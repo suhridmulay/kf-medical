@@ -26,7 +26,7 @@ const en = {
   },
 
   app: {
-    title: 'Application',
+    title: 'Hello Doctor EMR',
   },
 
   api: {
@@ -789,7 +789,7 @@ const en = {
   },
 
   auth: {
-    tenants: 'Workspaces',
+    tenants: 'NGOs',
     profile: {
       title: 'Profile',
       success: 'Profile successfully updated',
@@ -924,40 +924,40 @@ const en = {
 
   tenant: {
     name: 'tenant',
-    label: 'Workspaces',
-    menu: 'Workspaces',
+    label: 'NGOs',
+    menu: 'NGOs',
     list: {
-      menu: 'Workspaces',
-      title: 'Workspaces',
+      menu: 'NGOs',
+      title: 'NGOs',
     },
     create: {
-      button: 'Create Workspace',
-      success: 'Workspace successfully saved',
+      button: 'Create NGO',
+      success: 'NGO successfully saved',
     },
     update: {
-      success: 'Workspace successfully saved',
+      success: 'NGO successfully saved',
     },
     destroy: {
-      success: 'Workspace successfully deleted',
+      success: 'NGO successfully deleted',
     },
     destroyAll: {
-      success: 'Workspace(s) successfully deleted',
+      success: 'NGO(s) successfully deleted',
     },
     edit: {
-      title: 'Edit Workspace',
+      title: 'Edit NGO',
     },
     fields: {
       id: 'Id',
       name: 'Name',
       url: 'URL',
-      tenantName: 'Workspace Name',
-      tenantId: 'Workspace',
-      tenantUrl: 'Workspace URL',
+      tenantName: 'NGO Name',
+      tenantId: 'NGO',
+      tenantUrl: 'NGO URL',
       plan: 'Plan',
     },
     enumerators: {},
     new: {
-      title: 'New Workspace',
+      title: 'New NGO',
     },
     invitation: {
       view: 'View Invitations',
@@ -967,7 +967,7 @@ const en = {
       declined: 'Invitation successfully declined',
       acceptWrongEmail: 'Accept Invitation With This Email',
     },
-    select: 'Select Workspace',
+    select: 'Select NGO',
     validation: {
       url:
         'Your workspace URL can only contain lowercase letters, numbers and dashes (and must start with a letter or number).',

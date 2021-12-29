@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "staging": "kf-medical-staging",
+    "production": "kf-medical"
+  }
+}

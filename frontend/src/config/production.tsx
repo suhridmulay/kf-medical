@@ -1,6 +1,6 @@
 // Place the URL here with the /api suffix.
 // Ex.:`https://domain.com/api`;
-const backendUrl = `/api`;
+const backendUrl = `https://health-service-dot-kf-apps-288002.uc.r.appspot.com/api`;
 
 // SwaggerUI Documentation URL
 // Leave black if documentation should be hidden
@@ -10,7 +10,7 @@ const apiDocumentationUrl = `/documentation`;
  * Frontend URL.
  */
 const frontendUrl = {
-  host: 'domain.com',
+  host: 'kf-medical.web.app',
   protocol: 'https',
 };
 

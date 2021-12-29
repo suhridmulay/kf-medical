@@ -2,13 +2,15 @@
   "name": "app-backend",
   "description": "Backend",
   "scripts": {
-    "start": "nodemon --watch \"src/**/*.ts\" -e ts,json --exec \"ts-node --transpile-only ./src/server.ts\"",
+    "start": "node ./dist/server.js",
+    "start:watch": "nodemon --watch \"src/**/*.ts\" -e ts,json --exec \"ts-node --transpile-only ./src/server.ts\"",
     "test": "nodemon --exec \"cross-env NODE_ENV=test mocha -r ts-node/register ./src/**/*.test.ts --exit || exit 1\"",
     "build:documentation": "copyfiles --flat ./src/documentation/openapi.json ./dist/documentation/",
     "build": "tsc && npm run build:documentation",
     "db:create": "npm run build && node ./dist/database/migrations/create",
     "stripe:login": "stripe login",
-    "stripe:start": "stripe listen --forward-to localhost:8080/api/plan/stripe/webhook"
+    "stripe:start": "stripe listen --forward-to localhost:8080/api/plan/stripe/webhook",
+    "deploy:production": "npm run build && gcloud app deploy app-engine.production.yml --project kf-apps-288002"
   },
   "dependencies": {
     "@google-cloud/storage": "5.3.0",
