@@ -1,2 +1,2 @@
-# kf-medical
-Open source EMR platform for nonprofits (a Kolkata Foundation initiative)
+Visit https://docs.scaffoldhub.io for docs/instructions.
+Version: 2.7.8
