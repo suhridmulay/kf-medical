@@ -149,6 +149,15 @@ function PatientVisitListTable(props) {
                 )}
               />
               <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'repeatVisit'}
+                label={i18n(
+                  'entities.patientVisit.fields.repeatVisit',
+                )}
+              />
+              <TableCellCustom
                 label={i18n(
                   'entities.patientVisit.fields.symptom1',
                 )}
@@ -172,43 +181,6 @@ function PatientVisitListTable(props) {
                 label={i18n(
                   'entities.patientVisit.fields.telemedicineDoctor',
                 )}
-              />
-              <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'differentialDiagnosis'}
-                label={i18n(
-                  'entities.patientVisit.fields.differentialDiagnosis',
-                )}
-              />
-              <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'differentialRecommendation'}
-                label={i18n(
-                  'entities.patientVisit.fields.differentialRecommendation',
-                )}
-              />
-              <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'differentialUpdate'}
-                label={i18n(
-                  'entities.patientVisit.fields.differentialUpdate',
-                )}
-              />
-              <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'patientCopay'}
-                label={i18n(
-                  'entities.patientVisit.fields.patientCopay',
-                )}
-                align="right"
               />              
               <TableCellCustom size="md" />
             </TableRow>
@@ -257,6 +229,11 @@ function PatientVisitListTable(props) {
                 </TableCell>
                 <TableCell>{row.visitDate}</TableCell>
                 <TableCell>
+                  {row.repeatVisit
+                    ? i18n('common.yes')
+                    : i18n('common.no')}
+                </TableCell>
+                <TableCell>
                   <SymptomsEnumListItem value={row.symptom1} />
                 </TableCell>
                 <TableCell>
@@ -270,11 +247,7 @@ function PatientVisitListTable(props) {
                 </TableCell>
                 <TableCell>
                   <DoctorListItem value={row.telemedicineDoctor} />
-                </TableCell>
-                <TableCell>{row.differentialDiagnosis}</TableCell>
-                <TableCell>{row.differentialRecommendation}</TableCell>
-                <TableCell>{row.differentialUpdate}</TableCell>
-                <TableCell align="right">{row.patientCopay}</TableCell>                  
+                </TableCell>                  
                   <TableCell>
                     <Box
                       display="flex"

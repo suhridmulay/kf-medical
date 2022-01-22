@@ -1473,35 +1473,17 @@
           },
           {
             "in": "query",
+            "name": "filter[repeatVisit]",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
             "name": "filter[telemedicineDoctor]",
             "schema": {
               "type": "string",
               "format": "uuid"
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[differentialDiagnosis]",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[differentialRecommendation]",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[differentialUpdateRange][]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "format": "date"
-              }
             }
           },      
           {
@@ -7268,6 +7250,9 @@
             "type": "string",
             "format": "date"
           },
+          "repeatVisit": {
+            "type": "boolean"
+          },
           "symptom1": {
             "$ref": "#/components/schemas/SymptomsEnum"
           },
@@ -7280,7 +7265,25 @@
           "otherSymptoms": {
             "type": "string"
           },
-          "vitalStatistics": {
+          "temperature": {
+            "type": "string"
+          },
+          "bloodPressure": {
+            "type": "string"
+          },
+          "pulseRate": {
+            "type": "string"
+          },
+          "oxygenLevel": {
+            "type": "string"
+          },
+          "height": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "string"
+          },
+          "vitalStatisticsOther": {
             "type": "string"
           },
           "diagnosis": {
@@ -7295,11 +7298,17 @@
           "med1Qty": {
             "type": "integer"
           },
+          "med1Supplied": {
+            "type": "boolean"
+          },
           "medicine2": {
             "$ref": "#/components/schemas/MedicineEnum"
           },
           "med2Qty": {
             "type": "integer"
+          },
+          "med2Supplied": {
+            "type": "boolean"
           },
           "medicine3": {
             "$ref": "#/components/schemas/MedicineEnum"
@@ -7307,11 +7316,17 @@
           "med3Qty": {
             "type": "integer"
           },
+          "med3Supplied": {
+            "type": "boolean"
+          },
           "medicine4": {
             "$ref": "#/components/schemas/MedicineEnum"
           },
           "med4Qty": {
             "type": "integer"
+          },
+          "med4Supplied": {
+            "type": "boolean"
           },
           "medicineInstructions": {
             "type": "string"
@@ -7319,27 +7334,25 @@
           "dietaryInstructions": {
             "type": "string"
           },
-          "referralLab": {
+          "requestedLab": {
             "type": "string"
           },
           "referralHospital": {
             "type": "string"
           },
-          "referredDoctor": {
+          "referredSpecialistDoctor": {
             "type": "string"
           },
           "returnIn": {
             "type": "string",
             "enum": ["1week","2weeks","3weeks","4weeks","6weeks","2months","3months","4months","6months","1year"]
           },
-          "prescription": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/File"
-            }
-          },
           "telemedicineDoctor": {
             "$ref": "#/components/schemas/Doctor"
+          },
+          "telemedicineConsultDate": {
+            "type": "string",
+            "format": "date"
           },
           "differentialDiagnosis": {
             "type": "string"
@@ -7347,9 +7360,8 @@
           "differentialRecommendation": {
             "type": "string"
           },
-          "differentialUpdate": {
-            "type": "string",
-            "format": "date"
+          "finalNotes": {
+            "type": "string"
           },
           "patientCopay": {
             "type": "integer"
@@ -7375,6 +7387,9 @@
             "type": "string",
             "format": "date"
           },
+          "repeatVisit": {
+            "type": "boolean"
+          },
           "symptom1": {
             "type": "string",
             "format": "uuid"
@@ -7390,7 +7405,25 @@
           "otherSymptoms": {
             "type": "string"
           },
-          "vitalStatistics": {
+          "temperature": {
+            "type": "string"
+          },
+          "bloodPressure": {
+            "type": "string"
+          },
+          "pulseRate": {
+            "type": "string"
+          },
+          "oxygenLevel": {
+            "type": "string"
+          },
+          "height": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "string"
+          },
+          "vitalStatisticsOther": {
             "type": "string"
           },
           "diagnosis": {
@@ -7406,12 +7439,18 @@
           "med1Qty": {
             "type": "integer"
           },
+          "med1Supplied": {
+            "type": "boolean"
+          },
           "medicine2": {
             "type": "string",
             "format": "uuid"
           },
           "med2Qty": {
             "type": "integer"
+          },
+          "med2Supplied": {
+            "type": "boolean"
           },
           "medicine3": {
             "type": "string",
@@ -7420,6 +7459,9 @@
           "med3Qty": {
             "type": "integer"
           },
+          "med3Supplied": {
+            "type": "boolean"
+          },
           "medicine4": {
             "type": "string",
             "format": "uuid"
@@ -7427,34 +7469,35 @@
           "med4Qty": {
             "type": "integer"
           },
+          "med4Supplied": {
+            "type": "boolean"
+          },
           "medicineInstructions": {
             "type": "string"
           },
           "dietaryInstructions": {
             "type": "string"
           },
-          "referralLab": {
+          "requestedLab": {
             "type": "string"
           },
           "referralHospital": {
             "type": "string"
           },
-          "referredDoctor": {
+          "referredSpecialistDoctor": {
             "type": "string"
           },
           "returnIn": {
             "type": "string",
             "enum": ["1week","2weeks","3weeks","4weeks","6weeks","2months","3months","4months","6months","1year"]
           },
-          "prescription": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FileInput"
-            }
-          },
           "telemedicineDoctor": {
             "type": "string",
             "format": "uuid"
+          },
+          "telemedicineConsultDate": {
+            "type": "string",
+            "format": "date"
           },
           "differentialDiagnosis": {
             "type": "string"
@@ -7462,9 +7505,8 @@
           "differentialRecommendation": {
             "type": "string"
           },
-          "differentialUpdate": {
-            "type": "string",
-            "format": "date"
+          "finalNotes": {
+            "type": "string"
           },
           "patientCopay": {
             "type": "integer"

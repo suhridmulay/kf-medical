@@ -45,6 +45,14 @@ export default [
    render: (value) => value && value instanceof Date ? moment(value).format('YYYY-MM-DD') : value,
   },
   {
+    name: 'repeatVisit',
+    label: i18n('entities.patientVisit.fields.repeatVisit'),
+    schema: schemas.boolean(
+      i18n('entities.patientVisit.fields.repeatVisit'),
+      {},
+    ),
+  },
+  {
     name: 'symptom1',
     label: i18n('entities.patientVisit.fields.symptom1'),
     schema: schemas.relationToOne(
@@ -79,10 +87,72 @@ export default [
     ),
   },
   {
-    name: 'vitalStatistics',
-    label: i18n('entities.patientVisit.fields.vitalStatistics'),
+    name: 'temperature',
+    label: i18n('entities.patientVisit.fields.temperature'),
     schema: schemas.string(
-      i18n('entities.patientVisit.fields.vitalStatistics'),
+      i18n('entities.patientVisit.fields.temperature'),
+      {
+        "max": 5,
+        "min": 2
+      },
+    ),
+  },
+  {
+    name: 'bloodPressure',
+    label: i18n('entities.patientVisit.fields.bloodPressure'),
+    schema: schemas.string(
+      i18n('entities.patientVisit.fields.bloodPressure'),
+      {
+        "max": 8
+      },
+    ),
+  },
+  {
+    name: 'pulseRate',
+    label: i18n('entities.patientVisit.fields.pulseRate'),
+    schema: schemas.string(
+      i18n('entities.patientVisit.fields.pulseRate'),
+      {
+        "min": 2,
+        "max": 3
+      },
+    ),
+  },
+  {
+    name: 'oxygenLevel',
+    label: i18n('entities.patientVisit.fields.oxygenLevel'),
+    schema: schemas.string(
+      i18n('entities.patientVisit.fields.oxygenLevel'),
+      {
+        "max": 3
+      },
+    ),
+  },
+  {
+    name: 'height',
+    label: i18n('entities.patientVisit.fields.height'),
+    schema: schemas.string(
+      i18n('entities.patientVisit.fields.height'),
+      {
+        "max": 6
+      },
+    ),
+  },
+  {
+    name: 'weight',
+    label: i18n('entities.patientVisit.fields.weight'),
+    schema: schemas.string(
+      i18n('entities.patientVisit.fields.weight'),
+      {
+        "max": 6
+      },
+    ),
+  },
+  {
+    name: 'vitalStatisticsOther',
+    label: i18n('entities.patientVisit.fields.vitalStatisticsOther'),
+    schema: schemas.string(
+      i18n('entities.patientVisit.fields.vitalStatisticsOther'),
       {},
     ),
   },
@@ -121,6 +191,14 @@ export default [
     ),
   },
   {
+    name: 'med1Supplied',
+    label: i18n('entities.patientVisit.fields.med1Supplied'),
+    schema: schemas.boolean(
+      i18n('entities.patientVisit.fields.med1Supplied'),
+      {},
+    ),
+  },
+  {
     name: 'medicine2',
     label: i18n('entities.patientVisit.fields.medicine2'),
     schema: schemas.relationToOne(
@@ -133,6 +211,14 @@ export default [
     label: i18n('entities.patientVisit.fields.med2Qty'),
     schema: schemas.integer(
       i18n('entities.patientVisit.fields.med2Qty'),
+      {},
+    ),
+  },
+  {
+    name: 'med2Supplied',
+    label: i18n('entities.patientVisit.fields.med2Supplied'),
+    schema: schemas.boolean(
+      i18n('entities.patientVisit.fields.med2Supplied'),
       {},
     ),
   },
@@ -153,6 +239,14 @@ export default [
     ),
   },
   {
+    name: 'med3Supplied',
+    label: i18n('entities.patientVisit.fields.med3Supplied'),
+    schema: schemas.boolean(
+      i18n('entities.patientVisit.fields.med3Supplied'),
+      {},
+    ),
+  },
+  {
     name: 'medicine4',
     label: i18n('entities.patientVisit.fields.medicine4'),
     schema: schemas.relationToOne(
@@ -165,6 +259,14 @@ export default [
     label: i18n('entities.patientVisit.fields.med4Qty'),
     schema: schemas.integer(
       i18n('entities.patientVisit.fields.med4Qty'),
+      {},
+    ),
+  },
+  {
+    name: 'med4Supplied',
+    label: i18n('entities.patientVisit.fields.med4Supplied'),
+    schema: schemas.boolean(
+      i18n('entities.patientVisit.fields.med4Supplied'),
       {},
     ),
   },
@@ -185,10 +287,10 @@ export default [
     ),
   },
   {
-    name: 'referralLab',
-    label: i18n('entities.patientVisit.fields.referralLab'),
+    name: 'requestedLab',
+    label: i18n('entities.patientVisit.fields.requestedLab'),
     schema: schemas.string(
-      i18n('entities.patientVisit.fields.referralLab'),
+      i18n('entities.patientVisit.fields.requestedLab'),
       {},
     ),
   },
@@ -201,10 +303,10 @@ export default [
     ),
   },
   {
-    name: 'referredDoctor',
-    label: i18n('entities.patientVisit.fields.referredDoctor'),
+    name: 'referredSpecialistDoctor',
+    label: i18n('entities.patientVisit.fields.referredSpecialistDoctor'),
     schema: schemas.string(
-      i18n('entities.patientVisit.fields.referredDoctor'),
+      i18n('entities.patientVisit.fields.referredSpecialistDoctor'),
       {},
     ),
   },
@@ -219,20 +321,21 @@ export default [
     ),
   },
   {
-    name: 'prescription',
-    label: i18n('entities.patientVisit.fields.prescription'),
-    schema: schemas.images(
-      i18n('entities.patientVisit.fields.prescription'),
-      {},
-    ),
-  },
-  {
     name: 'telemedicineDoctor',
     label: i18n('entities.patientVisit.fields.telemedicineDoctor'),
     schema: schemas.relationToOne(
       i18n('entities.patientVisit.fields.telemedicineDoctor'),
       {},
     ),
+  },
+  {
+    name: 'telemedicineConsultDate',
+    label: i18n('entities.patientVisit.fields.telemedicineConsultDate'),
+    schema: schemas.date(
+      i18n('entities.patientVisit.fields.telemedicineConsultDate'),
+      {},
+    ),
+   render: (value) => value && value instanceof Date ? moment(value).format('YYYY-MM-DD') : value,
   },
   {
     name: 'differentialDiagnosis',
@@ -251,13 +354,12 @@ export default [
     ),
   },
   {
-    name: 'differentialUpdate',
-    label: i18n('entities.patientVisit.fields.differentialUpdate'),
-    schema: schemas.date(
-      i18n('entities.patientVisit.fields.differentialUpdate'),
+    name: 'finalNotes',
+    label: i18n('entities.patientVisit.fields.finalNotes'),
+    schema: schemas.string(
+      i18n('entities.patientVisit.fields.finalNotes'),
       {},
     ),
-   render: (value) => value && value instanceof Date ? moment(value).format('YYYY-MM-DD') : value,
   },
   {
     name: 'patientCopay',
