@@ -38,11 +38,7 @@ export default class Storage {
 
 
 
-      patientVisitPrescription: {
-        id: 'patientVisitPrescription',
-        folder: 'tenant/:tenantId/patientVisit/prescription',
-        maxSizeInBytes: 100 * 1024 * 1024,
-      },
+
 
 
 

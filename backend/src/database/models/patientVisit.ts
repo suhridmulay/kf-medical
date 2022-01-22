@@ -22,10 +22,51 @@ export default function (sequelize) {
         },
         allowNull: false,
       },
+      repeatVisit: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       otherSymptoms: {
         type: DataTypes.TEXT,
       },
-      vitalStatistics: {
+      temperature: {
+        type: DataTypes.STRING(5),
+        validate: {
+          len: [2, 5],
+        }
+      },
+      bloodPressure: {
+        type: DataTypes.STRING(8),
+        validate: {
+          len: [0, 8],
+        }
+      },
+      pulseRate: {
+        type: DataTypes.STRING(3),
+        validate: {
+          len: [2, 3],
+        }
+      },
+      oxygenLevel: {
+        type: DataTypes.STRING(3),
+        validate: {
+          len: [0, 3],
+        }
+      },
+      height: {
+        type: DataTypes.STRING(6),
+        validate: {
+          len: [0, 6],
+        }
+      },
+      weight: {
+        type: DataTypes.STRING(6),
+        validate: {
+          len: [0, 6],
+        }
+      },
+      vitalStatisticsOther: {
         type: DataTypes.TEXT,
       },
       diagnosis: {
@@ -41,14 +82,34 @@ export default function (sequelize) {
       med1Qty: {
         type: DataTypes.INTEGER,
       },
+      med1Supplied: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       med2Qty: {
         type: DataTypes.INTEGER,
+      },
+      med2Supplied: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
       med3Qty: {
         type: DataTypes.INTEGER,
       },
+      med3Supplied: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       med4Qty: {
         type: DataTypes.INTEGER,
+      },
+      med4Supplied: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
       medicineInstructions: {
         type: DataTypes.TEXT,
@@ -56,13 +117,13 @@ export default function (sequelize) {
       dietaryInstructions: {
         type: DataTypes.TEXT,
       },
-      referralLab: {
+      requestedLab: {
         type: DataTypes.TEXT,
       },
       referralHospital: {
         type: DataTypes.TEXT,
       },
-      referredDoctor: {
+      referredSpecialistDoctor: {
         type: DataTypes.TEXT,
       },
       returnIn: {
@@ -82,23 +143,26 @@ export default function (sequelize) {
           ]],
         }
       },
+      telemedicineConsultDate: {
+        type: DataTypes.DATEONLY,
+        get: function() {
+          // @ts-ignore
+          return this.getDataValue('telemedicineConsultDate')
+            ? moment
+                // @ts-ignore
+                .utc(this.getDataValue('telemedicineConsultDate'))
+                .format('YYYY-MM-DD')
+            : null;
+        },
+      },
       differentialDiagnosis: {
         type: DataTypes.TEXT,
       },
       differentialRecommendation: {
         type: DataTypes.TEXT,
       },
-      differentialUpdate: {
-        type: DataTypes.DATEONLY,
-        get: function() {
-          // @ts-ignore
-          return this.getDataValue('differentialUpdate')
-            ? moment
-                // @ts-ignore
-                .utc(this.getDataValue('differentialUpdate'))
-                .format('YYYY-MM-DD')
-            : null;
-        },
+      finalNotes: {
+        type: DataTypes.TEXT,
       },
       patientCopay: {
         type: DataTypes.INTEGER,
@@ -195,15 +259,7 @@ export default function (sequelize) {
       constraints: false,
     });
 
-    models.patientVisit.hasMany(models.file, {
-      as: 'prescription',
-      foreignKey: 'belongsToId',
-      constraints: false,
-      scope: {
-        belongsTo: models.patientVisit.getTableName(),
-        belongsToColumn: 'prescription',
-      },
-    });
+
     
     models.patientVisit.belongsTo(models.tenant, {
       as: 'tenant',

@@ -22,7 +22,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import filterRenders from 'src/modules/shared/filter/filterRenders';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
-import InputFormItem from 'src/view/shared/form/items/InputFormItem';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import DatePickerRangeFormItem from 'src/view/shared/form/items/DatePickerRangeFormItem';
 import PatientAutocompleteFormItem from 'src/view/patient/autocomplete/PatientAutocompleteFormItem';
 import HealthCenterAutocompleteFormItem from 'src/view/healthCenter/autocomplete/HealthCenterAutocompleteFormItem';
@@ -41,17 +41,11 @@ const schema = yup.object().shape({
   visitDateRange: yupFilterSchemas.dateRange(
     i18n('entities.patientVisit.fields.visitDateRange'),
   ),
+  repeatVisit: yupFilterSchemas.boolean(
+    i18n('entities.patientVisit.fields.repeatVisit'),
+  ),
   telemedicineDoctor: yupFilterSchemas.relationToOne(
     i18n('entities.patientVisit.fields.telemedicineDoctor'),
-  ),
-  differentialDiagnosis: yupFilterSchemas.string(
-    i18n('entities.patientVisit.fields.differentialDiagnosis'),
-  ),
-  differentialRecommendation: yupFilterSchemas.string(
-    i18n('entities.patientVisit.fields.differentialRecommendation'),
-  ),
-  differentialUpdateRange: yupFilterSchemas.dateRange(
-    i18n('entities.patientVisit.fields.differentialUpdateRange'),
   ),
 });
 
@@ -60,10 +54,8 @@ const emptyValues = {
   medicalCenter: null,
   doctor: null,
   visitDateRange: [],
+  repeatVisit: null,
   telemedicineDoctor: null,
-  differentialDiagnosis: null,
-  differentialRecommendation: null,
-  differentialUpdateRange: [],
 }
 
 const previewRenders = {
@@ -83,22 +75,14 @@ const previewRenders = {
     label: i18n('entities.patientVisit.fields.visitDateRange'),
     render: filterRenders.dateRange(),
   },
+  repeatVisit: {
+    label: i18n('entities.patientVisit.fields.repeatVisit'),
+    render: filterRenders.boolean(),
+  },
   telemedicineDoctor: {
       label: i18n('entities.patientVisit.fields.telemedicineDoctor'),
       render: filterRenders.relationToOne(),
     },
-  differentialDiagnosis: {
-    label: i18n('entities.patientVisit.fields.differentialDiagnosis'),
-    render: filterRenders.generic(),
-  },
-  differentialRecommendation: {
-    label: i18n('entities.patientVisit.fields.differentialRecommendation'),
-    render: filterRenders.generic(),
-  },
-  differentialUpdateRange: {
-    label: i18n('entities.patientVisit.fields.differentialUpdateRange'),
-    render: filterRenders.dateRange(),
-  },
 }
 
 function PatientVisitListFilter(props) {
@@ -188,27 +172,25 @@ function PatientVisitListFilter(props) {
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
+                  <SelectFormItem
+                    name="repeatVisit"
+                    label={i18n('entities.patientVisit.fields.repeatVisit')}
+                    options={[
+                      {
+                        value: true,
+                        label: i18n('common.yes'),
+                      },
+                      {
+                        value: false,
+                        label: i18n('common.no'),
+                      },
+                    ]}
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
                   <DoctorAutocompleteFormItem  
                     name="telemedicineDoctor"
                     label={i18n('entities.patientVisit.fields.telemedicineDoctor')}        
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputFormItem
-                    name="differentialDiagnosis"
-                    label={i18n('entities.patientVisit.fields.differentialDiagnosis')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputFormItem
-                    name="differentialRecommendation"
-                    label={i18n('entities.patientVisit.fields.differentialRecommendation')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <DatePickerRangeFormItem
-                    name="differentialUpdateRange"
-                    label={i18n('entities.patientVisit.fields.differentialUpdateRange')}    
                   />
                 </Grid>
               </Grid>

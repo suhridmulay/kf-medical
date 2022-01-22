@@ -3,7 +3,7 @@ import AuditLogRepository from '../../database/repositories/auditLogRepository';
 import lodash from 'lodash';
 import SequelizeFilterUtils from '../../database/utils/sequelizeFilterUtils';
 import Error404 from '../../errors/Error404';
-import Sequelize from 'sequelize';import FileRepository from './fileRepository';
+import Sequelize from 'sequelize';
 import { IRepositoryOptions } from './IRepositoryOptions';
 
 const Op = Sequelize.Op;
@@ -27,23 +27,35 @@ class PatientVisitRepository {
       {
         ...lodash.pick(data, [
           'visitDate',
+          'repeatVisit',
           'otherSymptoms',
-          'vitalStatistics',
+          'temperature',
+          'bloodPressure',
+          'pulseRate',
+          'oxygenLevel',
+          'height',
+          'weight',
+          'vitalStatisticsOther',
           'diagnosis',
           'requestedLabs',
           'med1Qty',
+          'med1Supplied',
           'med2Qty',
+          'med2Supplied',
           'med3Qty',
+          'med3Supplied',
           'med4Qty',
+          'med4Supplied',
           'medicineInstructions',
           'dietaryInstructions',
-          'referralLab',
+          'requestedLab',
           'referralHospital',
-          'referredDoctor',
+          'referredSpecialistDoctor',
           'returnIn',
+          'telemedicineConsultDate',
           'differentialDiagnosis',
           'differentialRecommendation',
-          'differentialUpdate',
+          'finalNotes',
           'patientCopay',          
           'importHash',
         ]),
@@ -69,15 +81,7 @@ class PatientVisitRepository {
 
     
   
-    await FileRepository.replaceRelationFiles(
-      {
-        belongsTo: options.database.patientVisit.getTableName(),
-        belongsToColumn: 'prescription',
-        belongsToId: record.id,
-      },
-      data.prescription,
-      options,
-    );
+
   
     await this._createAuditLog(
       AuditLogRepository.CREATE,
@@ -121,23 +125,35 @@ class PatientVisitRepository {
       {
         ...lodash.pick(data, [
           'visitDate',
+          'repeatVisit',
           'otherSymptoms',
-          'vitalStatistics',
+          'temperature',
+          'bloodPressure',
+          'pulseRate',
+          'oxygenLevel',
+          'height',
+          'weight',
+          'vitalStatisticsOther',
           'diagnosis',
           'requestedLabs',
           'med1Qty',
+          'med1Supplied',
           'med2Qty',
+          'med2Supplied',
           'med3Qty',
+          'med3Supplied',
           'med4Qty',
+          'med4Supplied',
           'medicineInstructions',
           'dietaryInstructions',
-          'referralLab',
+          'requestedLab',
           'referralHospital',
-          'referredDoctor',
+          'referredSpecialistDoctor',
           'returnIn',
+          'telemedicineConsultDate',
           'differentialDiagnosis',
           'differentialRecommendation',
-          'differentialUpdate',
+          'finalNotes',
           'patientCopay',          
           'importHash',
         ]),
@@ -161,15 +177,7 @@ class PatientVisitRepository {
 
 
 
-    await FileRepository.replaceRelationFiles(
-      {
-        belongsTo: options.database.patientVisit.getTableName(),
-        belongsToColumn: 'prescription',
-        belongsToId: record.id,
-      },
-      data.prescription,
-      options,
-    );
+
 
     await this._createAuditLog(
       AuditLogRepository.UPDATE,
@@ -460,52 +468,25 @@ class PatientVisitRepository {
         }
       }
 
+      if (
+        filter.repeatVisit === true ||
+        filter.repeatVisit === 'true' ||
+        filter.repeatVisit === false ||
+        filter.repeatVisit === 'false'
+      ) {
+        whereAnd.push({
+          repeatVisit:
+            filter.repeatVisit === true ||
+            filter.repeatVisit === 'true',
+        });
+      }
+
       if (filter.telemedicineDoctor) {
         whereAnd.push({
           ['telemedicineDoctorId']: SequelizeFilterUtils.uuid(
             filter.telemedicineDoctor,
           ),
         });
-      }
-
-      if (filter.differentialDiagnosis) {
-        whereAnd.push(
-          SequelizeFilterUtils.ilikeIncludes(
-            'patientVisit',
-            'differentialDiagnosis',
-            filter.differentialDiagnosis,
-          ),
-        );
-      }
-
-      if (filter.differentialRecommendation) {
-        whereAnd.push(
-          SequelizeFilterUtils.ilikeIncludes(
-            'patientVisit',
-            'differentialRecommendation',
-            filter.differentialRecommendation,
-          ),
-        );
-      }
-
-      if (filter.differentialUpdateRange) {
-        const [start, end] = filter.differentialUpdateRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            differentialUpdate: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            differentialUpdate: {
-              [Op.lte]: end,
-            },
-          });
-        }
       }
 
       if (filter.createdAtRange) {
@@ -609,7 +590,7 @@ class PatientVisitRepository {
     if (data) {
       values = {
         ...record.get({ plain: true }),
-        prescription: data.prescription,
+
       };
     }
 
@@ -650,11 +631,7 @@ class PatientVisitRepository {
       options,
     );
 
-    output.prescription = await FileRepository.fillDownloadUrl(
-      await record.getPrescription({
-        transaction,
-      }),
-    );
+
 
     return output;
   }

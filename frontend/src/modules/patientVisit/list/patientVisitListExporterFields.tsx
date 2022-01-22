@@ -26,6 +26,11 @@ export default [
     label: i18n('entities.patientVisit.fields.visitDate'),
   },
   {
+    name: 'repeatVisit',
+    label: i18n('entities.patientVisit.fields.repeatVisit'),
+    render: exporterRenders.boolean(),
+  },
+  {
     name: 'symptom1',
     label: i18n('entities.patientVisit.fields.symptom1'),
     render: exporterRenders.relationToOne(),
@@ -45,8 +50,32 @@ export default [
     label: i18n('entities.patientVisit.fields.otherSymptoms'),
   },
   {
-    name: 'vitalStatistics',
-    label: i18n('entities.patientVisit.fields.vitalStatistics'),
+    name: 'temperature',
+    label: i18n('entities.patientVisit.fields.temperature'),
+  },
+  {
+    name: 'bloodPressure',
+    label: i18n('entities.patientVisit.fields.bloodPressure'),
+  },
+  {
+    name: 'pulseRate',
+    label: i18n('entities.patientVisit.fields.pulseRate'),
+  },
+  {
+    name: 'oxygenLevel',
+    label: i18n('entities.patientVisit.fields.oxygenLevel'),
+  },
+  {
+    name: 'height',
+    label: i18n('entities.patientVisit.fields.height'),
+  },
+  {
+    name: 'weight',
+    label: i18n('entities.patientVisit.fields.weight'),
+  },
+  {
+    name: 'vitalStatisticsOther',
+    label: i18n('entities.patientVisit.fields.vitalStatisticsOther'),
   },
   {
     name: 'diagnosis',
@@ -66,6 +95,11 @@ export default [
     label: i18n('entities.patientVisit.fields.med1Qty'),
   },
   {
+    name: 'med1Supplied',
+    label: i18n('entities.patientVisit.fields.med1Supplied'),
+    render: exporterRenders.boolean(),
+  },
+  {
     name: 'medicine2',
     label: i18n('entities.patientVisit.fields.medicine2'),
     render: exporterRenders.relationToOne(),
@@ -73,6 +107,11 @@ export default [
   {
     name: 'med2Qty',
     label: i18n('entities.patientVisit.fields.med2Qty'),
+  },
+  {
+    name: 'med2Supplied',
+    label: i18n('entities.patientVisit.fields.med2Supplied'),
+    render: exporterRenders.boolean(),
   },
   {
     name: 'medicine3',
@@ -84,6 +123,11 @@ export default [
     label: i18n('entities.patientVisit.fields.med3Qty'),
   },
   {
+    name: 'med3Supplied',
+    label: i18n('entities.patientVisit.fields.med3Supplied'),
+    render: exporterRenders.boolean(),
+  },
+  {
     name: 'medicine4',
     label: i18n('entities.patientVisit.fields.medicine4'),
     render: exporterRenders.relationToOne(),
@@ -91,6 +135,11 @@ export default [
   {
     name: 'med4Qty',
     label: i18n('entities.patientVisit.fields.med4Qty'),
+  },
+  {
+    name: 'med4Supplied',
+    label: i18n('entities.patientVisit.fields.med4Supplied'),
+    render: exporterRenders.boolean(),
   },
   {
     name: 'medicineInstructions',
@@ -101,30 +150,29 @@ export default [
     label: i18n('entities.patientVisit.fields.dietaryInstructions'),
   },
   {
-    name: 'referralLab',
-    label: i18n('entities.patientVisit.fields.referralLab'),
+    name: 'requestedLab',
+    label: i18n('entities.patientVisit.fields.requestedLab'),
   },
   {
     name: 'referralHospital',
     label: i18n('entities.patientVisit.fields.referralHospital'),
   },
   {
-    name: 'referredDoctor',
-    label: i18n('entities.patientVisit.fields.referredDoctor'),
+    name: 'referredSpecialistDoctor',
+    label: i18n('entities.patientVisit.fields.referredSpecialistDoctor'),
   },
   {
     name: 'returnIn',
     label: i18n('entities.patientVisit.fields.returnIn'),
   },
   {
-    name: 'prescription',
-    label: i18n('entities.patientVisit.fields.prescription'),
-    render: exporterRenders.filesOrImages(),
-  },
-  {
     name: 'telemedicineDoctor',
     label: i18n('entities.patientVisit.fields.telemedicineDoctor'),
     render: exporterRenders.relationToOne(),
+  },
+  {
+    name: 'telemedicineConsultDate',
+    label: i18n('entities.patientVisit.fields.telemedicineConsultDate'),
   },
   {
     name: 'differentialDiagnosis',
@@ -135,8 +183,8 @@ export default [
     label: i18n('entities.patientVisit.fields.differentialRecommendation'),
   },
   {
-    name: 'differentialUpdate',
-    label: i18n('entities.patientVisit.fields.differentialUpdate'),
+    name: 'finalNotes',
+    label: i18n('entities.patientVisit.fields.finalNotes'),
   },
   {
     name: 'patientCopay',

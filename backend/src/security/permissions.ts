@@ -211,7 +211,7 @@ class Permissions {
         allowedRoles: [roles.admin],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
         allowedStorage: [
-          storage.patientVisitPrescription,
+
         ],
       },
       patientVisitEdit: {
@@ -219,7 +219,7 @@ class Permissions {
         allowedRoles: [roles.admin],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
         allowedStorage: [
-          storage.patientVisitPrescription,
+
         ],
       },
       patientVisitDestroy: {
@@ -227,7 +227,7 @@ class Permissions {
         allowedRoles: [roles.admin],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
         allowedStorage: [
-          storage.patientVisitPrescription,
+
         ],
       },
       patientVisitRead: {
