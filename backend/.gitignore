@@ -3,3 +3,4 @@ node_modules/
 dist/
 app-engine.staging.yml
 app-engine.production.yml
+sendgrid.env

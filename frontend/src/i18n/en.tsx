@@ -879,6 +879,22 @@ const en = {
       label: 'Custom Role',
       description: 'Custom role access',
     },
+    manager: {
+      label: 'Program Manager',
+      description: 'Program manager access',
+    },
+    helper: {
+      label: 'Data Entry helper',
+      description: 'Data entry helper access',
+    }, 
+    nurse: {
+      label: 'Nurse',
+      description: 'Nurse access',
+    },
+    doctor: {
+      label: 'Doctor',
+      description: 'Doctor access',
+    },
   },
 
   user: {
