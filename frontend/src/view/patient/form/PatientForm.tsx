@@ -60,7 +60,9 @@ const schema = yup.object().shape({
   ),
   age: yupFormSchemas.integer(
     i18n('entities.patient.fields.age'),
-    {},
+    {
+      "required": true
+    },
   ),
   localityName: yupFormSchemas.string(
     i18n('entities.patient.fields.localityName'),
@@ -189,7 +191,7 @@ function PatientForm(props) {
               <InputNumberFormItem
                 name="age"
                 label={i18n('entities.patient.fields.age')}  
-                required={false}
+                required={true}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

@@ -72,6 +72,18 @@ const schema = yup.object().shape({
     i18n('entities.patientVisit.fields.otherSymptoms'),
     {},
   ),
+  height: yupFormSchemas.string(
+    i18n('entities.patientVisit.fields.height'),
+    {
+      "max": 6
+    },
+  ),
+  weight: yupFormSchemas.string(
+    i18n('entities.patientVisit.fields.weight'),
+    {
+      "max": 6
+    },
+  ),
   temperature: yupFormSchemas.string(
     i18n('entities.patientVisit.fields.temperature'),
     {
@@ -98,18 +110,6 @@ const schema = yup.object().shape({
       "max": 3
     },
   ),
-  height: yupFormSchemas.string(
-    i18n('entities.patientVisit.fields.height'),
-    {
-      "max": 6
-    },
-  ),
-  weight: yupFormSchemas.string(
-    i18n('entities.patientVisit.fields.weight'),
-    {
-      "max": 6
-    },
-  ),
   vitalStatisticsOther: yupFormSchemas.string(
     i18n('entities.patientVisit.fields.vitalStatisticsOther'),
     {},
@@ -120,9 +120,11 @@ const schema = yup.object().shape({
       "required": true
     },
   ),
-  requestedLabs: yupFormSchemas.string(
-    i18n('entities.patientVisit.fields.requestedLabs'),
-    {},
+  caseSeverity: yupFormSchemas.enumerator(
+    i18n('entities.patientVisit.fields.caseSeverity'),
+    {
+      "options": patientVisitEnumerators.caseSeverity
+    },
   ),
   medicine1: yupFormSchemas.relationToOne(
     i18n('entities.patientVisit.fields.medicine1'),
@@ -174,6 +176,10 @@ const schema = yup.object().shape({
   ),
   medicineInstructions: yupFormSchemas.string(
     i18n('entities.patientVisit.fields.medicineInstructions'),
+    {},
+  ),
+  requestedLabs: yupFormSchemas.string(
+    i18n('entities.patientVisit.fields.requestedLabs'),
     {},
   ),
   dietaryInstructions: yupFormSchemas.string(
@@ -238,15 +244,15 @@ function PatientVisitForm(props) {
       symptom2: record.symptom2,
       symptom3: record.symptom3,
       otherSymptoms: record.otherSymptoms,
+      height: record.height,
+      weight: record.weight,
       temperature: record.temperature,
       bloodPressure: record.bloodPressure,
       pulseRate: record.pulseRate,
       oxygenLevel: record.oxygenLevel,
-      height: record.height,
-      weight: record.weight,
       vitalStatisticsOther: record.vitalStatisticsOther,
       diagnosis: record.diagnosis,
-      requestedLabs: record.requestedLabs,
+      caseSeverity: record.caseSeverity,
       medicine1: record.medicine1,
       med1Qty: record.med1Qty,
       med1Supplied: record.med1Supplied,
@@ -260,6 +266,7 @@ function PatientVisitForm(props) {
       med4Qty: record.med4Qty,
       med4Supplied: record.med4Supplied,
       medicineInstructions: record.medicineInstructions,
+      requestedLabs: record.requestedLabs,
       dietaryInstructions: record.dietaryInstructions,
       requestedLab: record.requestedLab,
       referralHospital: record.referralHospital,
@@ -368,6 +375,22 @@ function PatientVisitForm(props) {
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
               <InputFormItem
+                name="height"
+                label={i18n('entities.patientVisit.fields.height')}
+              hint={i18n('entities.patientVisit.hints.height')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="weight"
+                label={i18n('entities.patientVisit.fields.weight')}
+              hint={i18n('entities.patientVisit.hints.weight')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
                 name="temperature"
                 label={i18n('entities.patientVisit.fields.temperature')}
               hint={i18n('entities.patientVisit.hints.temperature')}  
@@ -400,22 +423,6 @@ function PatientVisitForm(props) {
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
               <InputFormItem
-                name="height"
-                label={i18n('entities.patientVisit.fields.height')}
-              hint={i18n('entities.patientVisit.hints.height')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="weight"
-                label={i18n('entities.patientVisit.fields.weight')}
-              hint={i18n('entities.patientVisit.hints.weight')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
                 name="vitalStatisticsOther"
                 label={i18n('entities.patientVisit.fields.vitalStatisticsOther')}  
                 required={false}
@@ -429,9 +436,19 @@ function PatientVisitForm(props) {
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="requestedLabs"
-                label={i18n('entities.patientVisit.fields.requestedLabs')}  
+              <SelectFormItem
+                name="caseSeverity"
+                label={i18n('entities.patientVisit.fields.caseSeverity')}
+              placeholder={i18n('entities.patientVisit.placeholders.caseSeverity')}
+              hint={i18n('entities.patientVisit.hints.caseSeverity')}
+                options={patientVisitEnumerators.caseSeverity.map(
+                  (value) => ({
+                    value,
+                    label: i18n(
+                      `entities.patientVisit.enumerators.caseSeverity.${value}`,
+                    ),
+                  }),
+                )}
                 required={false}
               />
             </Grid>
@@ -527,6 +544,13 @@ function PatientVisitForm(props) {
               <TextAreaFormItem
                 name="medicineInstructions"
                 label={i18n('entities.patientVisit.fields.medicineInstructions')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="requestedLabs"
+                label={i18n('entities.patientVisit.fields.requestedLabs')}  
                 required={false}
               />
             </Grid>

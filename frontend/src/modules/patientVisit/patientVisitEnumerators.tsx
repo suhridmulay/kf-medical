@@ -1,4 +1,9 @@
 const patientVisitEnumerators = {
+  caseSeverity: [
+    'Green',
+    'Orange',
+    'Red',
+  ],
   returnIn: [
     '1week',
     '2weeks',

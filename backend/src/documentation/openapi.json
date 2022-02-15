@@ -1480,6 +1480,14 @@
           },
           {
             "in": "query",
+            "name": "filter[caseSeverity]",
+            "schema": {
+              "type": "string",
+              "enum": ["Green","Orange","Red"]
+            }
+          },
+          {
+            "in": "query",
             "name": "filter[telemedicineDoctor]",
             "schema": {
               "type": "string",
@@ -1913,6 +1921,13 @@
           {
             "in": "query",
             "name": "filter[keptInStock]",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "filter[isCommon]",
             "schema": {
               "type": "boolean"
             }
@@ -7265,6 +7280,12 @@
           "otherSymptoms": {
             "type": "string"
           },
+          "height": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "string"
+          },
           "temperature": {
             "type": "string"
           },
@@ -7277,20 +7298,15 @@
           "oxygenLevel": {
             "type": "string"
           },
-          "height": {
-            "type": "string"
-          },
-          "weight": {
-            "type": "string"
-          },
           "vitalStatisticsOther": {
             "type": "string"
           },
           "diagnosis": {
             "type": "string"
           },
-          "requestedLabs": {
-            "type": "string"
+          "caseSeverity": {
+            "type": "string",
+            "enum": ["Green","Orange","Red"]
           },
           "medicine1": {
             "$ref": "#/components/schemas/MedicineEnum"
@@ -7329,6 +7345,9 @@
             "type": "boolean"
           },
           "medicineInstructions": {
+            "type": "string"
+          },
+          "requestedLabs": {
             "type": "string"
           },
           "dietaryInstructions": {
@@ -7405,6 +7424,12 @@
           "otherSymptoms": {
             "type": "string"
           },
+          "height": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "string"
+          },
           "temperature": {
             "type": "string"
           },
@@ -7417,20 +7442,15 @@
           "oxygenLevel": {
             "type": "string"
           },
-          "height": {
-            "type": "string"
-          },
-          "weight": {
-            "type": "string"
-          },
           "vitalStatisticsOther": {
             "type": "string"
           },
           "diagnosis": {
             "type": "string"
           },
-          "requestedLabs": {
-            "type": "string"
+          "caseSeverity": {
+            "type": "string",
+            "enum": ["Green","Orange","Red"]
           },
           "medicine1": {
             "type": "string",
@@ -7473,6 +7493,9 @@
             "type": "boolean"
           },
           "medicineInstructions": {
+            "type": "string"
+          },
+          "requestedLabs": {
             "type": "string"
           },
           "dietaryInstructions": {
@@ -7526,6 +7549,9 @@
           },
           "keptInStock": {
             "type": "boolean"
+          },
+          "isCommon": {
+            "type": "boolean"
           }    
         }
       },
@@ -7536,6 +7562,9 @@
             "type": "string"
           },
           "keptInStock": {
+            "type": "boolean"
+          },
+          "isCommon": {
             "type": "boolean"
           }    
         }

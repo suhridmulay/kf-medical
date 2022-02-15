@@ -21,6 +21,15 @@ function MedicineEnumView(props) {
               ? i18n('common.yes')
               : i18n('common.no')
           }
+        />
+
+        <TextViewItem
+          label={i18n('entities.medicineEnum.fields.isCommon')}
+          value={
+            record.isCommon
+              ? i18n('common.yes')
+              : i18n('common.no')
+          }
         />        
       </div>
     );

@@ -32,11 +32,15 @@ const schema = yup.object().shape({
   keptInStock: yupFilterSchemas.boolean(
     i18n('entities.medicineEnum.fields.keptInStock'),
   ),
+  isCommon: yupFilterSchemas.boolean(
+    i18n('entities.medicineEnum.fields.isCommon'),
+  ),
 });
 
 const emptyValues = {
   medicineName: null,
   keptInStock: null,
+  isCommon: null,
 }
 
 const previewRenders = {
@@ -46,6 +50,10 @@ const previewRenders = {
   },
   keptInStock: {
     label: i18n('entities.medicineEnum.fields.keptInStock'),
+    render: filterRenders.boolean(),
+  },
+  isCommon: {
+    label: i18n('entities.medicineEnum.fields.isCommon'),
     render: filterRenders.boolean(),
   },
 }
@@ -122,6 +130,22 @@ function MedicineEnumListFilter(props) {
                   <SelectFormItem
                     name="keptInStock"
                     label={i18n('entities.medicineEnum.fields.keptInStock')}
+                    options={[
+                      {
+                        value: true,
+                        label: i18n('common.yes'),
+                      },
+                      {
+                        value: false,
+                        label: i18n('common.no'),
+                      },
+                    ]}
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <SelectFormItem
+                    name="isCommon"
+                    label={i18n('entities.medicineEnum.fields.isCommon')}
                     options={[
                       {
                         value: true,

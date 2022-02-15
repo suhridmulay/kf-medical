@@ -27,7 +27,8 @@ class MedicineEnumRepository {
       {
         ...lodash.pick(data, [
           'medicineName',
-          'keptInStock',          
+          'keptInStock',
+          'isCommon',          
           'importHash',
         ]),
 
@@ -86,7 +87,8 @@ class MedicineEnumRepository {
       {
         ...lodash.pick(data, [
           'medicineName',
-          'keptInStock',          
+          'keptInStock',
+          'isCommon',          
           'importHash',
         ]),
 
@@ -280,6 +282,19 @@ class MedicineEnumRepository {
           keptInStock:
             filter.keptInStock === true ||
             filter.keptInStock === 'true',
+        });
+      }
+
+      if (
+        filter.isCommon === true ||
+        filter.isCommon === 'true' ||
+        filter.isCommon === false ||
+        filter.isCommon === 'false'
+      ) {
+        whereAnd.push({
+          isCommon:
+            filter.isCommon === true ||
+            filter.isCommon === 'true',
         });
       }
 

@@ -50,6 +50,14 @@ export default [
     label: i18n('entities.patientVisit.fields.otherSymptoms'),
   },
   {
+    name: 'height',
+    label: i18n('entities.patientVisit.fields.height'),
+  },
+  {
+    name: 'weight',
+    label: i18n('entities.patientVisit.fields.weight'),
+  },
+  {
     name: 'temperature',
     label: i18n('entities.patientVisit.fields.temperature'),
   },
@@ -66,14 +74,6 @@ export default [
     label: i18n('entities.patientVisit.fields.oxygenLevel'),
   },
   {
-    name: 'height',
-    label: i18n('entities.patientVisit.fields.height'),
-  },
-  {
-    name: 'weight',
-    label: i18n('entities.patientVisit.fields.weight'),
-  },
-  {
     name: 'vitalStatisticsOther',
     label: i18n('entities.patientVisit.fields.vitalStatisticsOther'),
   },
@@ -82,8 +82,8 @@ export default [
     label: i18n('entities.patientVisit.fields.diagnosis'),
   },
   {
-    name: 'requestedLabs',
-    label: i18n('entities.patientVisit.fields.requestedLabs'),
+    name: 'caseSeverity',
+    label: i18n('entities.patientVisit.fields.caseSeverity'),
   },
   {
     name: 'medicine1',
@@ -144,6 +144,10 @@ export default [
   {
     name: 'medicineInstructions',
     label: i18n('entities.patientVisit.fields.medicineInstructions'),
+  },
+  {
+    name: 'requestedLabs',
+    label: i18n('entities.patientVisit.fields.requestedLabs'),
   },
   {
     name: 'dietaryInstructions',

@@ -64,6 +64,16 @@ function PatientVisitView(props) {
         />
 
         <TextViewItem
+          label={i18n('entities.patientVisit.fields.height')}
+          value={record.height}
+        />
+
+        <TextViewItem
+          label={i18n('entities.patientVisit.fields.weight')}
+          value={record.weight}
+        />
+
+        <TextViewItem
           label={i18n('entities.patientVisit.fields.temperature')}
           value={record.temperature}
         />
@@ -84,16 +94,6 @@ function PatientVisitView(props) {
         />
 
         <TextViewItem
-          label={i18n('entities.patientVisit.fields.height')}
-          value={record.height}
-        />
-
-        <TextViewItem
-          label={i18n('entities.patientVisit.fields.weight')}
-          value={record.weight}
-        />
-
-        <TextViewItem
           label={i18n('entities.patientVisit.fields.vitalStatisticsOther')}
           value={record.vitalStatisticsOther}
         />
@@ -104,8 +104,13 @@ function PatientVisitView(props) {
         />
 
         <TextViewItem
-          label={i18n('entities.patientVisit.fields.requestedLabs')}
-          value={record.requestedLabs}
+          label={i18n('entities.patientVisit.fields.caseSeverity')}
+          value={
+            record.caseSeverity &&
+            i18n(
+              `entities.patientVisit.enumerators.caseSeverity.${record.caseSeverity}`,
+            )
+          }
         />
 
         <MedicineEnumViewItem
@@ -187,6 +192,11 @@ function PatientVisitView(props) {
         <TextViewItem
           label={i18n('entities.patientVisit.fields.medicineInstructions')}
           value={record.medicineInstructions}
+        />
+
+        <TextViewItem
+          label={i18n('entities.patientVisit.fields.requestedLabs')}
+          value={record.requestedLabs}
         />
 
         <TextViewItem

@@ -47,6 +47,10 @@ export default function (sequelize) {
       },
       age: {
         type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+
+        }
       },
       localityName: {
         type: DataTypes.TEXT,

@@ -23,6 +23,7 @@ import filterRenders from 'src/modules/shared/filter/filterRenders';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import patientVisitEnumerators from 'src/modules/patientVisit/patientVisitEnumerators';
 import DatePickerRangeFormItem from 'src/view/shared/form/items/DatePickerRangeFormItem';
 import PatientAutocompleteFormItem from 'src/view/patient/autocomplete/PatientAutocompleteFormItem';
 import HealthCenterAutocompleteFormItem from 'src/view/healthCenter/autocomplete/HealthCenterAutocompleteFormItem';
@@ -44,6 +45,9 @@ const schema = yup.object().shape({
   repeatVisit: yupFilterSchemas.boolean(
     i18n('entities.patientVisit.fields.repeatVisit'),
   ),
+  caseSeverity: yupFilterSchemas.enumerator(
+    i18n('entities.patientVisit.fields.caseSeverity'),
+  ),
   telemedicineDoctor: yupFilterSchemas.relationToOne(
     i18n('entities.patientVisit.fields.telemedicineDoctor'),
   ),
@@ -55,6 +59,7 @@ const emptyValues = {
   doctor: null,
   visitDateRange: [],
   repeatVisit: null,
+  caseSeverity: null,
   telemedicineDoctor: null,
 }
 
@@ -78,6 +83,10 @@ const previewRenders = {
   repeatVisit: {
     label: i18n('entities.patientVisit.fields.repeatVisit'),
     render: filterRenders.boolean(),
+  },
+  caseSeverity: {
+    label: i18n('entities.patientVisit.fields.caseSeverity'),
+    render: filterRenders.enumerator('entities.patientVisit.enumerators.caseSeverity',),
   },
   telemedicineDoctor: {
       label: i18n('entities.patientVisit.fields.telemedicineDoctor'),
@@ -185,6 +194,20 @@ function PatientVisitListFilter(props) {
                         label: i18n('common.no'),
                       },
                     ]}
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <SelectFormItem
+                    name="caseSeverity"
+                    label={i18n('entities.patientVisit.fields.caseSeverity')}
+                    options={patientVisitEnumerators.caseSeverity.map(
+                      (value) => ({
+                        value,
+                        label: i18n(
+                          `entities.patientVisit.enumerators.caseSeverity.${value}`,
+                        ),
+                      }),
+                    )}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>

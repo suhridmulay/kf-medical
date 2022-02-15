@@ -29,15 +29,15 @@ class PatientVisitRepository {
           'visitDate',
           'repeatVisit',
           'otherSymptoms',
+          'height',
+          'weight',
           'temperature',
           'bloodPressure',
           'pulseRate',
           'oxygenLevel',
-          'height',
-          'weight',
           'vitalStatisticsOther',
           'diagnosis',
-          'requestedLabs',
+          'caseSeverity',
           'med1Qty',
           'med1Supplied',
           'med2Qty',
@@ -47,6 +47,7 @@ class PatientVisitRepository {
           'med4Qty',
           'med4Supplied',
           'medicineInstructions',
+          'requestedLabs',
           'dietaryInstructions',
           'requestedLab',
           'referralHospital',
@@ -127,15 +128,15 @@ class PatientVisitRepository {
           'visitDate',
           'repeatVisit',
           'otherSymptoms',
+          'height',
+          'weight',
           'temperature',
           'bloodPressure',
           'pulseRate',
           'oxygenLevel',
-          'height',
-          'weight',
           'vitalStatisticsOther',
           'diagnosis',
-          'requestedLabs',
+          'caseSeverity',
           'med1Qty',
           'med1Supplied',
           'med2Qty',
@@ -145,6 +146,7 @@ class PatientVisitRepository {
           'med4Qty',
           'med4Supplied',
           'medicineInstructions',
+          'requestedLabs',
           'dietaryInstructions',
           'requestedLab',
           'referralHospital',
@@ -478,6 +480,12 @@ class PatientVisitRepository {
           repeatVisit:
             filter.repeatVisit === true ||
             filter.repeatVisit === 'true',
+        });
+      }
+
+      if (filter.caseSeverity) {
+        whereAnd.push({
+          caseSeverity: filter.caseSeverity,
         });
       }
 
