@@ -30,6 +30,18 @@ export default function (sequelize) {
       otherSymptoms: {
         type: DataTypes.TEXT,
       },
+      height: {
+        type: DataTypes.STRING(6),
+        validate: {
+          len: [0, 6],
+        }
+      },
+      weight: {
+        type: DataTypes.STRING(6),
+        validate: {
+          len: [0, 6],
+        }
+      },
       temperature: {
         type: DataTypes.STRING(5),
         validate: {
@@ -54,18 +66,6 @@ export default function (sequelize) {
           len: [0, 3],
         }
       },
-      height: {
-        type: DataTypes.STRING(6),
-        validate: {
-          len: [0, 6],
-        }
-      },
-      weight: {
-        type: DataTypes.STRING(6),
-        validate: {
-          len: [0, 6],
-        }
-      },
       vitalStatisticsOther: {
         type: DataTypes.TEXT,
       },
@@ -76,8 +76,15 @@ export default function (sequelize) {
           notEmpty: true,
         }
       },
-      requestedLabs: {
+      caseSeverity: {
         type: DataTypes.TEXT,
+        validate: {
+          isIn: [[
+            "Green",
+            "Orange",
+            "Red"
+          ]],
+        }
       },
       med1Qty: {
         type: DataTypes.INTEGER,
@@ -112,6 +119,9 @@ export default function (sequelize) {
         defaultValue: false,
       },
       medicineInstructions: {
+        type: DataTypes.TEXT,
+      },
+      requestedLabs: {
         type: DataTypes.TEXT,
       },
       dietaryInstructions: {

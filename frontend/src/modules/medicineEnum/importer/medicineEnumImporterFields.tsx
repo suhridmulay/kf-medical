@@ -22,4 +22,12 @@ export default [
       {},
     ),
   },
+  {
+    name: 'isCommon',
+    label: i18n('entities.medicineEnum.fields.isCommon'),
+    schema: schemas.boolean(
+      i18n('entities.medicineEnum.fields.isCommon'),
+      {},
+    ),
+  },
 ];

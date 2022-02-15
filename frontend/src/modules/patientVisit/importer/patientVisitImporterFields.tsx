@@ -87,6 +87,26 @@ export default [
     ),
   },
   {
+    name: 'height',
+    label: i18n('entities.patientVisit.fields.height'),
+    schema: schemas.string(
+      i18n('entities.patientVisit.fields.height'),
+      {
+        "max": 6
+      },
+    ),
+  },
+  {
+    name: 'weight',
+    label: i18n('entities.patientVisit.fields.weight'),
+    schema: schemas.string(
+      i18n('entities.patientVisit.fields.weight'),
+      {
+        "max": 6
+      },
+    ),
+  },
+  {
     name: 'temperature',
     label: i18n('entities.patientVisit.fields.temperature'),
     schema: schemas.string(
@@ -129,26 +149,6 @@ export default [
     ),
   },
   {
-    name: 'height',
-    label: i18n('entities.patientVisit.fields.height'),
-    schema: schemas.string(
-      i18n('entities.patientVisit.fields.height'),
-      {
-        "max": 6
-      },
-    ),
-  },
-  {
-    name: 'weight',
-    label: i18n('entities.patientVisit.fields.weight'),
-    schema: schemas.string(
-      i18n('entities.patientVisit.fields.weight'),
-      {
-        "max": 6
-      },
-    ),
-  },
-  {
     name: 'vitalStatisticsOther',
     label: i18n('entities.patientVisit.fields.vitalStatisticsOther'),
     schema: schemas.string(
@@ -167,11 +167,13 @@ export default [
     ),
   },
   {
-    name: 'requestedLabs',
-    label: i18n('entities.patientVisit.fields.requestedLabs'),
-    schema: schemas.string(
-      i18n('entities.patientVisit.fields.requestedLabs'),
-      {},
+    name: 'caseSeverity',
+    label: i18n('entities.patientVisit.fields.caseSeverity'),
+    schema: schemas.enumerator(
+      i18n('entities.patientVisit.fields.caseSeverity'),
+      {
+        "options": patientVisitEnumerators.caseSeverity
+      },
     ),
   },
   {
@@ -275,6 +277,14 @@ export default [
     label: i18n('entities.patientVisit.fields.medicineInstructions'),
     schema: schemas.string(
       i18n('entities.patientVisit.fields.medicineInstructions'),
+      {},
+    ),
+  },
+  {
+    name: 'requestedLabs',
+    label: i18n('entities.patientVisit.fields.requestedLabs'),
+    schema: schemas.string(
+      i18n('entities.patientVisit.fields.requestedLabs'),
       {},
     ),
   },

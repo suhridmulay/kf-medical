@@ -22,6 +22,11 @@ export default function (sequelize) {
         allowNull: false,
         defaultValue: false,
       },
+      isCommon: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,    

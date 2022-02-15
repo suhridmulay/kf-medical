@@ -16,6 +16,11 @@ export default [
     render: exporterRenders.boolean(),
   },
   {
+    name: 'isCommon',
+    label: i18n('entities.medicineEnum.fields.isCommon'),
+    render: exporterRenders.boolean(),
+  },
+  {
     name: 'createdAt',
     label: i18n('entities.medicineEnum.fields.createdAt'),
     render: exporterRenders.datetime(),

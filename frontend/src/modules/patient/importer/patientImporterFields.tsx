@@ -62,7 +62,9 @@ export default [
     label: i18n('entities.patient.fields.age'),
     schema: schemas.integer(
       i18n('entities.patient.fields.age'),
-      {},
+      {
+        "required": true
+      },
     ),
   },
   {
