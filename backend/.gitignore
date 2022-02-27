@@ -1,6 +1,7 @@
 node_modules/
 /data
 dist/
+.env.prod.DO_NOT_DELETE
 app-engine.staging.yml
-app-engine.production.yml
+app-engine.production.yml.DO_NOT_DELETE
 sendgrid.env

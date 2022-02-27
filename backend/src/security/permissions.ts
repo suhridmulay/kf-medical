@@ -80,7 +80,7 @@ class Permissions {
       },
       patientCreate: {
         id: 'patientCreate',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
         allowedPlans: [plans.free],
         allowedStorage: [
           storage.patientPicture,
@@ -88,7 +88,7 @@ class Permissions {
       },
       patientEdit: {
         id: 'patientEdit',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
         allowedPlans: [plans.free],
         allowedStorage: [
           storage.patientPicture,
@@ -104,12 +104,12 @@ class Permissions {
       },
       patientRead: {
         id: 'patientRead',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
         allowedPlans: [plans.free],
       },
       patientAutocomplete: {
         id: 'patientAutocomplete',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
         allowedPlans: [plans.free],
       },
 
@@ -160,7 +160,7 @@ class Permissions {
       },
       patientVisitCreate: {
         id: 'patientVisitCreate',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
         allowedPlans: [plans.free],
         allowedStorage: [
 
@@ -168,7 +168,7 @@ class Permissions {
       },
       patientVisitEdit: {
         id: 'patientVisitEdit',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager, roles.pharmacist],
         allowedPlans: [plans.free],
         allowedStorage: [
 
@@ -184,12 +184,12 @@ class Permissions {
       },
       patientVisitRead: {
         id: 'patientVisitRead',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
         allowedPlans: [plans.free],
       },
       patientVisitAutocomplete: {
         id: 'patientVisitAutocomplete',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
         allowedPlans: [plans.free],
       },
 
@@ -200,7 +200,7 @@ class Permissions {
       },
       medicineEnumCreate: {
         id: 'medicineEnumCreate',
-        allowedRoles: [roles.admin, roles.manager],
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
         allowedPlans: [plans.free],
         allowedStorage: [
 
@@ -208,7 +208,7 @@ class Permissions {
       },
       medicineEnumEdit: {
         id: 'medicineEnumEdit',
-        allowedRoles: [roles.admin, roles.manager],
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
         allowedPlans: [plans.free],
         allowedStorage: [
 
@@ -224,12 +224,12 @@ class Permissions {
       },
       medicineEnumRead: {
         id: 'medicineEnumRead',
-        allowedRoles: [roles.admin, roles.manager],
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
         allowedPlans: [plans.free],
       },
       medicineEnumAutocomplete: {
         id: 'medicineEnumAutocomplete',
-        allowedRoles: [roles.admin, roles.manager],
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
         allowedPlans: [plans.free],
       },
 
@@ -320,14 +320,14 @@ class Permissions {
       },
       patientDocumentCreate: {
         id: 'patientDocumentCreate',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
         allowedStorage: [
           storage.patientDocumentImage,
         ],
       },
       patientDocumentEdit: {
         id: 'patientDocumentEdit',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
         allowedPlans: [plans.free],
         allowedStorage: [
           storage.patientDocumentImage,
@@ -335,7 +335,7 @@ class Permissions {
       },
       patientDocumentDestroy: {
         id: 'patientDocumentDestroy',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
         allowedPlans: [plans.free],
         allowedStorage: [
           storage.patientDocumentImage,
@@ -343,23 +343,23 @@ class Permissions {
       },
       patientDocumentRead: {
         id: 'patientDocumentRead',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
         allowedPlans: [plans.free],
       },
       patientDocumentAutocomplete: {
         id: 'patientDocumentAutocomplete',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
         allowedPlans: [plans.free],
       },
 
       medicineSuppliesImport: {
         id: 'medicineSuppliesImport',
-        allowedRoles: [roles.admin, roles.manager],
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
         allowedPlans: [plans.free],
       },
       medicineSuppliesCreate: {
         id: 'medicineSuppliesCreate',
-        allowedRoles: [roles.admin, roles.manager, roles.helper],
+        allowedRoles: [roles.admin, roles.manager, roles.data_entry, roles.pharmacist],
         allowedPlans: [plans.free],
         allowedStorage: [
 
@@ -367,7 +367,7 @@ class Permissions {
       },
       medicineSuppliesEdit: {
         id: 'medicineSuppliesEdit',
-        allowedRoles: [roles.admin, roles.manager, roles.helper],
+        allowedRoles: [roles.admin, roles.manager, roles.data_entry, roles.pharmacist],
         allowedPlans: [plans.free],
         allowedStorage: [
 
@@ -383,23 +383,23 @@ class Permissions {
       },
       medicineSuppliesRead: {
         id: 'medicineSuppliesRead',
-        allowedRoles: [roles.admin, roles.manager, roles.helper],
+        allowedRoles: [roles.admin, roles.manager, roles.data_entry, roles.pharmacist],
         allowedPlans: [plans.free],
       },
       medicineSuppliesAutocomplete: {
         id: 'medicineSuppliesAutocomplete',
-        allowedRoles: [roles.admin, roles.manager, roles.helper],
+        allowedRoles: [roles.admin, roles.manager, roles.data_entry, roles.pharmacist],
         allowedPlans: [plans.free],
       },
 
       medicineInventoryImport: {
         id: 'medicineInventoryImport',
-        allowedRoles: [roles.admin, roles.manager, roles.helper],
+        allowedRoles: [roles.admin, roles.manager, roles.data_entry, roles.pharmacist],
         allowedPlans: [plans.free],
       },
       medicineInventoryCreate: {
         id: 'medicineInventoryCreate',
-        allowedRoles: [roles.admin, roles.manager, roles.helper],
+        allowedRoles: [roles.admin, roles.manager, roles.data_entry, roles.pharmacist],
         allowedPlans: [plans.free],
         allowedStorage: [
 
@@ -407,7 +407,7 @@ class Permissions {
       },
       medicineInventoryEdit: {
         id: 'medicineInventoryEdit',
-        allowedRoles: [roles.admin, roles.manager, roles.helper],
+        allowedRoles: [roles.admin, roles.manager, roles.data_entry, roles.pharmacist],
         allowedPlans: [plans.free],
         allowedStorage: [
 
@@ -423,12 +423,12 @@ class Permissions {
       },
       medicineInventoryRead: {
         id: 'medicineInventoryRead',
-        allowedRoles: [roles.admin, roles.manager, roles.helper],
+        allowedRoles: [roles.admin, roles.manager, roles.data_entry, roles.pharmacist],
         allowedPlans: [plans.free],
       },
       medicineInventoryAutocomplete: {
         id: 'medicineInventoryAutocomplete',
-        allowedRoles: [roles.admin, roles.manager, roles.helper],
+        allowedRoles: [roles.admin, roles.manager, roles.data_entry, roles.pharmacist],
         allowedPlans: [plans.free],
       },
 
@@ -479,7 +479,7 @@ class Permissions {
       },
       medicalHistoryCreate: {
         id: 'medicalHistoryCreate',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
         allowedPlans: [plans.free],
         allowedStorage: [
 
@@ -487,7 +487,7 @@ class Permissions {
       },
       medicalHistoryEdit: {
         id: 'medicalHistoryEdit',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
         allowedPlans: [plans.free],
         allowedStorage: [
 
@@ -503,12 +503,12 @@ class Permissions {
       },
       medicalHistoryRead: {
         id: 'medicalHistoryRead',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
         allowedPlans: [plans.free],
       },
       medicalHistoryAutocomplete: {
         id: 'medicalHistoryAutocomplete',
-        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.helper, roles.manager],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
         allowedPlans: [plans.free],
       },
 
@@ -550,7 +550,7 @@ class Permissions {
         id: 'chronicDiseaseEnumAutocomplete',
         allowedRoles: [roles.admin, roles.doctor, roles.manager],
         allowedPlans: [plans.free],
-      },      
+      },
     };
   }
 

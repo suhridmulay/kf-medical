@@ -31,6 +31,12 @@ const schema = yup.object().shape({
     i18n('entities.medicineEnum.fields.isCommon'),
     {},
   ),
+  msrp: yupFormSchemas.decimal(
+    i18n('entities.medicineEnum.fields.msrp'),
+    {
+      "scale": 2
+    },
+  ),
 });
 
 function MedicineEnumForm(props) {
@@ -41,6 +47,7 @@ function MedicineEnumForm(props) {
       medicineName: record.medicineName,
       keptInStock: record.keptInStock,
       isCommon: record.isCommon,
+      msrp: record.msrp,
     };
   });
 
@@ -85,6 +92,13 @@ function MedicineEnumForm(props) {
               <SwitchFormItem
                 name="isCommon"
                 label={i18n('entities.medicineEnum.fields.isCommon')}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="msrp"
+                label={i18n('entities.medicineEnum.fields.msrp')}  
+                required={false}
               />
             </Grid>
           </Grid>

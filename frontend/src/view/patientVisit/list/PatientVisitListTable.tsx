@@ -187,6 +187,35 @@ function PatientVisitListTable(props) {
                 )}
               />
               <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'isTelemedReferral'}
+                label={i18n(
+                  'entities.patientVisit.fields.isTelemedReferral',
+                )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'patientCopay'}
+                label={i18n(
+                  'entities.patientVisit.fields.patientCopay',
+                )}
+                align="right"
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'telemedCopay'}
+                label={i18n(
+                  'entities.patientVisit.fields.telemedCopay',
+                )}
+                align="right"
+              />
+              <TableCellCustom
                 label={i18n(
                   'entities.patientVisit.fields.telemedicineDoctor',
                 )}
@@ -261,6 +290,13 @@ function PatientVisitListTable(props) {
                 <TableCell>
                   <MedicineEnumListItem value={row.medicine2} />
                 </TableCell>
+                <TableCell>
+                  {row.isTelemedReferral
+                    ? i18n('common.yes')
+                    : i18n('common.no')}
+                </TableCell>
+                <TableCell align="right">{row.patientCopay}</TableCell>
+                <TableCell align="right">{row.telemedCopay}</TableCell>
                 <TableCell>
                   <DoctorListItem value={row.telemedicineDoctor} />
                 </TableCell>                  

@@ -30,7 +30,12 @@ function MedicineEnumView(props) {
               ? i18n('common.yes')
               : i18n('common.no')
           }
-        />        
+        />
+
+        {record.msrp != null && <TextViewItem
+          label={i18n('entities.medicineEnum.fields.msrp')}
+          value={Number(record.msrp).toFixed(2)}
+        />}        
       </div>
     );
   };

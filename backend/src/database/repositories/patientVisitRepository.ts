@@ -49,15 +49,16 @@ class PatientVisitRepository {
           'medicineInstructions',
           'requestedLabs',
           'dietaryInstructions',
-          'requestedLab',
+          'isTelemedReferral',
+          'patientCopay',
+          'telemedCopay',
           'referralHospital',
           'referredSpecialistDoctor',
           'returnIn',
           'telemedicineConsultDate',
           'differentialDiagnosis',
           'differentialRecommendation',
-          'finalNotes',
-          'patientCopay',          
+          'finalNotes',          
           'importHash',
         ]),
         patientId: data.patient || null,
@@ -148,15 +149,16 @@ class PatientVisitRepository {
           'medicineInstructions',
           'requestedLabs',
           'dietaryInstructions',
-          'requestedLab',
+          'isTelemedReferral',
+          'patientCopay',
+          'telemedCopay',
           'referralHospital',
           'referredSpecialistDoctor',
           'returnIn',
           'telemedicineConsultDate',
           'differentialDiagnosis',
           'differentialRecommendation',
-          'finalNotes',
-          'patientCopay',          
+          'finalNotes',          
           'importHash',
         ]),
         patientId: data.patient || null,
@@ -487,6 +489,59 @@ class PatientVisitRepository {
         whereAnd.push({
           caseSeverity: filter.caseSeverity,
         });
+      }
+
+      if (
+        filter.isTelemedReferral === true ||
+        filter.isTelemedReferral === 'true' ||
+        filter.isTelemedReferral === false ||
+        filter.isTelemedReferral === 'false'
+      ) {
+        whereAnd.push({
+          isTelemedReferral:
+            filter.isTelemedReferral === true ||
+            filter.isTelemedReferral === 'true',
+        });
+      }
+
+      if (filter.patientCopayRange) {
+        const [start, end] = filter.patientCopayRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          whereAnd.push({
+            patientCopay: {
+              [Op.gte]: start,
+            },
+          });
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          whereAnd.push({
+            patientCopay: {
+              [Op.lte]: end,
+            },
+          });
+        }
+      }
+
+      if (filter.telemedCopayRange) {
+        const [start, end] = filter.telemedCopayRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          whereAnd.push({
+            telemedCopay: {
+              [Op.gte]: start,
+            },
+          });
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          whereAnd.push({
+            telemedCopay: {
+              [Op.lte]: end,
+            },
+          });
+        }
       }
 
       if (filter.telemedicineDoctor) {

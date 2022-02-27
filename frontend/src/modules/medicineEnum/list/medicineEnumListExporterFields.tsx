@@ -21,6 +21,11 @@ export default [
     render: exporterRenders.boolean(),
   },
   {
+    name: 'msrp',
+    label: i18n('entities.medicineEnum.fields.msrp'),
+    render: exporterRenders.decimal(2),
+  },
+  {
     name: 'createdAt',
     label: i18n('entities.medicineEnum.fields.createdAt'),
     render: exporterRenders.datetime(),

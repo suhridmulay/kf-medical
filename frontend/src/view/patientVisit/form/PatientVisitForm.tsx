@@ -186,9 +186,21 @@ const schema = yup.object().shape({
     i18n('entities.patientVisit.fields.dietaryInstructions'),
     {},
   ),
-  requestedLab: yupFormSchemas.string(
-    i18n('entities.patientVisit.fields.requestedLab'),
+  isTelemedReferral: yupFormSchemas.boolean(
+    i18n('entities.patientVisit.fields.isTelemedReferral'),
     {},
+  ),
+  patientCopay: yupFormSchemas.decimal(
+    i18n('entities.patientVisit.fields.patientCopay'),
+    {
+      "scale": 2
+    },
+  ),
+  telemedCopay: yupFormSchemas.decimal(
+    i18n('entities.patientVisit.fields.telemedCopay'),
+    {
+      "scale": 2
+    },
   ),
   referralHospital: yupFormSchemas.string(
     i18n('entities.patientVisit.fields.referralHospital'),
@@ -222,10 +234,6 @@ const schema = yup.object().shape({
   ),
   finalNotes: yupFormSchemas.string(
     i18n('entities.patientVisit.fields.finalNotes'),
-    {},
-  ),
-  patientCopay: yupFormSchemas.integer(
-    i18n('entities.patientVisit.fields.patientCopay'),
     {},
   ),
 });
@@ -268,7 +276,9 @@ function PatientVisitForm(props) {
       medicineInstructions: record.medicineInstructions,
       requestedLabs: record.requestedLabs,
       dietaryInstructions: record.dietaryInstructions,
-      requestedLab: record.requestedLab,
+      isTelemedReferral: record.isTelemedReferral,
+      patientCopay: record.patientCopay,
+      telemedCopay: record.telemedCopay,
       referralHospital: record.referralHospital,
       referredSpecialistDoctor: record.referredSpecialistDoctor,
       returnIn: record.returnIn,
@@ -277,7 +287,6 @@ function PatientVisitForm(props) {
       differentialDiagnosis: record.differentialDiagnosis,
       differentialRecommendation: record.differentialRecommendation,
       finalNotes: record.finalNotes,
-      patientCopay: record.patientCopay,
     };
   });
 
@@ -562,9 +571,22 @@ function PatientVisitForm(props) {
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
+              <SwitchFormItem
+                name="isTelemedReferral"
+                label={i18n('entities.patientVisit.fields.isTelemedReferral')}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
               <InputFormItem
-                name="requestedLab"
-                label={i18n('entities.patientVisit.fields.requestedLab')}  
+                name="patientCopay"
+                label={i18n('entities.patientVisit.fields.patientCopay')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="telemedCopay"
+                label={i18n('entities.patientVisit.fields.telemedCopay')}  
                 required={false}
               />
             </Grid>
@@ -635,15 +657,6 @@ function PatientVisitForm(props) {
                 name="finalNotes"
                 label={i18n('entities.patientVisit.fields.finalNotes')}
               hint={i18n('entities.patientVisit.hints.finalNotes')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputNumberFormItem
-                name="patientCopay"
-                label={i18n('entities.patientVisit.fields.patientCopay')}
-              placeholder={i18n('entities.patientVisit.placeholders.patientCopay')}
-              hint={i18n('entities.patientVisit.hints.patientCopay')}  
                 required={false}
               />
             </Grid>

@@ -30,4 +30,14 @@ export default [
       {},
     ),
   },
+  {
+    name: 'msrp',
+    label: i18n('entities.medicineEnum.fields.msrp'),
+    schema: schemas.decimal(
+      i18n('entities.medicineEnum.fields.msrp'),
+      {
+        "scale": 2
+      },
+    ),
+  },
 ];

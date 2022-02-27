@@ -3,11 +3,11 @@ class Roles {
   static get values() {
     return {
       admin: 'admin',
-      doctor: 'Doctor',
-      nurse:  'Nurse',
-      helper: 'Data entry helper',
-      manager: 'NGO Manager', 
-      custom: 'custom',
+      doctor: 'doctor',
+      nurse:  'nurse',
+      pharmacist: 'pharmacist',
+      data_entry: 'data_entry',
+      manager: 'manager', 
     };
   }
 }

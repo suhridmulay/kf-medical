@@ -152,6 +152,16 @@ function MedicineEnumListTable(props) {
                 label={i18n(
                   'entities.medicineEnum.fields.isCommon',
                 )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'msrp'}
+                label={i18n(
+                  'entities.medicineEnum.fields.msrp',
+                )}
+                align="right"
               />              
               <TableCellCustom size="md" />
             </TableRow>
@@ -202,7 +212,8 @@ function MedicineEnumListTable(props) {
                   {row.isCommon
                     ? i18n('common.yes')
                     : i18n('common.no')}
-                </TableCell>                  
+                </TableCell>
+                <TableCell align="right">{row.msrp}</TableCell>                  
                   <TableCell>
                     <Box
                       display="flex"

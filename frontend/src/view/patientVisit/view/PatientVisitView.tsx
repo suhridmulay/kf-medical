@@ -205,9 +205,23 @@ function PatientVisitView(props) {
         />
 
         <TextViewItem
-          label={i18n('entities.patientVisit.fields.requestedLab')}
-          value={record.requestedLab}
+          label={i18n('entities.patientVisit.fields.isTelemedReferral')}
+          value={
+            record.isTelemedReferral
+              ? i18n('common.yes')
+              : i18n('common.no')
+          }
         />
+
+        {record.patientCopay != null && <TextViewItem
+          label={i18n('entities.patientVisit.fields.patientCopay')}
+          value={Number(record.patientCopay).toFixed(2)}
+        />}
+
+        {record.telemedCopay != null && <TextViewItem
+          label={i18n('entities.patientVisit.fields.telemedCopay')}
+          value={Number(record.telemedCopay).toFixed(2)}
+        />}
 
         <TextViewItem
           label={i18n('entities.patientVisit.fields.referralHospital')}
@@ -252,11 +266,6 @@ function PatientVisitView(props) {
         <TextViewItem
           label={i18n('entities.patientVisit.fields.finalNotes')}
           value={record.finalNotes}
-        />
-
-        <TextViewItem
-          label={i18n('entities.patientVisit.fields.patientCopay')}
-          value={record.patientCopay}
         />        
       </div>
     );
