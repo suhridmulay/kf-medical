@@ -1488,6 +1488,33 @@
           },
           {
             "in": "query",
+            "name": "filter[isTelemedReferral]",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "filter[patientCopayRange][]",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "filter[telemedCopayRange][]",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            }
+          },
+          {
+            "in": "query",
             "name": "filter[telemedicineDoctor]",
             "schema": {
               "type": "string",
@@ -1930,6 +1957,16 @@
             "name": "filter[isCommon]",
             "schema": {
               "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "filter[msrpRange][]",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
             }
           },      
           {
@@ -7353,8 +7390,14 @@
           "dietaryInstructions": {
             "type": "string"
           },
-          "requestedLab": {
-            "type": "string"
+          "isTelemedReferral": {
+            "type": "boolean"
+          },
+          "patientCopay": {
+            "type": "number"
+          },
+          "telemedCopay": {
+            "type": "number"
           },
           "referralHospital": {
             "type": "string"
@@ -7381,9 +7424,6 @@
           },
           "finalNotes": {
             "type": "string"
-          },
-          "patientCopay": {
-            "type": "integer"
           }    
         }
       },
@@ -7501,8 +7541,14 @@
           "dietaryInstructions": {
             "type": "string"
           },
-          "requestedLab": {
-            "type": "string"
+          "isTelemedReferral": {
+            "type": "boolean"
+          },
+          "patientCopay": {
+            "type": "number"
+          },
+          "telemedCopay": {
+            "type": "number"
           },
           "referralHospital": {
             "type": "string"
@@ -7530,9 +7576,6 @@
           },
           "finalNotes": {
             "type": "string"
-          },
-          "patientCopay": {
-            "type": "integer"
           }    
         }
       },
@@ -7552,6 +7595,9 @@
           },
           "isCommon": {
             "type": "boolean"
+          },
+          "msrp": {
+            "type": "number"
           }    
         }
       },
@@ -7566,6 +7612,9 @@
           },
           "isCommon": {
             "type": "boolean"
+          },
+          "msrp": {
+            "type": "number"
           }    
         }
       },

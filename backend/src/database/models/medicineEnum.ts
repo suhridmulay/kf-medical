@@ -27,6 +27,12 @@ export default function (sequelize) {
         allowNull: false,
         defaultValue: false,
       },
+      msrp: {
+        type: DataTypes.DECIMAL(24, 2),
+        validate: {
+
+        }
+      },
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,    

@@ -23,6 +23,7 @@ import filterRenders from 'src/modules/shared/filter/filterRenders';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
+import InputRangeFormItem from 'src/view/shared/form/items/InputRangeFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 
 const schema = yup.object().shape({
@@ -35,12 +36,16 @@ const schema = yup.object().shape({
   isCommon: yupFilterSchemas.boolean(
     i18n('entities.medicineEnum.fields.isCommon'),
   ),
+  msrpRange: yupFilterSchemas.decimalRange(
+    i18n('entities.medicineEnum.fields.msrpRange'),
+  ),
 });
 
 const emptyValues = {
   medicineName: null,
   keptInStock: null,
   isCommon: null,
+  msrpRange: [],
 }
 
 const previewRenders = {
@@ -55,6 +60,10 @@ const previewRenders = {
   isCommon: {
     label: i18n('entities.medicineEnum.fields.isCommon'),
     render: filterRenders.boolean(),
+  },
+  msrpRange: {
+    label: i18n('entities.medicineEnum.fields.msrpRange'),
+    render: filterRenders.decimalRange(2),
   },
 }
 
@@ -156,6 +165,12 @@ function MedicineEnumListFilter(props) {
                         label: i18n('common.no'),
                       },
                     ]}
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <InputRangeFormItem
+                    name="msrpRange"
+                    label={i18n('entities.medicineEnum.fields.msrpRange')}      
                   />
                 </Grid>
               </Grid>

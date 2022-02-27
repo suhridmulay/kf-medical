@@ -28,7 +28,8 @@ class MedicineEnumRepository {
         ...lodash.pick(data, [
           'medicineName',
           'keptInStock',
-          'isCommon',          
+          'isCommon',
+          'msrp',          
           'importHash',
         ]),
 
@@ -88,7 +89,8 @@ class MedicineEnumRepository {
         ...lodash.pick(data, [
           'medicineName',
           'keptInStock',
-          'isCommon',          
+          'isCommon',
+          'msrp',          
           'importHash',
         ]),
 
@@ -296,6 +298,26 @@ class MedicineEnumRepository {
             filter.isCommon === true ||
             filter.isCommon === 'true',
         });
+      }
+
+      if (filter.msrpRange) {
+        const [start, end] = filter.msrpRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          whereAnd.push({
+            msrp: {
+              [Op.gte]: start,
+            },
+          });
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          whereAnd.push({
+            msrp: {
+              [Op.lte]: end,
+            },
+          });
+        }
       }
 
       if (filter.createdAtRange) {

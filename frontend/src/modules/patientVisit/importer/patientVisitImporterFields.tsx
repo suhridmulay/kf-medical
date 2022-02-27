@@ -297,11 +297,31 @@ export default [
     ),
   },
   {
-    name: 'requestedLab',
-    label: i18n('entities.patientVisit.fields.requestedLab'),
-    schema: schemas.string(
-      i18n('entities.patientVisit.fields.requestedLab'),
+    name: 'isTelemedReferral',
+    label: i18n('entities.patientVisit.fields.isTelemedReferral'),
+    schema: schemas.boolean(
+      i18n('entities.patientVisit.fields.isTelemedReferral'),
       {},
+    ),
+  },
+  {
+    name: 'patientCopay',
+    label: i18n('entities.patientVisit.fields.patientCopay'),
+    schema: schemas.decimal(
+      i18n('entities.patientVisit.fields.patientCopay'),
+      {
+        "scale": 2
+      },
+    ),
+  },
+  {
+    name: 'telemedCopay',
+    label: i18n('entities.patientVisit.fields.telemedCopay'),
+    schema: schemas.decimal(
+      i18n('entities.patientVisit.fields.telemedCopay'),
+      {
+        "scale": 2
+      },
     ),
   },
   {
@@ -368,14 +388,6 @@ export default [
     label: i18n('entities.patientVisit.fields.finalNotes'),
     schema: schemas.string(
       i18n('entities.patientVisit.fields.finalNotes'),
-      {},
-    ),
-  },
-  {
-    name: 'patientCopay',
-    label: i18n('entities.patientVisit.fields.patientCopay'),
-    schema: schemas.integer(
-      i18n('entities.patientVisit.fields.patientCopay'),
       {},
     ),
   },

@@ -127,8 +127,22 @@ export default function (sequelize) {
       dietaryInstructions: {
         type: DataTypes.TEXT,
       },
-      requestedLab: {
-        type: DataTypes.TEXT,
+      isTelemedReferral: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+      patientCopay: {
+        type: DataTypes.DECIMAL(24, 2),
+        validate: {
+
+        }
+      },
+      telemedCopay: {
+        type: DataTypes.DECIMAL(24, 2),
+        validate: {
+
+        }
       },
       referralHospital: {
         type: DataTypes.TEXT,
@@ -173,9 +187,6 @@ export default function (sequelize) {
       },
       finalNotes: {
         type: DataTypes.TEXT,
-      },
-      patientCopay: {
-        type: DataTypes.INTEGER,
       },
       importHash: {
         type: DataTypes.STRING(255),

@@ -154,8 +154,19 @@ export default [
     label: i18n('entities.patientVisit.fields.dietaryInstructions'),
   },
   {
-    name: 'requestedLab',
-    label: i18n('entities.patientVisit.fields.requestedLab'),
+    name: 'isTelemedReferral',
+    label: i18n('entities.patientVisit.fields.isTelemedReferral'),
+    render: exporterRenders.boolean(),
+  },
+  {
+    name: 'patientCopay',
+    label: i18n('entities.patientVisit.fields.patientCopay'),
+    render: exporterRenders.decimal(2),
+  },
+  {
+    name: 'telemedCopay',
+    label: i18n('entities.patientVisit.fields.telemedCopay'),
+    render: exporterRenders.decimal(2),
   },
   {
     name: 'referralHospital',
@@ -189,10 +200,6 @@ export default [
   {
     name: 'finalNotes',
     label: i18n('entities.patientVisit.fields.finalNotes'),
-  },
-  {
-    name: 'patientCopay',
-    label: i18n('entities.patientVisit.fields.patientCopay'),
   },
   {
     name: 'createdAt',
