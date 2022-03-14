@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
+import 'package:kf_openapi_generated/api.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -47,14 +48,21 @@ class StackedRouter extends RouterBase {
       );
     },
     DashboardView: (data) {
+      var args = data.getArgs<DashboardViewArguments>(
+        orElse: () => DashboardViewArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const DashboardView(),
+        builder: (context) => DashboardView(key: args.key),
         settings: data,
       );
     },
     PatientView: (data) {
+      var args = data.getArgs<PatientViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const PatientView(),
+        builder: (context) => PatientView(
+          key: args.key,
+          patient: args.patient,
+        ),
         settings: data,
       );
     },
@@ -65,4 +73,21 @@ class StackedRouter extends RouterBase {
       );
     },
   };
+}
+
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
+
+/// DashboardView arguments holder class
+class DashboardViewArguments {
+  final Key? key;
+  DashboardViewArguments({this.key});
+}
+
+/// PatientView arguments holder class
+class PatientViewArguments {
+  final Key? key;
+  final Patient patient;
+  PatientViewArguments({this.key, required this.patient});
 }
