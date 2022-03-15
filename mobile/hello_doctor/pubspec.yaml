@@ -38,6 +38,7 @@ dependencies:
   stacked_services: ^0.8.17
   kf_openapi_generated:
     path: ../kf_openapi_generated
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
