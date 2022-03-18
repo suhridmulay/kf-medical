@@ -226,8 +226,10 @@ const es = {
           'requestedLabs': 'Lab Diagnostics',
           'dietaryInstructions': 'DietaryInstructions',
           'isTelemedReferral': 'Telemedicine Referral',
-          'patientCopayRange': 'Medicine Payment (Rs)',
-          'patientCopay': 'Medicine Payment (Rs)',
+          'medicineCopayRange': 'Medicine Copay (Rs)',
+          'medicineCopay': 'Medicine Copay (Rs)',
+          'doctorCopayRange': 'DoctorCopay',
+          'doctorCopay': 'DoctorCopay',
           'telemedCopayRange': 'Telemed Copay (Rs)',
           'telemedCopay': 'Telemed Copay (Rs)',
           'referralHospital': 'Referral Hospital',
@@ -327,6 +329,9 @@ const es = {
           'medicineName': 'Medicine Name',
           'keptInStock': 'Kept In Stock',
           'isCommon': 'Commonly Prescribed',
+          'medicineCategory': 'MedicineCategory',
+          'genericName': 'Generic Name',
+          'compositionName': 'Composition Name',
           'msrpRange': 'MSRP',
           'msrp': 'MSRP',
           createdAt: 'Creado el',
@@ -337,10 +342,10 @@ const es = {
 
         },
         placeholders: {
-
+          'genericName': 'Acetaminophen',
         },
         hints: {
-
+          'genericName': 'Drug composition name',
         },
         new: {
           title: 'Nuevo Medicine',
@@ -440,6 +445,8 @@ const es = {
           'specialization': 'Specialization',
           'user': 'User',
           'phone': 'Phone',
+          'certifications': 'Certifications',
+          'registrationId': 'Registration ID',
           'isRuralHealthcareProfessional': 'Rural Healthcare Professional',
           createdAt: 'Creado el',
           updatedAt: 'Actualizado el',
@@ -557,6 +564,11 @@ const es = {
           'inventoryAddDate': 'Date Added to Inventory',
           'countRange': 'Count',
           'count': 'Count',
+          'batchNumber': 'Batch Number',
+          'expiryDateRange': 'Expiry Date',
+          'expiryDate': 'Expiry Date',
+          'rateRange': 'Rate',
+          'rate': 'Rate',
           createdAt: 'Creado el',
           updatedAt: 'Actualizado el',
           createdAtRange: 'Creado el',
@@ -818,6 +830,60 @@ const es = {
         importer: {
           title: 'Importar ChronicDiseases',
           fileName: 'chronicDiseaseEnum_import_template',
+          hint:
+            'Las columnas Archivos/Imágenes deben ser las URL de los archivos separados por espacio.',
+        },
+      },
+
+    medicineCategoryEnum: {
+        name: 'medicineCategoryEnum',
+        label: 'MedicineCategoryEnums',
+        menu: 'MedicineCategoryEnums',
+        exporterFileName: 'exportacion_medicineCategoryEnum',
+        list: {
+          menu: 'MedicineCategoryEnums',
+          title: 'MedicineCategoryEnums',
+        },
+        create: {
+          success: 'Medicine Category guardado con éxito',
+        },
+        update: {
+          success: 'Medicine Category guardado con éxito',
+        },
+        destroy: {
+          success: 'Medicine Category eliminado con éxito',
+        },
+        destroyAll: {
+          success: 'Medicine Category(s) eliminado con éxito',
+        },
+        edit: {
+          title: 'Editar Medicine Category',
+        },
+        fields: {
+          id: 'Id',
+          'categoryName': 'Category Name',
+          createdAt: 'Creado el',
+          updatedAt: 'Actualizado el',
+          createdAtRange: 'Creado el',
+        },
+        enumerators: {
+
+        },
+        placeholders: {
+          'categoryName': 'Category name',
+        },
+        hints: {
+          'categoryName': 'Respiratory Antibiotic',
+        },
+        new: {
+          title: 'Nuevo Medicine Category',
+        },
+        view: {
+          title: 'Ver Medicine Category',
+        },
+        importer: {
+          title: 'Importar MedicineCategoryEnums',
+          fileName: 'medicineCategoryEnum_import_template',
           hint:
             'Las columnas Archivos/Imágenes deben ser las URL de los archivos separados por espacio.',
         },

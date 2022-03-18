@@ -23,7 +23,22 @@ function MedicineSuppliesView(props) {
         <TextViewItem
           label={i18n('entities.medicineSupplies.fields.count')}
           value={record.count}
-        />        
+        />
+
+        <TextViewItem
+          label={i18n('entities.medicineSupplies.fields.batchNumber')}
+          value={record.batchNumber}
+        />
+
+        <TextViewItem
+          label={i18n('entities.medicineSupplies.fields.expiryDate')}
+          value={record.expiryDate}
+        />
+
+        {record.rate != null && <TextViewItem
+          label={i18n('entities.medicineSupplies.fields.rate')}
+          value={Number(record.rate).toFixed(2)}
+        />}        
       </div>
     );
   };

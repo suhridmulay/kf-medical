@@ -25,6 +25,7 @@ import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputRangeFormItem from 'src/view/shared/form/items/InputRangeFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import MedicineCategoryEnumAutocompleteFormItem from 'src/view/medicineCategoryEnum/autocomplete/MedicineCategoryEnumAutocompleteFormItem';
 
 const schema = yup.object().shape({
   medicineName: yupFilterSchemas.string(
@@ -36,6 +37,15 @@ const schema = yup.object().shape({
   isCommon: yupFilterSchemas.boolean(
     i18n('entities.medicineEnum.fields.isCommon'),
   ),
+  medicineCategory: yupFilterSchemas.relationToOne(
+    i18n('entities.medicineEnum.fields.medicineCategory'),
+  ),
+  genericName: yupFilterSchemas.string(
+    i18n('entities.medicineEnum.fields.genericName'),
+  ),
+  compositionName: yupFilterSchemas.string(
+    i18n('entities.medicineEnum.fields.compositionName'),
+  ),
   msrpRange: yupFilterSchemas.decimalRange(
     i18n('entities.medicineEnum.fields.msrpRange'),
   ),
@@ -45,6 +55,9 @@ const emptyValues = {
   medicineName: null,
   keptInStock: null,
   isCommon: null,
+  medicineCategory: null,
+  genericName: null,
+  compositionName: null,
   msrpRange: [],
 }
 
@@ -60,6 +73,18 @@ const previewRenders = {
   isCommon: {
     label: i18n('entities.medicineEnum.fields.isCommon'),
     render: filterRenders.boolean(),
+  },
+  medicineCategory: {
+      label: i18n('entities.medicineEnum.fields.medicineCategory'),
+      render: filterRenders.relationToOne(),
+    },
+  genericName: {
+    label: i18n('entities.medicineEnum.fields.genericName'),
+    render: filterRenders.generic(),
+  },
+  compositionName: {
+    label: i18n('entities.medicineEnum.fields.compositionName'),
+    render: filterRenders.generic(),
   },
   msrpRange: {
     label: i18n('entities.medicineEnum.fields.msrpRange'),
@@ -165,6 +190,24 @@ function MedicineEnumListFilter(props) {
                         label: i18n('common.no'),
                       },
                     ]}
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <MedicineCategoryEnumAutocompleteFormItem  
+                    name="medicineCategory"
+                    label={i18n('entities.medicineEnum.fields.medicineCategory')}        
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <InputFormItem
+                    name="genericName"
+                    label={i18n('entities.medicineEnum.fields.genericName')}      
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <InputFormItem
+                    name="compositionName"
+                    label={i18n('entities.medicineEnum.fields.compositionName')}      
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>

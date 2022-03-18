@@ -11,6 +11,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import * as yup from 'yup';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
+import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import moment from 'moment';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
@@ -35,6 +36,20 @@ const schema = yup.object().shape({
       "required": true
     },
   ),
+  batchNumber: yupFormSchemas.string(
+    i18n('entities.medicineSupplies.fields.batchNumber'),
+    {},
+  ),
+  expiryDate: yupFormSchemas.date(
+    i18n('entities.medicineSupplies.fields.expiryDate'),
+    {},
+  ),
+  rate: yupFormSchemas.decimal(
+    i18n('entities.medicineSupplies.fields.rate'),
+    {
+      "scale": 2
+    },
+  ),
 });
 
 function MedicineSuppliesForm(props) {
@@ -45,6 +60,9 @@ function MedicineSuppliesForm(props) {
       medicine: record.medicine,
       inventoryAddDate: record.inventoryAddDate ? moment(record.inventoryAddDate, 'YYYY-MM-DD') : null,
       count: record.count,
+      batchNumber: record.batchNumber,
+      expiryDate: record.expiryDate ? moment(record.expiryDate, 'YYYY-MM-DD') : null,
+      rate: record.rate,
     };
   });
 
@@ -91,6 +109,27 @@ function MedicineSuppliesForm(props) {
                 name="count"
                 label={i18n('entities.medicineSupplies.fields.count')}  
                 required={true}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="batchNumber"
+                label={i18n('entities.medicineSupplies.fields.batchNumber')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <DatePickerFormItem
+                name="expiryDate"
+                label={i18n('entities.medicineSupplies.fields.expiryDate')}
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="rate"
+                label={i18n('entities.medicineSupplies.fields.rate')}  
+                required={false}
               />
             </Grid>
           </Grid>

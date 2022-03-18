@@ -18,6 +18,7 @@ import medicineInventory from 'src/modules/medicineInventory/medicineInventoryRe
 import symptomsEnum from 'src/modules/symptomsEnum/symptomsEnumReducers';
 import medicalHistory from 'src/modules/medicalHistory/medicalHistoryReducers';
 import chronicDiseaseEnum from 'src/modules/chronicDiseaseEnum/chronicDiseaseEnumReducers';
+import medicineCategoryEnum from 'src/modules/medicineCategoryEnum/medicineCategoryEnumReducers';
 import { combineReducers } from 'redux';
 
 export default (history) =>
@@ -42,4 +43,5 @@ export default (history) =>
     symptomsEnum,
     medicalHistory,
     chronicDiseaseEnum,
+    medicineCategoryEnum,
   });

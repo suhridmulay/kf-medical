@@ -2,6 +2,7 @@ import React from 'react';
 import Spinner from 'src/view/shared/Spinner';
 import { i18n } from 'src/i18n';
 import TextViewItem from 'src/view/shared/view/TextViewItem';
+import MedicineCategoryEnumViewItem from 'src/view/medicineCategoryEnum/view/MedicineCategoryEnumViewItem';
 
 function MedicineEnumView(props) {
   const renderView = () => {
@@ -30,6 +31,21 @@ function MedicineEnumView(props) {
               ? i18n('common.yes')
               : i18n('common.no')
           }
+        />
+
+        <MedicineCategoryEnumViewItem
+          label={i18n('entities.medicineEnum.fields.medicineCategory')}
+          value={record.medicineCategory}
+        />
+
+        <TextViewItem
+          label={i18n('entities.medicineEnum.fields.genericName')}
+          value={record.genericName}
+        />
+
+        <TextViewItem
+          label={i18n('entities.medicineEnum.fields.compositionName')}
+          value={record.compositionName}
         />
 
         {record.msrp != null && <TextViewItem

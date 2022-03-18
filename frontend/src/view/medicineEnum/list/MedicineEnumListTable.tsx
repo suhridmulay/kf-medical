@@ -23,7 +23,7 @@ import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
 import Pagination from 'src/view/shared/table/Pagination';
 import Spinner from 'src/view/shared/Spinner';
 import TableCellCustom from 'src/view/shared/table/TableCellCustom';
-
+import MedicineCategoryEnumListItem from 'src/view/medicineCategoryEnum/list/MedicineCategoryEnumListItem';
 
 function MedicineEnumListTable(props) {
   const [
@@ -154,6 +154,29 @@ function MedicineEnumListTable(props) {
                 )}
               />
               <TableCellCustom
+                label={i18n(
+                  'entities.medicineEnum.fields.medicineCategory',
+                )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'genericName'}
+                label={i18n(
+                  'entities.medicineEnum.fields.genericName',
+                )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'compositionName'}
+                label={i18n(
+                  'entities.medicineEnum.fields.compositionName',
+                )}
+              />
+              <TableCellCustom
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
@@ -213,6 +236,11 @@ function MedicineEnumListTable(props) {
                     ? i18n('common.yes')
                     : i18n('common.no')}
                 </TableCell>
+                <TableCell>
+                  <MedicineCategoryEnumListItem value={row.medicineCategory} />
+                </TableCell>
+                <TableCell>{row.genericName}</TableCell>
+                <TableCell>{row.compositionName}</TableCell>
                 <TableCell align="right">{row.msrp}</TableCell>                  
                   <TableCell>
                     <Box

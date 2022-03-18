@@ -24,6 +24,14 @@ export default [
     label: i18n('entities.doctor.fields.phone'),
   },
   {
+    name: 'certifications',
+    label: i18n('entities.doctor.fields.certifications'),
+  },
+  {
+    name: 'registrationId',
+    label: i18n('entities.doctor.fields.registrationId'),
+  },
+  {
     name: 'isRuralHealthcareProfessional',
     label: i18n('entities.doctor.fields.isRuralHealthcareProfessional'),
     render: exporterRenders.boolean(),

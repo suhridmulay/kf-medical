@@ -29,6 +29,8 @@ class DoctorRepository {
           'name',
           'specialization',
           'phone',
+          'certifications',
+          'registrationId',
           'isRuralHealthcareProfessional',          
           'importHash',
         ]),
@@ -90,6 +92,8 @@ class DoctorRepository {
           'name',
           'specialization',
           'phone',
+          'certifications',
+          'registrationId',
           'isRuralHealthcareProfessional',          
           'importHash',
         ]),
@@ -304,6 +308,26 @@ class DoctorRepository {
             'doctor',
             'phone',
             filter.phone,
+          ),
+        );
+      }
+
+      if (filter.certifications) {
+        whereAnd.push(
+          SequelizeFilterUtils.ilikeIncludes(
+            'doctor',
+            'certifications',
+            filter.certifications,
+          ),
+        );
+      }
+
+      if (filter.registrationId) {
+        whereAnd.push(
+          SequelizeFilterUtils.ilikeIncludes(
+            'doctor',
+            'registrationId',
+            filter.registrationId,
           ),
         );
       }

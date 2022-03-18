@@ -170,6 +170,13 @@ const ptBR = {
         }
       }
     },
+    medicineCategoryEnum: {
+      errors: {
+        unique: {
+          categoryName: 'Category Name deve ser único',
+        }
+      }
+    },
   }
 };
 

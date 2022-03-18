@@ -80,6 +80,7 @@ require('./medicineInventory').default(routes);
 require('./symptomsEnum').default(routes);
 require('./medicalHistory').default(routes);
 require('./chronicDiseaseEnum').default(routes);
+require('./medicineCategoryEnum').default(routes);
 
 // Loads the Tenant if the :tenantId param is passed
 routes.param('tenantId', tenantMiddleware);

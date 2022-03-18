@@ -52,8 +52,11 @@ const schema = yup.object().shape({
   isTelemedReferral: yupFilterSchemas.boolean(
     i18n('entities.patientVisit.fields.isTelemedReferral'),
   ),
-  patientCopayRange: yupFilterSchemas.decimalRange(
-    i18n('entities.patientVisit.fields.patientCopayRange'),
+  medicineCopayRange: yupFilterSchemas.decimalRange(
+    i18n('entities.patientVisit.fields.medicineCopayRange'),
+  ),
+  doctorCopayRange: yupFilterSchemas.decimalRange(
+    i18n('entities.patientVisit.fields.doctorCopayRange'),
   ),
   telemedCopayRange: yupFilterSchemas.decimalRange(
     i18n('entities.patientVisit.fields.telemedCopayRange'),
@@ -71,7 +74,8 @@ const emptyValues = {
   repeatVisit: null,
   caseSeverity: null,
   isTelemedReferral: null,
-  patientCopayRange: [],
+  medicineCopayRange: [],
+  doctorCopayRange: [],
   telemedCopayRange: [],
   telemedicineDoctor: null,
 }
@@ -105,8 +109,12 @@ const previewRenders = {
     label: i18n('entities.patientVisit.fields.isTelemedReferral'),
     render: filterRenders.boolean(),
   },
-  patientCopayRange: {
-    label: i18n('entities.patientVisit.fields.patientCopayRange'),
+  medicineCopayRange: {
+    label: i18n('entities.patientVisit.fields.medicineCopayRange'),
+    render: filterRenders.decimalRange(2),
+  },
+  doctorCopayRange: {
+    label: i18n('entities.patientVisit.fields.doctorCopayRange'),
     render: filterRenders.decimalRange(2),
   },
   telemedCopayRange: {
@@ -253,8 +261,14 @@ function PatientVisitListFilter(props) {
                 </Grid>
                 <Grid item lg={6} xs={12}>
                   <InputRangeFormItem
-                    name="patientCopayRange"
-                    label={i18n('entities.patientVisit.fields.patientCopayRange')}      
+                    name="medicineCopayRange"
+                    label={i18n('entities.patientVisit.fields.medicineCopayRange')}      
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <InputRangeFormItem
+                    name="doctorCopayRange"
+                    label={i18n('entities.patientVisit.fields.doctorCopayRange')}      
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>

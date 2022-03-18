@@ -13,6 +13,7 @@ import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import SwitchFormItem from 'src/view/shared/form/items/SwitchFormItem';
+import MedicineCategoryEnumAutocompleteFormItem from 'src/view/medicineCategoryEnum/autocomplete/MedicineCategoryEnumAutocompleteFormItem';
 
 const schema = yup.object().shape({
   medicineName: yupFormSchemas.string(
@@ -31,6 +32,18 @@ const schema = yup.object().shape({
     i18n('entities.medicineEnum.fields.isCommon'),
     {},
   ),
+  medicineCategory: yupFormSchemas.relationToOne(
+    i18n('entities.medicineEnum.fields.medicineCategory'),
+    {},
+  ),
+  genericName: yupFormSchemas.string(
+    i18n('entities.medicineEnum.fields.genericName'),
+    {},
+  ),
+  compositionName: yupFormSchemas.string(
+    i18n('entities.medicineEnum.fields.compositionName'),
+    {},
+  ),
   msrp: yupFormSchemas.decimal(
     i18n('entities.medicineEnum.fields.msrp'),
     {
@@ -47,6 +60,9 @@ function MedicineEnumForm(props) {
       medicineName: record.medicineName,
       keptInStock: record.keptInStock,
       isCommon: record.isCommon,
+      medicineCategory: record.medicineCategory,
+      genericName: record.genericName,
+      compositionName: record.compositionName,
       msrp: record.msrp,
     };
   });
@@ -92,6 +108,30 @@ function MedicineEnumForm(props) {
               <SwitchFormItem
                 name="isCommon"
                 label={i18n('entities.medicineEnum.fields.isCommon')}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <MedicineCategoryEnumAutocompleteFormItem  
+                name="medicineCategory"
+                label={i18n('entities.medicineEnum.fields.medicineCategory')}
+                required={false}
+                showCreate={!props.modal}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="genericName"
+                label={i18n('entities.medicineEnum.fields.genericName')}
+              placeholder={i18n('entities.medicineEnum.placeholders.genericName')}
+              hint={i18n('entities.medicineEnum.hints.genericName')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="compositionName"
+                label={i18n('entities.medicineEnum.fields.compositionName')}  
+                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

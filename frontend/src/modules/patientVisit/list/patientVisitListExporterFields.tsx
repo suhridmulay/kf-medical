@@ -159,8 +159,13 @@ export default [
     render: exporterRenders.boolean(),
   },
   {
-    name: 'patientCopay',
-    label: i18n('entities.patientVisit.fields.patientCopay'),
+    name: 'medicineCopay',
+    label: i18n('entities.patientVisit.fields.medicineCopay'),
+    render: exporterRenders.decimal(2),
+  },
+  {
+    name: 'doctorCopay',
+    label: i18n('entities.patientVisit.fields.doctorCopay'),
     render: exporterRenders.decimal(2),
   },
   {

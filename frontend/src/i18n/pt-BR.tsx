@@ -228,8 +228,10 @@ const ptBR = {
           'requestedLabs': 'Lab Diagnostics',
           'dietaryInstructions': 'DietaryInstructions',
           'isTelemedReferral': 'Telemedicine Referral',
-          'patientCopayRange': 'Medicine Payment (Rs)',
-          'patientCopay': 'Medicine Payment (Rs)',
+          'medicineCopayRange': 'Medicine Copay (Rs)',
+          'medicineCopay': 'Medicine Copay (Rs)',
+          'doctorCopayRange': 'DoctorCopay',
+          'doctorCopay': 'DoctorCopay',
           'telemedCopayRange': 'Telemed Copay (Rs)',
           'telemedCopay': 'Telemed Copay (Rs)',
           'referralHospital': 'Referral Hospital',
@@ -329,6 +331,9 @@ const ptBR = {
           'medicineName': 'Medicine Name',
           'keptInStock': 'Kept In Stock',
           'isCommon': 'Commonly Prescribed',
+          'medicineCategory': 'MedicineCategory',
+          'genericName': 'Generic Name',
+          'compositionName': 'Composition Name',
           'msrpRange': 'MSRP',
           'msrp': 'MSRP',
           createdAt: 'Criado em',
@@ -339,10 +344,10 @@ const ptBR = {
 
         },
         placeholders: {
-
+          'genericName': 'Acetaminophen',
         },
         hints: {
-
+          'genericName': 'Drug composition name',
         },
         new: {
           title: 'Novo Medicine',
@@ -442,6 +447,8 @@ const ptBR = {
           'specialization': 'Specialization',
           'user': 'User',
           'phone': 'Phone',
+          'certifications': 'Certifications',
+          'registrationId': 'Registration ID',
           'isRuralHealthcareProfessional': 'Rural Healthcare Professional',
           createdAt: 'Criado em',
           updatedAt: 'Atualizado em',
@@ -559,6 +566,11 @@ const ptBR = {
           'inventoryAddDate': 'Date Added to Inventory',
           'countRange': 'Count',
           'count': 'Count',
+          'batchNumber': 'Batch Number',
+          'expiryDateRange': 'Expiry Date',
+          'expiryDate': 'Expiry Date',
+          'rateRange': 'Rate',
+          'rate': 'Rate',
           createdAt: 'Criado em',
           updatedAt: 'Atualizado em',
           createdAtRange: 'Criado em',
@@ -820,6 +832,60 @@ const ptBR = {
         importer: {
           title: 'Importar ChronicDiseases',
           fileName: 'chronicDiseaseEnum_template_importacao',
+          hint:
+            'Arquivos/Imagens devem ser as URLs dos arquivos, separados por espaço. Relacionamentos devem ser os IDs separados por espaço.',
+        },
+      },
+
+    medicineCategoryEnum: {
+        name: 'Medicine Category',
+        label: 'MedicineCategoryEnums',
+        menu: 'MedicineCategoryEnums',
+        exporterFileName: 'Medicine Category_exportados',
+        list: {
+          menu: 'MedicineCategoryEnums',
+          title: 'MedicineCategoryEnums',
+        },
+        create: {
+          success: 'Medicine Category salvo com sucesso',
+        },
+        update: {
+          success: 'Medicine Category salvo com sucesso',
+        },
+        destroy: {
+          success: 'Medicine Category deletado com sucesso',
+        },
+        destroyAll: {
+          success: 'Medicine Category(s) deletado com sucesso',
+        },
+        edit: {
+          title: 'Editar Medicine Category',
+        },
+        fields: {
+          id: 'Id',
+          'categoryName': 'Category Name',
+          createdAt: 'Criado em',
+          updatedAt: 'Atualizado em',
+          createdAtRange: 'Criado em',
+        },
+        enumerators: {
+
+        },
+        placeholders: {
+          'categoryName': 'Category name',
+        },
+        hints: {
+          'categoryName': 'Respiratory Antibiotic',
+        },
+        new: {
+          title: 'Novo Medicine Category',
+        },
+        view: {
+          title: 'Visualizar Medicine Category',
+        },
+        importer: {
+          title: 'Importar MedicineCategoryEnums',
+          fileName: 'medicineCategoryEnum_template_importacao',
           hint:
             'Arquivos/Imagens devem ser as URLs dos arquivos, separados por espaço. Relacionamentos devem ser os IDs separados por espaço.',
         },
