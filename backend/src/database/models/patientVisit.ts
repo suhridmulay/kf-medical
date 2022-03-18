@@ -132,7 +132,13 @@ export default function (sequelize) {
         allowNull: false,
         defaultValue: false,
       },
-      patientCopay: {
+      medicineCopay: {
+        type: DataTypes.DECIMAL(24, 2),
+        validate: {
+
+        }
+      },
+      doctorCopay: {
         type: DataTypes.DECIMAL(24, 2),
         validate: {
 

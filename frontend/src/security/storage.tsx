@@ -41,6 +41,8 @@ export default class Storage {
 
 
 
+
+
       settingsLogos: {
         id: 'settingsLogos',
         folder: 'tenant/:tenantId/settings/logos',

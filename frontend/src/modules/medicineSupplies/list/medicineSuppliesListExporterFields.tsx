@@ -20,6 +20,19 @@ export default [
     label: i18n('entities.medicineSupplies.fields.count'),
   },
   {
+    name: 'batchNumber',
+    label: i18n('entities.medicineSupplies.fields.batchNumber'),
+  },
+  {
+    name: 'expiryDate',
+    label: i18n('entities.medicineSupplies.fields.expiryDate'),
+  },
+  {
+    name: 'rate',
+    label: i18n('entities.medicineSupplies.fields.rate'),
+    render: exporterRenders.decimal(2),
+  },
+  {
     name: 'createdAt',
     label: i18n('entities.medicineSupplies.fields.createdAt'),
     render: exporterRenders.datetime(),

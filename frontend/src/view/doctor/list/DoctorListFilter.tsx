@@ -39,6 +39,12 @@ const schema = yup.object().shape({
   phone: yupFilterSchemas.string(
     i18n('entities.doctor.fields.phone'),
   ),
+  certifications: yupFilterSchemas.string(
+    i18n('entities.doctor.fields.certifications'),
+  ),
+  registrationId: yupFilterSchemas.string(
+    i18n('entities.doctor.fields.registrationId'),
+  ),
   isRuralHealthcareProfessional: yupFilterSchemas.boolean(
     i18n('entities.doctor.fields.isRuralHealthcareProfessional'),
   ),
@@ -49,6 +55,8 @@ const emptyValues = {
   specialization: null,
   user: null,
   phone: null,
+  certifications: null,
+  registrationId: null,
   isRuralHealthcareProfessional: null,
 }
 
@@ -67,6 +75,14 @@ const previewRenders = {
   },
   phone: {
     label: i18n('entities.doctor.fields.phone'),
+    render: filterRenders.generic(),
+  },
+  certifications: {
+    label: i18n('entities.doctor.fields.certifications'),
+    render: filterRenders.generic(),
+  },
+  registrationId: {
+    label: i18n('entities.doctor.fields.registrationId'),
     render: filterRenders.generic(),
   },
   isRuralHealthcareProfessional: {
@@ -159,6 +175,18 @@ function DoctorListFilter(props) {
                   <InputFormItem
                     name="phone"
                     label={i18n('entities.doctor.fields.phone')}      
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <InputFormItem
+                    name="certifications"
+                    label={i18n('entities.doctor.fields.certifications')}      
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <InputFormItem
+                    name="registrationId"
+                    label={i18n('entities.doctor.fields.registrationId')}      
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>

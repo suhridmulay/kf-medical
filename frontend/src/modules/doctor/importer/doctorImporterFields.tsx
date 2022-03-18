@@ -41,6 +41,22 @@ export default [
     ),
   },
   {
+    name: 'certifications',
+    label: i18n('entities.doctor.fields.certifications'),
+    schema: schemas.string(
+      i18n('entities.doctor.fields.certifications'),
+      {},
+    ),
+  },
+  {
+    name: 'registrationId',
+    label: i18n('entities.doctor.fields.registrationId'),
+    schema: schemas.string(
+      i18n('entities.doctor.fields.registrationId'),
+      {},
+    ),
+  },
+  {
     name: 'isRuralHealthcareProfessional',
     label: i18n('entities.doctor.fields.isRuralHealthcareProfessional'),
     schema: schemas.boolean(

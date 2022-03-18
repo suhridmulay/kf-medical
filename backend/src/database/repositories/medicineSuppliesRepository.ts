@@ -27,7 +27,10 @@ class MedicineSuppliesRepository {
       {
         ...lodash.pick(data, [
           'inventoryAddDate',
-          'count',          
+          'count',
+          'batchNumber',
+          'expiryDate',
+          'rate',          
           'importHash',
         ]),
         medicineId: data.medicine || null,
@@ -86,7 +89,10 @@ class MedicineSuppliesRepository {
       {
         ...lodash.pick(data, [
           'inventoryAddDate',
-          'count',          
+          'count',
+          'batchNumber',
+          'expiryDate',
+          'rate',          
           'importHash',
         ]),
         medicineId: data.medicine || null,
@@ -308,6 +314,36 @@ class MedicineSuppliesRepository {
         if (end !== undefined && end !== null && end !== '') {
           whereAnd.push({
             count: {
+              [Op.lte]: end,
+            },
+          });
+        }
+      }
+
+      if (filter.batchNumber) {
+        whereAnd.push(
+          SequelizeFilterUtils.ilikeIncludes(
+            'medicineSupplies',
+            'batchNumber',
+            filter.batchNumber,
+          ),
+        );
+      }
+
+      if (filter.expiryDateRange) {
+        const [start, end] = filter.expiryDateRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          whereAnd.push({
+            expiryDate: {
+              [Op.gte]: start,
+            },
+          });
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          whereAnd.push({
+            expiryDate: {
               [Op.lte]: end,
             },
           });

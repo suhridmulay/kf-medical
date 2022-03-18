@@ -31,6 +31,30 @@ export default [
     ),
   },
   {
+    name: 'medicineCategory',
+    label: i18n('entities.medicineEnum.fields.medicineCategory'),
+    schema: schemas.relationToOne(
+      i18n('entities.medicineEnum.fields.medicineCategory'),
+      {},
+    ),
+  },
+  {
+    name: 'genericName',
+    label: i18n('entities.medicineEnum.fields.genericName'),
+    schema: schemas.string(
+      i18n('entities.medicineEnum.fields.genericName'),
+      {},
+    ),
+  },
+  {
+    name: 'compositionName',
+    label: i18n('entities.medicineEnum.fields.compositionName'),
+    schema: schemas.string(
+      i18n('entities.medicineEnum.fields.compositionName'),
+      {},
+    ),
+  },
+  {
     name: 'msrp',
     label: i18n('entities.medicineEnum.fields.msrp'),
     schema: schemas.decimal(

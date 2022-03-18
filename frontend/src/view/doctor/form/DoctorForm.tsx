@@ -38,6 +38,14 @@ const schema = yup.object().shape({
     i18n('entities.doctor.fields.phone'),
     {},
   ),
+  certifications: yupFormSchemas.string(
+    i18n('entities.doctor.fields.certifications'),
+    {},
+  ),
+  registrationId: yupFormSchemas.string(
+    i18n('entities.doctor.fields.registrationId'),
+    {},
+  ),
   isRuralHealthcareProfessional: yupFormSchemas.boolean(
     i18n('entities.doctor.fields.isRuralHealthcareProfessional'),
     {},
@@ -53,6 +61,8 @@ function DoctorForm(props) {
       specialization: record.specialization,
       user: record.user,
       phone: record.phone,
+      certifications: record.certifications,
+      registrationId: record.registrationId,
       isRuralHealthcareProfessional: record.isRuralHealthcareProfessional,
     };
   });
@@ -107,6 +117,20 @@ function DoctorForm(props) {
               <InputFormItem
                 name="phone"
                 label={i18n('entities.doctor.fields.phone')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="certifications"
+                label={i18n('entities.doctor.fields.certifications')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="registrationId"
+                label={i18n('entities.doctor.fields.registrationId')}  
                 required={false}
               />
             </Grid>

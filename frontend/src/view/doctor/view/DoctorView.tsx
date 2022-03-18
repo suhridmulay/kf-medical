@@ -31,6 +31,16 @@ function DoctorView(props) {
         />
 
         <TextViewItem
+          label={i18n('entities.doctor.fields.certifications')}
+          value={record.certifications}
+        />
+
+        <TextViewItem
+          label={i18n('entities.doctor.fields.registrationId')}
+          value={record.registrationId}
+        />
+
+        <TextViewItem
           label={i18n('entities.doctor.fields.isRuralHealthcareProfessional')}
           value={
             record.isRuralHealthcareProfessional

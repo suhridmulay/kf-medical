@@ -557,6 +557,44 @@ const privateRoutes = [
     permissionRequired: permissions.chronicDiseaseEnumRead,
     exact: true,
   },
+
+  {
+    path: '/medicine-category-enum',
+    loader: () =>
+      import('src/view/medicineCategoryEnum/list/MedicineCategoryEnumListPage'),
+    permissionRequired: permissions.medicineCategoryEnumRead,
+    exact: true,
+  },
+  {
+    path: '/medicine-category-enum/new',
+    loader: () =>
+      import('src/view/medicineCategoryEnum/form/MedicineCategoryEnumFormPage'),
+    permissionRequired: permissions.medicineCategoryEnumCreate,
+    exact: true,
+  },
+  {
+    path: '/medicine-category-enum/importer',
+    loader: () =>
+      import(
+        'src/view/medicineCategoryEnum/importer/MedicineCategoryEnumImporterPage'
+      ),
+    permissionRequired: permissions.medicineCategoryEnumImport,
+    exact: true,
+  },
+  {
+    path: '/medicine-category-enum/:id/edit',
+    loader: () =>
+      import('src/view/medicineCategoryEnum/form/MedicineCategoryEnumFormPage'),
+    permissionRequired: permissions.medicineCategoryEnumEdit,
+    exact: true,
+  },
+  {
+    path: '/medicine-category-enum/:id',
+    loader: () =>
+      import('src/view/medicineCategoryEnum/view/MedicineCategoryEnumViewPage'),
+    permissionRequired: permissions.medicineCategoryEnumRead,
+    exact: true,
+  },
 ].filter(Boolean);
 
 const publicRoutes = [

@@ -27,6 +27,12 @@ export default function (sequelize) {
       phone: {
         type: DataTypes.TEXT,
       },
+      certifications: {
+        type: DataTypes.TEXT,
+      },
+      registrationId: {
+        type: DataTypes.TEXT,
+      },
       isRuralHealthcareProfessional: {
         type: DataTypes.BOOLEAN,
         allowNull: false,

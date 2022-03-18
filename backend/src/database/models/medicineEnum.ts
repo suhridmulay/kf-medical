@@ -27,6 +27,12 @@ export default function (sequelize) {
         allowNull: false,
         defaultValue: false,
       },
+      genericName: {
+        type: DataTypes.TEXT,
+      },
+      compositionName: {
+        type: DataTypes.TEXT,
+      },
       msrp: {
         type: DataTypes.DECIMAL(24, 2),
         validate: {
@@ -64,7 +70,10 @@ export default function (sequelize) {
   );
 
   medicineEnum.associate = (models) => {
-
+    models.medicineEnum.belongsTo(models.medicineCategoryEnum, {
+      as: 'medicineCategory',
+      constraints: false,
+    });
 
 
     

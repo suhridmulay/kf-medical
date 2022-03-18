@@ -149,6 +149,34 @@ function MedicineSuppliesListTable(props) {
                   'entities.medicineSupplies.fields.count',
                 )}
                 align="right"
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'batchNumber'}
+                label={i18n(
+                  'entities.medicineSupplies.fields.batchNumber',
+                )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'expiryDate'}
+                label={i18n(
+                  'entities.medicineSupplies.fields.expiryDate',
+                )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'rate'}
+                label={i18n(
+                  'entities.medicineSupplies.fields.rate',
+                )}
+                align="right"
               />              
               <TableCellCustom size="md" />
             </TableRow>
@@ -193,7 +221,10 @@ function MedicineSuppliesListTable(props) {
                   <MedicineEnumListItem value={row.medicine} />
                 </TableCell>
                 <TableCell>{row.inventoryAddDate}</TableCell>
-                <TableCell align="right">{row.count}</TableCell>                  
+                <TableCell align="right">{row.count}</TableCell>
+                <TableCell>{row.batchNumber}</TableCell>
+                <TableCell>{row.expiryDate}</TableCell>
+                <TableCell align="right">{row.rate}</TableCell>                  
                   <TableCell>
                     <Box
                       display="flex"
