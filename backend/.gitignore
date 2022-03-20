@@ -5,3 +5,4 @@ dist/
 app-engine.staging.yml
 app-engine.production.yml.DO_NOT_DELETE
 sendgrid.env
+testSendGrid.js
