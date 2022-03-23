@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_doctor/ui/visit/visitBox.dart';
+import 'package:hello_doctor/utils/demoData.dart';
 import 'package:kf_openapi_generated/api.dart';
 import 'package:stacked/stacked.dart';
 
@@ -35,10 +36,12 @@ class PatientView extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.all(16.0),
                           child: CircleAvatar(
                             minRadius: 50,
+                            foregroundImage:
+                                AssetImage("assets/images/user.png"),
                           ),
                         ),
                         const VerticalDivider(
@@ -77,7 +80,9 @@ class PatientView extends StatelessWidget {
                   ),
                 ),
                 VisitBox(
+                  editable: true,
                   visit: PatientVisit(
+                    patient: demoPatient,
                     visitDate: DateTime.now(),
                     medicalCenter:
                         HealthCenter(name: "Anand Vatika Healtcare Center"),
@@ -112,6 +117,7 @@ class PatientView extends StatelessWidget {
                 ),
                 VisitBox(
                   visit: PatientVisit(
+                    patient: demoPatient,
                     visitDate: DateTime.now(),
                     medicalCenter:
                         HealthCenter(name: "Anand Vatika Healtcare Center"),
@@ -127,6 +133,7 @@ class PatientView extends StatelessWidget {
                 ),
                 VisitBox(
                   visit: PatientVisit(
+                    patient: demoPatient,
                     visitDate: DateTime.now(),
                     medicalCenter:
                         HealthCenter(name: "Anand Vatika Healtcare Center"),

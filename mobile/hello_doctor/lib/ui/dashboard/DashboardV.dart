@@ -21,9 +21,25 @@ class DashboardView extends StatelessWidget {
         drawer: Drawer(
             child: Column(
           children: [
-            DrawerHeader(child: Row()),
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    foregroundImage: AssetImage('assets/images/user.png'),
+                    radius: 50,
+                  )
+                ],
+              ),
+            ),
             const ListTile(
               title: Text("Patients by location"),
+            ),
+            const ListTile(
+              title: Text("Patients by date"),
+            ),
+            const ListTile(
+              title: Text("Patients by name"),
             ),
           ],
         )),
@@ -60,7 +76,9 @@ class DashboardView extends StatelessWidget {
                         title: Text(patient.fullName),
                         subtitle: Text(
                             "${patient.age} | ${patient.gender == PatientGenderEnum.male ? "M" : "F"} | ${patient.mobileNumber}"),
-                        leading: CircleAvatar(),
+                        leading: CircleAvatar(
+                          foregroundImage: AssetImage("assets/images/user.png"),
+                        ),
                         onTap: () => {
                           _navigationService.navigateTo(
                             Routes.patientView,
@@ -91,7 +109,9 @@ class DashboardView extends StatelessWidget {
                         title: Text(patient.fullName),
                         subtitle: Text(
                             "${patient.age} | ${patient.gender == PatientGenderEnum.male ? "M" : "F"} | ${patient.mobileNumber}"),
-                        leading: CircleAvatar(),
+                        leading: CircleAvatar(
+                          foregroundImage: AssetImage("assets/images/user.png"),
+                        ),
                         onTap: () => {
                           _navigationService.navigateTo(
                             Routes.patientView,

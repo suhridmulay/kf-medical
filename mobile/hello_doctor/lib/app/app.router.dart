@@ -67,8 +67,15 @@ class StackedRouter extends RouterBase {
       );
     },
     VisitView: (data) {
+      var args = data.getArgs<VisitViewArguments>(
+        orElse: () => VisitViewArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const VisitView(),
+        builder: (context) => VisitView(
+          key: args.key,
+          visit: args.visit,
+          patient: args.patient,
+        ),
         settings: data,
       );
     },
@@ -90,4 +97,12 @@ class PatientViewArguments {
   final Key? key;
   final Patient patient;
   PatientViewArguments({this.key, required this.patient});
+}
+
+/// VisitView arguments holder class
+class VisitViewArguments {
+  final Key? key;
+  final PatientVisit? visit;
+  final Patient? patient;
+  VisitViewArguments({this.key, this.visit, this.patient});
 }
