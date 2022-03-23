@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:hello_doctor/app/app.locator.dart';
+import 'package:hello_doctor/app/app.router.dart';
 import 'package:hello_doctor/ui/visit/visitBox.dart';
 import 'package:hello_doctor/utils/demoData.dart';
 import 'package:kf_openapi_generated/api.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 import 'patientVM.dart';
 
 class PatientView extends StatelessWidget {
   Patient patient;
   PatientView({Key? key, required this.patient}) : super(key: key);
+  NavigationService _navigationService = locator<NavigationService>();
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +21,23 @@ class PatientView extends StatelessWidget {
         appBar: AppBar(
           title: Text(patient.fullName),
         ),
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              _navigationService.navigateTo(
+                Routes.visitView,
+                arguments: VisitViewArguments(patient: patient),
+              );
+            },
+            label: Row(
+              children: const [
+                Icon(
+                  Icons.add,
+                  size: 24,
+                ),
+                Padding(padding: EdgeInsets.all(2)),
+                Text("Add Visit")
+              ],
+            )),
         body: ListView(
           children: [
             Card(
