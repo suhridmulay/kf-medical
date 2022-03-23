@@ -76,6 +76,7 @@ class VisitView extends StatelessWidget {
                         border: OutlineInputBorder(),
                         label: Text('Visit Date'),
                       ),
+                      inputType: InputType.date,
                     ),
                   ),
                   Padding(
@@ -534,6 +535,7 @@ class VisitView extends StatelessWidget {
                         border: OutlineInputBorder(),
                         label: Text('Return Date'),
                       ),
+                      inputType: InputType.date,
                     ),
                   ),
                   Padding(
@@ -562,6 +564,7 @@ class VisitView extends StatelessWidget {
                         border: OutlineInputBorder(),
                         label: Text('Consulation Date'),
                       ),
+                      inputType: InputType.date,
                     ),
                   ),
                   Padding(

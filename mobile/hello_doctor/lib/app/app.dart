@@ -2,6 +2,7 @@ import 'package:hello_doctor/services/api/apiService.dart';
 import 'package:hello_doctor/services/prefetchService.dart';
 import 'package:hello_doctor/ui/dashboard/DashboardV.dart';
 import 'package:hello_doctor/ui/login/loginV.dart';
+import 'package:hello_doctor/ui/patient/form/patientFormV.dart';
 import 'package:hello_doctor/ui/patient/patientV.dart';
 import 'package:hello_doctor/ui/visit/visitV.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -13,6 +14,7 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: DashboardView),
     MaterialRoute(page: PatientView),
     MaterialRoute(page: VisitView),
+    MaterialRoute(page: PatientFormView),
   ],
   dependencies: [
     Singleton(classType: NavigationService),

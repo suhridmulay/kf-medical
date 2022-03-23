@@ -48,7 +48,11 @@ class PatientView extends StatelessWidget {
                       icon: const Icon(Icons.edit),
                       color: Colors.blue,
                       iconSize: 18,
-                      onPressed: () {},
+                      onPressed: () {
+                        _navigationService.navigateTo(Routes.patientFormView,
+                            arguments:
+                                PatientFormViewArguments(patient: patient));
+                      },
                     ),
                     top: 0,
                     right: 0,
@@ -57,7 +61,7 @@ class PatientView extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.all(16.0),
                           child: CircleAvatar(
                             minRadius: 50,

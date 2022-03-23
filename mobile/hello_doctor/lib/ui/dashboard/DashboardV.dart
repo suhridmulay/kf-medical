@@ -16,15 +16,29 @@ class DashboardView extends StatelessWidget {
     return ViewModelBuilder<DashboardViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
-          title: Text("Hello Doctor!"),
+          title: const Text("Hello Doctor!"),
         ),
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              _navigationService.navigateTo(Routes.patientFormView);
+            },
+            label: Row(
+              children: const [
+                Icon(
+                  Icons.add,
+                  size: 24,
+                ),
+                Padding(padding: EdgeInsets.all(2)),
+                Text("New Patient"),
+              ],
+            )),
         drawer: Drawer(
             child: Column(
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(color: Colors.blue),
+              decoration: const BoxDecoration(color: Colors.blue),
               child: Row(
-                children: [
+                children: const [
                   CircleAvatar(
                     foregroundImage: AssetImage('assets/images/user.png'),
                     radius: 50,
@@ -76,7 +90,7 @@ class DashboardView extends StatelessWidget {
                         title: Text(patient.fullName),
                         subtitle: Text(
                             "${patient.age} | ${patient.gender == PatientGenderEnum.male ? "M" : "F"} | ${patient.mobileNumber}"),
-                        leading: CircleAvatar(
+                        leading: const CircleAvatar(
                           foregroundImage: AssetImage("assets/images/user.png"),
                         ),
                         onTap: () => {

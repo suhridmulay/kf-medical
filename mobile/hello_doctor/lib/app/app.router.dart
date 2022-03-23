@@ -13,6 +13,7 @@ import 'package:stacked/stacked_annotations.dart';
 
 import '../ui/dashboard/DashboardV.dart';
 import '../ui/login/loginV.dart';
+import '../ui/patient/form/patientFormV.dart';
 import '../ui/patient/patientV.dart';
 import '../ui/visit/visitV.dart';
 
@@ -21,11 +22,13 @@ class Routes {
   static const String dashboardView = '/dashboard-view';
   static const String patientView = '/patient-view';
   static const String visitView = '/visit-view';
+  static const String patientFormView = '/patient-form-view';
   static const all = <String>{
     loginView,
     dashboardView,
     patientView,
     visitView,
+    patientFormView,
   };
 }
 
@@ -37,6 +40,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.dashboardView, page: DashboardView),
     RouteDef(Routes.patientView, page: PatientView),
     RouteDef(Routes.visitView, page: VisitView),
+    RouteDef(Routes.patientFormView, page: PatientFormView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -79,6 +83,18 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    PatientFormView: (data) {
+      var args = data.getArgs<PatientFormViewArguments>(
+        orElse: () => PatientFormViewArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => PatientFormView(
+          key: args.key,
+          patient: args.patient,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -105,4 +121,11 @@ class VisitViewArguments {
   final PatientVisit? visit;
   final Patient? patient;
   VisitViewArguments({this.key, this.visit, this.patient});
+}
+
+/// PatientFormView arguments holder class
+class PatientFormViewArguments {
+  final Key? key;
+  final Patient? patient;
+  PatientFormViewArguments({this.key, this.patient});
 }
