@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:hello_doctor/app/app.locator.dart';
 import 'package:hello_doctor/app/app.router.dart';
 import 'package:stacked/stacked.dart';
@@ -7,7 +8,8 @@ import 'package:stacked_services/stacked_services.dart';
 import 'loginVM.dart';
 
 class LoginView extends StatelessWidget {
-  const LoginView({Key? key}) : super(key: key);
+  LoginView({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,27 +36,44 @@ class LoginView extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Username",
-                      suffixIcon: Icon(Icons.person),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Password",
-                      suffixIcon: Icon(Icons.password),
-                    ),
-                  ),
-                ),
+                FormBuilder(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: FormBuilderDropdown(
+                              name: 'tenentId',
+                              items: const [
+                                DropdownMenuItem(
+                                  child: Text("Mukti"),
+                                  value: "79d841e0-4d34-4075-a865-61ae6a0debb5",
+                                )
+                              ]),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: FormBuilderTextField(
+                            name: 'username',
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              label: Text("Username"),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: FormBuilderTextField(
+                            name: 'password',
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              label: Text("Password"),
+                            ),
+                            obscureText: true,
+                          ),
+                        ),
+                      ],
+                    )),
                 ElevatedButton(
                   onPressed: () {
                     navigationService.navigateTo(Routes.dashboardView);
