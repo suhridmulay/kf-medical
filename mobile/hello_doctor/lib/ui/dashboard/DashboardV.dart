@@ -16,14 +16,44 @@ class DashboardView extends StatelessWidget {
     return ViewModelBuilder<DashboardViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
-          title: Text("Hello Doctor!"),
+          title: const Text("Hello Doctor!"),
         ),
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              _navigationService.navigateTo(Routes.patientFormView);
+            },
+            label: Row(
+              children: const [
+                Icon(
+                  Icons.add,
+                  size: 24,
+                ),
+                Padding(padding: EdgeInsets.all(2)),
+                Text("New Patient"),
+              ],
+            )),
         drawer: Drawer(
             child: Column(
           children: [
-            DrawerHeader(child: Row()),
+            DrawerHeader(
+              decoration: const BoxDecoration(color: Colors.blue),
+              child: Row(
+                children: const [
+                  CircleAvatar(
+                    foregroundImage: AssetImage('assets/images/user.png'),
+                    radius: 50,
+                  )
+                ],
+              ),
+            ),
             const ListTile(
               title: Text("Patients by location"),
+            ),
+            const ListTile(
+              title: Text("Patients by date"),
+            ),
+            const ListTile(
+              title: Text("Patients by name"),
             ),
           ],
         )),
@@ -55,12 +85,14 @@ class DashboardView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    ...model.patientsToday.map(
+                    ...model.getPatientsToday.map(
                       (Patient patient) => ListTile(
                         title: Text(patient.fullName),
                         subtitle: Text(
                             "${patient.age} | ${patient.gender == PatientGenderEnum.male ? "M" : "F"} | ${patient.mobileNumber}"),
-                        leading: CircleAvatar(),
+                        leading: const CircleAvatar(
+                          foregroundImage: AssetImage("assets/images/user.png"),
+                        ),
                         onTap: () => {
                           _navigationService.navigateTo(
                             Routes.patientView,
@@ -86,12 +118,14 @@ class DashboardView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    ...model.patientsToday.map(
+                    ...model.getPatientsToday.map(
                       (Patient patient) => ListTile(
                         title: Text(patient.fullName),
                         subtitle: Text(
                             "${patient.age} | ${patient.gender == PatientGenderEnum.male ? "M" : "F"} | ${patient.mobileNumber}"),
-                        leading: CircleAvatar(),
+                        leading: CircleAvatar(
+                          foregroundImage: AssetImage("assets/images/user.png"),
+                        ),
                         onTap: () => {
                           _navigationService.navigateTo(
                             Routes.patientView,
@@ -108,6 +142,7 @@ class DashboardView extends StatelessWidget {
         ),
       ),
       viewModelBuilder: () => DashboardViewModel(),
+      onModelReady: (model) => model.initialise(),
     );
   }
 }

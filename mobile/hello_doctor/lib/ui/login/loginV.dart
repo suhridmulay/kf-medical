@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:hello_doctor/app/app.locator.dart';
 import 'package:hello_doctor/app/app.router.dart';
 import 'package:stacked/stacked.dart';
@@ -7,7 +8,8 @@ import 'package:stacked_services/stacked_services.dart';
 import 'loginVM.dart';
 
 class LoginView extends StatelessWidget {
-  const LoginView({Key? key}) : super(key: key);
+  LoginView({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,34 +36,71 @@ class LoginView extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Username",
-                      suffixIcon: Icon(Icons.person),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Password",
-                      suffixIcon: Icon(Icons.password),
-                    ),
-                  ),
-                ),
+                FormBuilder(
+                    key: _formKey,
+                    enabled: !model.isBusy,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: FormBuilderDropdown(
+                              name: 'tenentId',
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                label: Text("NGO"),
+                              ),
+                              initialValue:
+                                  "79d841e0-4d34-4075-a865-61ae6a0debb5",
+                              items: const [
+                                DropdownMenuItem(
+                                  child: Text("Mukti"),
+                                  value: "79d841e0-4d34-4075-a865-61ae6a0debb5",
+                                )
+                              ]),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: FormBuilderTextField(
+                            name: 'username',
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              label: Text("Username"),
+                            ),
+                            initialValue: "banerjee.dhritiman@gmail.com",
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: FormBuilderTextField(
+                            name: 'password',
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              label: Text("Password"),
+                            ),
+                            obscureText: true,
+                            initialValue: "dman123",
+                          ),
+                        ),
+                      ],
+                    )),
                 ElevatedButton(
-                  onPressed: () {
-                    navigationService.navigateTo(Routes.dashboardView);
+                  onPressed: () async {
+                    _formKey.currentState?.save();
+                    if (_formKey.currentState!.validate()) {
+                      if (await model.login(
+                        username: _formKey.currentState?.value['username'],
+                        password: _formKey.currentState?.value['password'],
+                        tenentId: _formKey.currentState?.value['tenentId'],
+                      )) {
+                        navigationService
+                            .clearStackAndShow(Routes.dashboardView);
+                      }
+                    }
                   },
                   child: Container(
                     width: screenSize.width * 0.5,
-                    child: Center(child: const Text("Login")),
+                    child: const Center(child: Text("Login")),
+
                   ),
                 ),
                 ElevatedButton(
@@ -74,7 +113,7 @@ class LoginView extends StatelessWidget {
                   ),
                   child: Container(
                     width: screenSize.width * 0.5,
-                    child: Center(child: const Text("Login with Google")),
+                    child: const Center(child: Text("Login with Google")),
                   ),
                 ),
                 ElevatedButton(
@@ -87,7 +126,7 @@ class LoginView extends StatelessWidget {
                   ),
                   child: Container(
                     width: screenSize.width * 0.5,
-                    child: Center(child: const Text("Login with Meta")),
+                    child: const Center(child: Text("Login with Meta")),
                   ),
                 ),
               ],

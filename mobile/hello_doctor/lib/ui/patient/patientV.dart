@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:hello_doctor/app/app.locator.dart';
+import 'package:hello_doctor/app/app.router.dart';
 import 'package:hello_doctor/ui/visit/visitBox.dart';
+import 'package:hello_doctor/utils/demoData.dart';
 import 'package:kf_openapi_generated/api.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 import 'patientVM.dart';
 
 class PatientView extends StatelessWidget {
   Patient patient;
   PatientView({Key? key, required this.patient}) : super(key: key);
+  NavigationService _navigationService = locator<NavigationService>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +21,23 @@ class PatientView extends StatelessWidget {
         appBar: AppBar(
           title: Text(patient.fullName),
         ),
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              _navigationService.navigateTo(
+                Routes.visitView,
+                arguments: VisitViewArguments(patient: patient),
+              );
+            },
+            label: Row(
+              children: const [
+                Icon(
+                  Icons.add,
+                  size: 24,
+                ),
+                Padding(padding: EdgeInsets.all(2)),
+                Text("Add Visit")
+              ],
+            )),
         body: ListView(
           children: [
             Card(
@@ -26,7 +48,11 @@ class PatientView extends StatelessWidget {
                       icon: const Icon(Icons.edit),
                       color: Colors.blue,
                       iconSize: 18,
-                      onPressed: () {},
+                      onPressed: () {
+                        _navigationService.navigateTo(Routes.patientFormView,
+                            arguments:
+                                PatientFormViewArguments(patient: patient));
+                      },
                     ),
                     top: 0,
                     right: 0,
@@ -39,6 +65,8 @@ class PatientView extends StatelessWidget {
                           padding: EdgeInsets.all(16.0),
                           child: CircleAvatar(
                             minRadius: 50,
+                            foregroundImage:
+                                AssetImage("assets/images/user.png"),
                           ),
                         ),
                         const VerticalDivider(
@@ -77,7 +105,9 @@ class PatientView extends StatelessWidget {
                   ),
                 ),
                 VisitBox(
+                  editable: true,
                   visit: PatientVisit(
+                    patient: demoPatient,
                     visitDate: DateTime.now(),
                     medicalCenter:
                         HealthCenter(name: "Anand Vatika Healtcare Center"),
@@ -112,6 +142,7 @@ class PatientView extends StatelessWidget {
                 ),
                 VisitBox(
                   visit: PatientVisit(
+                    patient: demoPatient,
                     visitDate: DateTime.now(),
                     medicalCenter:
                         HealthCenter(name: "Anand Vatika Healtcare Center"),
@@ -127,6 +158,7 @@ class PatientView extends StatelessWidget {
                 ),
                 VisitBox(
                   visit: PatientVisit(
+                    patient: demoPatient,
                     visitDate: DateTime.now(),
                     medicalCenter:
                         HealthCenter(name: "Anand Vatika Healtcare Center"),

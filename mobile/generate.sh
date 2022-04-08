@@ -1,0 +1,1 @@
+openapi-generator-cli generate -i .\kf-openapi.yaml -g dart -o /kf-openapi-generated/
