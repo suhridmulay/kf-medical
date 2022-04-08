@@ -305,12 +305,23 @@ export default [
     ),
   },
   {
-    name: 'patientCopay',
-    label: i18n('entities.patientVisit.fields.patientCopay'),
+    name: 'medicineCopay',
+    label: i18n('entities.patientVisit.fields.medicineCopay'),
     schema: schemas.decimal(
-      i18n('entities.patientVisit.fields.patientCopay'),
+      i18n('entities.patientVisit.fields.medicineCopay'),
       {
         "scale": 2
+      },
+    ),
+  },
+  {
+    name: 'doctorCopay',
+    label: i18n('entities.patientVisit.fields.doctorCopay'),
+    schema: schemas.decimal(
+      i18n('entities.patientVisit.fields.doctorCopay'),
+      {
+        "scale": 2,
+        "min": 0
       },
     ),
   },

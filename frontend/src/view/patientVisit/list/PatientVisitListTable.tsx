@@ -199,9 +199,19 @@ function PatientVisitListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
-                name={'patientCopay'}
+                name={'medicineCopay'}
                 label={i18n(
-                  'entities.patientVisit.fields.patientCopay',
+                  'entities.patientVisit.fields.medicineCopay',
+                )}
+                align="right"
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'doctorCopay'}
+                label={i18n(
+                  'entities.patientVisit.fields.doctorCopay',
                 )}
                 align="right"
               />
@@ -295,7 +305,8 @@ function PatientVisitListTable(props) {
                     ? i18n('common.yes')
                     : i18n('common.no')}
                 </TableCell>
-                <TableCell align="right">{row.patientCopay}</TableCell>
+                <TableCell align="right">{row.medicineCopay}</TableCell>
+                <TableCell align="right">{row.doctorCopay}</TableCell>
                 <TableCell align="right">{row.telemedCopay}</TableCell>
                 <TableCell>
                   <DoctorListItem value={row.telemedicineDoctor} />

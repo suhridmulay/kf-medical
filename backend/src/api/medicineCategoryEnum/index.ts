@@ -1,0 +1,30 @@
+export default (app) => {
+  app.post(
+    `/tenant/:tenantId/medicine-category-enum`,
+    require('./medicineCategoryEnumCreate').default,
+  );
+  app.put(
+    `/tenant/:tenantId/medicine-category-enum/:id`,
+    require('./medicineCategoryEnumUpdate').default,
+  );
+  app.post(
+    `/tenant/:tenantId/medicine-category-enum/import`,
+    require('./medicineCategoryEnumImport').default,
+  );
+  app.delete(
+    `/tenant/:tenantId/medicine-category-enum`,
+    require('./medicineCategoryEnumDestroy').default,
+  );
+  app.get(
+    `/tenant/:tenantId/medicine-category-enum/autocomplete`,
+    require('./medicineCategoryEnumAutocomplete').default,
+  );
+  app.get(
+    `/tenant/:tenantId/medicine-category-enum`,
+    require('./medicineCategoryEnumList').default,
+  );
+  app.get(
+    `/tenant/:tenantId/medicine-category-enum/:id`,
+    require('./medicineCategoryEnumFind').default,
+  );
+};

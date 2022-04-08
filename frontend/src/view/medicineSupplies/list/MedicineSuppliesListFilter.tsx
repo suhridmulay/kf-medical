@@ -22,6 +22,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import filterRenders from 'src/modules/shared/filter/filterRenders';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
+import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
 import DatePickerRangeFormItem from 'src/view/shared/form/items/DatePickerRangeFormItem';
 import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
@@ -36,12 +37,20 @@ const schema = yup.object().shape({
   countRange: yupFilterSchemas.integerRange(
     i18n('entities.medicineSupplies.fields.countRange'),
   ),
+  batchNumber: yupFilterSchemas.string(
+    i18n('entities.medicineSupplies.fields.batchNumber'),
+  ),
+  expiryDateRange: yupFilterSchemas.dateRange(
+    i18n('entities.medicineSupplies.fields.expiryDateRange'),
+  ),
 });
 
 const emptyValues = {
   medicine: null,
   inventoryAddDateRange: [],
   countRange: [],
+  batchNumber: null,
+  expiryDateRange: [],
 }
 
 const previewRenders = {
@@ -56,6 +65,14 @@ const previewRenders = {
   countRange: {
     label: i18n('entities.medicineSupplies.fields.countRange'),
     render: filterRenders.range(),
+  },
+  batchNumber: {
+    label: i18n('entities.medicineSupplies.fields.batchNumber'),
+    render: filterRenders.generic(),
+  },
+  expiryDateRange: {
+    label: i18n('entities.medicineSupplies.fields.expiryDateRange'),
+    render: filterRenders.dateRange(),
   },
 }
 
@@ -137,6 +154,18 @@ function MedicineSuppliesListFilter(props) {
                   <InputNumberRangeFormItem
                     name="countRange"
                     label={i18n('entities.medicineSupplies.fields.countRange')}      
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <InputFormItem
+                    name="batchNumber"
+                    label={i18n('entities.medicineSupplies.fields.batchNumber')}      
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <DatePickerRangeFormItem
+                    name="expiryDateRange"
+                    label={i18n('entities.medicineSupplies.fields.expiryDateRange')}    
                   />
                 </Grid>
               </Grid>

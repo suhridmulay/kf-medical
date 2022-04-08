@@ -29,6 +29,27 @@ export default function (sequelize) {
 
         }
       },
+      batchNumber: {
+        type: DataTypes.TEXT,
+      },
+      expiryDate: {
+        type: DataTypes.DATEONLY,
+        get: function() {
+          // @ts-ignore
+          return this.getDataValue('expiryDate')
+            ? moment
+                // @ts-ignore
+                .utc(this.getDataValue('expiryDate'))
+                .format('YYYY-MM-DD')
+            : null;
+        },
+      },
+      rate: {
+        type: DataTypes.DECIMAL(24, 2),
+        validate: {
+
+        }
+      },
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,    

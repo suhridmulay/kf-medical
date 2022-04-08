@@ -21,6 +21,19 @@ export default [
     render: exporterRenders.boolean(),
   },
   {
+    name: 'medicineCategory',
+    label: i18n('entities.medicineEnum.fields.medicineCategory'),
+    render: exporterRenders.relationToOne(),
+  },
+  {
+    name: 'genericName',
+    label: i18n('entities.medicineEnum.fields.genericName'),
+  },
+  {
+    name: 'compositionName',
+    label: i18n('entities.medicineEnum.fields.compositionName'),
+  },
+  {
     name: 'msrp',
     label: i18n('entities.medicineEnum.fields.msrp'),
     render: exporterRenders.decimal(2),

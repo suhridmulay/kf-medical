@@ -162,6 +162,24 @@ function DoctorListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
+                name={'certifications'}
+                label={i18n(
+                  'entities.doctor.fields.certifications',
+                )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'registrationId'}
+                label={i18n(
+                  'entities.doctor.fields.registrationId',
+                )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
                 name={'isRuralHealthcareProfessional'}
                 label={i18n(
                   'entities.doctor.fields.isRuralHealthcareProfessional',
@@ -212,6 +230,8 @@ function DoctorListTable(props) {
                   <UserListItem value={row.user} />
                 </TableCell>
                 <TableCell>{row.phone}</TableCell>
+                <TableCell>{row.certifications}</TableCell>
+                <TableCell>{row.registrationId}</TableCell>
                 <TableCell>
                   {row.isRuralHealthcareProfessional
                     ? i18n('common.yes')

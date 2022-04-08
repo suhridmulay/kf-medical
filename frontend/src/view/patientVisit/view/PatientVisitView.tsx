@@ -213,9 +213,14 @@ function PatientVisitView(props) {
           }
         />
 
-        {record.patientCopay != null && <TextViewItem
-          label={i18n('entities.patientVisit.fields.patientCopay')}
-          value={Number(record.patientCopay).toFixed(2)}
+        {record.medicineCopay != null && <TextViewItem
+          label={i18n('entities.patientVisit.fields.medicineCopay')}
+          value={Number(record.medicineCopay).toFixed(2)}
+        />}
+
+        {record.doctorCopay != null && <TextViewItem
+          label={i18n('entities.patientVisit.fields.doctorCopay')}
+          value={Number(record.doctorCopay).toFixed(2)}
         />}
 
         {record.telemedCopay != null && <TextViewItem

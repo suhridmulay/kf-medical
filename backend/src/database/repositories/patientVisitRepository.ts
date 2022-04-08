@@ -50,7 +50,8 @@ class PatientVisitRepository {
           'requestedLabs',
           'dietaryInstructions',
           'isTelemedReferral',
-          'patientCopay',
+          'medicineCopay',
+          'doctorCopay',
           'telemedCopay',
           'referralHospital',
           'referredSpecialistDoctor',
@@ -150,7 +151,8 @@ class PatientVisitRepository {
           'requestedLabs',
           'dietaryInstructions',
           'isTelemedReferral',
-          'patientCopay',
+          'medicineCopay',
+          'doctorCopay',
           'telemedCopay',
           'referralHospital',
           'referredSpecialistDoctor',
@@ -504,12 +506,12 @@ class PatientVisitRepository {
         });
       }
 
-      if (filter.patientCopayRange) {
-        const [start, end] = filter.patientCopayRange;
+      if (filter.medicineCopayRange) {
+        const [start, end] = filter.medicineCopayRange;
 
         if (start !== undefined && start !== null && start !== '') {
           whereAnd.push({
-            patientCopay: {
+            medicineCopay: {
               [Op.gte]: start,
             },
           });
@@ -517,7 +519,27 @@ class PatientVisitRepository {
 
         if (end !== undefined && end !== null && end !== '') {
           whereAnd.push({
-            patientCopay: {
+            medicineCopay: {
+              [Op.lte]: end,
+            },
+          });
+        }
+      }
+
+      if (filter.doctorCopayRange) {
+        const [start, end] = filter.doctorCopayRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          whereAnd.push({
+            doctorCopay: {
+              [Op.gte]: start,
+            },
+          });
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          whereAnd.push({
+            doctorCopay: {
               [Op.lte]: end,
             },
           });

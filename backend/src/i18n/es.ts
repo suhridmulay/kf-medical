@@ -174,6 +174,13 @@ const es = {
         }
       }
     },
+    medicineCategoryEnum: {
+      errors: {
+        unique: {
+          categoryName: 'Category Name debe ser único',
+        }
+      }
+    },
   }
 };
 

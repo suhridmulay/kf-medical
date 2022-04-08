@@ -551,6 +551,46 @@ class Permissions {
         allowedRoles: [roles.admin, roles.doctor, roles.manager],
         allowedPlans: [plans.free],
       },
+
+      medicineCategoryEnumImport: {
+        id: 'medicineCategoryEnumImport',
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
+      },
+      medicineCategoryEnumCreate: {
+        id: 'medicineCategoryEnumCreate',
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
+        allowedStorage: [
+
+        ],
+      },
+      medicineCategoryEnumEdit: {
+        id: 'medicineCategoryEnumEdit',
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
+        allowedStorage: [
+
+        ],
+      },
+      medicineCategoryEnumDestroy: {
+        id: 'medicineCategoryEnumDestroy',
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
+        allowedStorage: [
+
+        ],
+      },
+      medicineCategoryEnumRead: {
+        id: 'medicineCategoryEnumRead',
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
+      },
+      medicineCategoryEnumAutocomplete: {
+        id: 'medicineCategoryEnumAutocomplete',
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
+      },
     };
   }
 

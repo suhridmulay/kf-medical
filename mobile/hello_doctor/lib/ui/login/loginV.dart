@@ -100,6 +100,7 @@ class LoginView extends StatelessWidget {
                   child: Container(
                     width: screenSize.width * 0.5,
                     child: const Center(child: Text("Login")),
+
                   ),
                 ),
                 ElevatedButton(

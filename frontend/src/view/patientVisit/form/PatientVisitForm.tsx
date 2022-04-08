@@ -190,10 +190,17 @@ const schema = yup.object().shape({
     i18n('entities.patientVisit.fields.isTelemedReferral'),
     {},
   ),
-  patientCopay: yupFormSchemas.decimal(
-    i18n('entities.patientVisit.fields.patientCopay'),
+  medicineCopay: yupFormSchemas.decimal(
+    i18n('entities.patientVisit.fields.medicineCopay'),
     {
       "scale": 2
+    },
+  ),
+  doctorCopay: yupFormSchemas.decimal(
+    i18n('entities.patientVisit.fields.doctorCopay'),
+    {
+      "scale": 2,
+      "min": 0
     },
   ),
   telemedCopay: yupFormSchemas.decimal(
@@ -277,7 +284,8 @@ function PatientVisitForm(props) {
       requestedLabs: record.requestedLabs,
       dietaryInstructions: record.dietaryInstructions,
       isTelemedReferral: record.isTelemedReferral,
-      patientCopay: record.patientCopay,
+      medicineCopay: record.medicineCopay,
+      doctorCopay: record.doctorCopay,
       telemedCopay: record.telemedCopay,
       referralHospital: record.referralHospital,
       referredSpecialistDoctor: record.referredSpecialistDoctor,
@@ -578,8 +586,15 @@ function PatientVisitForm(props) {
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
               <InputFormItem
-                name="patientCopay"
-                label={i18n('entities.patientVisit.fields.patientCopay')}  
+                name="medicineCopay"
+                label={i18n('entities.patientVisit.fields.medicineCopay')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="doctorCopay"
+                label={i18n('entities.patientVisit.fields.doctorCopay')}  
                 required={false}
               />
             </Grid>

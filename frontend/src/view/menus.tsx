@@ -131,4 +131,11 @@ export default [
     icon: <ChevronRightIcon />,
     label: i18n('entities.chronicDiseaseEnum.menu'),
   },
+
+  {
+    path: '/medicine-category-enum',
+    permissionRequired: permissions.medicineCategoryEnumRead,
+    icon: <ChevronRightIcon />,
+    label: i18n('entities.medicineCategoryEnum.menu'),
+  },
 ].filter(Boolean);

@@ -2,6 +2,7 @@ import Error400 from '../errors/Error400';
 import SequelizeRepository from '../database/repositories/sequelizeRepository';
 import { IServiceOptions } from './IServiceOptions';
 import MedicineEnumRepository from '../database/repositories/medicineEnumRepository';
+import MedicineCategoryEnumRepository from '../database/repositories/medicineCategoryEnumRepository';
 
 export default class MedicineEnumService {
   options: IServiceOptions;
@@ -16,7 +17,7 @@ export default class MedicineEnumService {
     );
 
     try {
-
+      data.medicineCategory = await MedicineCategoryEnumRepository.filterIdInTenant(data.medicineCategory, { ...this.options, transaction });
 
       const record = await MedicineEnumRepository.create(data, {
         ...this.options,
@@ -49,7 +50,7 @@ export default class MedicineEnumService {
     );
 
     try {
-
+      data.medicineCategory = await MedicineCategoryEnumRepository.filterIdInTenant(data.medicineCategory, { ...this.options, transaction });
 
       const record = await MedicineEnumRepository.update(
         id,

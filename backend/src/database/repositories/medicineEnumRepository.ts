@@ -29,10 +29,12 @@ class MedicineEnumRepository {
           'medicineName',
           'keptInStock',
           'isCommon',
+          'genericName',
+          'compositionName',
           'msrp',          
           'importHash',
         ]),
-
+        medicineCategoryId: data.medicineCategory || null,
         tenantId: tenant.id,
         createdById: currentUser.id,
         updatedById: currentUser.id,
@@ -90,10 +92,12 @@ class MedicineEnumRepository {
           'medicineName',
           'keptInStock',
           'isCommon',
+          'genericName',
+          'compositionName',
           'msrp',          
           'importHash',
         ]),
-
+        medicineCategoryId: data.medicineCategory || null,
         updatedById: currentUser.id,
       },
       {
@@ -156,7 +160,10 @@ class MedicineEnumRepository {
     );
 
     const include = [
-
+      {
+        model: options.database.medicineCategoryEnum,
+        as: 'medicineCategory',
+      },
     ];
 
     const currentTenant = SequelizeRepository.getCurrentTenant(
@@ -250,7 +257,10 @@ class MedicineEnumRepository {
 
     let whereAnd: Array<any> = [];
     let include = [
-      
+      {
+        model: options.database.medicineCategoryEnum,
+        as: 'medicineCategory',
+      },      
     ];
 
     whereAnd.push({
@@ -298,6 +308,34 @@ class MedicineEnumRepository {
             filter.isCommon === true ||
             filter.isCommon === 'true',
         });
+      }
+
+      if (filter.medicineCategory) {
+        whereAnd.push({
+          ['medicineCategoryId']: SequelizeFilterUtils.uuid(
+            filter.medicineCategory,
+          ),
+        });
+      }
+
+      if (filter.genericName) {
+        whereAnd.push(
+          SequelizeFilterUtils.ilikeIncludes(
+            'medicineEnum',
+            'genericName',
+            filter.genericName,
+          ),
+        );
+      }
+
+      if (filter.compositionName) {
+        whereAnd.push(
+          SequelizeFilterUtils.ilikeIncludes(
+            'medicineEnum',
+            'compositionName',
+            filter.compositionName,
+          ),
+        );
       }
 
       if (filter.msrpRange) {
