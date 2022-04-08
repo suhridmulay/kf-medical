@@ -38,12 +38,19 @@ class LoginView extends StatelessWidget {
                 ),
                 FormBuilder(
                     key: _formKey,
+                    enabled: !model.isBusy,
                     child: Column(
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: FormBuilderDropdown(
                               name: 'tenentId',
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                label: Text("NGO"),
+                              ),
+                              initialValue:
+                                  "79d841e0-4d34-4075-a865-61ae6a0debb5",
                               items: const [
                                 DropdownMenuItem(
                                   child: Text("Mukti"),
@@ -59,6 +66,7 @@ class LoginView extends StatelessWidget {
                               border: OutlineInputBorder(),
                               label: Text("Username"),
                             ),
+                            initialValue: "banerjee.dhritiman@gmail.com",
                           ),
                         ),
                         Padding(
@@ -70,17 +78,28 @@ class LoginView extends StatelessWidget {
                               label: Text("Password"),
                             ),
                             obscureText: true,
+                            initialValue: "dman123",
                           ),
                         ),
                       ],
                     )),
                 ElevatedButton(
-                  onPressed: () {
-                    navigationService.navigateTo(Routes.dashboardView);
+                  onPressed: () async {
+                    _formKey.currentState?.save();
+                    if (_formKey.currentState!.validate()) {
+                      if (await model.login(
+                        username: _formKey.currentState?.value['username'],
+                        password: _formKey.currentState?.value['password'],
+                        tenentId: _formKey.currentState?.value['tenentId'],
+                      )) {
+                        navigationService
+                            .clearStackAndShow(Routes.dashboardView);
+                      }
+                    }
                   },
                   child: Container(
                     width: screenSize.width * 0.5,
-                    child: Center(child: const Text("Login")),
+                    child: const Center(child: Text("Login")),
                   ),
                 ),
                 ElevatedButton(
@@ -93,7 +112,7 @@ class LoginView extends StatelessWidget {
                   ),
                   child: Container(
                     width: screenSize.width * 0.5,
-                    child: Center(child: const Text("Login with Google")),
+                    child: const Center(child: Text("Login with Google")),
                   ),
                 ),
                 ElevatedButton(
@@ -106,7 +125,7 @@ class LoginView extends StatelessWidget {
                   ),
                   child: Container(
                     width: screenSize.width * 0.5,
-                    child: Center(child: const Text("Login with Meta")),
+                    child: const Center(child: Text("Login with Meta")),
                   ),
                 ),
               ],

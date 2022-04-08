@@ -1,4 +1,4 @@
-import 'package:hello_doctor/services/api/apiService.dart';
+import 'package:hello_doctor/services/apiService.dart';
 import 'package:hello_doctor/services/prefetchService.dart';
 import 'package:hello_doctor/ui/dashboard/DashboardV.dart';
 import 'package:hello_doctor/ui/login/loginV.dart';

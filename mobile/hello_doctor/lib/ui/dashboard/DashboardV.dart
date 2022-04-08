@@ -85,7 +85,7 @@ class DashboardView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    ...model.patientsToday.map(
+                    ...model.getPatientsToday.map(
                       (Patient patient) => ListTile(
                         title: Text(patient.fullName),
                         subtitle: Text(
@@ -118,7 +118,7 @@ class DashboardView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    ...model.patientsToday.map(
+                    ...model.getPatientsToday.map(
                       (Patient patient) => ListTile(
                         title: Text(patient.fullName),
                         subtitle: Text(
@@ -142,6 +142,7 @@ class DashboardView extends StatelessWidget {
         ),
       ),
       viewModelBuilder: () => DashboardViewModel(),
+      onModelReady: (model) => model.initialise(),
     );
   }
 }
