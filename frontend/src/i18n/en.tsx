@@ -6,6 +6,7 @@ const en = {
     save: 'Save',
     search: 'Search',
     edit: 'Edit',
+    print: 'Print',
     new: 'New',
     export: 'Export to Excel',
     noDataToExport: 'No data to export',
