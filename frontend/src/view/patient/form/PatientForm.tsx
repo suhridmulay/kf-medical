@@ -19,11 +19,16 @@ import moment from 'moment';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
 import Storage from 'src/security/storage';
 import ImagesFormItem from 'src/view/shared/form/items/ImagesFormItem';
+import HealthCenterAutocompleteFormItem from 'src/view/healthCenter/autocomplete/HealthCenterAutocompleteFormItem';
 import MedicalHistoryAutocompleteFormItem from 'src/view/medicalHistory/autocomplete/MedicalHistoryAutocompleteFormItem';
 import PatientVisitAutocompleteFormItem from 'src/view/patientVisit/autocomplete/PatientVisitAutocompleteFormItem';
 import PatientDocumentAutocompleteFormItem from 'src/view/patientDocument/autocomplete/PatientDocumentAutocompleteFormItem';
 
 const schema = yup.object().shape({
+  medicalCenter: yupFormSchemas.relationToOne(
+    i18n('entities.patient.fields.medicalCenter'),
+    {},
+  ),
   firstName: yupFormSchemas.string(
     i18n('entities.patient.fields.firstName'),
     {
@@ -103,6 +108,7 @@ function PatientForm(props) {
     const record = props.record || {};
 
     return {
+      medicalCenter: record.medicalCenter,
       firstName: record.firstName,
       middleName: record.middleName,
       lastName: record.lastName,
@@ -144,11 +150,19 @@ function PatientForm(props) {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Grid spacing={2} container>
             <Grid item lg={7} md={8} sm={12} xs={12}>
+              <HealthCenterAutocompleteFormItem  
+                name="medicalCenter"
+                label={i18n('entities.patient.fields.medicalCenter')}
+              hint={i18n('entities.patient.hints.medicalCenter')}
+                required={false}
+                showCreate={!props.modal}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
               <InputFormItem
                 name="firstName"
                 label={i18n('entities.patient.fields.firstName')}  
                 required={true}
-              autoFocus
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

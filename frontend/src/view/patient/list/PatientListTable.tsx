@@ -23,7 +23,7 @@ import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
 import Pagination from 'src/view/shared/table/Pagination';
 import Spinner from 'src/view/shared/Spinner';
 import TableCellCustom from 'src/view/shared/table/TableCellCustom';
-
+import HealthCenterListItem from 'src/view/healthCenter/list/HealthCenterListItem';
 
 function PatientListTable(props) {
   const [
@@ -127,6 +127,11 @@ function PatientListTable(props) {
                 )}
               </TableCellCustom>
               <TableCellCustom
+                label={i18n(
+                  'entities.patient.fields.medicalCenter',
+                )}
+              />
+              <TableCellCustom
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
@@ -211,6 +216,9 @@ function PatientListTable(props) {
                       size="small"
                     />
                   </TableCell>
+                <TableCell>
+                  <HealthCenterListItem value={row.medicalCenter} />
+                </TableCell>
                 <TableCell>{row.fullName}</TableCell>
                 <TableCell>
                   {row.gender

@@ -69,6 +69,11 @@ export default function (sequelize) {
   );
 
   doctor.associate = (models) => {
+    models.doctor.belongsTo(models.healthCenter, {
+      as: 'medicalCenter',
+      constraints: false,
+    });
+
     models.doctor.belongsTo(models.user, {
       as: 'user',
       constraints: false,

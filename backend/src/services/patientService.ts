@@ -2,6 +2,7 @@ import Error400 from '../errors/Error400';
 import SequelizeRepository from '../database/repositories/sequelizeRepository';
 import { IServiceOptions } from './IServiceOptions';
 import PatientRepository from '../database/repositories/patientRepository';
+import HealthCenterRepository from '../database/repositories/healthCenterRepository';
 import MedicalHistoryRepository from '../database/repositories/medicalHistoryRepository';
 import PatientVisitRepository from '../database/repositories/patientVisitRepository';
 import PatientDocumentRepository from '../database/repositories/patientDocumentRepository';
@@ -19,6 +20,7 @@ export default class PatientService {
     );
 
     try {
+      data.medicalCenter = await HealthCenterRepository.filterIdInTenant(data.medicalCenter, { ...this.options, transaction });
       data.medicalHistory = await MedicalHistoryRepository.filterIdInTenant(data.medicalHistory, { ...this.options, transaction });
       data.medicalVisits = await PatientVisitRepository.filterIdsInTenant(data.medicalVisits, { ...this.options, transaction });
       data.medicalDocuments = await PatientDocumentRepository.filterIdsInTenant(data.medicalDocuments, { ...this.options, transaction });
@@ -54,6 +56,7 @@ export default class PatientService {
     );
 
     try {
+      data.medicalCenter = await HealthCenterRepository.filterIdInTenant(data.medicalCenter, { ...this.options, transaction });
       data.medicalHistory = await MedicalHistoryRepository.filterIdInTenant(data.medicalHistory, { ...this.options, transaction });
       data.medicalVisits = await PatientVisitRepository.filterIdsInTenant(data.medicalVisits, { ...this.options, transaction });
       data.medicalDocuments = await PatientDocumentRepository.filterIdsInTenant(data.medicalDocuments, { ...this.options, transaction });

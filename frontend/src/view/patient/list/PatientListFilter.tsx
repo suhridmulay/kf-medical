@@ -26,8 +26,12 @@ import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import patientEnumerators from 'src/modules/patient/patientEnumerators';
 import DatePickerRangeFormItem from 'src/view/shared/form/items/DatePickerRangeFormItem';
+import HealthCenterAutocompleteFormItem from 'src/view/healthCenter/autocomplete/HealthCenterAutocompleteFormItem';
 
 const schema = yup.object().shape({
+  medicalCenter: yupFilterSchemas.relationToOne(
+    i18n('entities.patient.fields.medicalCenter'),
+  ),
   firstName: yupFilterSchemas.string(
     i18n('entities.patient.fields.firstName'),
   ),
@@ -55,6 +59,7 @@ const schema = yup.object().shape({
 });
 
 const emptyValues = {
+  medicalCenter: null,
   firstName: null,
   lastName: null,
   fullName: null,
@@ -66,6 +71,10 @@ const emptyValues = {
 }
 
 const previewRenders = {
+  medicalCenter: {
+      label: i18n('entities.patient.fields.medicalCenter'),
+      render: filterRenders.relationToOne(),
+    },
   firstName: {
     label: i18n('entities.patient.fields.firstName'),
     render: filterRenders.generic(),
@@ -162,6 +171,12 @@ function PatientListFilter(props) {
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <Grid container spacing={2}>
+                <Grid item lg={6} xs={12}>
+                  <HealthCenterAutocompleteFormItem  
+                    name="medicalCenter"
+                    label={i18n('entities.patient.fields.medicalCenter')}        
+                  />
+                </Grid>
                 <Grid item lg={6} xs={12}>
                   <InputFormItem
                     name="firstName"

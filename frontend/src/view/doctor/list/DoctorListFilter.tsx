@@ -25,8 +25,12 @@ import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import UserAutocompleteFormItem from 'src/view/user/autocomplete/UserAutocompleteFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import HealthCenterAutocompleteFormItem from 'src/view/healthCenter/autocomplete/HealthCenterAutocompleteFormItem';
 
 const schema = yup.object().shape({
+  medicalCenter: yupFilterSchemas.relationToOne(
+    i18n('entities.doctor.fields.medicalCenter'),
+  ),
   name: yupFilterSchemas.string(
     i18n('entities.doctor.fields.name'),
   ),
@@ -51,6 +55,7 @@ const schema = yup.object().shape({
 });
 
 const emptyValues = {
+  medicalCenter: null,
   name: null,
   specialization: null,
   user: null,
@@ -61,6 +66,10 @@ const emptyValues = {
 }
 
 const previewRenders = {
+  medicalCenter: {
+      label: i18n('entities.doctor.fields.medicalCenter'),
+      render: filterRenders.relationToOne(),
+    },
   name: {
     label: i18n('entities.doctor.fields.name'),
     render: filterRenders.generic(),
@@ -153,6 +162,12 @@ function DoctorListFilter(props) {
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <Grid container spacing={2}>
+                <Grid item lg={6} xs={12}>
+                  <HealthCenterAutocompleteFormItem  
+                    name="medicalCenter"
+                    label={i18n('entities.doctor.fields.medicalCenter')}        
+                  />
+                </Grid>
                 <Grid item lg={6} xs={12}>
                   <InputFormItem
                     name="name"

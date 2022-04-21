@@ -3,6 +3,14 @@ import { i18n } from 'src/i18n';
 
 export default [
   {
+    name: 'medicalCenter',
+    label: i18n('entities.doctor.fields.medicalCenter'),
+    schema: schemas.relationToOne(
+      i18n('entities.doctor.fields.medicalCenter'),
+      {},
+    ),
+  },
+  {
     name: 'name',
     label: i18n('entities.doctor.fields.name'),
     schema: schemas.string(

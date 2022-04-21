@@ -3,6 +3,7 @@ import Spinner from 'src/view/shared/Spinner';
 import { i18n } from 'src/i18n';
 import TextViewItem from 'src/view/shared/view/TextViewItem';
 import UserViewItem from 'src/view/user/view/UserViewItem';
+import HealthCenterViewItem from 'src/view/healthCenter/view/HealthCenterViewItem';
 
 function DoctorView(props) {
   const renderView = () => {
@@ -10,6 +11,11 @@ function DoctorView(props) {
 
     return (
       <div>
+        <HealthCenterViewItem
+          label={i18n('entities.doctor.fields.medicalCenter')}
+          value={record.medicalCenter}
+        />
+
         <TextViewItem
           label={i18n('entities.doctor.fields.name')}
           value={record.name}

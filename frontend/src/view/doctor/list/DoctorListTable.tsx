@@ -24,6 +24,7 @@ import Pagination from 'src/view/shared/table/Pagination';
 import Spinner from 'src/view/shared/Spinner';
 import TableCellCustom from 'src/view/shared/table/TableCellCustom';
 import UserListItem from 'src/view/user/list/UserListItem';
+import HealthCenterListItem from 'src/view/healthCenter/list/HealthCenterListItem';
 
 function DoctorListTable(props) {
   const [
@@ -127,6 +128,11 @@ function DoctorListTable(props) {
                 )}
               </TableCellCustom>
               <TableCellCustom
+                label={i18n(
+                  'entities.doctor.fields.medicalCenter',
+                )}
+              />
+              <TableCellCustom
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
@@ -224,6 +230,9 @@ function DoctorListTable(props) {
                       size="small"
                     />
                   </TableCell>
+                <TableCell>
+                  <HealthCenterListItem value={row.medicalCenter} />
+                </TableCell>
                 <TableCell>{row.name}</TableCell>
                 <TableCell>{row.specialization}</TableCell>
                 <TableCell>

@@ -22,7 +22,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import filterRenders from 'src/modules/shared/filter/filterRenders';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
-import InputRangeFormItem from 'src/view/shared/form/items/InputRangeFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import patientVisitEnumerators from 'src/modules/patientVisit/patientVisitEnumerators';
 import DatePickerRangeFormItem from 'src/view/shared/form/items/DatePickerRangeFormItem';
@@ -52,15 +51,6 @@ const schema = yup.object().shape({
   isTelemedReferral: yupFilterSchemas.boolean(
     i18n('entities.patientVisit.fields.isTelemedReferral'),
   ),
-  medicineCopayRange: yupFilterSchemas.decimalRange(
-    i18n('entities.patientVisit.fields.medicineCopayRange'),
-  ),
-  doctorCopayRange: yupFilterSchemas.decimalRange(
-    i18n('entities.patientVisit.fields.doctorCopayRange'),
-  ),
-  telemedCopayRange: yupFilterSchemas.decimalRange(
-    i18n('entities.patientVisit.fields.telemedCopayRange'),
-  ),
   telemedicineDoctor: yupFilterSchemas.relationToOne(
     i18n('entities.patientVisit.fields.telemedicineDoctor'),
   ),
@@ -74,9 +64,6 @@ const emptyValues = {
   repeatVisit: null,
   caseSeverity: null,
   isTelemedReferral: null,
-  medicineCopayRange: [],
-  doctorCopayRange: [],
-  telemedCopayRange: [],
   telemedicineDoctor: null,
 }
 
@@ -108,18 +95,6 @@ const previewRenders = {
   isTelemedReferral: {
     label: i18n('entities.patientVisit.fields.isTelemedReferral'),
     render: filterRenders.boolean(),
-  },
-  medicineCopayRange: {
-    label: i18n('entities.patientVisit.fields.medicineCopayRange'),
-    render: filterRenders.decimalRange(2),
-  },
-  doctorCopayRange: {
-    label: i18n('entities.patientVisit.fields.doctorCopayRange'),
-    render: filterRenders.decimalRange(2),
-  },
-  telemedCopayRange: {
-    label: i18n('entities.patientVisit.fields.telemedCopayRange'),
-    render: filterRenders.decimalRange(2),
   },
   telemedicineDoctor: {
       label: i18n('entities.patientVisit.fields.telemedicineDoctor'),
@@ -257,24 +232,6 @@ function PatientVisitListFilter(props) {
                         label: i18n('common.no'),
                       },
                     ]}
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="medicineCopayRange"
-                    label={i18n('entities.patientVisit.fields.medicineCopayRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="doctorCopayRange"
-                    label={i18n('entities.patientVisit.fields.doctorCopayRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="telemedCopayRange"
-                    label={i18n('entities.patientVisit.fields.telemedCopayRange')}      
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
