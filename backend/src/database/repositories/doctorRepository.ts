@@ -34,6 +34,7 @@ class DoctorRepository {
           'isRuralHealthcareProfessional',          
           'importHash',
         ]),
+        medicalCenterId: data.medicalCenter || null,
         userId: data.user || null,
         tenantId: tenant.id,
         createdById: currentUser.id,
@@ -97,6 +98,7 @@ class DoctorRepository {
           'isRuralHealthcareProfessional',          
           'importHash',
         ]),
+        medicalCenterId: data.medicalCenter || null,
         userId: data.user || null,
         updatedById: currentUser.id,
       },
@@ -160,6 +162,10 @@ class DoctorRepository {
     );
 
     const include = [
+      {
+        model: options.database.healthCenter,
+        as: 'medicalCenter',
+      },
       {
         model: options.database.user,
         as: 'user',
@@ -258,6 +264,10 @@ class DoctorRepository {
     let whereAnd: Array<any> = [];
     let include = [
       {
+        model: options.database.healthCenter,
+        as: 'medicalCenter',
+      },
+      {
         model: options.database.user,
         as: 'user',
       },      
@@ -271,6 +281,14 @@ class DoctorRepository {
       if (filter.id) {
         whereAnd.push({
           ['id']: SequelizeFilterUtils.uuid(filter.id),
+        });
+      }
+
+      if (filter.medicalCenter) {
+        whereAnd.push({
+          ['medicalCenterId']: SequelizeFilterUtils.uuid(
+            filter.medicalCenter,
+          ),
         });
       }
 

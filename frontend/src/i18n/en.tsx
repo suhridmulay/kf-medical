@@ -60,6 +60,7 @@ const en = {
         },
         fields: {
           id: 'Id',
+          'medicalCenter': 'MedicalCenter',
           'firstName': 'FirstName',
           'middleName': 'MiddleName',
           'lastName': 'LastName',
@@ -90,7 +91,7 @@ const en = {
 
         },
         hints: {
-
+          'medicalCenter': 'Medical center for patient',
         },
         new: {
           title: 'New Patient',
@@ -230,8 +231,8 @@ const en = {
           'isTelemedReferral': 'Telemedicine Referral',
           'medicineCopayRange': 'Medicine Copay (Rs)',
           'medicineCopay': 'Medicine Copay (Rs)',
-          'doctorCopayRange': 'DoctorCopay',
-          'doctorCopay': 'DoctorCopay',
+          'doctorCopayRange': 'Doctor Copay (Rs)',
+          'doctorCopay': 'Doctor Copay (Rs)',
           'telemedCopayRange': 'Telemed Copay (Rs)',
           'telemedCopay': 'Telemed Copay (Rs)',
           'referralHospital': 'Referral Hospital',
@@ -443,6 +444,7 @@ const en = {
         },
         fields: {
           id: 'Id',
+          'medicalCenter': 'Medical Center',
           'name': 'Name',
           'specialization': 'Specialization',
           'user': 'User',

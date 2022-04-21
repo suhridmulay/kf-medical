@@ -14,8 +14,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import UserAutocompleteFormItem from 'src/view/user/autocomplete/UserAutocompleteFormItem';
 import SwitchFormItem from 'src/view/shared/form/items/SwitchFormItem';
+import HealthCenterAutocompleteFormItem from 'src/view/healthCenter/autocomplete/HealthCenterAutocompleteFormItem';
 
 const schema = yup.object().shape({
+  medicalCenter: yupFormSchemas.relationToOne(
+    i18n('entities.doctor.fields.medicalCenter'),
+    {},
+  ),
   name: yupFormSchemas.string(
     i18n('entities.doctor.fields.name'),
     {
@@ -57,6 +62,7 @@ function DoctorForm(props) {
     const record = props.record || {};
 
     return {
+      medicalCenter: record.medicalCenter,
       name: record.name,
       specialization: record.specialization,
       user: record.user,
@@ -91,11 +97,18 @@ function DoctorForm(props) {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Grid spacing={2} container>
             <Grid item lg={7} md={8} sm={12} xs={12}>
+              <HealthCenterAutocompleteFormItem  
+                name="medicalCenter"
+                label={i18n('entities.doctor.fields.medicalCenter')}
+                required={false}
+                showCreate={!props.modal}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
               <InputFormItem
                 name="name"
                 label={i18n('entities.doctor.fields.name')}  
                 required={true}
-              autoFocus
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

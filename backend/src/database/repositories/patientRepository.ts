@@ -38,6 +38,7 @@ class PatientRepository {
           'dateOfBirth',          
           'importHash',
         ]),
+        medicalCenterId: data.medicalCenter || null,
         medicalHistoryId: data.medicalHistory || null,
         tenantId: tenant.id,
         createdById: currentUser.id,
@@ -118,6 +119,7 @@ class PatientRepository {
           'dateOfBirth',          
           'importHash',
         ]),
+        medicalCenterId: data.medicalCenter || null,
         medicalHistoryId: data.medicalHistory || null,
         updatedById: currentUser.id,
       },
@@ -194,6 +196,10 @@ class PatientRepository {
     );
 
     const include = [
+      {
+        model: options.database.healthCenter,
+        as: 'medicalCenter',
+      },
       {
         model: options.database.medicalHistory,
         as: 'medicalHistory',
@@ -292,6 +298,10 @@ class PatientRepository {
     let whereAnd: Array<any> = [];
     let include = [
       {
+        model: options.database.healthCenter,
+        as: 'medicalCenter',
+      },
+      {
         model: options.database.medicalHistory,
         as: 'medicalHistory',
       },      
@@ -305,6 +315,14 @@ class PatientRepository {
       if (filter.id) {
         whereAnd.push({
           ['id']: SequelizeFilterUtils.uuid(filter.id),
+        });
+      }
+
+      if (filter.medicalCenter) {
+        whereAnd.push({
+          ['medicalCenterId']: SequelizeFilterUtils.uuid(
+            filter.medicalCenter,
+          ),
         });
       }
 

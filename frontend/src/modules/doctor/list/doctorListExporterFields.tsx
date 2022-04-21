@@ -7,6 +7,11 @@ export default [
     label: i18n('entities.doctor.fields.id'),
   },
   {
+    name: 'medicalCenter',
+    label: i18n('entities.doctor.fields.medicalCenter'),
+    render: exporterRenders.relationToOne(),
+  },
+  {
     name: 'name',
     label: i18n('entities.doctor.fields.name'),
   },

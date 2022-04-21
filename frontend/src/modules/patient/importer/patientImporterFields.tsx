@@ -4,6 +4,14 @@ import moment from 'moment';
 
 export default [
   {
+    name: 'medicalCenter',
+    label: i18n('entities.patient.fields.medicalCenter'),
+    schema: schemas.relationToOne(
+      i18n('entities.patient.fields.medicalCenter'),
+      {},
+    ),
+  },
+  {
     name: 'firstName',
     label: i18n('entities.patient.fields.firstName'),
     schema: schemas.string(
