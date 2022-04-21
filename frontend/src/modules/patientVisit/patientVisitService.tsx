@@ -77,7 +77,6 @@ export default class PatientVisitService {
   }
 
   static async print(id) {
-    console.log('Coming here with : ', id);
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
