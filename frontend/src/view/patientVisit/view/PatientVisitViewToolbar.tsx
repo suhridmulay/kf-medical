@@ -1,6 +1,7 @@
 import { Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import PrintIcon from '@material-ui/icons/Print';
 import HistoryIcon from '@material-ui/icons/History';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -51,6 +52,20 @@ function PatientVisitViewToolbar(props) {
 
   return (
     <ToolbarWrapper>
+      {(
+        <Button
+          component={Link}
+          to={`/patient-visit/${id}/print`}
+          variant="contained"
+          color="primary"
+          type="button"
+          startIcon={<PrintIcon />}
+          size="small"
+        >
+          {i18n('common.print')}
+        </Button>
+      )}
+
       {hasPermissionToEdit && (
         <Button
           component={Link}

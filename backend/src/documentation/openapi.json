@@ -514,6 +514,14 @@
           },
           {
             "in": "query",
+            "name": "filter[medicalCenter]",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "query",
             "name": "filter[firstName]",
             "schema": {
               "type": "string"
@@ -1491,36 +1499,6 @@
             "name": "filter[isTelemedReferral]",
             "schema": {
               "type": "boolean"
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[medicineCopayRange][]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[doctorCopayRange][]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[telemedCopayRange][]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
             }
           },
           {
@@ -2840,6 +2818,14 @@
             "name": "filter[id]",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "filter[medicalCenter]",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -7613,6 +7599,9 @@
         ],
         "type": "object",
         "properties": {
+          "medicalCenter": {
+            "$ref": "#/components/schemas/HealthCenter"
+          },
           "firstName": {
             "type": "string"
           },
@@ -7671,6 +7660,10 @@
       "PatientInput": {
         "type": "object",
         "properties": {
+          "medicalCenter": {
+            "type": "string",
+            "format": "uuid"
+          },
           "firstName": {
             "type": "string"
           },
@@ -8160,6 +8153,9 @@
         ],
         "type": "object",
         "properties": {
+          "medicalCenter": {
+            "$ref": "#/components/schemas/HealthCenter"
+          },
           "name": {
             "type": "string"
           },
@@ -8186,6 +8182,10 @@
       "DoctorInput": {
         "type": "object",
         "properties": {
+          "medicalCenter": {
+            "type": "string",
+            "format": "uuid"
+          },
           "name": {
             "type": "string"
           },

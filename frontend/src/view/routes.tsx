@@ -215,6 +215,13 @@ const privateRoutes = [
     permissionRequired: permissions.patientVisitRead,
     exact: true,
   },
+  {
+    path: '/patient-visit/:id/print',
+    loader: () =>
+      import('src/view/patientVisit/view/PatientVisitPrintPage'),
+    permissionRequired: permissions.patientVisitRead,
+    exact: true,
+  },
 
   {
     path: '/medicine-enum',

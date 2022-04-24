@@ -3,6 +3,7 @@ import Spinner from 'src/view/shared/Spinner';
 import { i18n } from 'src/i18n';
 import TextViewItem from 'src/view/shared/view/TextViewItem';
 import ImagesViewItem from 'src/view/shared/view/ImagesViewItem';
+import HealthCenterViewItem from 'src/view/healthCenter/view/HealthCenterViewItem';
 import MedicalHistoryViewItem from 'src/view/medicalHistory/view/MedicalHistoryViewItem';
 import PatientVisitViewItem from 'src/view/patientVisit/view/PatientVisitViewItem';
 import PatientDocumentViewItem from 'src/view/patientDocument/view/PatientDocumentViewItem';
@@ -13,6 +14,11 @@ function PatientView(props) {
 
     return (
       <div>
+        <HealthCenterViewItem
+          label={i18n('entities.patient.fields.medicalCenter')}
+          value={record.medicalCenter}
+        />
+
         <TextViewItem
           label={i18n('entities.patient.fields.firstName')}
           value={record.firstName}

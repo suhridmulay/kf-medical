@@ -149,15 +149,6 @@ function PatientVisitListTable(props) {
                 )}
               />
               <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'repeatVisit'}
-                label={i18n(
-                  'entities.patientVisit.fields.repeatVisit',
-                )}
-              />
-              <TableCellCustom
                 label={i18n(
                   'entities.patientVisit.fields.symptom1',
                 )}
@@ -168,15 +159,6 @@ function PatientVisitListTable(props) {
                 )}
               />
               <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'caseSeverity'}
-                label={i18n(
-                  'entities.patientVisit.fields.caseSeverity',
-                )}
-              />
-              <TableCellCustom
                 label={i18n(
                   'entities.patientVisit.fields.medicine1',
                 )}
@@ -184,50 +166,6 @@ function PatientVisitListTable(props) {
               <TableCellCustom
                 label={i18n(
                   'entities.patientVisit.fields.medicine2',
-                )}
-              />
-              <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'isTelemedReferral'}
-                label={i18n(
-                  'entities.patientVisit.fields.isTelemedReferral',
-                )}
-              />
-              <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'medicineCopay'}
-                label={i18n(
-                  'entities.patientVisit.fields.medicineCopay',
-                )}
-                align="right"
-              />
-              <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'doctorCopay'}
-                label={i18n(
-                  'entities.patientVisit.fields.doctorCopay',
-                )}
-                align="right"
-              />
-              <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'telemedCopay'}
-                label={i18n(
-                  'entities.patientVisit.fields.telemedCopay',
-                )}
-                align="right"
-              />
-              <TableCellCustom
-                label={i18n(
-                  'entities.patientVisit.fields.telemedicineDoctor',
                 )}
               />              
               <TableCellCustom size="md" />
@@ -277,39 +215,16 @@ function PatientVisitListTable(props) {
                 </TableCell>
                 <TableCell>{row.visitDate}</TableCell>
                 <TableCell>
-                  {row.repeatVisit
-                    ? i18n('common.yes')
-                    : i18n('common.no')}
-                </TableCell>
-                <TableCell>
                   <SymptomsEnumListItem value={row.symptom1} />
                 </TableCell>
                 <TableCell>
                   <SymptomsEnumListItem value={row.symptom2} />
                 </TableCell>
                 <TableCell>
-                  {row.caseSeverity
-                    ? i18n(
-                        `entities.patientVisit.enumerators.caseSeverity.${row.caseSeverity}`,
-                      )
-                    : null}
-                </TableCell>
-                <TableCell>
                   <MedicineEnumListItem value={row.medicine1} />
                 </TableCell>
                 <TableCell>
                   <MedicineEnumListItem value={row.medicine2} />
-                </TableCell>
-                <TableCell>
-                  {row.isTelemedReferral
-                    ? i18n('common.yes')
-                    : i18n('common.no')}
-                </TableCell>
-                <TableCell align="right">{row.medicineCopay}</TableCell>
-                <TableCell align="right">{row.doctorCopay}</TableCell>
-                <TableCell align="right">{row.telemedCopay}</TableCell>
-                <TableCell>
-                  <DoctorListItem value={row.telemedicineDoctor} />
                 </TableCell>                  
                   <TableCell>
                     <Box

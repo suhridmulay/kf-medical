@@ -2,6 +2,7 @@ import Error400 from '../errors/Error400';
 import SequelizeRepository from '../database/repositories/sequelizeRepository';
 import { IServiceOptions } from './IServiceOptions';
 import DoctorRepository from '../database/repositories/doctorRepository';
+import HealthCenterRepository from '../database/repositories/healthCenterRepository';
 import UserRepository from '../database/repositories/userRepository';
 
 export default class DoctorService {
@@ -17,6 +18,7 @@ export default class DoctorService {
     );
 
     try {
+      data.medicalCenter = await HealthCenterRepository.filterIdInTenant(data.medicalCenter, { ...this.options, transaction });
       data.user = await UserRepository.filterIdInTenant(data.user, { ...this.options, transaction });
 
       const record = await DoctorRepository.create(data, {
@@ -50,6 +52,7 @@ export default class DoctorService {
     );
 
     try {
+      data.medicalCenter = await HealthCenterRepository.filterIdInTenant(data.medicalCenter, { ...this.options, transaction });
       data.user = await UserRepository.filterIdInTenant(data.user, { ...this.options, transaction });
 
       const record = await DoctorRepository.update(

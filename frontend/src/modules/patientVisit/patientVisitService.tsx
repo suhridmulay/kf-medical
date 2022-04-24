@@ -76,6 +76,16 @@ export default class PatientVisitService {
     return response.data;
   }
 
+  static async print(id) {
+    const tenantId = AuthCurrentTenant.get();
+
+    const response = await authAxios.get(
+      `/tenant/${tenantId}/patient-visit/${id}`,
+    );
+
+    return response.data;
+  }
+
   static async list(filter, orderBy, limit, offset) {
     const params = {
       filter,

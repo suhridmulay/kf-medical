@@ -506,66 +506,6 @@ class PatientVisitRepository {
         });
       }
 
-      if (filter.medicineCopayRange) {
-        const [start, end] = filter.medicineCopayRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            medicineCopay: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            medicineCopay: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.doctorCopayRange) {
-        const [start, end] = filter.doctorCopayRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            doctorCopay: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            doctorCopay: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.telemedCopayRange) {
-        const [start, end] = filter.telemedCopayRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            telemedCopay: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            telemedCopay: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
       if (filter.telemedicineDoctor) {
         whereAnd.push({
           ['telemedicineDoctorId']: SequelizeFilterUtils.uuid(
