@@ -84,29 +84,41 @@ class LoginView extends StatelessWidget {
                       ],
                     )),
                 ElevatedButton(
-                  onPressed: () async {
-                    _formKey.currentState?.save();
-                    if (_formKey.currentState!.validate()) {
-                      if (await model.login(
-                        username: _formKey.currentState?.value['username'],
-                        password: _formKey.currentState?.value['password'],
-                        tenentId: _formKey.currentState?.value['tenentId'],
-                      )) {
-                        navigationService
-                            .clearStackAndShow(Routes.dashboardView);
-                      }
-                    }
-                  },
+                  onPressed: model.isBusy
+                      ? null
+                      : () async {
+                          _formKey.currentState?.save();
+                          if (_formKey.currentState!.validate()) {
+                            if (await model.login(
+                              username:
+                                  _formKey.currentState?.value['username'],
+                              password:
+                                  _formKey.currentState?.value['password'],
+                              tenentId:
+                                  _formKey.currentState?.value['tenentId'],
+                            )) {
+                              navigationService
+                                  .clearStackAndShow(Routes.dashboardView);
+                            }
+                          }
+                        },
                   child: Container(
                     width: screenSize.width * 0.5,
-                    child: const Center(child: Text("Login")),
-
+                    child: Center(
+                        child: Row(
+                      children: [
+                        Text("Login"),
+                        if (model.isBusy) CircularProgressIndicator.adaptive()
+                      ],
+                    )),
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    navigationService.navigateTo(Routes.dashboardView);
-                  },
+                  onPressed: model.isBusy
+                      ? null
+                      : () {
+                          navigationService.navigateTo(Routes.dashboardView);
+                        },
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all(Colors.redAccent),
@@ -117,9 +129,11 @@ class LoginView extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    navigationService.navigateTo(Routes.dashboardView);
-                  },
+                  onPressed: model.isBusy
+                      ? null
+                      : () {
+                          navigationService.navigateTo(Routes.dashboardView);
+                        },
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all(Colors.blueAccent),

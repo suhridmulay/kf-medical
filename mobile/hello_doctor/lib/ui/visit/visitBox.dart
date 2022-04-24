@@ -38,7 +38,7 @@ class VisitBox extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "${DateFormat('dd/MM/yyyy').format(visit.visitDate)} | ${visit.medicalCenter.name}",
+                    "${DateFormat('dd/MM/yyyy').format(visit.visitDate)} | ${visit?.medicalCenter?.name}",
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

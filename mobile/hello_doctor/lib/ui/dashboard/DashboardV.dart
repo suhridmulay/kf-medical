@@ -46,15 +46,8 @@ class DashboardView extends StatelessWidget {
                 ],
               ),
             ),
-            const ListTile(
-              title: Text("Patients by location"),
-            ),
-            const ListTile(
-              title: Text("Patients by date"),
-            ),
-            const ListTile(
-              title: Text("Patients by name"),
-            ),
+            ElevatedButton(
+                onPressed: model.signOut, child: const Text("Sign out"))
           ],
         )),
         body: Padding(
@@ -123,7 +116,7 @@ class DashboardView extends StatelessWidget {
                         title: Text(patient.fullName),
                         subtitle: Text(
                             "${patient.age} | ${patient.gender == PatientGenderEnum.male ? "M" : "F"} | ${patient.mobileNumber}"),
-                        leading: CircleAvatar(
+                        leading: const CircleAvatar(
                           foregroundImage: AssetImage("assets/images/user.png"),
                         ),
                         onTap: () => {
