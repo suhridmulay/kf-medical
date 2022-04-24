@@ -50,12 +50,16 @@ class LoginView extends StatelessWidget {
                                 label: Text("NGO"),
                               ),
                               initialValue:
-                                  "79d841e0-4d34-4075-a865-61ae6a0debb5",
+                                  "0d95b43e-b76d-404a-b115-7e6d27fb1c74",
                               items: const [
                                 DropdownMenuItem(
                                   child: Text("Mukti"),
                                   value: "79d841e0-4d34-4075-a865-61ae6a0debb5",
-                                )
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("Test Mobile"),
+                                  value: "0d95b43e-b76d-404a-b115-7e6d27fb1c74",
+                                ),
                               ]),
                         ),
                         Padding(
@@ -106,43 +110,52 @@ class LoginView extends StatelessWidget {
                     width: screenSize.width * 0.5,
                     child: Center(
                         child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Login"),
-                        if (model.isBusy) CircularProgressIndicator.adaptive()
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text("Login"),
+                        ),
+                        if (model.isBusy)
+                          const SizedBox(
+                            height: 16,
+                            width: 16,
+                            child: CircularProgressIndicator(),
+                          )
                       ],
                     )),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: model.isBusy
-                      ? null
-                      : () {
-                          navigationService.navigateTo(Routes.dashboardView);
-                        },
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.redAccent),
-                  ),
-                  child: Container(
-                    width: screenSize.width * 0.5,
-                    child: const Center(child: Text("Login with Google")),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: model.isBusy
-                      ? null
-                      : () {
-                          navigationService.navigateTo(Routes.dashboardView);
-                        },
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.blueAccent),
-                  ),
-                  child: Container(
-                    width: screenSize.width * 0.5,
-                    child: const Center(child: Text("Login with Meta")),
-                  ),
-                ),
+                // ElevatedButton(
+                //   onPressed: model.isBusy
+                //       ? null
+                //       : () {
+                //           navigationService.replaceWith(Routes.dashboardView);
+                //         },
+                //   style: ButtonStyle(
+                //     backgroundColor:
+                //         MaterialStateProperty.all(Colors.redAccent),
+                //   ),
+                //   child: Container(
+                //     width: screenSize.width * 0.5,
+                //     child: const Center(child: Text("Login with Google")),
+                //   ),
+                // ),
+                // ElevatedButton(
+                //   onPressed: model.isBusy
+                //       ? null
+                //       : () {
+                //           navigationService.navigateTo(Routes.dashboardView);
+                //         },
+                //   style: ButtonStyle(
+                //     backgroundColor:
+                //         MaterialStateProperty.all(Colors.blueAccent),
+                //   ),
+                //   child: Container(
+                //     width: screenSize.width * 0.5,
+                //     child: const Center(child: Text("Login with Meta")),
+                //   ),
+                // ),
               ],
             ),
           ),
