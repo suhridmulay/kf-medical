@@ -41,22 +41,24 @@ class PrefetchService {
 
   APIService _apiService = locator<APIService>();
 
+  //TODO: Convert to api service methods
+
   Future<void> prefetch() async {
     print("Prefetching");
     healthCenters = (await HealthCenterApi(_apiService.defaultClient)
-            .tenantTenantIdHealthCenterGet(_apiService.tenentId))
+            .tenantTenantIdHealthCenterGet(_apiService.tenantId))
         .rows;
     symptoms = (await SymptomsEnumApi(_apiService.defaultClient)
-            .tenantTenantIdSymptomsEnumGet(_apiService.tenentId))
+            .tenantTenantIdSymptomsEnumGet(_apiService.tenantId))
         .rows;
     medicines = (await MedicineApi(_apiService.defaultClient)
-            .tenantTenantIdMedicineEnumGet(_apiService.tenentId))
+            .tenantTenantIdMedicineEnumGet(_apiService.tenantId))
         .rows;
     doctors = (await DoctorApi(_apiService.defaultClient)
-            .tenantTenantIdDoctorGet(_apiService.tenentId))
+            .tenantTenantIdDoctorGet(_apiService.tenantId))
         .rows;
     patients = (await PatientApi(_apiService.defaultClient)
-            .tenantTenantIdPatientGet(_apiService.tenentId))
+            .tenantTenantIdPatientGet(_apiService.tenantId))
         .rows;
   }
 }

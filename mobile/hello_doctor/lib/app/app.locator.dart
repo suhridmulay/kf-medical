@@ -24,4 +24,5 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerSingleton(NavigationService());
   locator.registerSingleton(APIService());
   locator.registerSingleton(PrefetchService());
+  locator.registerSingleton(SnackbarService());
 }

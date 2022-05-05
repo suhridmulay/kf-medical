@@ -20,6 +20,7 @@ import 'package:stacked_services/stacked_services.dart';
     Singleton(classType: NavigationService),
     Singleton(classType: APIService),
     Singleton(classType: PrefetchService),
+    Singleton(classType: SnackbarService),
   ],
 )
 class App {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hello_doctor/app/app.locator.dart';
 import 'package:hello_doctor/app/app.router.dart';
 import 'package:hello_doctor/ui/visit/visitBox.dart';
-import 'package:hello_doctor/utils/demoData.dart';
 import 'package:kf_openapi_generated/api.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
