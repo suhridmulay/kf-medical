@@ -83,10 +83,8 @@ class PatientView extends StatelessWidget {
                               Text(patient.mobileNumber ?? "Mobile not found"),
                               Text(
                                   "${patient.age} | ${patient.gender == PatientGenderEnum.male ? 'M' : 'F'}"),
-                              Text(patient.aadharNumber ?? "Aadhar not found"),
                               Text(
                                   patient.localityName ?? "Locality not found"),
-                              Text(patient.dateOfBirth.toString())
                             ],
                           ),
                         )

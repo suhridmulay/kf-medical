@@ -109,24 +109,6 @@ class PatientFormView extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: FormBuilderTextField(
-                          name: 'fullName',
-                          initialValue: patient?.fullName ?? "John Alice Doe",
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            label: Text("Full Name"),
-                          ),
-                          validator: FormBuilderValidators.compose([
-                            FormBuilderValidators.required(context),
-                            // TODO: Check max length
-                            FormBuilderValidators.maxLength(context, 30,
-                                errorText:
-                                    "Name should not be longer than 30 characters")
-                          ]),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
                         child: FormBuilderDropdown(
                           name: 'gender',
                           initialValue:
@@ -188,33 +170,6 @@ class PatientFormView extends StatelessWidget {
                             label: Text("Mobile Number"),
                           ),
                           keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: FormBuilderTextField(
-                          name: 'aadharNumber',
-                          initialValue:
-                              patient?.aadharNumber ?? "1111222233334444",
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            label: Text("Aadhar Number"),
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: FormBuilderDateTimePicker(
-                          name: 'dateOfBirth',
-                          initialValue: patient?.dateOfBirth ?? DateTime.now(),
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            label: Text("Date Of Birth"),
-                          ),
-                          inputType: InputType.date,
-                          valueTransformer: (date) =>
-                              date?.millisecondsSinceEpoch,
                         ),
                       ),
                     ],
