@@ -1,5 +1,5 @@
 import 'package:hello_doctor/app/app.locator.dart';
-import 'package:hello_doctor/services/apiService.dart';
+import 'package:hello_doctor/services/api_service.dart';
 import 'package:hello_doctor/utils/demoData.dart';
 import 'package:kf_openapi_generated/api.dart';
 

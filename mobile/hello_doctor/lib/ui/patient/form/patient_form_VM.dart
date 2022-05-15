@@ -1,11 +1,11 @@
 import 'dart:collection';
 
 import 'package:hello_doctor/app/app.locator.dart';
-import 'package:hello_doctor/services/apiService.dart';
-import 'package:hello_doctor/services/prefetchService.dart';
+import 'package:hello_doctor/services/api_service.dart';
+import 'package:hello_doctor/services/prefetch_service.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../../services/apiService.dart';
+import '../../../services/api_service.dart';
 
 class PatientFormViewModel extends BaseViewModel {
   final APIService _apiService = locator.get<APIService>();

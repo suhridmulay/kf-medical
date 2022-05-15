@@ -1,10 +1,11 @@
-import 'package:hello_doctor/services/apiService.dart';
-import 'package:hello_doctor/services/prefetchService.dart';
-import 'package:hello_doctor/ui/dashboard/DashboardV.dart';
-import 'package:hello_doctor/ui/login/loginV.dart';
-import 'package:hello_doctor/ui/patient/form/patientFormV.dart';
-import 'package:hello_doctor/ui/patient/patientV.dart';
-import 'package:hello_doctor/ui/visit/visitV.dart';
+import 'package:hello_doctor/services/api_service.dart';
+import 'package:hello_doctor/services/prefetch_service.dart';
+import 'package:hello_doctor/ui/dashboard/dashboard_V.dart';
+import 'package:hello_doctor/ui/login/login_V.dart';
+import 'package:hello_doctor/ui/patient/form/patient_form_V.dart';
+import 'package:hello_doctor/ui/patient/patient_V.dart';
+import 'package:hello_doctor/ui/patient/search/patient_search_V.dart';
+import 'package:hello_doctor/ui/visit/form/visit_form_V.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -13,8 +14,9 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: LoginView, initial: true),
     MaterialRoute(page: DashboardView),
     MaterialRoute(page: PatientView),
-    MaterialRoute(page: VisitView),
+    MaterialRoute(page: VisitFormView),
     MaterialRoute(page: PatientFormView),
+    MaterialRoute(page: PatientSearchView)
   ],
   dependencies: [
     Singleton(classType: NavigationService),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hello_doctor/app/app.locator.dart';
 import 'package:hello_doctor/app/app.router.dart';
-import 'package:hello_doctor/ui/visit/visitBox.dart';
+import 'package:hello_doctor/ui/visit/visit_box.dart';
 import 'package:kf_openapi_generated/api.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import 'patientVM.dart';
+import 'patient_VM.dart';
 
 class PatientView extends StatelessWidget {
   Patient patient;
@@ -24,8 +24,8 @@ class PatientView extends StatelessWidget {
         floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
               _navigationService.navigateTo(
-                Routes.visitView,
-                arguments: VisitViewArguments(patient: patient),
+                Routes.visitFormView,
+                arguments: VisitFormViewArguments(patient: patient),
               );
             },
             label: Row(

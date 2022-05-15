@@ -7,7 +7,7 @@ import 'package:hello_doctor/utils/commons.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import 'loginVM.dart';
+import 'login_VM.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({Key? key}) : super(key: key);

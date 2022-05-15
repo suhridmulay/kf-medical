@@ -4,7 +4,7 @@ import 'package:form_builder_image_picker/form_builder_image_picker.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hello_doctor/app/app.locator.dart';
 import 'package:hello_doctor/app/app.snackbar.dart';
-import 'package:hello_doctor/ui/patient/form/patientFormVM.dart';
+import 'package:hello_doctor/ui/patient/form/patient_form_VM.dart';
 import 'package:hello_doctor/utils/commons.dart';
 import 'package:kf_openapi_generated/api.dart';
 import 'package:stacked/stacked.dart';

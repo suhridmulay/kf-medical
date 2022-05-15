@@ -11,24 +11,27 @@ import 'package:kf_openapi_generated/api.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
-import '../ui/dashboard/DashboardV.dart';
-import '../ui/login/loginV.dart';
-import '../ui/patient/form/patientFormV.dart';
-import '../ui/patient/patientV.dart';
-import '../ui/visit/visitV.dart';
+import '../ui/dashboard/dashboard_V.dart';
+import '../ui/login/login_V.dart';
+import '../ui/patient/form/patient_form_V.dart';
+import '../ui/patient/patient_V.dart';
+import '../ui/patient/search/patient_search_V.dart';
+import '../ui/visit/form/visit_form_V.dart';
 
 class Routes {
   static const String loginView = '/';
   static const String dashboardView = '/dashboard-view';
   static const String patientView = '/patient-view';
-  static const String visitView = '/visit-view';
+  static const String visitFormView = '/visit-form-view';
   static const String patientFormView = '/patient-form-view';
+  static const String patientSearchView = '/patient-search-view';
   static const all = <String>{
     loginView,
     dashboardView,
     patientView,
-    visitView,
+    visitFormView,
     patientFormView,
+    patientSearchView,
   };
 }
 
@@ -39,8 +42,9 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.dashboardView, page: DashboardView),
     RouteDef(Routes.patientView, page: PatientView),
-    RouteDef(Routes.visitView, page: VisitView),
+    RouteDef(Routes.visitFormView, page: VisitFormView),
     RouteDef(Routes.patientFormView, page: PatientFormView),
+    RouteDef(Routes.patientSearchView, page: PatientSearchView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -73,12 +77,12 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    VisitView: (data) {
-      var args = data.getArgs<VisitViewArguments>(
-        orElse: () => VisitViewArguments(),
+    VisitFormView: (data) {
+      var args = data.getArgs<VisitFormViewArguments>(
+        orElse: () => VisitFormViewArguments(),
       );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => VisitView(
+        builder: (context) => VisitFormView(
           key: args.key,
           visit: args.visit,
           patient: args.patient,
@@ -95,6 +99,12 @@ class StackedRouter extends RouterBase {
           key: args.key,
           patient: args.patient,
         ),
+        settings: data,
+      );
+    },
+    PatientSearchView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const PatientSearchView(),
         settings: data,
       );
     },
@@ -124,12 +134,12 @@ class PatientViewArguments {
   PatientViewArguments({this.key, required this.patient});
 }
 
-/// VisitView arguments holder class
-class VisitViewArguments {
+/// VisitFormView arguments holder class
+class VisitFormViewArguments {
   final Key? key;
   final PatientVisit? visit;
   final Patient? patient;
-  VisitViewArguments({this.key, this.visit, this.patient});
+  VisitFormViewArguments({this.key, this.visit, this.patient});
 }
 
 /// PatientFormView arguments holder class

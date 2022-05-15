@@ -50,8 +50,8 @@ class VisitBox extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       _navigationService.navigateTo(
-                        Routes.visitView,
-                        arguments: VisitViewArguments(
+                        Routes.visitFormView,
+                        arguments: VisitFormViewArguments(
                           visit: visit,
                           patient: visit.patient,
                         ),

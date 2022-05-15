@@ -1,6 +1,6 @@
 import 'package:hello_doctor/app/app.locator.dart';
-import 'package:hello_doctor/services/apiService.dart';
-import 'package:hello_doctor/services/prefetchService.dart';
+import 'package:hello_doctor/services/api_service.dart';
+import 'package:hello_doctor/services/prefetch_service.dart';
 import 'package:stacked/stacked.dart';
 
 class LoginViewModel extends BaseViewModel {
