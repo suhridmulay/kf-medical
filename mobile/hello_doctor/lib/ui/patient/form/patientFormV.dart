@@ -5,6 +5,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hello_doctor/app/app.locator.dart';
 import 'package:hello_doctor/app/app.snackbar.dart';
 import 'package:hello_doctor/ui/patient/form/patientFormVM.dart';
+import 'package:hello_doctor/utils/commons.dart';
 import 'package:kf_openapi_generated/api.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -63,7 +64,7 @@ class PatientFormView extends StatelessWidget {
                               initialValue: patient?.firstName ?? "John",
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                label: Text("First Name"),
+                                label: Text("First Name *"),
                               ),
                               validator: FormBuilderValidators.compose([
                                 FormBuilderValidators.required(context),
@@ -80,7 +81,7 @@ class PatientFormView extends StatelessWidget {
                               initialValue: patient?.middleName ?? "Alice",
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                label: Text("Middle Name"),
+                                label: Text("Middle Name *"),
                               ),
                               validator: FormBuilderValidators.compose([
                                 FormBuilderValidators.required(context),
@@ -97,7 +98,7 @@ class PatientFormView extends StatelessWidget {
                               initialValue: patient?.lastName ?? "Doe",
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                label: Text("Last Name"),
+                                label: Text("Last Name *"),
                               ),
                               validator: FormBuilderValidators.compose([
                                 FormBuilderValidators.required(context),
@@ -115,7 +116,7 @@ class PatientFormView extends StatelessWidget {
                                   patient?.gender ?? PatientGenderEnum.female,
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                label: Text("Gender"),
+                                label: Text("Gender *"),
                               ),
                               items: [
                                 ...[
@@ -139,7 +140,7 @@ class PatientFormView extends StatelessWidget {
                               initialValue: patient?.age.toString() ?? "25",
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                label: Text("Age"),
+                                label: Text("Age *"),
                               ),
                               keyboardType: TextInputType.number,
                               valueTransformer: (text) => num.tryParse(text!),
@@ -157,7 +158,7 @@ class PatientFormView extends StatelessWidget {
                                   patient?.localityName ?? "Demo Locality",
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                label: Text("Locality Name"),
+                                label: Text("Locality Name *"),
                               ),
                             ),
                           ),
@@ -172,6 +173,11 @@ class PatientFormView extends StatelessWidget {
                                 label: Text("Mobile Number"),
                               ),
                               keyboardType: TextInputType.number,
+                              validator: FormBuilderValidators.compose([
+                                FormBuilderValidators.numeric(context),
+                                FormBuilderValidators.maxLength(context, 10),
+                                FormBuilderValidators.minLength(context, 10),
+                              ]),
                             ),
                           ),
                         ],
@@ -225,15 +231,7 @@ class PatientFormView extends StatelessWidget {
                   ],
                 ),
               ),
-              if (model.isBusy)
-                Opacity(
-                  opacity: 0.5,
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    child: const Center(child: CircularProgressIndicator()),
-                  ),
-                ),
+              if (model.isBusy) const LoadingScreen(),
             ],
           ),
         );

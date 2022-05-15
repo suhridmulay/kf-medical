@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hello_doctor/app/app.locator.dart';
 import 'package:hello_doctor/app/app.router.dart';
+import 'package:hello_doctor/utils/commons.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -149,16 +150,7 @@ class LoginView extends StatelessWidget {
                   ],
                 ),
               ),
-              if (model.isBusy)
-                Opacity(
-                  opacity: 0.5,
-                  child: Container(
-                    height: screenSize.height,
-                    width: screenSize.width,
-                    color: Colors.white,
-                    child: const Center(child: CircularProgressIndicator()),
-                  ),
-                ),
+              if (model.isBusy) const LoadingScreen()
             ],
           ),
         );
