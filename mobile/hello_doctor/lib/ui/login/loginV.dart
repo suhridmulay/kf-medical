@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hello_doctor/app/app.locator.dart';
 import 'package:hello_doctor/app/app.router.dart';
 import 'package:stacked/stacked.dart';
@@ -20,34 +21,36 @@ class LoginView extends StatelessWidget {
         Size screenSize = MediaQuery.of(context).size;
 
         return Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 8.0, right: 8.0, left: 8.0, bottom: 32.0),
-                  child: Center(
-                    child: Image.asset(
-                      'assets/images/logo.png',
-                      width: screenSize.width * 0.8,
+          body: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 8.0, right: 8.0, left: 8.0, bottom: 32.0),
+                      child: Center(
+                        child: Image.asset(
+                          'assets/images/hello-doctor.png',
+                          width: screenSize.width * 0.8,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                FormBuilder(
-                    key: _formKey,
-                    enabled: !model.isBusy,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: FormBuilderDropdown(
+                    FormBuilder(
+                      key: _formKey,
+                      enabled: !model.isBusy,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: FormBuilderDropdown(
                               name: 'tenentId',
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                label: Text("NGO"),
+                                label: Text("Organisation"),
                               ),
                               initialValue:
                                   "0d95b43e-b76d-404a-b115-7e6d27fb1c74",
@@ -60,104 +63,103 @@ class LoginView extends StatelessWidget {
                                   child: Text("Test Mobile"),
                                   value: "0d95b43e-b76d-404a-b115-7e6d27fb1c74",
                                 ),
+                              ],
+                              validator:
+                                  FormBuilderValidators.required(context),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: FormBuilderTextField(
+                              name: 'username',
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                label: Text("Username"),
+                              ),
+                              initialValue: "banerjee.dhritiman@gmail.com",
+                              validator: FormBuilderValidators.compose([
+                                FormBuilderValidators.required(context),
+                                FormBuilderValidators.email(context),
                               ]),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: FormBuilderTextField(
-                            name: 'username',
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              label: Text("Username"),
                             ),
-                            initialValue: "banerjee.dhritiman@gmail.com",
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: FormBuilderTextField(
+                              name: 'password',
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                label: Text("Password"),
+                              ),
+                              obscureText: true,
+                              initialValue: "dman123",
+                              validator: FormBuilderValidators.compose([
+                                FormBuilderValidators.required(context),
+                              ]),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: model.isBusy
+                          ? null
+                          : () async {
+                              _formKey.currentState?.save();
+                              if (_formKey.currentState!.validate()) {
+                                if (await model.login(
+                                  username:
+                                      _formKey.currentState?.value['username'],
+                                  password:
+                                      _formKey.currentState?.value['password'],
+                                  tenentId:
+                                      _formKey.currentState?.value['tenentId'],
+                                )) {
+                                  navigationService
+                                      .clearStackAndShow(Routes.dashboardView);
+                                }
+                              }
+                            },
+                      child: SizedBox(
+                        width: screenSize.width * 0.5,
+                        child: const Center(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text("Login"),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: FormBuilderTextField(
-                            name: 'password',
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              label: Text("Password"),
-                            ),
-                            obscureText: true,
-                            initialValue: "dman123",
-                          ),
-                        ),
-                      ],
-                    )),
-                ElevatedButton(
-                  onPressed: model.isBusy
-                      ? null
-                      : () async {
-                          _formKey.currentState?.save();
-                          if (_formKey.currentState!.validate()) {
-                            if (await model.login(
-                              username:
-                                  _formKey.currentState?.value['username'],
-                              password:
-                                  _formKey.currentState?.value['password'],
-                              tenentId:
-                                  _formKey.currentState?.value['tenentId'],
-                            )) {
-                              navigationService
-                                  .clearStackAndShow(Routes.dashboardView);
-                            }
-                          }
-                        },
-                  child: Container(
-                    width: screenSize.width * 0.5,
-                    child: Center(
-                        child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(40)),
+                    Column(
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text("Login"),
+                        const Text("Powered by"),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 8.0, right: 8.0, left: 8.0, bottom: 32.0),
+                          child: Center(
+                            child: Image.asset(
+                              'assets/images/logo.png',
+                              width: screenSize.width * 0.6,
+                            ),
+                          ),
                         ),
-                        if (model.isBusy)
-                          const SizedBox(
-                            height: 16,
-                            width: 16,
-                            child: CircularProgressIndicator(),
-                          )
                       ],
-                    )),
+                    )
+                  ],
+                ),
+              ),
+              if (model.isBusy)
+                Opacity(
+                  opacity: 0.5,
+                  child: Container(
+                    height: screenSize.height,
+                    width: screenSize.width,
+                    color: Colors.white,
+                    child: const Center(child: CircularProgressIndicator()),
                   ),
                 ),
-                // ElevatedButton(
-                //   onPressed: model.isBusy
-                //       ? null
-                //       : () {
-                //           navigationService.replaceWith(Routes.dashboardView);
-                //         },
-                //   style: ButtonStyle(
-                //     backgroundColor:
-                //         MaterialStateProperty.all(Colors.redAccent),
-                //   ),
-                //   child: Container(
-                //     width: screenSize.width * 0.5,
-                //     child: const Center(child: Text("Login with Google")),
-                //   ),
-                // ),
-                // ElevatedButton(
-                //   onPressed: model.isBusy
-                //       ? null
-                //       : () {
-                //           navigationService.navigateTo(Routes.dashboardView);
-                //         },
-                //   style: ButtonStyle(
-                //     backgroundColor:
-                //         MaterialStateProperty.all(Colors.blueAccent),
-                //   ),
-                //   child: Container(
-                //     width: screenSize.width * 0.5,
-                //     child: const Center(child: Text("Login with Meta")),
-                //   ),
-                // ),
-              ],
-            ),
+            ],
           ),
         );
       },
