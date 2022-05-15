@@ -57,8 +57,11 @@ class PrefetchService {
     doctors = (await DoctorApi(_apiService.defaultClient)
             .tenantTenantIdDoctorGet(_apiService.tenantId))
         .rows;
-    patients = (await PatientApi(_apiService.defaultClient)
-            .tenantTenantIdPatientGet(_apiService.tenantId))
-        .rows;
+    patients = [
+      demoPatient,
+      ...(await PatientApi(_apiService.defaultClient)
+              .tenantTenantIdPatientGet(_apiService.tenantId))
+          .rows
+    ];
   }
 }

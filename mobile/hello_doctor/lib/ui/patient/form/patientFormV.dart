@@ -46,7 +46,7 @@ class PatientFormView extends StatelessWidget {
                                   const AssetImage("assets/images/user.png"),
                               maxImages: 1,
                               fit: BoxFit.fitWidth,
-                              enabled: false,
+                              // enabled: false,
                             ),
                           ),
                           const Flexible(
