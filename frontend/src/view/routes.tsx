@@ -376,78 +376,40 @@ const privateRoutes = [
   },
 
   {
-    path: '/medicine-supplies',
+    path: '/site-inventory',
     loader: () =>
-      import('src/view/medicineSupplies/list/MedicineSuppliesListPage'),
-    permissionRequired: permissions.medicineSuppliesRead,
+      import('src/view/siteInventory/list/SiteInventoryListPage'),
+    permissionRequired: permissions.siteInventoryRead,
     exact: true,
   },
   {
-    path: '/medicine-supplies/new',
+    path: '/site-inventory/new',
     loader: () =>
-      import('src/view/medicineSupplies/form/MedicineSuppliesFormPage'),
-    permissionRequired: permissions.medicineSuppliesCreate,
+      import('src/view/siteInventory/form/SiteInventoryFormPage'),
+    permissionRequired: permissions.siteInventoryCreate,
     exact: true,
   },
   {
-    path: '/medicine-supplies/importer',
+    path: '/site-inventory/importer',
     loader: () =>
       import(
-        'src/view/medicineSupplies/importer/MedicineSuppliesImporterPage'
+        'src/view/siteInventory/importer/SiteInventoryImporterPage'
       ),
-    permissionRequired: permissions.medicineSuppliesImport,
+    permissionRequired: permissions.siteInventoryImport,
     exact: true,
   },
   {
-    path: '/medicine-supplies/:id/edit',
+    path: '/site-inventory/:id/edit',
     loader: () =>
-      import('src/view/medicineSupplies/form/MedicineSuppliesFormPage'),
-    permissionRequired: permissions.medicineSuppliesEdit,
+      import('src/view/siteInventory/form/SiteInventoryFormPage'),
+    permissionRequired: permissions.siteInventoryEdit,
     exact: true,
   },
   {
-    path: '/medicine-supplies/:id',
+    path: '/site-inventory/:id',
     loader: () =>
-      import('src/view/medicineSupplies/view/MedicineSuppliesViewPage'),
-    permissionRequired: permissions.medicineSuppliesRead,
-    exact: true,
-  },
-
-  {
-    path: '/medicine-inventory',
-    loader: () =>
-      import('src/view/medicineInventory/list/MedicineInventoryListPage'),
-    permissionRequired: permissions.medicineInventoryRead,
-    exact: true,
-  },
-  {
-    path: '/medicine-inventory/new',
-    loader: () =>
-      import('src/view/medicineInventory/form/MedicineInventoryFormPage'),
-    permissionRequired: permissions.medicineInventoryCreate,
-    exact: true,
-  },
-  {
-    path: '/medicine-inventory/importer',
-    loader: () =>
-      import(
-        'src/view/medicineInventory/importer/MedicineInventoryImporterPage'
-      ),
-    permissionRequired: permissions.medicineInventoryImport,
-    exact: true,
-  },
-  {
-    path: '/medicine-inventory/:id/edit',
-    loader: () =>
-      import('src/view/medicineInventory/form/MedicineInventoryFormPage'),
-    permissionRequired: permissions.medicineInventoryEdit,
-    exact: true,
-  },
-  {
-    path: '/medicine-inventory/:id',
-    loader: () =>
-      import('src/view/medicineInventory/view/MedicineInventoryViewPage'),
-    permissionRequired: permissions.medicineInventoryRead,
+      import('src/view/siteInventory/view/SiteInventoryViewPage'),
+    permissionRequired: permissions.siteInventoryRead,
     exact: true,
   },
 
@@ -600,6 +562,234 @@ const privateRoutes = [
     loader: () =>
       import('src/view/medicineCategoryEnum/view/MedicineCategoryEnumViewPage'),
     permissionRequired: permissions.medicineCategoryEnumRead,
+    exact: true,
+  },
+
+  {
+    path: '/vendor',
+    loader: () =>
+      import('src/view/vendor/list/VendorListPage'),
+    permissionRequired: permissions.vendorRead,
+    exact: true,
+  },
+  {
+    path: '/vendor/new',
+    loader: () =>
+      import('src/view/vendor/form/VendorFormPage'),
+    permissionRequired: permissions.vendorCreate,
+    exact: true,
+  },
+  {
+    path: '/vendor/importer',
+    loader: () =>
+      import(
+        'src/view/vendor/importer/VendorImporterPage'
+      ),
+    permissionRequired: permissions.vendorImport,
+    exact: true,
+  },
+  {
+    path: '/vendor/:id/edit',
+    loader: () =>
+      import('src/view/vendor/form/VendorFormPage'),
+    permissionRequired: permissions.vendorEdit,
+    exact: true,
+  },
+  {
+    path: '/vendor/:id',
+    loader: () =>
+      import('src/view/vendor/view/VendorViewPage'),
+    permissionRequired: permissions.vendorRead,
+    exact: true,
+  },
+
+  {
+    path: '/purchase-order',
+    loader: () =>
+      import('src/view/purchaseOrder/list/PurchaseOrderListPage'),
+    permissionRequired: permissions.purchaseOrderRead,
+    exact: true,
+  },
+  {
+    path: '/purchase-order/new',
+    loader: () =>
+      import('src/view/purchaseOrder/form/PurchaseOrderFormPage'),
+    permissionRequired: permissions.purchaseOrderCreate,
+    exact: true,
+  },
+  {
+    path: '/purchase-order/importer',
+    loader: () =>
+      import(
+        'src/view/purchaseOrder/importer/PurchaseOrderImporterPage'
+      ),
+    permissionRequired: permissions.purchaseOrderImport,
+    exact: true,
+  },
+  {
+    path: '/purchase-order/:id/edit',
+    loader: () =>
+      import('src/view/purchaseOrder/form/PurchaseOrderFormPage'),
+    permissionRequired: permissions.purchaseOrderEdit,
+    exact: true,
+  },
+  {
+    path: '/purchase-order/:id',
+    loader: () =>
+      import('src/view/purchaseOrder/view/PurchaseOrderViewPage'),
+    permissionRequired: permissions.purchaseOrderRead,
+    exact: true,
+  },
+
+  {
+    path: '/purchase-order-entry',
+    loader: () =>
+      import('src/view/purchaseOrderEntry/list/PurchaseOrderEntryListPage'),
+    permissionRequired: permissions.purchaseOrderEntryRead,
+    exact: true,
+  },
+  {
+    path: '/purchase-order-entry/new',
+    loader: () =>
+      import('src/view/purchaseOrderEntry/form/PurchaseOrderEntryFormPage'),
+    permissionRequired: permissions.purchaseOrderEntryCreate,
+    exact: true,
+  },
+  {
+    path: '/purchase-order-entry/importer',
+    loader: () =>
+      import(
+        'src/view/purchaseOrderEntry/importer/PurchaseOrderEntryImporterPage'
+      ),
+    permissionRequired: permissions.purchaseOrderEntryImport,
+    exact: true,
+  },
+  {
+    path: '/purchase-order-entry/:id/edit',
+    loader: () =>
+      import('src/view/purchaseOrderEntry/form/PurchaseOrderEntryFormPage'),
+    permissionRequired: permissions.purchaseOrderEntryEdit,
+    exact: true,
+  },
+  {
+    path: '/purchase-order-entry/:id',
+    loader: () =>
+      import('src/view/purchaseOrderEntry/view/PurchaseOrderEntryViewPage'),
+    permissionRequired: permissions.purchaseOrderEntryRead,
+    exact: true,
+  },
+
+  {
+    path: '/medicine-batch',
+    loader: () =>
+      import('src/view/medicineBatch/list/MedicineBatchListPage'),
+    permissionRequired: permissions.medicineBatchRead,
+    exact: true,
+  },
+  {
+    path: '/medicine-batch/new',
+    loader: () =>
+      import('src/view/medicineBatch/form/MedicineBatchFormPage'),
+    permissionRequired: permissions.medicineBatchCreate,
+    exact: true,
+  },
+  {
+    path: '/medicine-batch/importer',
+    loader: () =>
+      import(
+        'src/view/medicineBatch/importer/MedicineBatchImporterPage'
+      ),
+    permissionRequired: permissions.medicineBatchImport,
+    exact: true,
+  },
+  {
+    path: '/medicine-batch/:id/edit',
+    loader: () =>
+      import('src/view/medicineBatch/form/MedicineBatchFormPage'),
+    permissionRequired: permissions.medicineBatchEdit,
+    exact: true,
+  },
+  {
+    path: '/medicine-batch/:id',
+    loader: () =>
+      import('src/view/medicineBatch/view/MedicineBatchViewPage'),
+    permissionRequired: permissions.medicineBatchRead,
+    exact: true,
+  },
+
+  {
+    path: '/purchase-invoice',
+    loader: () =>
+      import('src/view/purchaseInvoice/list/PurchaseInvoiceListPage'),
+    permissionRequired: permissions.purchaseInvoiceRead,
+    exact: true,
+  },
+  {
+    path: '/purchase-invoice/new',
+    loader: () =>
+      import('src/view/purchaseInvoice/form/PurchaseInvoiceFormPage'),
+    permissionRequired: permissions.purchaseInvoiceCreate,
+    exact: true,
+  },
+  {
+    path: '/purchase-invoice/importer',
+    loader: () =>
+      import(
+        'src/view/purchaseInvoice/importer/PurchaseInvoiceImporterPage'
+      ),
+    permissionRequired: permissions.purchaseInvoiceImport,
+    exact: true,
+  },
+  {
+    path: '/purchase-invoice/:id/edit',
+    loader: () =>
+      import('src/view/purchaseInvoice/form/PurchaseInvoiceFormPage'),
+    permissionRequired: permissions.purchaseInvoiceEdit,
+    exact: true,
+  },
+  {
+    path: '/purchase-invoice/:id',
+    loader: () =>
+      import('src/view/purchaseInvoice/view/PurchaseInvoiceViewPage'),
+    permissionRequired: permissions.purchaseInvoiceRead,
+    exact: true,
+  },
+
+  {
+    path: '/transfer',
+    loader: () =>
+      import('src/view/transfer/list/TransferListPage'),
+    permissionRequired: permissions.transferRead,
+    exact: true,
+  },
+  {
+    path: '/transfer/new',
+    loader: () =>
+      import('src/view/transfer/form/TransferFormPage'),
+    permissionRequired: permissions.transferCreate,
+    exact: true,
+  },
+  {
+    path: '/transfer/importer',
+    loader: () =>
+      import(
+        'src/view/transfer/importer/TransferImporterPage'
+      ),
+    permissionRequired: permissions.transferImport,
+    exact: true,
+  },
+  {
+    path: '/transfer/:id/edit',
+    loader: () =>
+      import('src/view/transfer/form/TransferFormPage'),
+    permissionRequired: permissions.transferEdit,
+    exact: true,
+  },
+  {
+    path: '/transfer/:id',
+    loader: () =>
+      import('src/view/transfer/view/TransferViewPage'),
+    permissionRequired: permissions.transferRead,
     exact: true,
   },
 ].filter(Boolean);

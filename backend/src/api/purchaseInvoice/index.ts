@@ -1,0 +1,30 @@
+export default (app) => {
+  app.post(
+    `/tenant/:tenantId/purchase-invoice`,
+    require('./purchaseInvoiceCreate').default,
+  );
+  app.put(
+    `/tenant/:tenantId/purchase-invoice/:id`,
+    require('./purchaseInvoiceUpdate').default,
+  );
+  app.post(
+    `/tenant/:tenantId/purchase-invoice/import`,
+    require('./purchaseInvoiceImport').default,
+  );
+  app.delete(
+    `/tenant/:tenantId/purchase-invoice`,
+    require('./purchaseInvoiceDestroy').default,
+  );
+  app.get(
+    `/tenant/:tenantId/purchase-invoice/autocomplete`,
+    require('./purchaseInvoiceAutocomplete').default,
+  );
+  app.get(
+    `/tenant/:tenantId/purchase-invoice`,
+    require('./purchaseInvoiceList').default,
+  );
+  app.get(
+    `/tenant/:tenantId/purchase-invoice/:id`,
+    require('./purchaseInvoiceFind').default,
+  );
+};

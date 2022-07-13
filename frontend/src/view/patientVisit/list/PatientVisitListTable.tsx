@@ -27,6 +27,7 @@ import PatientListItem from 'src/view/patient/list/PatientListItem';
 import DoctorListItem from 'src/view/doctor/list/DoctorListItem';
 import SymptomsEnumListItem from 'src/view/symptomsEnum/list/SymptomsEnumListItem';
 import MedicineEnumListItem from 'src/view/medicineEnum/list/MedicineEnumListItem';
+import SiteInventoryListItem from 'src/view/siteInventory/list/SiteInventoryListItem';
 
 function PatientVisitListTable(props) {
   const [
@@ -167,6 +168,26 @@ function PatientVisitListTable(props) {
                 label={i18n(
                   'entities.patientVisit.fields.medicine2',
                 )}
+              />
+              <TableCellCustom
+                label={i18n(
+                  'entities.patientVisit.fields.med1BatchDetails',
+                )}
+              />
+              <TableCellCustom
+                label={i18n(
+                  'entities.patientVisit.fields.med2BatchDetails',
+                )}
+              />
+              <TableCellCustom
+                label={i18n(
+                  'entities.patientVisit.fields.med3BatchDetails',
+                )}
+              />
+              <TableCellCustom
+                label={i18n(
+                  'entities.patientVisit.fields.med4BatchDetails',
+                )}
               />              
               <TableCellCustom size="md" />
             </TableRow>
@@ -225,6 +246,18 @@ function PatientVisitListTable(props) {
                 </TableCell>
                 <TableCell>
                   <MedicineEnumListItem value={row.medicine2} />
+                </TableCell>
+                <TableCell>
+                  <SiteInventoryListItem value={row.med1BatchDetails} />
+                </TableCell>
+                <TableCell>
+                  <SiteInventoryListItem value={row.med2BatchDetails} />
+                </TableCell>
+                <TableCell>
+                  <SiteInventoryListItem value={row.med3BatchDetails} />
+                </TableCell>
+                <TableCell>
+                  <SiteInventoryListItem value={row.med4BatchDetails} />
                 </TableCell>                  
                   <TableCell>
                     <Box

@@ -137,14 +137,7 @@ const en = {
         }
       }
     },
-    medicineSupplies: {
-      errors: {
-        unique: {
-
-        }
-      }
-    },
-    medicineInventory: {
+    siteInventory: {
       errors: {
         unique: {
 
@@ -176,6 +169,50 @@ const en = {
       errors: {
         unique: {
           categoryName: 'Category Name must be unique',
+        }
+      }
+    },
+    vendor: {
+      errors: {
+        unique: {
+          vendorName: 'Vendor Name must be unique',
+          phone: 'Phone must be unique',
+          email: 'Email must be unique',
+        }
+      }
+    },
+    purchaseOrder: {
+      errors: {
+        unique: {
+          purchaseOrderLookup: 'PurchaseOrderLookup must be unique',
+        }
+      }
+    },
+    purchaseOrderEntry: {
+      errors: {
+        unique: {
+
+        }
+      }
+    },
+    medicineBatch: {
+      errors: {
+        unique: {
+          medicineBatchLookup: 'Medicine Batch Lookup must be unique',
+        }
+      }
+    },
+    purchaseInvoice: {
+      errors: {
+        unique: {
+
+        }
+      }
+    },
+    transfer: {
+      errors: {
+        unique: {
+
         }
       }
     },

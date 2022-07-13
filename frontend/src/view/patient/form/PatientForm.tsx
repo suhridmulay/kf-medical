@@ -182,7 +182,8 @@ function PatientForm(props) {
             <Grid item lg={7} md={8} sm={12} xs={12}>
               <InputFormItem
                 name="fullName"
-                label={i18n('entities.patient.fields.fullName')}  
+                label={i18n('entities.patient.fields.fullName')}
+              hint={i18n('entities.patient.hints.fullName')}  
                 required={false}
               />
             </Grid>

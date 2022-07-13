@@ -1,0 +1,30 @@
+export default (app) => {
+  app.post(
+    `/tenant/:tenantId/medicine-batch`,
+    require('./medicineBatchCreate').default,
+  );
+  app.put(
+    `/tenant/:tenantId/medicine-batch/:id`,
+    require('./medicineBatchUpdate').default,
+  );
+  app.post(
+    `/tenant/:tenantId/medicine-batch/import`,
+    require('./medicineBatchImport').default,
+  );
+  app.delete(
+    `/tenant/:tenantId/medicine-batch`,
+    require('./medicineBatchDestroy').default,
+  );
+  app.get(
+    `/tenant/:tenantId/medicine-batch/autocomplete`,
+    require('./medicineBatchAutocomplete').default,
+  );
+  app.get(
+    `/tenant/:tenantId/medicine-batch`,
+    require('./medicineBatchList').default,
+  );
+  app.get(
+    `/tenant/:tenantId/medicine-batch/:id`,
+    require('./medicineBatchFind').default,
+  );
+};
