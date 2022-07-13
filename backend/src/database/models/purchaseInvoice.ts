@@ -10,9 +10,10 @@ export default function (sequelize) {
         primaryKey: true,
       },
       invoiceNumber: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(255),
         allowNull: false,
         validate: {
+          len: [2, 255],
           notEmpty: true,
         }
       },
@@ -62,7 +63,10 @@ export default function (sequelize) {
         },
       },
       paymentDetails: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(255),
+        validate: {
+          len: [0, 255],
+        }
       },
       importHash: {
         type: DataTypes.STRING(255),

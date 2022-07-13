@@ -186,7 +186,7 @@ const es = {
     purchaseOrder: {
       errors: {
         unique: {
-
+          purchaseOrderLookup: 'PurchaseOrderLookup debe ser único',
         }
       }
     },
@@ -200,7 +200,7 @@ const es = {
     medicineBatch: {
       errors: {
         unique: {
-
+          medicineBatchLookup: 'Medicine Batch Lookup debe ser único',
         }
       }
     },

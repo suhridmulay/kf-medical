@@ -182,7 +182,7 @@ const ptBR = {
     purchaseOrder: {
       errors: {
         unique: {
-
+          purchaseOrderLookup: 'PurchaseOrderLookup deve ser único',
         }
       }
     },
@@ -196,7 +196,7 @@ const ptBR = {
     medicineBatch: {
       errors: {
         unique: {
-
+          medicineBatchLookup: 'Medicine Batch Lookup deve ser único',
         }
       }
     },

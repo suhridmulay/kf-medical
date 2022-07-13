@@ -66,7 +66,9 @@ export default [
     label: i18n('entities.purchaseOrder.fields.notes'),
     schema: schemas.string(
       i18n('entities.purchaseOrder.fields.notes'),
-      {},
+      {
+        "max": 255
+      },
     ),
   },
   {
@@ -75,7 +77,9 @@ export default [
     schema: schemas.string(
       i18n('entities.purchaseOrder.fields.purchaseOrderLookup'),
       {
-        "required": true
+        "required": true,
+        "max": 255,
+        "min": 5
       },
     ),
   },

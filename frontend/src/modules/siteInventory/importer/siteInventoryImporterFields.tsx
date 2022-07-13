@@ -7,7 +7,9 @@ export default [
     label: i18n('entities.siteInventory.fields.siteBatchIdentifier'),
     schema: schemas.string(
       i18n('entities.siteInventory.fields.siteBatchIdentifier'),
-      {},
+      {
+        "max": 255
+      },
     ),
   },
   {

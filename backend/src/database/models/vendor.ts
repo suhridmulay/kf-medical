@@ -10,9 +10,10 @@ export default function (sequelize) {
         primaryKey: true,
       },
       vendorName: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(255),
         allowNull: false,
         validate: {
+          len: [0, 255],
           notEmpty: true,
         }
       },

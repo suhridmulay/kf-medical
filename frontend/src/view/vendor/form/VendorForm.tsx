@@ -17,7 +17,8 @@ const schema = yup.object().shape({
   vendorName: yupFormSchemas.string(
     i18n('entities.vendor.fields.vendorName'),
     {
-      "required": true
+      "required": true,
+      "max": 255
     },
   ),
   address: yupFormSchemas.string(

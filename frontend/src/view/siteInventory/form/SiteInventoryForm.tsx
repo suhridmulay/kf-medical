@@ -22,7 +22,9 @@ import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete
 const schema = yup.object().shape({
   siteBatchIdentifier: yupFormSchemas.string(
     i18n('entities.siteInventory.fields.siteBatchIdentifier'),
-    {},
+    {
+      "max": 255
+    },
   ),
   center: yupFormSchemas.relationToOne(
     i18n('entities.siteInventory.fields.center'),

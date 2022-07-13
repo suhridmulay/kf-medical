@@ -39,7 +39,9 @@ const schema = yup.object().shape({
   batchNumber: yupFormSchemas.string(
     i18n('entities.medicineBatch.fields.batchNumber'),
     {
-      "required": true
+      "required": true,
+      "max": 100,
+      "min": 2
     },
   ),
   expiryDate: yupFormSchemas.date(
@@ -69,7 +71,9 @@ const schema = yup.object().shape({
   ),
   description: yupFormSchemas.string(
     i18n('entities.medicineBatch.fields.description'),
-    {},
+    {
+      "max": 255
+    },
   ),
   purchaseOrderNumber: yupFormSchemas.integer(
     i18n('entities.medicineBatch.fields.purchaseOrderNumber'),
@@ -81,7 +85,11 @@ const schema = yup.object().shape({
   ),
   medicineBatchLookup: yupFormSchemas.string(
     i18n('entities.medicineBatch.fields.medicineBatchLookup'),
-    {},
+    {
+      "max": 255,
+      "required": true,
+      "min": 5
+    },
   ),
 });
 
@@ -215,7 +223,7 @@ function MedicineBatchForm(props) {
                 name="medicineBatchLookup"
                 label={i18n('entities.medicineBatch.fields.medicineBatchLookup')}
               hint={i18n('entities.medicineBatch.hints.medicineBatchLookup')}  
-                required={false}
+                required={true}
               />
             </Grid>
           </Grid>

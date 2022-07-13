@@ -184,7 +184,7 @@ const en = {
     purchaseOrder: {
       errors: {
         unique: {
-
+          purchaseOrderLookup: 'PurchaseOrderLookup must be unique',
         }
       }
     },
@@ -198,7 +198,7 @@ const en = {
     medicineBatch: {
       errors: {
         unique: {
-
+          medicineBatchLookup: 'Medicine Batch Lookup must be unique',
         }
       }
     },

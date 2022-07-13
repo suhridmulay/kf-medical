@@ -25,7 +25,9 @@ const schema = yup.object().shape({
   invoiceNumber: yupFormSchemas.string(
     i18n('entities.purchaseInvoice.fields.invoiceNumber'),
     {
-      "required": true
+      "required": true,
+      "max": 255,
+      "min": 2
     },
   ),
   invoiceAmount: yupFormSchemas.decimal(
@@ -61,7 +63,9 @@ const schema = yup.object().shape({
   ),
   paymentDetails: yupFormSchemas.string(
     i18n('entities.purchaseInvoice.fields.paymentDetails'),
-    {},
+    {
+      "max": 255
+    },
   ),
   batches: yupFormSchemas.relationToMany(
     i18n('entities.purchaseInvoice.fields.batches'),

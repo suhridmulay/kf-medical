@@ -52,12 +52,16 @@ const schema = yup.object().shape({
   ),
   notes: yupFormSchemas.string(
     i18n('entities.purchaseOrder.fields.notes'),
-    {},
+    {
+      "max": 255
+    },
   ),
   purchaseOrderLookup: yupFormSchemas.string(
     i18n('entities.purchaseOrder.fields.purchaseOrderLookup'),
     {
-      "required": true
+      "required": true,
+      "max": 255,
+      "min": 5
     },
   ),
 });

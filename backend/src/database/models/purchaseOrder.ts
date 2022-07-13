@@ -35,12 +35,16 @@ export default function (sequelize) {
         }
       },
       notes: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(255),
+        validate: {
+          len: [0, 255],
+        }
       },
       purchaseOrderLookup: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(255),
         allowNull: false,
         validate: {
+          len: [5, 255],
           notEmpty: true,
         }
       },
@@ -61,7 +65,13 @@ export default function (sequelize) {
             deletedAt: null,
           },
         },
-
+        {
+          unique: true,
+          fields: ['purchaseOrderLookup', 'tenantId'],
+          where: {
+            deletedAt: null,
+          },
+        },
       ],
       timestamps: true,
       paranoid: true,

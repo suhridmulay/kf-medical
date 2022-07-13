@@ -35,7 +35,10 @@ const schema = yup.object().shape({
   ),
   medicineName: yupFormSchemas.string(
     i18n('entities.transfer.fields.medicineName'),
-    {},
+    {
+      "max": 255,
+      "required": true
+    },
   ),
   expiryDate: yupFormSchemas.date(
     i18n('entities.transfer.fields.expiryDate'),
@@ -120,7 +123,7 @@ function TransferForm(props) {
                 name="medicineName"
                 label={i18n('entities.transfer.fields.medicineName')}
               hint={i18n('entities.transfer.hints.medicineName')}  
-                required={false}
+                required={true}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

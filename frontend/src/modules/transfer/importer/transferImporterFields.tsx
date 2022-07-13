@@ -33,7 +33,10 @@ export default [
     label: i18n('entities.transfer.fields.medicineName'),
     schema: schemas.string(
       i18n('entities.transfer.fields.medicineName'),
-      {},
+      {
+        "max": 255,
+        "required": true
+      },
     ),
   },
   {

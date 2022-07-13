@@ -17,9 +17,10 @@ export default function (sequelize) {
         }
       },
       batchNumber: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(100),
         allowNull: false,
         validate: {
+          len: [2, 100],
           notEmpty: true,
         }
       },
@@ -56,13 +57,21 @@ export default function (sequelize) {
         }
       },
       description: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(255),
+        validate: {
+          len: [0, 255],
+        }
       },
       purchaseOrderNumber: {
         type: DataTypes.INTEGER,
       },
       medicineBatchLookup: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(255),
+        allowNull: false,
+        validate: {
+          len: [5, 255],
+          notEmpty: true,
+        }
       },
       importHash: {
         type: DataTypes.STRING(255),
@@ -81,7 +90,13 @@ export default function (sequelize) {
             deletedAt: null,
           },
         },
-
+        {
+          unique: true,
+          fields: ['medicineBatchLookup', 'tenantId'],
+          where: {
+            deletedAt: null,
+          },
+        },
       ],
       timestamps: true,
       paranoid: true,

@@ -36,7 +36,9 @@ export default [
     schema: schemas.string(
       i18n('entities.medicineBatch.fields.batchNumber'),
       {
-        "required": true
+        "required": true,
+        "max": 100,
+        "min": 2
       },
     ),
   },
@@ -87,7 +89,9 @@ export default [
     label: i18n('entities.medicineBatch.fields.description'),
     schema: schemas.string(
       i18n('entities.medicineBatch.fields.description'),
-      {},
+      {
+        "max": 255
+      },
     ),
   },
   {
@@ -111,7 +115,11 @@ export default [
     label: i18n('entities.medicineBatch.fields.medicineBatchLookup'),
     schema: schemas.string(
       i18n('entities.medicineBatch.fields.medicineBatchLookup'),
-      {},
+      {
+        "max": 255,
+        "required": true,
+        "min": 5
+      },
     ),
   },
 ];

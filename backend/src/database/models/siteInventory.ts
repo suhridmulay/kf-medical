@@ -10,7 +10,10 @@ export default function (sequelize) {
         primaryKey: true,
       },
       siteBatchIdentifier: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(255),
+        validate: {
+          len: [0, 255],
+        }
       },
       inventoryAddDate: {
         type: DataTypes.DATEONLY,

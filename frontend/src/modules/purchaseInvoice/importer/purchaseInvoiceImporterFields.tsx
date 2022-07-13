@@ -16,7 +16,9 @@ export default [
     schema: schemas.string(
       i18n('entities.purchaseInvoice.fields.invoiceNumber'),
       {
-        "required": true
+        "required": true,
+        "max": 255,
+        "min": 2
       },
     ),
   },
@@ -78,7 +80,9 @@ export default [
     label: i18n('entities.purchaseInvoice.fields.paymentDetails'),
     schema: schemas.string(
       i18n('entities.purchaseInvoice.fields.paymentDetails'),
-      {},
+      {
+        "max": 255
+      },
     ),
   },
   {
