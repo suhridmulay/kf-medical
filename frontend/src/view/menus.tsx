@@ -98,17 +98,10 @@ export default [
   },
 
   {
-    path: '/medicine-supplies',
-    permissionRequired: permissions.medicineSuppliesRead,
+    path: '/site-inventory',
+    permissionRequired: permissions.siteInventoryRead,
     icon: <ChevronRightIcon />,
-    label: i18n('entities.medicineSupplies.menu'),
-  },
-
-  {
-    path: '/medicine-inventory',
-    permissionRequired: permissions.medicineInventoryRead,
-    icon: <ChevronRightIcon />,
-    label: i18n('entities.medicineInventory.menu'),
+    label: i18n('entities.siteInventory.menu'),
   },
 
   {
@@ -137,5 +130,47 @@ export default [
     permissionRequired: permissions.medicineCategoryEnumRead,
     icon: <ChevronRightIcon />,
     label: i18n('entities.medicineCategoryEnum.menu'),
+  },
+
+  {
+    path: '/vendor',
+    permissionRequired: permissions.vendorRead,
+    icon: <ChevronRightIcon />,
+    label: i18n('entities.vendor.menu'),
+  },
+
+  {
+    path: '/purchase-order',
+    permissionRequired: permissions.purchaseOrderRead,
+    icon: <ChevronRightIcon />,
+    label: i18n('entities.purchaseOrder.menu'),
+  },
+
+  {
+    path: '/purchase-order-entry',
+    permissionRequired: permissions.purchaseOrderEntryRead,
+    icon: <ChevronRightIcon />,
+    label: i18n('entities.purchaseOrderEntry.menu'),
+  },
+
+  {
+    path: '/medicine-batch',
+    permissionRequired: permissions.medicineBatchRead,
+    icon: <ChevronRightIcon />,
+    label: i18n('entities.medicineBatch.menu'),
+  },
+
+  {
+    path: '/purchase-invoice',
+    permissionRequired: permissions.purchaseInvoiceRead,
+    icon: <ChevronRightIcon />,
+    label: i18n('entities.purchaseInvoice.menu'),
+  },
+
+  {
+    path: '/transfer',
+    permissionRequired: permissions.transferRead,
+    icon: <ChevronRightIcon />,
+    label: i18n('entities.transfer.menu'),
   },
 ].filter(Boolean);

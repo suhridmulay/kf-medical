@@ -139,14 +139,7 @@ const es = {
         }
       }
     },
-    medicineSupplies: {
-      errors: {
-        unique: {
-
-        }
-      }
-    },
-    medicineInventory: {
+    siteInventory: {
       errors: {
         unique: {
 
@@ -178,6 +171,50 @@ const es = {
       errors: {
         unique: {
           categoryName: 'Category Name debe ser único',
+        }
+      }
+    },
+    vendor: {
+      errors: {
+        unique: {
+          vendorName: 'Vendor Name debe ser único',
+          phone: 'Phone debe ser único',
+          email: 'Email debe ser único',
+        }
+      }
+    },
+    purchaseOrder: {
+      errors: {
+        unique: {
+
+        }
+      }
+    },
+    purchaseOrderEntry: {
+      errors: {
+        unique: {
+
+        }
+      }
+    },
+    medicineBatch: {
+      errors: {
+        unique: {
+
+        }
+      }
+    },
+    purchaseInvoice: {
+      errors: {
+        unique: {
+
+        }
+      }
+    },
+    transfer: {
+      errors: {
+        unique: {
+
         }
       }
     },

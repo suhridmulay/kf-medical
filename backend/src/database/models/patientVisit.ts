@@ -286,6 +286,26 @@ export default function (sequelize) {
       constraints: false,
     });
 
+    models.patientVisit.belongsTo(models.siteInventory, {
+      as: 'med1BatchDetails',
+      constraints: false,
+    });
+
+    models.patientVisit.belongsTo(models.siteInventory, {
+      as: 'med2BatchDetails',
+      constraints: false,
+    });
+
+    models.patientVisit.belongsTo(models.siteInventory, {
+      as: 'med3BatchDetails',
+      constraints: false,
+    });
+
+    models.patientVisit.belongsTo(models.siteInventory, {
+      as: 'med4BatchDetails',
+      constraints: false,
+    });
+
 
     
     models.patientVisit.belongsTo(models.tenant, {

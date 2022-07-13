@@ -75,12 +75,17 @@ require('./medicineEnum').default(routes);
 require('./diagnosticEnum').default(routes);
 require('./doctor').default(routes);
 require('./patientDocument').default(routes);
-require('./medicineSupplies').default(routes);
-require('./medicineInventory').default(routes);
+require('./siteInventory').default(routes);
 require('./symptomsEnum').default(routes);
 require('./medicalHistory').default(routes);
 require('./chronicDiseaseEnum').default(routes);
 require('./medicineCategoryEnum').default(routes);
+require('./vendor').default(routes);
+require('./purchaseOrder').default(routes);
+require('./purchaseOrderEntry').default(routes);
+require('./medicineBatch').default(routes);
+require('./purchaseInvoice').default(routes);
+require('./transfer').default(routes);
 
 // Loads the Tenant if the :tenantId param is passed
 routes.param('tenantId', tenantMiddleware);

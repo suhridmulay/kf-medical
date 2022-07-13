@@ -401,82 +401,42 @@ class Permissions {
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
       },
 
-      medicineSuppliesImport: {
-        id: 'medicineSuppliesImport',
+      siteInventoryImport: {
+        id: 'siteInventoryImport',
         allowedRoles: [roles.admin],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
       },
-      medicineSuppliesCreate: {
-        id: 'medicineSuppliesCreate',
-        allowedRoles: [roles.admin],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
-        allowedStorage: [
-
-        ],
-      },
-      medicineSuppliesEdit: {
-        id: 'medicineSuppliesEdit',
+      siteInventoryCreate: {
+        id: 'siteInventoryCreate',
         allowedRoles: [roles.admin],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
         allowedStorage: [
 
         ],
       },
-      medicineSuppliesDestroy: {
-        id: 'medicineSuppliesDestroy',
+      siteInventoryEdit: {
+        id: 'siteInventoryEdit',
         allowedRoles: [roles.admin],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
         allowedStorage: [
 
         ],
       },
-      medicineSuppliesRead: {
-        id: 'medicineSuppliesRead',
+      siteInventoryDestroy: {
+        id: 'siteInventoryDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      siteInventoryRead: {
+        id: 'siteInventoryRead',
         allowedRoles: [roles.admin, roles.custom],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
       },
-      medicineSuppliesAutocomplete: {
-        id: 'medicineSuppliesAutocomplete',
-        allowedRoles: [roles.admin, roles.custom],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
-      },
-
-      medicineInventoryImport: {
-        id: 'medicineInventoryImport',
-        allowedRoles: [roles.admin],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
-      },
-      medicineInventoryCreate: {
-        id: 'medicineInventoryCreate',
-        allowedRoles: [roles.admin],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
-        allowedStorage: [
-
-        ],
-      },
-      medicineInventoryEdit: {
-        id: 'medicineInventoryEdit',
-        allowedRoles: [roles.admin],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
-        allowedStorage: [
-
-        ],
-      },
-      medicineInventoryDestroy: {
-        id: 'medicineInventoryDestroy',
-        allowedRoles: [roles.admin],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
-        allowedStorage: [
-
-        ],
-      },
-      medicineInventoryRead: {
-        id: 'medicineInventoryRead',
-        allowedRoles: [roles.admin, roles.custom],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
-      },
-      medicineInventoryAutocomplete: {
-        id: 'medicineInventoryAutocomplete',
+      siteInventoryAutocomplete: {
+        id: 'siteInventoryAutocomplete',
         allowedRoles: [roles.admin, roles.custom],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
       },
@@ -637,6 +597,246 @@ class Permissions {
       },
       medicineCategoryEnumAutocomplete: {
         id: 'medicineCategoryEnumAutocomplete',
+        allowedRoles: [roles.admin, roles.custom],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+
+      vendorImport: {
+        id: 'vendorImport',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+      vendorCreate: {
+        id: 'vendorCreate',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      vendorEdit: {
+        id: 'vendorEdit',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      vendorDestroy: {
+        id: 'vendorDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      vendorRead: {
+        id: 'vendorRead',
+        allowedRoles: [roles.admin, roles.custom],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+      vendorAutocomplete: {
+        id: 'vendorAutocomplete',
+        allowedRoles: [roles.admin, roles.custom],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+
+      purchaseOrderImport: {
+        id: 'purchaseOrderImport',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+      purchaseOrderCreate: {
+        id: 'purchaseOrderCreate',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      purchaseOrderEdit: {
+        id: 'purchaseOrderEdit',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      purchaseOrderDestroy: {
+        id: 'purchaseOrderDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      purchaseOrderRead: {
+        id: 'purchaseOrderRead',
+        allowedRoles: [roles.admin, roles.custom],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+      purchaseOrderAutocomplete: {
+        id: 'purchaseOrderAutocomplete',
+        allowedRoles: [roles.admin, roles.custom],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+
+      purchaseOrderEntryImport: {
+        id: 'purchaseOrderEntryImport',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+      purchaseOrderEntryCreate: {
+        id: 'purchaseOrderEntryCreate',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      purchaseOrderEntryEdit: {
+        id: 'purchaseOrderEntryEdit',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      purchaseOrderEntryDestroy: {
+        id: 'purchaseOrderEntryDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      purchaseOrderEntryRead: {
+        id: 'purchaseOrderEntryRead',
+        allowedRoles: [roles.admin, roles.custom],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+      purchaseOrderEntryAutocomplete: {
+        id: 'purchaseOrderEntryAutocomplete',
+        allowedRoles: [roles.admin, roles.custom],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+
+      medicineBatchImport: {
+        id: 'medicineBatchImport',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+      medicineBatchCreate: {
+        id: 'medicineBatchCreate',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      medicineBatchEdit: {
+        id: 'medicineBatchEdit',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      medicineBatchDestroy: {
+        id: 'medicineBatchDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      medicineBatchRead: {
+        id: 'medicineBatchRead',
+        allowedRoles: [roles.admin, roles.custom],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+      medicineBatchAutocomplete: {
+        id: 'medicineBatchAutocomplete',
+        allowedRoles: [roles.admin, roles.custom],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+
+      purchaseInvoiceImport: {
+        id: 'purchaseInvoiceImport',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+      purchaseInvoiceCreate: {
+        id: 'purchaseInvoiceCreate',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      purchaseInvoiceEdit: {
+        id: 'purchaseInvoiceEdit',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      purchaseInvoiceDestroy: {
+        id: 'purchaseInvoiceDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      purchaseInvoiceRead: {
+        id: 'purchaseInvoiceRead',
+        allowedRoles: [roles.admin, roles.custom],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+      purchaseInvoiceAutocomplete: {
+        id: 'purchaseInvoiceAutocomplete',
+        allowedRoles: [roles.admin, roles.custom],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+
+      transferImport: {
+        id: 'transferImport',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+      transferCreate: {
+        id: 'transferCreate',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      transferEdit: {
+        id: 'transferEdit',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      transferDestroy: {
+        id: 'transferDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [
+
+        ],
+      },
+      transferRead: {
+        id: 'transferRead',
+        allowedRoles: [roles.admin, roles.custom],
+        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+      },
+      transferAutocomplete: {
+        id: 'transferAutocomplete',
         allowedRoles: [roles.admin, roles.custom],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
       },
