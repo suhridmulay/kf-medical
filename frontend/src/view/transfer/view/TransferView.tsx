@@ -27,6 +27,11 @@ function TransferView(props) {
         />
 
         <TextViewItem
+          label={i18n('entities.transfer.fields.transferQuantity')}
+          value={record.transferQuantity}
+        />
+
+        <TextViewItem
           label={i18n('entities.transfer.fields.medicineName')}
           value={record.medicineName}
         />
@@ -34,11 +39,6 @@ function TransferView(props) {
         <TextViewItem
           label={i18n('entities.transfer.fields.expiryDate')}
           value={record.expiryDate}
-        />
-
-        <TextViewItem
-          label={i18n('entities.transfer.fields.transferQuantity')}
-          value={record.transferQuantity}
         />
 
         <TextViewItem

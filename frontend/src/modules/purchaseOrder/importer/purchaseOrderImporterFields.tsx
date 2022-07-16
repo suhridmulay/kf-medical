@@ -40,9 +40,7 @@ export default [
     label: i18n('entities.purchaseOrder.fields.submittedTotalCost'),
     schema: schemas.decimal(
       i18n('entities.purchaseOrder.fields.submittedTotalCost'),
-      {
-        "required": true
-      },
+      {},
     ),
   },
   {
@@ -77,7 +75,6 @@ export default [
     schema: schemas.string(
       i18n('entities.purchaseOrder.fields.purchaseOrderLookup'),
       {
-        "required": true,
         "max": 255,
         "min": 5
       },

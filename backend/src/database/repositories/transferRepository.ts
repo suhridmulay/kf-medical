@@ -26,9 +26,9 @@ class TransferRepository {
     const record = await options.database.transfer.create(
       {
         ...lodash.pick(data, [
+          'transferQuantity',
           'medicineName',
           'expiryDate',
-          'transferQuantity',
           'transferDate',          
           'importHash',
         ]),
@@ -89,9 +89,9 @@ class TransferRepository {
     record = await record.update(
       {
         ...lodash.pick(data, [
+          'transferQuantity',
           'medicineName',
           'expiryDate',
-          'transferQuantity',
           'transferDate',          
           'importHash',
         ]),
@@ -314,6 +314,26 @@ class TransferRepository {
         });
       }
 
+      if (filter.transferQuantityRange) {
+        const [start, end] = filter.transferQuantityRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          whereAnd.push({
+            transferQuantity: {
+              [Op.gte]: start,
+            },
+          });
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          whereAnd.push({
+            transferQuantity: {
+              [Op.lte]: end,
+            },
+          });
+        }
+      }
+
       if (filter.medicineName) {
         whereAnd.push(
           SequelizeFilterUtils.ilikeIncludes(
@@ -338,26 +358,6 @@ class TransferRepository {
         if (end !== undefined && end !== null && end !== '') {
           whereAnd.push({
             expiryDate: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.transferQuantityRange) {
-        const [start, end] = filter.transferQuantityRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            transferQuantity: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            transferQuantity: {
               [Op.lte]: end,
             },
           });

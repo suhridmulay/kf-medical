@@ -50,7 +50,6 @@ export default [
     schema: schemas.decimal(
       i18n('entities.purchaseInvoice.fields.invoiceTotal'),
       {
-        "required": true,
         "scale": 2
       },
     ),
@@ -60,9 +59,7 @@ export default [
     label: i18n('entities.purchaseInvoice.fields.invoiceDate'),
     schema: schemas.date(
       i18n('entities.purchaseInvoice.fields.invoiceDate'),
-      {
-        "required": true
-      },
+      {},
     ),
    render: (value) => value && value instanceof Date ? moment(value).format('YYYY-MM-DD') : value,
   },

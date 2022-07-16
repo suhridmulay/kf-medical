@@ -7,9 +7,7 @@ export default [
     label: i18n('entities.purchaseOrderEntry.fields.purchaseOrder'),
     schema: schemas.relationToOne(
       i18n('entities.purchaseOrderEntry.fields.purchaseOrder'),
-      {
-        "required": true
-      },
+      {},
     ),
   },
   {
@@ -50,8 +48,7 @@ export default [
     schema: schemas.decimal(
       i18n('entities.purchaseOrderEntry.fields.totalCost'),
       {
-        "scale": 2,
-        "required": true
+        "scale": 2
       },
     ),
   },

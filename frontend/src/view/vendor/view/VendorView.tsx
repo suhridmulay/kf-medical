@@ -25,6 +25,11 @@ function VendorView(props) {
         />
 
         <TextViewItem
+          label={i18n('entities.vendor.fields.fax')}
+          value={record.fax}
+        />
+
+        <TextViewItem
           label={i18n('entities.vendor.fields.email')}
           value={record.email}
         />

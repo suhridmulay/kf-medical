@@ -38,9 +38,7 @@ const schema = yup.object().shape({
   ),
   submittedTotalCost: yupFormSchemas.decimal(
     i18n('entities.purchaseOrder.fields.submittedTotalCost'),
-    {
-      "required": true
-    },
+    {},
   ),
   entries: yupFormSchemas.relationToMany(
     i18n('entities.purchaseOrder.fields.entries'),
@@ -59,7 +57,6 @@ const schema = yup.object().shape({
   purchaseOrderLookup: yupFormSchemas.string(
     i18n('entities.purchaseOrder.fields.purchaseOrderLookup'),
     {
-      "required": true,
       "max": 255,
       "min": 5
     },
@@ -142,7 +139,7 @@ function PurchaseOrderForm(props) {
               <InputFormItem
                 name="submittedTotalCost"
                 label={i18n('entities.purchaseOrder.fields.submittedTotalCost')}  
-                required={true}
+                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
@@ -175,7 +172,7 @@ function PurchaseOrderForm(props) {
                 name="purchaseOrderLookup"
                 label={i18n('entities.purchaseOrder.fields.purchaseOrderLookup')}
               hint={i18n('entities.purchaseOrder.hints.purchaseOrderLookup')}  
-                required={true}
+                required={false}
               />
             </Grid>
           </Grid>

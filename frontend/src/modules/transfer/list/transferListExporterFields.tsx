@@ -22,16 +22,16 @@ export default [
     render: exporterRenders.relationToOne(),
   },
   {
+    name: 'transferQuantity',
+    label: i18n('entities.transfer.fields.transferQuantity'),
+  },
+  {
     name: 'medicineName',
     label: i18n('entities.transfer.fields.medicineName'),
   },
   {
     name: 'expiryDate',
     label: i18n('entities.transfer.fields.expiryDate'),
-  },
-  {
-    name: 'transferQuantity',
-    label: i18n('entities.transfer.fields.transferQuantity'),
   },
   {
     name: 'transferDate',

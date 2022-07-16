@@ -27,28 +27,31 @@ const schema = yup.object().shape({
   ),
   toCenter: yupFormSchemas.relationToOne(
     i18n('entities.transfer.fields.toCenter'),
-    {},
-  ),
-  medicineBatch: yupFormSchemas.relationToOne(
-    i18n('entities.transfer.fields.medicineBatch'),
-    {},
-  ),
-  medicineName: yupFormSchemas.string(
-    i18n('entities.transfer.fields.medicineName'),
     {
-      "max": 255,
       "required": true
     },
   ),
-  expiryDate: yupFormSchemas.date(
-    i18n('entities.transfer.fields.expiryDate'),
-    {},
+  medicineBatch: yupFormSchemas.relationToOne(
+    i18n('entities.transfer.fields.medicineBatch'),
+    {
+      "required": true
+    },
   ),
   transferQuantity: yupFormSchemas.integer(
     i18n('entities.transfer.fields.transferQuantity'),
     {
       "required": true
     },
+  ),
+  medicineName: yupFormSchemas.string(
+    i18n('entities.transfer.fields.medicineName'),
+    {
+      "max": 255
+    },
+  ),
+  expiryDate: yupFormSchemas.date(
+    i18n('entities.transfer.fields.expiryDate'),
+    {},
   ),
   transferDate: yupFormSchemas.date(
     i18n('entities.transfer.fields.transferDate'),
@@ -64,9 +67,9 @@ function TransferForm(props) {
       fromCenter: record.fromCenter,
       toCenter: record.toCenter,
       medicineBatch: record.medicineBatch,
+      transferQuantity: record.transferQuantity,
       medicineName: record.medicineName,
       expiryDate: record.expiryDate ? moment(record.expiryDate, 'YYYY-MM-DD') : null,
-      transferQuantity: record.transferQuantity,
       transferDate: record.transferDate ? moment(record.transferDate, 'YYYY-MM-DD') : null,
     };
   });
@@ -106,7 +109,7 @@ function TransferForm(props) {
               <HealthCenterAutocompleteFormItem  
                 name="toCenter"
                 label={i18n('entities.transfer.fields.toCenter')}
-                required={false}
+                required={true}
                 showCreate={!props.modal}
               />
             </Grid>
@@ -114,8 +117,15 @@ function TransferForm(props) {
               <MedicineBatchAutocompleteFormItem  
                 name="medicineBatch"
                 label={i18n('entities.transfer.fields.medicineBatch')}
-                required={false}
+                required={true}
                 showCreate={!props.modal}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputNumberFormItem
+                name="transferQuantity"
+                label={i18n('entities.transfer.fields.transferQuantity')}  
+                required={true}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
@@ -123,7 +133,7 @@ function TransferForm(props) {
                 name="medicineName"
                 label={i18n('entities.transfer.fields.medicineName')}
               hint={i18n('entities.transfer.hints.medicineName')}  
-                required={true}
+                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
@@ -132,13 +142,6 @@ function TransferForm(props) {
                 label={i18n('entities.transfer.fields.expiryDate')}
               hint={i18n('entities.transfer.hints.expiryDate')}
                 required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputNumberFormItem
-                name="transferQuantity"
-                label={i18n('entities.transfer.fields.transferQuantity')}  
-                required={true}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

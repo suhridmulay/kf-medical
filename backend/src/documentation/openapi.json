@@ -5959,13 +5959,6 @@
           },
           {
             "in": "query",
-            "name": "filter[address]",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
             "name": "filter[phone]",
             "schema": {
               "type": "string"
@@ -6430,33 +6423,6 @@
                 "format": "date"
               }
             }
-          },
-          {
-            "in": "query",
-            "name": "filter[sumEntriesCostRange][]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[submittedTotalCostRange][]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[notes]",
-            "schema": {
-              "type": "string"
-            }
           },      
           {
             "in": "query",
@@ -6889,43 +6855,6 @@
             "schema": {
               "type": "string",
               "format": "uuid"
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[quantityRange][]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[unitCostRange][]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[totalCostRange][]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[substitutionAllowed]",
-            "schema": {
-              "type": "boolean"
             }
           },      
           {
@@ -7363,60 +7292,9 @@
           },
           {
             "in": "query",
-            "name": "filter[quantityRange][]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
-            }
-          },
-          {
-            "in": "query",
             "name": "filter[batchNumber]",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[expiryDateRange][]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "format": "date"
-              }
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[unitPriceRange][]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[totalPriceRange][]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[msrpRange][]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
             }
           },
           {
@@ -8378,6 +8256,16 @@
           },
           {
             "in": "query",
+            "name": "filter[transferQuantityRange][]",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          {
+            "in": "query",
             "name": "filter[medicineName]",
             "schema": {
               "type": "string"
@@ -8391,16 +8279,6 @@
               "items": {
                 "type": "string",
                 "format": "date"
-              }
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[transferQuantityRange][]",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "integer"
               }
             }
           },
@@ -10994,6 +10872,9 @@
           "phone": {
             "type": "string"
           },
+          "fax": {
+            "type": "string"
+          },
           "email": {
             "type": "string"
           },
@@ -11012,6 +10893,9 @@
             "type": "string"
           },
           "phone": {
+            "type": "string"
+          },
+          "fax": {
             "type": "string"
           },
           "email": {
@@ -11351,15 +11235,15 @@
           "medicineBatch": {
             "$ref": "#/components/schemas/MedicineBatch"
           },
+          "transferQuantity": {
+            "type": "integer"
+          },
           "medicineName": {
             "type": "string"
           },
           "expiryDate": {
             "type": "string",
             "format": "date"
-          },
-          "transferQuantity": {
-            "type": "integer"
           },
           "transferDate": {
             "type": "string",
@@ -11382,15 +11266,15 @@
             "type": "string",
             "format": "uuid"
           },
+          "transferQuantity": {
+            "type": "integer"
+          },
           "medicineName": {
             "type": "string"
           },
           "expiryDate": {
             "type": "string",
             "format": "date"
-          },
-          "transferQuantity": {
-            "type": "integer"
           },
           "transferDate": {
             "type": "string",

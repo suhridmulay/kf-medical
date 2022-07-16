@@ -26,7 +26,6 @@ export default function (sequelize) {
                 .format('YYYY-MM-DD')
             : null;
         },
-        allowNull: false,
       },
       expiryDate: {
         type: DataTypes.DATEONLY,
@@ -42,10 +41,6 @@ export default function (sequelize) {
       },
       initialcount: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-
-        }
       },
       currentCount: {
         type: DataTypes.INTEGER,
@@ -88,9 +83,6 @@ export default function (sequelize) {
     models.siteInventory.belongsTo(models.medicineEnum, {
       as: 'medicine',
       constraints: false,
-      foreignKey: {
-        allowNull: false,
-      },
     });
 
 

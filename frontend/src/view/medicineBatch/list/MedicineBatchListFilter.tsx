@@ -23,9 +23,7 @@ import filterRenders from 'src/modules/shared/filter/filterRenders';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import InputRangeFormItem from 'src/view/shared/form/items/InputRangeFormItem';
 import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
-import DatePickerRangeFormItem from 'src/view/shared/form/items/DatePickerRangeFormItem';
 import PurchaseInvoiceAutocompleteFormItem from 'src/view/purchaseInvoice/autocomplete/PurchaseInvoiceAutocompleteFormItem';
 import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
 import VendorAutocompleteFormItem from 'src/view/vendor/autocomplete/VendorAutocompleteFormItem';
@@ -37,23 +35,8 @@ const schema = yup.object().shape({
   medicine: yupFilterSchemas.relationToOne(
     i18n('entities.medicineBatch.fields.medicine'),
   ),
-  quantityRange: yupFilterSchemas.integerRange(
-    i18n('entities.medicineBatch.fields.quantityRange'),
-  ),
   batchNumber: yupFilterSchemas.string(
     i18n('entities.medicineBatch.fields.batchNumber'),
-  ),
-  expiryDateRange: yupFilterSchemas.dateRange(
-    i18n('entities.medicineBatch.fields.expiryDateRange'),
-  ),
-  unitPriceRange: yupFilterSchemas.decimalRange(
-    i18n('entities.medicineBatch.fields.unitPriceRange'),
-  ),
-  totalPriceRange: yupFilterSchemas.decimalRange(
-    i18n('entities.medicineBatch.fields.totalPriceRange'),
-  ),
-  msrpRange: yupFilterSchemas.decimalRange(
-    i18n('entities.medicineBatch.fields.msrpRange'),
   ),
   purchaseOrderNumberRange: yupFilterSchemas.integerRange(
     i18n('entities.medicineBatch.fields.purchaseOrderNumberRange'),
@@ -69,12 +52,7 @@ const schema = yup.object().shape({
 const emptyValues = {
   invoice: null,
   medicine: null,
-  quantityRange: [],
   batchNumber: null,
-  expiryDateRange: [],
-  unitPriceRange: [],
-  totalPriceRange: [],
-  msrpRange: [],
   purchaseOrderNumberRange: [],
   vendor: null,
   medicineBatchLookup: null,
@@ -89,29 +67,9 @@ const previewRenders = {
       label: i18n('entities.medicineBatch.fields.medicine'),
       render: filterRenders.relationToOne(),
     },
-  quantityRange: {
-    label: i18n('entities.medicineBatch.fields.quantityRange'),
-    render: filterRenders.range(),
-  },
   batchNumber: {
     label: i18n('entities.medicineBatch.fields.batchNumber'),
     render: filterRenders.generic(),
-  },
-  expiryDateRange: {
-    label: i18n('entities.medicineBatch.fields.expiryDateRange'),
-    render: filterRenders.dateRange(),
-  },
-  unitPriceRange: {
-    label: i18n('entities.medicineBatch.fields.unitPriceRange'),
-    render: filterRenders.decimalRange(2),
-  },
-  totalPriceRange: {
-    label: i18n('entities.medicineBatch.fields.totalPriceRange'),
-    render: filterRenders.decimalRange(2),
-  },
-  msrpRange: {
-    label: i18n('entities.medicineBatch.fields.msrpRange'),
-    render: filterRenders.decimalRange(2),
   },
   purchaseOrderNumberRange: {
     label: i18n('entities.medicineBatch.fields.purchaseOrderNumberRange'),
@@ -202,39 +160,9 @@ function MedicineBatchListFilter(props) {
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
-                  <InputNumberRangeFormItem
-                    name="quantityRange"
-                    label={i18n('entities.medicineBatch.fields.quantityRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
                   <InputFormItem
                     name="batchNumber"
                     label={i18n('entities.medicineBatch.fields.batchNumber')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <DatePickerRangeFormItem
-                    name="expiryDateRange"
-                    label={i18n('entities.medicineBatch.fields.expiryDateRange')}    
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="unitPriceRange"
-                    label={i18n('entities.medicineBatch.fields.unitPriceRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="totalPriceRange"
-                    label={i18n('entities.medicineBatch.fields.totalPriceRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="msrpRange"
-                    label={i18n('entities.medicineBatch.fields.msrpRange')}      
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>

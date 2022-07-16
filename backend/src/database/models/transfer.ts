@@ -9,12 +9,17 @@ export default function (sequelize) {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      medicineName: {
-        type: DataTypes.STRING(255),
+      transferQuantity: {
+        type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
+
+        }
+      },
+      medicineName: {
+        type: DataTypes.STRING(255),
+        validate: {
           len: [0, 255],
-          notEmpty: true,
         }
       },
       expiryDate: {
@@ -28,13 +33,6 @@ export default function (sequelize) {
                 .format('YYYY-MM-DD')
             : null;
         },
-      },
-      transferQuantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-
-        }
       },
       transferDate: {
         type: DataTypes.DATEONLY,
@@ -84,11 +82,17 @@ export default function (sequelize) {
     models.transfer.belongsTo(models.healthCenter, {
       as: 'toCenter',
       constraints: false,
+      foreignKey: {
+        allowNull: false,
+      },
     });
 
     models.transfer.belongsTo(models.medicineBatch, {
       as: 'medicineBatch',
       constraints: false,
+      foreignKey: {
+        allowNull: false,
+      },
     });
 
 

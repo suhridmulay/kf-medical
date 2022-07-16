@@ -174,15 +174,6 @@ function PurchaseOrderListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
-                name={'notes'}
-                label={i18n(
-                  'entities.purchaseOrder.fields.notes',
-                )}
-              />
-              <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
                 name={'purchaseOrderLookup'}
                 label={i18n(
                   'entities.purchaseOrder.fields.purchaseOrderLookup',
@@ -234,7 +225,6 @@ function PurchaseOrderListTable(props) {
                 <TableCell>{row.submittedDate}</TableCell>
                 <TableCell align="right">{row.sumEntriesCost}</TableCell>
                 <TableCell align="right">{row.submittedTotalCost}</TableCell>
-                <TableCell>{row.notes}</TableCell>
                 <TableCell>{row.purchaseOrderLookup}</TableCell>                  
                   <TableCell>
                     <Box

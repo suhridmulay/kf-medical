@@ -24,25 +24,37 @@ const schema = yup.object().shape({
   address: yupFormSchemas.string(
     i18n('entities.vendor.fields.address'),
     {
-      "required": true
+      "required": true,
+      "max": 255
     },
   ),
   phone: yupFormSchemas.string(
     i18n('entities.vendor.fields.phone'),
     {
       "required": true,
-      "min": 10
+      "min": 10,
+      "max": 20
+    },
+  ),
+  fax: yupFormSchemas.string(
+    i18n('entities.vendor.fields.fax'),
+    {
+      "min": 10,
+      "max": 20
     },
   ),
   email: yupFormSchemas.string(
     i18n('entities.vendor.fields.email'),
     {
-      "required": true
+      "required": true,
+      "max": 255
     },
   ),
   gstNumber: yupFormSchemas.string(
     i18n('entities.vendor.fields.gstNumber'),
-    {},
+    {
+      "max": 255
+    },
   ),
 });
 
@@ -54,6 +66,7 @@ function VendorForm(props) {
       vendorName: record.vendorName,
       address: record.address,
       phone: record.phone,
+      fax: record.fax,
       email: record.email,
       gstNumber: record.gstNumber,
     };
@@ -102,6 +115,13 @@ function VendorForm(props) {
                 name="phone"
                 label={i18n('entities.vendor.fields.phone')}  
                 required={true}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="fax"
+                label={i18n('entities.vendor.fields.fax')}  
+                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

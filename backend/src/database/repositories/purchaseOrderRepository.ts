@@ -332,56 +332,6 @@ class PurchaseOrderRepository {
         }
       }
 
-      if (filter.sumEntriesCostRange) {
-        const [start, end] = filter.sumEntriesCostRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            sumEntriesCost: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            sumEntriesCost: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.submittedTotalCostRange) {
-        const [start, end] = filter.submittedTotalCostRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            submittedTotalCost: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            submittedTotalCost: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.notes) {
-        whereAnd.push(
-          SequelizeFilterUtils.ilikeIncludes(
-            'purchaseOrder',
-            'notes',
-            filter.notes,
-          ),
-        );
-      }
-
       if (filter.createdAtRange) {
         const [start, end] = filter.createdAtRange;
 

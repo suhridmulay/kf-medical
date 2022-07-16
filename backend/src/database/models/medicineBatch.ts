@@ -18,10 +18,8 @@ export default function (sequelize) {
       },
       batchNumber: {
         type: DataTypes.STRING(100),
-        allowNull: false,
         validate: {
           len: [2, 100],
-          notEmpty: true,
         }
       },
       expiryDate: {
@@ -39,7 +37,6 @@ export default function (sequelize) {
       },
       unitPrice: {
         type: DataTypes.DECIMAL(24, 2),
-        allowNull: false,
         validate: {
 
         }
@@ -67,10 +64,8 @@ export default function (sequelize) {
       },
       medicineBatchLookup: {
         type: DataTypes.STRING(255),
-        allowNull: false,
         validate: {
           len: [5, 255],
-          notEmpty: true,
         }
       },
       importHash: {

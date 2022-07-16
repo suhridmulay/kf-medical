@@ -36,7 +36,6 @@ export default [
     schema: schemas.string(
       i18n('entities.medicineBatch.fields.batchNumber'),
       {
-        "required": true,
         "max": 100,
         "min": 2
       },
@@ -59,7 +58,6 @@ export default [
     schema: schemas.decimal(
       i18n('entities.medicineBatch.fields.unitPrice'),
       {
-        "required": true,
         "scale": 2
       },
     ),
@@ -117,7 +115,6 @@ export default [
       i18n('entities.medicineBatch.fields.medicineBatchLookup'),
       {
         "max": 255,
-        "required": true,
         "min": 5
       },
     ),

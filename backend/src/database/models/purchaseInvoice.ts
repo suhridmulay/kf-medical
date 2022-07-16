@@ -32,7 +32,6 @@ export default function (sequelize) {
       },
       invoiceTotal: {
         type: DataTypes.DECIMAL(24, 2),
-        allowNull: false,
         validate: {
 
         }
@@ -48,7 +47,6 @@ export default function (sequelize) {
                 .format('YYYY-MM-DD')
             : null;
         },
-        allowNull: false,
       },
       invoicePaidDate: {
         type: DataTypes.DATEONLY,

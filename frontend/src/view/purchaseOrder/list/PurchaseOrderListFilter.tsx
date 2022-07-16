@@ -22,8 +22,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import filterRenders from 'src/modules/shared/filter/filterRenders';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
-import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import InputRangeFormItem from 'src/view/shared/form/items/InputRangeFormItem';
 import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
 import DatePickerRangeFormItem from 'src/view/shared/form/items/DatePickerRangeFormItem';
 import VendorAutocompleteFormItem from 'src/view/vendor/autocomplete/VendorAutocompleteFormItem';
@@ -38,24 +36,12 @@ const schema = yup.object().shape({
   submittedDateRange: yupFilterSchemas.dateRange(
     i18n('entities.purchaseOrder.fields.submittedDateRange'),
   ),
-  sumEntriesCostRange: yupFilterSchemas.decimalRange(
-    i18n('entities.purchaseOrder.fields.sumEntriesCostRange'),
-  ),
-  submittedTotalCostRange: yupFilterSchemas.decimalRange(
-    i18n('entities.purchaseOrder.fields.submittedTotalCostRange'),
-  ),
-  notes: yupFilterSchemas.string(
-    i18n('entities.purchaseOrder.fields.notes'),
-  ),
 });
 
 const emptyValues = {
   purchaseOrderNumberRange: [],
   vendor: null,
   submittedDateRange: [],
-  sumEntriesCostRange: [],
-  submittedTotalCostRange: [],
-  notes: null,
 }
 
 const previewRenders = {
@@ -70,18 +56,6 @@ const previewRenders = {
   submittedDateRange: {
     label: i18n('entities.purchaseOrder.fields.submittedDateRange'),
     render: filterRenders.dateRange(),
-  },
-  sumEntriesCostRange: {
-    label: i18n('entities.purchaseOrder.fields.sumEntriesCostRange'),
-    render: filterRenders.decimalRange(),
-  },
-  submittedTotalCostRange: {
-    label: i18n('entities.purchaseOrder.fields.submittedTotalCostRange'),
-    render: filterRenders.decimalRange(),
-  },
-  notes: {
-    label: i18n('entities.purchaseOrder.fields.notes'),
-    render: filterRenders.generic(),
   },
 }
 
@@ -163,24 +137,6 @@ function PurchaseOrderListFilter(props) {
                   <DatePickerRangeFormItem
                     name="submittedDateRange"
                     label={i18n('entities.purchaseOrder.fields.submittedDateRange')}    
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="sumEntriesCostRange"
-                    label={i18n('entities.purchaseOrder.fields.sumEntriesCostRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="submittedTotalCostRange"
-                    label={i18n('entities.purchaseOrder.fields.submittedTotalCostRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputFormItem
-                    name="notes"
-                    label={i18n('entities.purchaseOrder.fields.notes')}      
                   />
                 </Grid>
               </Grid>

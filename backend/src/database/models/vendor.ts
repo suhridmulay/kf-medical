@@ -18,28 +18,40 @@ export default function (sequelize) {
         }
       },
       address: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(255),
         allowNull: false,
         validate: {
+          len: [0, 255],
           notEmpty: true,
         }
       },
       phone: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(20),
         allowNull: false,
         validate: {
+          len: [10, 20],
           notEmpty: true,
         }
       },
+      fax: {
+        type: DataTypes.STRING(20),
+        validate: {
+          len: [10, 20],
+        }
+      },
       email: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(255),
         allowNull: false,
         validate: {
+          len: [0, 255],
           notEmpty: true,
         }
       },
       gstNumber: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(255),
+        validate: {
+          len: [0, 255],
+        }
       },
       importHash: {
         type: DataTypes.STRING(255),

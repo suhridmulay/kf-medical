@@ -316,26 +316,6 @@ class MedicineBatchRepository {
         });
       }
 
-      if (filter.quantityRange) {
-        const [start, end] = filter.quantityRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            quantity: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            quantity: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
       if (filter.batchNumber) {
         whereAnd.push(
           SequelizeFilterUtils.ilikeIncludes(
@@ -344,86 +324,6 @@ class MedicineBatchRepository {
             filter.batchNumber,
           ),
         );
-      }
-
-      if (filter.expiryDateRange) {
-        const [start, end] = filter.expiryDateRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            expiryDate: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            expiryDate: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.unitPriceRange) {
-        const [start, end] = filter.unitPriceRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            unitPrice: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            unitPrice: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.totalPriceRange) {
-        const [start, end] = filter.totalPriceRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            totalPrice: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            totalPrice: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.msrpRange) {
-        const [start, end] = filter.msrpRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            msrp: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            msrp: {
-              [Op.lte]: end,
-            },
-          });
-        }
       }
 
       if (filter.purchaseOrderNumberRange) {

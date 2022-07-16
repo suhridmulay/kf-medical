@@ -19,9 +19,7 @@ import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete
 const schema = yup.object().shape({
   purchaseOrder: yupFormSchemas.relationToOne(
     i18n('entities.purchaseOrderEntry.fields.purchaseOrder'),
-    {
-      "required": true
-    },
+    {},
   ),
   medicine: yupFormSchemas.relationToOne(
     i18n('entities.purchaseOrderEntry.fields.medicine'),
@@ -46,8 +44,7 @@ const schema = yup.object().shape({
   totalCost: yupFormSchemas.decimal(
     i18n('entities.purchaseOrderEntry.fields.totalCost'),
     {
-      "scale": 2,
-      "required": true
+      "scale": 2
     },
   ),
   substitutionAllowed: yupFormSchemas.boolean(
@@ -97,7 +94,7 @@ function PurchaseOrderEntryForm(props) {
               <PurchaseOrderAutocompleteFormItem  
                 name="purchaseOrder"
                 label={i18n('entities.purchaseOrderEntry.fields.purchaseOrder')}
-                required={true}
+                required={false}
                 showCreate={!props.modal}
               />
             </Grid>
@@ -127,7 +124,7 @@ function PurchaseOrderEntryForm(props) {
               <InputFormItem
                 name="totalCost"
                 label={i18n('entities.purchaseOrderEntry.fields.totalCost')}  
-                required={true}
+                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

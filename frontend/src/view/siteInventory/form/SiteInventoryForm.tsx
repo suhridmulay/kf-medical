@@ -36,15 +36,11 @@ const schema = yup.object().shape({
   ),
   medicine: yupFormSchemas.relationToOne(
     i18n('entities.siteInventory.fields.medicine'),
-    {
-      "required": true
-    },
+    {},
   ),
   inventoryAddDate: yupFormSchemas.date(
     i18n('entities.siteInventory.fields.inventoryAddDate'),
-    {
-      "required": true
-    },
+    {},
   ),
   expiryDate: yupFormSchemas.date(
     i18n('entities.siteInventory.fields.expiryDate'),
@@ -52,9 +48,7 @@ const schema = yup.object().shape({
   ),
   initialcount: yupFormSchemas.integer(
     i18n('entities.siteInventory.fields.initialcount'),
-    {
-      "required": true
-    },
+    {},
   ),
   currentCount: yupFormSchemas.integer(
     i18n('entities.siteInventory.fields.currentCount'),
@@ -130,7 +124,7 @@ function SiteInventoryForm(props) {
               <MedicineEnumAutocompleteFormItem  
                 name="medicine"
                 label={i18n('entities.siteInventory.fields.medicine')}
-                required={true}
+                required={false}
                 showCreate={!props.modal}
               />
             </Grid>
@@ -138,7 +132,7 @@ function SiteInventoryForm(props) {
               <DatePickerFormItem
                 name="inventoryAddDate"
                 label={i18n('entities.siteInventory.fields.inventoryAddDate')}
-                required={true}
+                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
@@ -152,7 +146,7 @@ function SiteInventoryForm(props) {
               <InputNumberFormItem
                 name="initialcount"
                 label={i18n('entities.siteInventory.fields.initialcount')}  
-                required={true}
+                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

@@ -19,7 +19,8 @@ export default [
     schema: schemas.string(
       i18n('entities.vendor.fields.address'),
       {
-        "required": true
+        "required": true,
+        "max": 255
       },
     ),
   },
@@ -30,7 +31,19 @@ export default [
       i18n('entities.vendor.fields.phone'),
       {
         "required": true,
-        "min": 10
+        "min": 10,
+        "max": 20
+      },
+    ),
+  },
+  {
+    name: 'fax',
+    label: i18n('entities.vendor.fields.fax'),
+    schema: schemas.string(
+      i18n('entities.vendor.fields.fax'),
+      {
+        "min": 10,
+        "max": 20
       },
     ),
   },
@@ -40,7 +53,8 @@ export default [
     schema: schemas.string(
       i18n('entities.vendor.fields.email'),
       {
-        "required": true
+        "required": true,
+        "max": 255
       },
     ),
   },
@@ -49,7 +63,9 @@ export default [
     label: i18n('entities.vendor.fields.gstNumber'),
     schema: schemas.string(
       i18n('entities.vendor.fields.gstNumber'),
-      {},
+      {
+        "max": 255
+      },
     ),
   },
 ];

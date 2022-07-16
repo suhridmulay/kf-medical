@@ -33,9 +33,7 @@ export default [
     label: i18n('entities.siteInventory.fields.medicine'),
     schema: schemas.relationToOne(
       i18n('entities.siteInventory.fields.medicine'),
-      {
-        "required": true
-      },
+      {},
     ),
   },
   {
@@ -43,9 +41,7 @@ export default [
     label: i18n('entities.siteInventory.fields.inventoryAddDate'),
     schema: schemas.date(
       i18n('entities.siteInventory.fields.inventoryAddDate'),
-      {
-        "required": true
-      },
+      {},
     ),
    render: (value) => value && value instanceof Date ? moment(value).format('YYYY-MM-DD') : value,
   },
@@ -63,9 +59,7 @@ export default [
     label: i18n('entities.siteInventory.fields.initialcount'),
     schema: schemas.integer(
       i18n('entities.siteInventory.fields.initialcount'),
-      {
-        "required": true
-      },
+      {},
     ),
   },
   {

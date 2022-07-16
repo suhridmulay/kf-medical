@@ -17,7 +17,9 @@ export default [
     label: i18n('entities.transfer.fields.toCenter'),
     schema: schemas.relationToOne(
       i18n('entities.transfer.fields.toCenter'),
-      {},
+      {
+        "required": true
+      },
     ),
   },
   {
@@ -25,7 +27,19 @@ export default [
     label: i18n('entities.transfer.fields.medicineBatch'),
     schema: schemas.relationToOne(
       i18n('entities.transfer.fields.medicineBatch'),
-      {},
+      {
+        "required": true
+      },
+    ),
+  },
+  {
+    name: 'transferQuantity',
+    label: i18n('entities.transfer.fields.transferQuantity'),
+    schema: schemas.integer(
+      i18n('entities.transfer.fields.transferQuantity'),
+      {
+        "required": true
+      },
     ),
   },
   {
@@ -34,8 +48,7 @@ export default [
     schema: schemas.string(
       i18n('entities.transfer.fields.medicineName'),
       {
-        "max": 255,
-        "required": true
+        "max": 255
       },
     ),
   },
@@ -47,16 +60,6 @@ export default [
       {},
     ),
    render: (value) => value && value instanceof Date ? moment(value).format('YYYY-MM-DD') : value,
-  },
-  {
-    name: 'transferQuantity',
-    label: i18n('entities.transfer.fields.transferQuantity'),
-    schema: schemas.integer(
-      i18n('entities.transfer.fields.transferQuantity'),
-      {
-        "required": true
-      },
-    ),
   },
   {
     name: 'transferDate',

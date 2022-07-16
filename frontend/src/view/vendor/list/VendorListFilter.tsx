@@ -28,9 +28,6 @@ const schema = yup.object().shape({
   vendorName: yupFilterSchemas.string(
     i18n('entities.vendor.fields.vendorName'),
   ),
-  address: yupFilterSchemas.string(
-    i18n('entities.vendor.fields.address'),
-  ),
   phone: yupFilterSchemas.string(
     i18n('entities.vendor.fields.phone'),
   ),
@@ -44,7 +41,6 @@ const schema = yup.object().shape({
 
 const emptyValues = {
   vendorName: null,
-  address: null,
   phone: null,
   email: null,
   gstNumber: null,
@@ -53,10 +49,6 @@ const emptyValues = {
 const previewRenders = {
   vendorName: {
     label: i18n('entities.vendor.fields.vendorName'),
-    render: filterRenders.generic(),
-  },
-  address: {
-    label: i18n('entities.vendor.fields.address'),
     render: filterRenders.generic(),
   },
   phone: {
@@ -139,12 +131,6 @@ function VendorListFilter(props) {
                   <InputFormItem
                     name="vendorName"
                     label={i18n('entities.vendor.fields.vendorName')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputFormItem
-                    name="address"
-                    label={i18n('entities.vendor.fields.address')}      
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>

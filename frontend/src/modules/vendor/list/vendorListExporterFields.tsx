@@ -19,6 +19,10 @@ export default [
     label: i18n('entities.vendor.fields.phone'),
   },
   {
+    name: 'fax',
+    label: i18n('entities.vendor.fields.fax'),
+  },
+  {
     name: 'email',
     label: i18n('entities.vendor.fields.email'),
   },

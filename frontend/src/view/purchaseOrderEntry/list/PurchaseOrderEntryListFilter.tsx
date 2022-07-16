@@ -22,8 +22,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import filterRenders from 'src/modules/shared/filter/filterRenders';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
-import InputRangeFormItem from 'src/view/shared/form/items/InputRangeFormItem';
-import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import PurchaseOrderAutocompleteFormItem from 'src/view/purchaseOrder/autocomplete/PurchaseOrderAutocompleteFormItem';
 import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
 
@@ -34,27 +32,11 @@ const schema = yup.object().shape({
   medicine: yupFilterSchemas.relationToOne(
     i18n('entities.purchaseOrderEntry.fields.medicine'),
   ),
-  quantityRange: yupFilterSchemas.decimalRange(
-    i18n('entities.purchaseOrderEntry.fields.quantityRange'),
-  ),
-  unitCostRange: yupFilterSchemas.decimalRange(
-    i18n('entities.purchaseOrderEntry.fields.unitCostRange'),
-  ),
-  totalCostRange: yupFilterSchemas.decimalRange(
-    i18n('entities.purchaseOrderEntry.fields.totalCostRange'),
-  ),
-  substitutionAllowed: yupFilterSchemas.boolean(
-    i18n('entities.purchaseOrderEntry.fields.substitutionAllowed'),
-  ),
 });
 
 const emptyValues = {
   purchaseOrder: null,
   medicine: null,
-  quantityRange: [],
-  unitCostRange: [],
-  totalCostRange: [],
-  substitutionAllowed: null,
 }
 
 const previewRenders = {
@@ -66,22 +48,6 @@ const previewRenders = {
       label: i18n('entities.purchaseOrderEntry.fields.medicine'),
       render: filterRenders.relationToOne(),
     },
-  quantityRange: {
-    label: i18n('entities.purchaseOrderEntry.fields.quantityRange'),
-    render: filterRenders.decimalRange(2),
-  },
-  unitCostRange: {
-    label: i18n('entities.purchaseOrderEntry.fields.unitCostRange'),
-    render: filterRenders.decimalRange(2),
-  },
-  totalCostRange: {
-    label: i18n('entities.purchaseOrderEntry.fields.totalCostRange'),
-    render: filterRenders.decimalRange(2),
-  },
-  substitutionAllowed: {
-    label: i18n('entities.purchaseOrderEntry.fields.substitutionAllowed'),
-    render: filterRenders.boolean(),
-  },
 }
 
 function PurchaseOrderEntryListFilter(props) {
@@ -156,40 +122,6 @@ function PurchaseOrderEntryListFilter(props) {
                   <MedicineEnumAutocompleteFormItem  
                     name="medicine"
                     label={i18n('entities.purchaseOrderEntry.fields.medicine')}        
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="quantityRange"
-                    label={i18n('entities.purchaseOrderEntry.fields.quantityRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="unitCostRange"
-                    label={i18n('entities.purchaseOrderEntry.fields.unitCostRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="totalCostRange"
-                    label={i18n('entities.purchaseOrderEntry.fields.totalCostRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <SelectFormItem
-                    name="substitutionAllowed"
-                    label={i18n('entities.purchaseOrderEntry.fields.substitutionAllowed')}
-                    options={[
-                      {
-                        value: true,
-                        label: i18n('common.yes'),
-                      },
-                      {
-                        value: false,
-                        label: i18n('common.no'),
-                      },
-                    ]}
                   />
                 </Grid>
               </Grid>

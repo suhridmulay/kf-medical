@@ -38,14 +38,14 @@ const schema = yup.object().shape({
   medicineBatch: yupFilterSchemas.relationToOne(
     i18n('entities.transfer.fields.medicineBatch'),
   ),
+  transferQuantityRange: yupFilterSchemas.integerRange(
+    i18n('entities.transfer.fields.transferQuantityRange'),
+  ),
   medicineName: yupFilterSchemas.string(
     i18n('entities.transfer.fields.medicineName'),
   ),
   expiryDateRange: yupFilterSchemas.dateRange(
     i18n('entities.transfer.fields.expiryDateRange'),
-  ),
-  transferQuantityRange: yupFilterSchemas.integerRange(
-    i18n('entities.transfer.fields.transferQuantityRange'),
   ),
   transferDateRange: yupFilterSchemas.dateRange(
     i18n('entities.transfer.fields.transferDateRange'),
@@ -56,9 +56,9 @@ const emptyValues = {
   fromCenter: null,
   toCenter: null,
   medicineBatch: null,
+  transferQuantityRange: [],
   medicineName: null,
   expiryDateRange: [],
-  transferQuantityRange: [],
   transferDateRange: [],
 }
 
@@ -75,6 +75,10 @@ const previewRenders = {
       label: i18n('entities.transfer.fields.medicineBatch'),
       render: filterRenders.relationToOne(),
     },
+  transferQuantityRange: {
+    label: i18n('entities.transfer.fields.transferQuantityRange'),
+    render: filterRenders.range(),
+  },
   medicineName: {
     label: i18n('entities.transfer.fields.medicineName'),
     render: filterRenders.generic(),
@@ -82,10 +86,6 @@ const previewRenders = {
   expiryDateRange: {
     label: i18n('entities.transfer.fields.expiryDateRange'),
     render: filterRenders.dateRange(),
-  },
-  transferQuantityRange: {
-    label: i18n('entities.transfer.fields.transferQuantityRange'),
-    render: filterRenders.range(),
   },
   transferDateRange: {
     label: i18n('entities.transfer.fields.transferDateRange'),
@@ -174,6 +174,12 @@ function TransferListFilter(props) {
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
+                  <InputNumberRangeFormItem
+                    name="transferQuantityRange"
+                    label={i18n('entities.transfer.fields.transferQuantityRange')}      
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
                   <InputFormItem
                     name="medicineName"
                     label={i18n('entities.transfer.fields.medicineName')}      
@@ -183,12 +189,6 @@ function TransferListFilter(props) {
                   <DatePickerRangeFormItem
                     name="expiryDateRange"
                     label={i18n('entities.transfer.fields.expiryDateRange')}    
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputNumberRangeFormItem
-                    name="transferQuantityRange"
-                    label={i18n('entities.transfer.fields.transferQuantityRange')}      
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>

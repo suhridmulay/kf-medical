@@ -39,7 +39,6 @@ const schema = yup.object().shape({
   batchNumber: yupFormSchemas.string(
     i18n('entities.medicineBatch.fields.batchNumber'),
     {
-      "required": true,
       "max": 100,
       "min": 2
     },
@@ -53,7 +52,6 @@ const schema = yup.object().shape({
   unitPrice: yupFormSchemas.decimal(
     i18n('entities.medicineBatch.fields.unitPrice'),
     {
-      "required": true,
       "scale": 2
     },
   ),
@@ -87,7 +85,6 @@ const schema = yup.object().shape({
     i18n('entities.medicineBatch.fields.medicineBatchLookup'),
     {
       "max": 255,
-      "required": true,
       "min": 5
     },
   ),
@@ -163,7 +160,7 @@ function MedicineBatchForm(props) {
               <InputFormItem
                 name="batchNumber"
                 label={i18n('entities.medicineBatch.fields.batchNumber')}  
-                required={true}
+                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
@@ -177,7 +174,7 @@ function MedicineBatchForm(props) {
               <InputFormItem
                 name="unitPrice"
                 label={i18n('entities.medicineBatch.fields.unitPrice')}  
-                required={true}
+                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
@@ -223,7 +220,7 @@ function MedicineBatchForm(props) {
                 name="medicineBatchLookup"
                 label={i18n('entities.medicineBatch.fields.medicineBatchLookup')}
               hint={i18n('entities.medicineBatch.hints.medicineBatchLookup')}  
-                required={true}
+                required={false}
               />
             </Grid>
           </Grid>

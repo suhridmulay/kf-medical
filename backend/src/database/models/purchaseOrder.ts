@@ -29,10 +29,6 @@ export default function (sequelize) {
       },
       submittedTotalCost: {
         type: DataTypes.DECIMAL,
-        allowNull: false,
-        validate: {
-
-        }
       },
       notes: {
         type: DataTypes.STRING(255),
@@ -42,10 +38,8 @@ export default function (sequelize) {
       },
       purchaseOrderLookup: {
         type: DataTypes.STRING(255),
-        allowNull: false,
         validate: {
           len: [5, 255],
-          notEmpty: true,
         }
       },
       importHash: {

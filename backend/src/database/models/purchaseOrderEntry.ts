@@ -25,7 +25,6 @@ export default function (sequelize) {
       },
       totalCost: {
         type: DataTypes.DECIMAL(24, 2),
-        allowNull: false,
         validate: {
 
         }
@@ -63,9 +62,6 @@ export default function (sequelize) {
     models.purchaseOrderEntry.belongsTo(models.purchaseOrder, {
       as: 'purchaseOrder',
       constraints: false,
-      foreignKey: {
-        allowNull: false,
-      },
     });
 
     models.purchaseOrderEntry.belongsTo(models.medicineEnum, {

@@ -47,15 +47,12 @@ const schema = yup.object().shape({
   invoiceTotal: yupFormSchemas.decimal(
     i18n('entities.purchaseInvoice.fields.invoiceTotal'),
     {
-      "required": true,
       "scale": 2
     },
   ),
   invoiceDate: yupFormSchemas.date(
     i18n('entities.purchaseInvoice.fields.invoiceDate'),
-    {
-      "required": true
-    },
+    {},
   ),
   invoicePaidDate: yupFormSchemas.date(
     i18n('entities.purchaseInvoice.fields.invoicePaidDate'),
@@ -146,14 +143,14 @@ function PurchaseInvoiceForm(props) {
               <InputFormItem
                 name="invoiceTotal"
                 label={i18n('entities.purchaseInvoice.fields.invoiceTotal')}  
-                required={true}
+                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
               <DatePickerFormItem
                 name="invoiceDate"
                 label={i18n('entities.purchaseInvoice.fields.invoiceDate')}
-                required={true}
+                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
