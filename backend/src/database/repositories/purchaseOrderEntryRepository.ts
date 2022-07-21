@@ -249,6 +249,28 @@ class PurchaseOrderEntryRepository {
     );
   }
 
+  static async findEntriesByIdList(idList, options: IRepositoryOptions) {
+    let where = {
+      id: {
+        [Op.in]: idList,
+      }};
+
+    let include = [];
+
+    let {
+      rows,
+      count,
+    } = await options.database.purchaseOrderEntry.findAndCountAll({
+      where,
+      include,
+      transaction: SequelizeRepository.getTransaction(
+        options,
+      ),
+    });
+
+    return { rows, count };
+  }
+
   static async findAndCountAll(
     { filter, limit = 0, offset = 0, orderBy = '' },
     options: IRepositoryOptions,

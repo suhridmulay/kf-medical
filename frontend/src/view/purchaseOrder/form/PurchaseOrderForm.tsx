@@ -128,21 +128,6 @@ function PurchaseOrderForm(props) {
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="sumEntriesCost"
-                label={i18n('entities.purchaseOrder.fields.sumEntriesCost')}
-              hint={i18n('entities.purchaseOrder.hints.sumEntriesCost')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="submittedTotalCost"
-                label={i18n('entities.purchaseOrder.fields.submittedTotalCost')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
               <PurchaseOrderEntryAutocompleteFormItem  
                 name="entries"
                 label={i18n('entities.purchaseOrder.fields.entries')}
@@ -164,14 +149,6 @@ function PurchaseOrderForm(props) {
               <InputFormItem
                 name="notes"
                 label={i18n('entities.purchaseOrder.fields.notes')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="purchaseOrderLookup"
-                label={i18n('entities.purchaseOrder.fields.purchaseOrderLookup')}
-              hint={i18n('entities.purchaseOrder.hints.purchaseOrderLookup')}  
                 required={false}
               />
             </Grid>

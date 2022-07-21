@@ -13,7 +13,6 @@ import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import SwitchFormItem from 'src/view/shared/form/items/SwitchFormItem';
-import PurchaseOrderAutocompleteFormItem from 'src/view/purchaseOrder/autocomplete/PurchaseOrderAutocompleteFormItem';
 import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
 
 const schema = yup.object().shape({
@@ -91,14 +90,6 @@ function PurchaseOrderEntryForm(props) {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Grid spacing={2} container>
             <Grid item lg={7} md={8} sm={12} xs={12}>
-              <PurchaseOrderAutocompleteFormItem  
-                name="purchaseOrder"
-                label={i18n('entities.purchaseOrderEntry.fields.purchaseOrder')}
-                required={false}
-                showCreate={!props.modal}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
               <MedicineEnumAutocompleteFormItem  
                 name="medicine"
                 label={i18n('entities.purchaseOrderEntry.fields.medicine')}
@@ -118,13 +109,6 @@ function PurchaseOrderEntryForm(props) {
                 name="unitCost"
                 label={i18n('entities.purchaseOrderEntry.fields.unitCost')}  
                 required={true}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="totalCost"
-                label={i18n('entities.purchaseOrderEntry.fields.totalCost')}  
-                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

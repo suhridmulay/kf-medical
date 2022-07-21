@@ -5,9 +5,16 @@ import MedicineBatchRepository from '../database/repositories/medicineBatchRepos
 import PurchaseInvoiceRepository from '../database/repositories/purchaseInvoiceRepository';
 import MedicineEnumRepository from '../database/repositories/medicineEnumRepository';
 import VendorRepository from '../database/repositories/vendorRepository';
+import HealthCenterRepository from '../database/repositories/healthCenterRepository';
+import AWSStorage from './file/awsFileStorage';
+import SiteInventoryRepository from '../database/repositories/siteInventoryRepository';
+import medicineEnum from '../database/models/medicineEnum';
+
+const HEADOFFICE = "HEADOFFICE";
 
 export default class MedicineBatchService {
   options: IServiceOptions;
+
 
   constructor(options) {
     this.options = options;
@@ -23,7 +30,33 @@ export default class MedicineBatchService {
       data.medicine = await MedicineEnumRepository.filterIdInTenant(data.medicine, { ...this.options, transaction });
       data.vendor = await VendorRepository.filterIdInTenant(data.vendor, { ...this.options, transaction });
 
+      let medicine = await MedicineEnumRepository.findById(data.medicine, { ...this.options, transaction });
+      let purchaseInvoice = await PurchaseInvoiceRepository.findById(data.invoice, { ...this.options, transaction });
+      let purchaseOrder = purchaseInvoice.purchaseOrder;
+      data.medicineBatchLookup = medicine.medicineName + " | " + data.expiryDate + " | " + data.batchNumber + " (" + purchaseOrder.purchaseOrderLookup + ")";
+
       const record = await MedicineBatchRepository.create(data, {
+        ...this.options,
+        transaction,
+      });
+
+      // Add this inventory to the "CENTRAL HEADOFFICE" inventory
+      let lookupFilter = {'name': HEADOFFICE};
+      let headOfficeData = await HealthCenterRepository.findAndCountAll({filter: lookupFilter}, { ...this.options, transaction });
+      let headOffice = headOfficeData.rows[0];
+
+      let inventoryData = {
+        inventoryAddDate: data.inventoryAddDate,
+        expiryDate: data.expiryDate,
+        medicine: medicine.id,
+        batchNumber: record.id,
+        center: headOffice.id,
+        initialCount: data.quantity,
+        currentCount: data.quantity,
+        siteBatchIdentifier:  headOffice.name + " | " + medicine.medicineName + " | " + data.expiryDate + " | " + data.batchNumber
+      }
+
+      const inventoryRecord = await SiteInventoryRepository.create(inventoryData, {
         ...this.options,
         transaction,
       });
