@@ -27,12 +27,15 @@ class PurchaseInvoiceRepository {
       {
         ...lodash.pick(data, [
           'invoiceNumber',
-          'invoiceAmount',
-          'invoiceTax',
-          'invoiceTotal',
+          'referenceNumber',
+          'grossAmount',
+          'stateGST',
+          'centralGST',
+          'grandTotal',
           'invoiceDate',
           'invoicePaidDate',
-          'paymentDetails',          
+          'paymentDetails',
+          'inventoryAddDate',          
           'importHash',
         ]),
         purchaseOrderId: data.purchaseOrder || null,
@@ -93,12 +96,15 @@ class PurchaseInvoiceRepository {
       {
         ...lodash.pick(data, [
           'invoiceNumber',
-          'invoiceAmount',
-          'invoiceTax',
-          'invoiceTotal',
+          'referenceNumber',
+          'grossAmount',
+          'stateGST',
+          'centralGST',
+          'grandTotal',
           'invoiceDate',
           'invoicePaidDate',
-          'paymentDetails',          
+          'paymentDetails',
+          'inventoryAddDate',          
           'importHash',
         ]),
         purchaseOrderId: data.purchaseOrder || null,
@@ -298,114 +304,34 @@ class PurchaseInvoiceRepository {
         );
       }
 
-      if (filter.invoiceAmountRange) {
-        const [start, end] = filter.invoiceAmountRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            invoiceAmount: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            invoiceAmount: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.invoiceTaxRange) {
-        const [start, end] = filter.invoiceTaxRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            invoiceTax: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            invoiceTax: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.invoiceTotalRange) {
-        const [start, end] = filter.invoiceTotalRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            invoiceTotal: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            invoiceTotal: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.invoiceDateRange) {
-        const [start, end] = filter.invoiceDateRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            invoiceDate: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            invoiceDate: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.invoicePaidDateRange) {
-        const [start, end] = filter.invoicePaidDateRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            invoicePaidDate: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            invoicePaidDate: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.paymentDetails) {
+      if (filter.referenceNumber) {
         whereAnd.push(
           SequelizeFilterUtils.ilikeIncludes(
             'purchaseInvoice',
-            'paymentDetails',
-            filter.paymentDetails,
+            'referenceNumber',
+            filter.referenceNumber,
           ),
         );
+      }
+
+      if (filter.inventoryAddDateRange) {
+        const [start, end] = filter.inventoryAddDateRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          whereAnd.push({
+            inventoryAddDate: {
+              [Op.gte]: start,
+            },
+          });
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          whereAnd.push({
+            inventoryAddDate: {
+              [Op.lte]: end,
+            },
+          });
+        }
       }
 
       if (filter.createdAtRange) {

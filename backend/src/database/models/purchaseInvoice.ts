@@ -17,20 +17,29 @@ export default function (sequelize) {
           notEmpty: true,
         }
       },
-      invoiceAmount: {
+      referenceNumber: {
+        type: DataTypes.TEXT,
+      },
+      grossAmount: {
         type: DataTypes.DECIMAL(24, 2),
         allowNull: false,
         validate: {
 
         }
       },
-      invoiceTax: {
+      stateGST: {
         type: DataTypes.DECIMAL(24, 2),
         validate: {
 
         }
       },
-      invoiceTotal: {
+      centralGST: {
+        type: DataTypes.DECIMAL(24, 2),
+        validate: {
+
+        }
+      },
+      grandTotal: {
         type: DataTypes.DECIMAL(24, 2),
         validate: {
 
@@ -65,6 +74,18 @@ export default function (sequelize) {
         validate: {
           len: [0, 255],
         }
+      },
+      inventoryAddDate: {
+        type: DataTypes.DATEONLY,
+        get: function() {
+          // @ts-ignore
+          return this.getDataValue('inventoryAddDate')
+            ? moment
+                // @ts-ignore
+                .utc(this.getDataValue('inventoryAddDate'))
+                .format('YYYY-MM-DD')
+            : null;
+        },
       },
       importHash: {
         type: DataTypes.STRING(255),

@@ -26,14 +26,6 @@ export default [
     label: i18n('entities.transfer.fields.transferQuantity'),
   },
   {
-    name: 'medicineName',
-    label: i18n('entities.transfer.fields.medicineName'),
-  },
-  {
-    name: 'expiryDate',
-    label: i18n('entities.transfer.fields.expiryDate'),
-  },
-  {
     name: 'transferDate',
     label: i18n('entities.transfer.fields.transferDate'),
   },

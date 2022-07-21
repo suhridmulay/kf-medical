@@ -39,7 +39,7 @@ export default function (sequelize) {
             : null;
         },
       },
-      initialcount: {
+      initialCount: {
         type: DataTypes.INTEGER,
       },
       currentCount: {

@@ -31,15 +31,15 @@ class MedicineBatchRepository {
           'expiryDate',
           'unitPrice',
           'totalPrice',
+          'stateGST',
+          'centralGST',
           'msrp',
           'description',
-          'purchaseOrderNumber',
           'medicineBatchLookup',          
           'importHash',
         ]),
         invoiceId: data.invoice || null,
         medicineId: data.medicine || null,
-        vendorId: data.vendor || null,
         tenantId: tenant.id,
         createdById: currentUser.id,
         updatedById: currentUser.id,
@@ -99,15 +99,15 @@ class MedicineBatchRepository {
           'expiryDate',
           'unitPrice',
           'totalPrice',
+          'stateGST',
+          'centralGST',
           'msrp',
           'description',
-          'purchaseOrderNumber',
           'medicineBatchLookup',          
           'importHash',
         ]),
         invoiceId: data.invoice || null,
         medicineId: data.medicine || null,
-        vendorId: data.vendor || null,
         updatedById: currentUser.id,
       },
       {
@@ -177,10 +177,6 @@ class MedicineBatchRepository {
       {
         model: options.database.medicineEnum,
         as: 'medicine',
-      },
-      {
-        model: options.database.vendor,
-        as: 'vendor',
       },
     ];
 
@@ -282,10 +278,6 @@ class MedicineBatchRepository {
       {
         model: options.database.medicineEnum,
         as: 'medicine',
-      },
-      {
-        model: options.database.vendor,
-        as: 'vendor',
       },      
     ];
 
@@ -312,44 +304,6 @@ class MedicineBatchRepository {
         whereAnd.push({
           ['medicineId']: SequelizeFilterUtils.uuid(
             filter.medicine,
-          ),
-        });
-      }
-
-      if (filter.batchNumber) {
-        whereAnd.push(
-          SequelizeFilterUtils.ilikeIncludes(
-            'medicineBatch',
-            'batchNumber',
-            filter.batchNumber,
-          ),
-        );
-      }
-
-      if (filter.purchaseOrderNumberRange) {
-        const [start, end] = filter.purchaseOrderNumberRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            purchaseOrderNumber: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            purchaseOrderNumber: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.vendor) {
-        whereAnd.push({
-          ['vendorId']: SequelizeFilterUtils.uuid(
-            filter.vendor,
           ),
         });
       }

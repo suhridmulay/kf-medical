@@ -173,4 +173,11 @@ export default [
     icon: <ChevronRightIcon />,
     label: i18n('entities.transfer.menu'),
   },
+
+  {
+    path: '/prescription-fill',
+    permissionRequired: permissions.prescriptionFillRead,
+    icon: <ChevronRightIcon />,
+    label: i18n('entities.prescriptionFill.menu'),
+  },
 ].filter(Boolean);

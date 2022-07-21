@@ -23,7 +23,6 @@ import filterRenders from 'src/modules/shared/filter/filterRenders';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import InputRangeFormItem from 'src/view/shared/form/items/InputRangeFormItem';
 import DatePickerRangeFormItem from 'src/view/shared/form/items/DatePickerRangeFormItem';
 import PurchaseOrderAutocompleteFormItem from 'src/view/purchaseOrder/autocomplete/PurchaseOrderAutocompleteFormItem';
 
@@ -34,35 +33,19 @@ const schema = yup.object().shape({
   invoiceNumber: yupFilterSchemas.string(
     i18n('entities.purchaseInvoice.fields.invoiceNumber'),
   ),
-  invoiceAmountRange: yupFilterSchemas.decimalRange(
-    i18n('entities.purchaseInvoice.fields.invoiceAmountRange'),
+  referenceNumber: yupFilterSchemas.string(
+    i18n('entities.purchaseInvoice.fields.referenceNumber'),
   ),
-  invoiceTaxRange: yupFilterSchemas.decimalRange(
-    i18n('entities.purchaseInvoice.fields.invoiceTaxRange'),
-  ),
-  invoiceTotalRange: yupFilterSchemas.decimalRange(
-    i18n('entities.purchaseInvoice.fields.invoiceTotalRange'),
-  ),
-  invoiceDateRange: yupFilterSchemas.dateRange(
-    i18n('entities.purchaseInvoice.fields.invoiceDateRange'),
-  ),
-  invoicePaidDateRange: yupFilterSchemas.dateRange(
-    i18n('entities.purchaseInvoice.fields.invoicePaidDateRange'),
-  ),
-  paymentDetails: yupFilterSchemas.string(
-    i18n('entities.purchaseInvoice.fields.paymentDetails'),
+  inventoryAddDateRange: yupFilterSchemas.dateRange(
+    i18n('entities.purchaseInvoice.fields.inventoryAddDateRange'),
   ),
 });
 
 const emptyValues = {
   purchaseOrder: null,
   invoiceNumber: null,
-  invoiceAmountRange: [],
-  invoiceTaxRange: [],
-  invoiceTotalRange: [],
-  invoiceDateRange: [],
-  invoicePaidDateRange: [],
-  paymentDetails: null,
+  referenceNumber: null,
+  inventoryAddDateRange: [],
 }
 
 const previewRenders = {
@@ -74,29 +57,13 @@ const previewRenders = {
     label: i18n('entities.purchaseInvoice.fields.invoiceNumber'),
     render: filterRenders.generic(),
   },
-  invoiceAmountRange: {
-    label: i18n('entities.purchaseInvoice.fields.invoiceAmountRange'),
-    render: filterRenders.decimalRange(2),
-  },
-  invoiceTaxRange: {
-    label: i18n('entities.purchaseInvoice.fields.invoiceTaxRange'),
-    render: filterRenders.decimalRange(2),
-  },
-  invoiceTotalRange: {
-    label: i18n('entities.purchaseInvoice.fields.invoiceTotalRange'),
-    render: filterRenders.decimalRange(2),
-  },
-  invoiceDateRange: {
-    label: i18n('entities.purchaseInvoice.fields.invoiceDateRange'),
-    render: filterRenders.dateRange(),
-  },
-  invoicePaidDateRange: {
-    label: i18n('entities.purchaseInvoice.fields.invoicePaidDateRange'),
-    render: filterRenders.dateRange(),
-  },
-  paymentDetails: {
-    label: i18n('entities.purchaseInvoice.fields.paymentDetails'),
+  referenceNumber: {
+    label: i18n('entities.purchaseInvoice.fields.referenceNumber'),
     render: filterRenders.generic(),
+  },
+  inventoryAddDateRange: {
+    label: i18n('entities.purchaseInvoice.fields.inventoryAddDateRange'),
+    render: filterRenders.dateRange(),
   },
 }
 
@@ -175,39 +142,15 @@ function PurchaseInvoiceListFilter(props) {
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="invoiceAmountRange"
-                    label={i18n('entities.purchaseInvoice.fields.invoiceAmountRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="invoiceTaxRange"
-                    label={i18n('entities.purchaseInvoice.fields.invoiceTaxRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="invoiceTotalRange"
-                    label={i18n('entities.purchaseInvoice.fields.invoiceTotalRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <DatePickerRangeFormItem
-                    name="invoiceDateRange"
-                    label={i18n('entities.purchaseInvoice.fields.invoiceDateRange')}    
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <DatePickerRangeFormItem
-                    name="invoicePaidDateRange"
-                    label={i18n('entities.purchaseInvoice.fields.invoicePaidDateRange')}    
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
                   <InputFormItem
-                    name="paymentDetails"
-                    label={i18n('entities.purchaseInvoice.fields.paymentDetails')}      
+                    name="referenceNumber"
+                    label={i18n('entities.purchaseInvoice.fields.referenceNumber')}      
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <DatePickerRangeFormItem
+                    name="inventoryAddDateRange"
+                    label={i18n('entities.purchaseInvoice.fields.inventoryAddDateRange')}    
                   />
                 </Grid>
               </Grid>

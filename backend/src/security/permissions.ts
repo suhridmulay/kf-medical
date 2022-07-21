@@ -646,6 +646,37 @@ class Permissions {
         id: 'transferAutocomplete',
         allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
         allowedPlans: [plans.free],
+      },
+
+      prescriptionFillImport: {
+        id: 'prescriptionFillImport',
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
+      },
+      prescriptionFillCreate: {
+        id: 'prescriptionFillCreate',
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
+      },
+      prescriptionFillEdit: {
+        id: 'prescriptionFillEdit',
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
+      },
+      prescriptionFillDestroy: {
+        id: 'prescriptionFillDestroy',
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
+      },
+      prescriptionFillRead: {
+        id: 'prescriptionFillRead',
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
+      },
+      prescriptionFillAutocomplete: {
+        id: 'prescriptionFillAutocomplete',
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
       },      
     };
   }

@@ -164,9 +164,18 @@ function PurchaseOrderListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
-                name={'submittedTotalCost'}
+                name={'purchaseOrderLookup'}
                 label={i18n(
-                  'entities.purchaseOrder.fields.submittedTotalCost',
+                  'entities.purchaseOrder.fields.purchaseOrderLookup',
+                )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'totalGST'}
+                label={i18n(
+                  'entities.purchaseOrder.fields.totalGST',
                 )}
                 align="right"
               />
@@ -174,10 +183,11 @@ function PurchaseOrderListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
-                name={'purchaseOrderLookup'}
+                name={'netAmount'}
                 label={i18n(
-                  'entities.purchaseOrder.fields.purchaseOrderLookup',
+                  'entities.purchaseOrder.fields.netAmount',
                 )}
+                align="right"
               />              
               <TableCellCustom size="md" />
             </TableRow>
@@ -224,8 +234,9 @@ function PurchaseOrderListTable(props) {
                 </TableCell>
                 <TableCell>{row.submittedDate}</TableCell>
                 <TableCell align="right">{row.sumEntriesCost}</TableCell>
-                <TableCell align="right">{row.submittedTotalCost}</TableCell>
-                <TableCell>{row.purchaseOrderLookup}</TableCell>                  
+                <TableCell>{row.purchaseOrderLookup}</TableCell>
+                <TableCell align="right">{row.totalGST}</TableCell>
+                <TableCell align="right">{row.netAmount}</TableCell>                  
                   <TableCell>
                     <Box
                       display="flex"

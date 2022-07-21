@@ -1,5 +1,5 @@
 import schemas from 'src/modules/shared/yup/yupImporterSchemas';
-import { i18n } from 'src/i18n';
+import { i18n } from 'src/i18n';import medicineEnumEnumerators from 'src/modules/medicineEnum/medicineEnumEnumerators';
 
 export default [
   {
@@ -61,6 +61,32 @@ export default [
       i18n('entities.medicineEnum.fields.msrp'),
       {
         "scale": 2
+      },
+    ),
+  },
+  {
+    name: 'centralGST',
+    label: i18n('entities.medicineEnum.fields.centralGST'),
+    schema: schemas.decimal(
+      i18n('entities.medicineEnum.fields.centralGST'),
+      {},
+    ),
+  },
+  {
+    name: 'stateGST',
+    label: i18n('entities.medicineEnum.fields.stateGST'),
+    schema: schemas.decimal(
+      i18n('entities.medicineEnum.fields.stateGST'),
+      {},
+    ),
+  },
+  {
+    name: 'unit',
+    label: i18n('entities.medicineEnum.fields.unit'),
+    schema: schemas.enumerator(
+      i18n('entities.medicineEnum.fields.unit'),
+      {
+        "options": medicineEnumEnumerators.unit
       },
     ),
   },

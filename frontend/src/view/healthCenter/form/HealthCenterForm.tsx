@@ -13,6 +13,7 @@ import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import UserAutocompleteFormItem from 'src/view/user/autocomplete/UserAutocompleteFormItem';
+import SwitchFormItem from 'src/view/shared/form/items/SwitchFormItem';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(
@@ -31,6 +32,16 @@ const schema = yup.object().shape({
     i18n('entities.healthCenter.fields.phoneNumber'),
     {},
   ),
+  warehouseLicenceNumber: yupFormSchemas.string(
+    i18n('entities.healthCenter.fields.warehouseLicenceNumber'),
+    {
+      "max": 255
+    },
+  ),
+  isHeadoffice: yupFormSchemas.boolean(
+    i18n('entities.healthCenter.fields.isHeadoffice'),
+    {},
+  ),
   adminName: yupFormSchemas.relationToOne(
     i18n('entities.healthCenter.fields.adminName'),
     {},
@@ -45,6 +56,8 @@ function HealthCenterForm(props) {
       name: record.name,
       address: record.address,
       phoneNumber: record.phoneNumber,
+      warehouseLicenceNumber: record.warehouseLicenceNumber,
+      isHeadoffice: record.isHeadoffice,
       adminName: record.adminName,
     };
   });
@@ -92,6 +105,19 @@ function HealthCenterForm(props) {
                 name="phoneNumber"
                 label={i18n('entities.healthCenter.fields.phoneNumber')}  
                 required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="warehouseLicenceNumber"
+                label={i18n('entities.healthCenter.fields.warehouseLicenceNumber')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <SwitchFormItem
+                name="isHeadoffice"
+                label={i18n('entities.healthCenter.fields.isHeadoffice')}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

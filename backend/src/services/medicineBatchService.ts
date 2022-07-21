@@ -10,8 +10,6 @@ import AWSStorage from './file/awsFileStorage';
 import SiteInventoryRepository from '../database/repositories/siteInventoryRepository';
 import medicineEnum from '../database/models/medicineEnum';
 
-const HEADOFFICE = "HEADOFFICE";
-
 export default class MedicineBatchService {
   options: IServiceOptions;
 
@@ -28,7 +26,6 @@ export default class MedicineBatchService {
     try {
       data.invoice = await PurchaseInvoiceRepository.filterIdInTenant(data.invoice, { ...this.options, transaction });
       data.medicine = await MedicineEnumRepository.filterIdInTenant(data.medicine, { ...this.options, transaction });
-      data.vendor = await VendorRepository.filterIdInTenant(data.vendor, { ...this.options, transaction });
 
       let medicine = await MedicineEnumRepository.findById(data.medicine, { ...this.options, transaction });
       let purchaseInvoice = await PurchaseInvoiceRepository.findById(data.invoice, { ...this.options, transaction });
@@ -40,8 +37,7 @@ export default class MedicineBatchService {
         transaction,
       });
 
-      // Add this inventory to the "CENTRAL HEADOFFICE" inventory
-      let lookupFilter = {'name': HEADOFFICE};
+      let lookupFilter = {'isHeadoffice': true};
       let headOfficeData = await HealthCenterRepository.findAndCountAll({filter: lookupFilter}, { ...this.options, transaction });
       let headOffice = headOfficeData.rows[0];
 
@@ -89,7 +85,6 @@ export default class MedicineBatchService {
     try {
       data.invoice = await PurchaseInvoiceRepository.filterIdInTenant(data.invoice, { ...this.options, transaction });
       data.medicine = await MedicineEnumRepository.filterIdInTenant(data.medicine, { ...this.options, transaction });
-      data.vendor = await VendorRepository.filterIdInTenant(data.vendor, { ...this.options, transaction });
 
       const record = await MedicineBatchRepository.update(
         id,

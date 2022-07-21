@@ -16,18 +16,32 @@ export default [
     label: i18n('entities.purchaseInvoice.fields.invoiceNumber'),
   },
   {
-    name: 'invoiceAmount',
-    label: i18n('entities.purchaseInvoice.fields.invoiceAmount'),
+    name: 'referenceNumber',
+    label: i18n('entities.purchaseInvoice.fields.referenceNumber'),
+  },
+  {
+    name: 'batches',
+    label: i18n('entities.purchaseInvoice.fields.batches'),
+    render: exporterRenders.relationToMany(),
+  },
+  {
+    name: 'grossAmount',
+    label: i18n('entities.purchaseInvoice.fields.grossAmount'),
     render: exporterRenders.decimal(2),
   },
   {
-    name: 'invoiceTax',
-    label: i18n('entities.purchaseInvoice.fields.invoiceTax'),
+    name: 'stateGST',
+    label: i18n('entities.purchaseInvoice.fields.stateGST'),
     render: exporterRenders.decimal(2),
   },
   {
-    name: 'invoiceTotal',
-    label: i18n('entities.purchaseInvoice.fields.invoiceTotal'),
+    name: 'centralGST',
+    label: i18n('entities.purchaseInvoice.fields.centralGST'),
+    render: exporterRenders.decimal(2),
+  },
+  {
+    name: 'grandTotal',
+    label: i18n('entities.purchaseInvoice.fields.grandTotal'),
     render: exporterRenders.decimal(2),
   },
   {
@@ -43,9 +57,8 @@ export default [
     label: i18n('entities.purchaseInvoice.fields.paymentDetails'),
   },
   {
-    name: 'batches',
-    label: i18n('entities.purchaseInvoice.fields.batches'),
-    render: exporterRenders.relationToMany(),
+    name: 'inventoryAddDate',
+    label: i18n('entities.purchaseInvoice.fields.inventoryAddDate'),
   },
   {
     name: 'createdAt',

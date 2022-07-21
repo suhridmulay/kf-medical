@@ -792,6 +792,44 @@ const privateRoutes = [
     permissionRequired: permissions.transferRead,
     exact: true,
   },
+
+  {
+    path: '/prescription-fill',
+    loader: () =>
+      import('src/view/prescriptionFill/list/PrescriptionFillListPage'),
+    permissionRequired: permissions.prescriptionFillRead,
+    exact: true,
+  },
+  {
+    path: '/prescription-fill/new',
+    loader: () =>
+      import('src/view/prescriptionFill/form/PrescriptionFillFormPage'),
+    permissionRequired: permissions.prescriptionFillCreate,
+    exact: true,
+  },
+  {
+    path: '/prescription-fill/importer',
+    loader: () =>
+      import(
+        'src/view/prescriptionFill/importer/PrescriptionFillImporterPage'
+      ),
+    permissionRequired: permissions.prescriptionFillImport,
+    exact: true,
+  },
+  {
+    path: '/prescription-fill/:id/edit',
+    loader: () =>
+      import('src/view/prescriptionFill/form/PrescriptionFillFormPage'),
+    permissionRequired: permissions.prescriptionFillEdit,
+    exact: true,
+  },
+  {
+    path: '/prescription-fill/:id',
+    loader: () =>
+      import('src/view/prescriptionFill/view/PrescriptionFillViewPage'),
+    permissionRequired: permissions.prescriptionFillRead,
+    exact: true,
+  },
 ].filter(Boolean);
 
 const publicRoutes = [

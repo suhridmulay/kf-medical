@@ -46,6 +46,14 @@ const schema = yup.object().shape({
       "scale": 2
     },
   ),
+  stateGST: yupFormSchemas.decimal(
+    i18n('entities.purchaseOrderEntry.fields.stateGST'),
+    {},
+  ),
+  centralGST: yupFormSchemas.decimal(
+    i18n('entities.purchaseOrderEntry.fields.centralGST'),
+    {},
+  ),
   substitutionAllowed: yupFormSchemas.boolean(
     i18n('entities.purchaseOrderEntry.fields.substitutionAllowed'),
     {},
@@ -62,6 +70,8 @@ function PurchaseOrderEntryForm(props) {
       quantity: record.quantity,
       unitCost: record.unitCost,
       totalCost: record.totalCost,
+      stateGST: record.stateGST,
+      centralGST: record.centralGST,
       substitutionAllowed: record.substitutionAllowed,
     };
   });

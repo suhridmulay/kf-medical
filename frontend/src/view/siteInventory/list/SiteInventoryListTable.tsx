@@ -156,15 +156,6 @@ function SiteInventoryListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
-                name={'inventoryAddDate'}
-                label={i18n(
-                  'entities.siteInventory.fields.inventoryAddDate',
-                )}
-              />
-              <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
                 name={'expiryDate'}
                 label={i18n(
                   'entities.siteInventory.fields.expiryDate',
@@ -174,9 +165,9 @@ function SiteInventoryListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
-                name={'initialcount'}
+                name={'initialCount'}
                 label={i18n(
-                  'entities.siteInventory.fields.initialcount',
+                  'entities.siteInventory.fields.initialCount',
                 )}
                 align="right"
               />
@@ -239,9 +230,8 @@ function SiteInventoryListTable(props) {
                 <TableCell>
                   <MedicineEnumListItem value={row.medicine} />
                 </TableCell>
-                <TableCell>{row.inventoryAddDate}</TableCell>
                 <TableCell>{row.expiryDate}</TableCell>
-                <TableCell align="right">{row.initialcount}</TableCell>
+                <TableCell align="right">{row.initialCount}</TableCell>
                 <TableCell align="right">{row.currentCount}</TableCell>                  
                   <TableCell>
                     <Box

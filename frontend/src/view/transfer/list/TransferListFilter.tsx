@@ -22,7 +22,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import filterRenders from 'src/modules/shared/filter/filterRenders';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
-import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
 import DatePickerRangeFormItem from 'src/view/shared/form/items/DatePickerRangeFormItem';
 import HealthCenterAutocompleteFormItem from 'src/view/healthCenter/autocomplete/HealthCenterAutocompleteFormItem';
@@ -41,12 +40,6 @@ const schema = yup.object().shape({
   transferQuantityRange: yupFilterSchemas.integerRange(
     i18n('entities.transfer.fields.transferQuantityRange'),
   ),
-  medicineName: yupFilterSchemas.string(
-    i18n('entities.transfer.fields.medicineName'),
-  ),
-  expiryDateRange: yupFilterSchemas.dateRange(
-    i18n('entities.transfer.fields.expiryDateRange'),
-  ),
   transferDateRange: yupFilterSchemas.dateRange(
     i18n('entities.transfer.fields.transferDateRange'),
   ),
@@ -57,8 +50,6 @@ const emptyValues = {
   toCenter: null,
   medicineBatch: null,
   transferQuantityRange: [],
-  medicineName: null,
-  expiryDateRange: [],
   transferDateRange: [],
 }
 
@@ -78,14 +69,6 @@ const previewRenders = {
   transferQuantityRange: {
     label: i18n('entities.transfer.fields.transferQuantityRange'),
     render: filterRenders.range(),
-  },
-  medicineName: {
-    label: i18n('entities.transfer.fields.medicineName'),
-    render: filterRenders.generic(),
-  },
-  expiryDateRange: {
-    label: i18n('entities.transfer.fields.expiryDateRange'),
-    render: filterRenders.dateRange(),
   },
   transferDateRange: {
     label: i18n('entities.transfer.fields.transferDateRange'),
@@ -177,18 +160,6 @@ function TransferListFilter(props) {
                   <InputNumberRangeFormItem
                     name="transferQuantityRange"
                     label={i18n('entities.transfer.fields.transferQuantityRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputFormItem
-                    name="medicineName"
-                    label={i18n('entities.transfer.fields.medicineName')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <DatePickerRangeFormItem
-                    name="expiryDateRange"
-                    label={i18n('entities.transfer.fields.expiryDateRange')}    
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>

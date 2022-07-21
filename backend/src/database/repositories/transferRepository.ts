@@ -27,8 +27,6 @@ class TransferRepository {
       {
         ...lodash.pick(data, [
           'transferQuantity',
-          'medicineName',
-          'expiryDate',
           'transferDate',          
           'importHash',
         ]),
@@ -90,8 +88,6 @@ class TransferRepository {
       {
         ...lodash.pick(data, [
           'transferQuantity',
-          'medicineName',
-          'expiryDate',
           'transferDate',          
           'importHash',
         ]),
@@ -328,36 +324,6 @@ class TransferRepository {
         if (end !== undefined && end !== null && end !== '') {
           whereAnd.push({
             transferQuantity: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.medicineName) {
-        whereAnd.push(
-          SequelizeFilterUtils.ilikeIncludes(
-            'transfer',
-            'medicineName',
-            filter.medicineName,
-          ),
-        );
-      }
-
-      if (filter.expiryDateRange) {
-        const [start, end] = filter.expiryDateRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            expiryDate: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            expiryDate: {
               [Op.lte]: end,
             },
           });

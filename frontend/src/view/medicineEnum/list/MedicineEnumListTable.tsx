@@ -185,6 +185,15 @@ function MedicineEnumListTable(props) {
                   'entities.medicineEnum.fields.msrp',
                 )}
                 align="right"
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'unit'}
+                label={i18n(
+                  'entities.medicineEnum.fields.unit',
+                )}
               />              
               <TableCellCustom size="md" />
             </TableRow>
@@ -241,7 +250,14 @@ function MedicineEnumListTable(props) {
                 </TableCell>
                 <TableCell>{row.genericName}</TableCell>
                 <TableCell>{row.compositionName}</TableCell>
-                <TableCell align="right">{row.msrp}</TableCell>                  
+                <TableCell align="right">{row.msrp}</TableCell>
+                <TableCell>
+                  {row.unit
+                    ? i18n(
+                        `entities.medicineEnum.enumerators.unit.${row.unit}`,
+                      )
+                    : null}
+                </TableCell>                  
                   <TableCell>
                     <Box
                       display="flex"

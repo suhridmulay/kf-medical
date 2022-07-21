@@ -25,7 +25,6 @@ import Spinner from 'src/view/shared/Spinner';
 import TableCellCustom from 'src/view/shared/table/TableCellCustom';
 import PurchaseInvoiceListItem from 'src/view/purchaseInvoice/list/PurchaseInvoiceListItem';
 import MedicineEnumListItem from 'src/view/medicineEnum/list/MedicineEnumListItem';
-import VendorListItem from 'src/view/vendor/list/VendorListItem';
 
 function MedicineBatchListTable(props) {
   const [
@@ -190,9 +189,9 @@ function MedicineBatchListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
-                name={'msrp'}
+                name={'stateGST'}
                 label={i18n(
-                  'entities.medicineBatch.fields.msrp',
+                  'entities.medicineBatch.fields.stateGST',
                 )}
                 align="right"
               />
@@ -200,16 +199,21 @@ function MedicineBatchListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
-                name={'purchaseOrderNumber'}
+                name={'centralGST'}
                 label={i18n(
-                  'entities.medicineBatch.fields.purchaseOrderNumber',
+                  'entities.medicineBatch.fields.centralGST',
                 )}
                 align="right"
               />
               <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'msrp'}
                 label={i18n(
-                  'entities.medicineBatch.fields.vendor',
+                  'entities.medicineBatch.fields.msrp',
                 )}
+                align="right"
               />
               <TableCellCustom
                 onSort={doChangeSort}
@@ -270,11 +274,9 @@ function MedicineBatchListTable(props) {
                 <TableCell>{row.expiryDate}</TableCell>
                 <TableCell align="right">{row.unitPrice}</TableCell>
                 <TableCell align="right">{row.totalPrice}</TableCell>
+                <TableCell align="right">{row.stateGST}</TableCell>
+                <TableCell align="right">{row.centralGST}</TableCell>
                 <TableCell align="right">{row.msrp}</TableCell>
-                <TableCell align="right">{row.purchaseOrderNumber}</TableCell>
-                <TableCell>
-                  <VendorListItem value={row.vendor} />
-                </TableCell>
                 <TableCell>{row.medicineBatchLookup}</TableCell>                  
                   <TableCell>
                     <Box

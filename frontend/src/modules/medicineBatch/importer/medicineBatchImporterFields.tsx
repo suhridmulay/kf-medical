@@ -37,7 +37,8 @@ export default [
       i18n('entities.medicineBatch.fields.batchNumber'),
       {
         "max": 100,
-        "min": 2
+        "min": 2,
+        "required": true
       },
     ),
   },
@@ -73,6 +74,26 @@ export default [
     ),
   },
   {
+    name: 'stateGST',
+    label: i18n('entities.medicineBatch.fields.stateGST'),
+    schema: schemas.decimal(
+      i18n('entities.medicineBatch.fields.stateGST'),
+      {
+        "scale": 2
+      },
+    ),
+  },
+  {
+    name: 'centralGST',
+    label: i18n('entities.medicineBatch.fields.centralGST'),
+    schema: schemas.decimal(
+      i18n('entities.medicineBatch.fields.centralGST'),
+      {
+        "scale": 2
+      },
+    ),
+  },
+  {
     name: 'msrp',
     label: i18n('entities.medicineBatch.fields.msrp'),
     schema: schemas.decimal(
@@ -90,22 +111,6 @@ export default [
       {
         "max": 255
       },
-    ),
-  },
-  {
-    name: 'purchaseOrderNumber',
-    label: i18n('entities.medicineBatch.fields.purchaseOrderNumber'),
-    schema: schemas.integer(
-      i18n('entities.medicineBatch.fields.purchaseOrderNumber'),
-      {},
-    ),
-  },
-  {
-    name: 'vendor',
-    label: i18n('entities.medicineBatch.fields.vendor'),
-    schema: schemas.relationToOne(
-      i18n('entities.medicineBatch.fields.vendor'),
-      {},
     ),
   },
   {

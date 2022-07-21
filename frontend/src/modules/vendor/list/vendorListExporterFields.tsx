@@ -27,6 +27,14 @@ export default [
     label: i18n('entities.vendor.fields.email'),
   },
   {
+    name: 'tin',
+    label: i18n('entities.vendor.fields.tin'),
+  },
+  {
+    name: 'dlNumber',
+    label: i18n('entities.vendor.fields.dlNumber'),
+  },
+  {
     name: 'gstNumber',
     label: i18n('entities.vendor.fields.gstNumber'),
   },

@@ -55,10 +55,10 @@ export default [
    render: (value) => value && value instanceof Date ? moment(value).format('YYYY-MM-DD') : value,
   },
   {
-    name: 'initialcount',
-    label: i18n('entities.siteInventory.fields.initialcount'),
+    name: 'initialCount',
+    label: i18n('entities.siteInventory.fields.initialCount'),
     schema: schemas.integer(
-      i18n('entities.siteInventory.fields.initialcount'),
+      i18n('entities.siteInventory.fields.initialCount'),
       {},
     ),
   },

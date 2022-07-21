@@ -7,7 +7,7 @@ import HealthCenterRepository from '../database/repositories/healthCenterReposit
 import DoctorRepository from '../database/repositories/doctorRepository';
 import SymptomsEnumRepository from '../database/repositories/symptomsEnumRepository';
 import MedicineEnumRepository from '../database/repositories/medicineEnumRepository';
-import SiteInventoryRepository from '../database/repositories/siteInventoryRepository';
+import PrescriptionFillRepository from '../database/repositories/prescriptionFillRepository';
 
 export default class PatientVisitService {
   options: IServiceOptions;
@@ -33,10 +33,7 @@ export default class PatientVisitService {
       data.medicine3 = await MedicineEnumRepository.filterIdInTenant(data.medicine3, { ...this.options, transaction });
       data.medicine4 = await MedicineEnumRepository.filterIdInTenant(data.medicine4, { ...this.options, transaction });
       data.telemedicineDoctor = await DoctorRepository.filterIdInTenant(data.telemedicineDoctor, { ...this.options, transaction });
-      data.med1BatchDetails = await SiteInventoryRepository.filterIdInTenant(data.med1BatchDetails, { ...this.options, transaction });
-      data.med2BatchDetails = await SiteInventoryRepository.filterIdInTenant(data.med2BatchDetails, { ...this.options, transaction });
-      data.med3BatchDetails = await SiteInventoryRepository.filterIdInTenant(data.med3BatchDetails, { ...this.options, transaction });
-      data.med4BatchDetails = await SiteInventoryRepository.filterIdInTenant(data.med4BatchDetails, { ...this.options, transaction });
+      data.prescriptionFills = await PrescriptionFillRepository.filterIdsInTenant(data.prescriptionFills, { ...this.options, transaction });
 
       const record = await PatientVisitRepository.create(data, {
         ...this.options,
@@ -80,10 +77,7 @@ export default class PatientVisitService {
       data.medicine3 = await MedicineEnumRepository.filterIdInTenant(data.medicine3, { ...this.options, transaction });
       data.medicine4 = await MedicineEnumRepository.filterIdInTenant(data.medicine4, { ...this.options, transaction });
       data.telemedicineDoctor = await DoctorRepository.filterIdInTenant(data.telemedicineDoctor, { ...this.options, transaction });
-      data.med1BatchDetails = await SiteInventoryRepository.filterIdInTenant(data.med1BatchDetails, { ...this.options, transaction });
-      data.med2BatchDetails = await SiteInventoryRepository.filterIdInTenant(data.med2BatchDetails, { ...this.options, transaction });
-      data.med3BatchDetails = await SiteInventoryRepository.filterIdInTenant(data.med3BatchDetails, { ...this.options, transaction });
-      data.med4BatchDetails = await SiteInventoryRepository.filterIdInTenant(data.med4BatchDetails, { ...this.options, transaction });
+      data.prescriptionFills = await PrescriptionFillRepository.filterIdsInTenant(data.prescriptionFills, { ...this.options, transaction });
 
       const record = await PatientVisitRepository.update(
         id,

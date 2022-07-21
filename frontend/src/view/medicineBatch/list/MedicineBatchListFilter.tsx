@@ -23,10 +23,8 @@ import filterRenders from 'src/modules/shared/filter/filterRenders';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
 import PurchaseInvoiceAutocompleteFormItem from 'src/view/purchaseInvoice/autocomplete/PurchaseInvoiceAutocompleteFormItem';
 import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
-import VendorAutocompleteFormItem from 'src/view/vendor/autocomplete/VendorAutocompleteFormItem';
 
 const schema = yup.object().shape({
   invoice: yupFilterSchemas.relationToOne(
@@ -34,15 +32,6 @@ const schema = yup.object().shape({
   ),
   medicine: yupFilterSchemas.relationToOne(
     i18n('entities.medicineBatch.fields.medicine'),
-  ),
-  batchNumber: yupFilterSchemas.string(
-    i18n('entities.medicineBatch.fields.batchNumber'),
-  ),
-  purchaseOrderNumberRange: yupFilterSchemas.integerRange(
-    i18n('entities.medicineBatch.fields.purchaseOrderNumberRange'),
-  ),
-  vendor: yupFilterSchemas.relationToOne(
-    i18n('entities.medicineBatch.fields.vendor'),
   ),
   medicineBatchLookup: yupFilterSchemas.string(
     i18n('entities.medicineBatch.fields.medicineBatchLookup'),
@@ -52,9 +41,6 @@ const schema = yup.object().shape({
 const emptyValues = {
   invoice: null,
   medicine: null,
-  batchNumber: null,
-  purchaseOrderNumberRange: [],
-  vendor: null,
   medicineBatchLookup: null,
 }
 
@@ -65,18 +51,6 @@ const previewRenders = {
     },
   medicine: {
       label: i18n('entities.medicineBatch.fields.medicine'),
-      render: filterRenders.relationToOne(),
-    },
-  batchNumber: {
-    label: i18n('entities.medicineBatch.fields.batchNumber'),
-    render: filterRenders.generic(),
-  },
-  purchaseOrderNumberRange: {
-    label: i18n('entities.medicineBatch.fields.purchaseOrderNumberRange'),
-    render: filterRenders.range(),
-  },
-  vendor: {
-      label: i18n('entities.medicineBatch.fields.vendor'),
       render: filterRenders.relationToOne(),
     },
   medicineBatchLookup: {
@@ -157,24 +131,6 @@ function MedicineBatchListFilter(props) {
                   <MedicineEnumAutocompleteFormItem  
                     name="medicine"
                     label={i18n('entities.medicineBatch.fields.medicine')}        
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputFormItem
-                    name="batchNumber"
-                    label={i18n('entities.medicineBatch.fields.batchNumber')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputNumberRangeFormItem
-                    name="purchaseOrderNumberRange"
-                    label={i18n('entities.medicineBatch.fields.purchaseOrderNumberRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <VendorAutocompleteFormItem  
-                    name="vendor"
-                    label={i18n('entities.medicineBatch.fields.vendor')}        
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>

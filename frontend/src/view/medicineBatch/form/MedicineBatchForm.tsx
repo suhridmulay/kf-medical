@@ -17,7 +17,6 @@ import moment from 'moment';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
 import PurchaseInvoiceAutocompleteFormItem from 'src/view/purchaseInvoice/autocomplete/PurchaseInvoiceAutocompleteFormItem';
 import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
-import VendorAutocompleteFormItem from 'src/view/vendor/autocomplete/VendorAutocompleteFormItem';
 
 const schema = yup.object().shape({
   invoice: yupFormSchemas.relationToOne(
@@ -40,7 +39,8 @@ const schema = yup.object().shape({
     i18n('entities.medicineBatch.fields.batchNumber'),
     {
       "max": 100,
-      "min": 2
+      "min": 2,
+      "required": true
     },
   ),
   expiryDate: yupFormSchemas.date(
@@ -61,6 +61,18 @@ const schema = yup.object().shape({
       "scale": 2
     },
   ),
+  stateGST: yupFormSchemas.decimal(
+    i18n('entities.medicineBatch.fields.stateGST'),
+    {
+      "scale": 2
+    },
+  ),
+  centralGST: yupFormSchemas.decimal(
+    i18n('entities.medicineBatch.fields.centralGST'),
+    {
+      "scale": 2
+    },
+  ),
   msrp: yupFormSchemas.decimal(
     i18n('entities.medicineBatch.fields.msrp'),
     {
@@ -72,14 +84,6 @@ const schema = yup.object().shape({
     {
       "max": 255
     },
-  ),
-  purchaseOrderNumber: yupFormSchemas.integer(
-    i18n('entities.medicineBatch.fields.purchaseOrderNumber'),
-    {},
-  ),
-  vendor: yupFormSchemas.relationToOne(
-    i18n('entities.medicineBatch.fields.vendor'),
-    {},
   ),
   medicineBatchLookup: yupFormSchemas.string(
     i18n('entities.medicineBatch.fields.medicineBatchLookup'),
@@ -102,10 +106,10 @@ function MedicineBatchForm(props) {
       expiryDate: record.expiryDate ? moment(record.expiryDate, 'YYYY-MM-DD') : null,
       unitPrice: record.unitPrice,
       totalPrice: record.totalPrice,
+      stateGST: record.stateGST,
+      centralGST: record.centralGST,
       msrp: record.msrp,
       description: record.description,
-      purchaseOrderNumber: record.purchaseOrderNumber,
-      vendor: record.vendor,
       medicineBatchLookup: record.medicineBatchLookup,
     };
   });
@@ -160,7 +164,7 @@ function MedicineBatchForm(props) {
               <InputFormItem
                 name="batchNumber"
                 label={i18n('entities.medicineBatch.fields.batchNumber')}  
-                required={false}
+                required={true}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
@@ -186,6 +190,20 @@ function MedicineBatchForm(props) {
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
               <InputFormItem
+                name="stateGST"
+                label={i18n('entities.medicineBatch.fields.stateGST')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="centralGST"
+                label={i18n('entities.medicineBatch.fields.centralGST')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
                 name="msrp"
                 label={i18n('entities.medicineBatch.fields.msrp')}  
                 required={false}
@@ -196,23 +214,6 @@ function MedicineBatchForm(props) {
                 name="description"
                 label={i18n('entities.medicineBatch.fields.description')}  
                 required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputNumberFormItem
-                name="purchaseOrderNumber"
-                label={i18n('entities.medicineBatch.fields.purchaseOrderNumber')}
-              hint={i18n('entities.medicineBatch.hints.purchaseOrderNumber')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <VendorAutocompleteFormItem  
-                name="vendor"
-                label={i18n('entities.medicineBatch.fields.vendor')}
-              hint={i18n('entities.medicineBatch.hints.vendor')}
-                required={false}
-                showCreate={!props.modal}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

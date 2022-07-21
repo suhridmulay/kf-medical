@@ -154,6 +154,24 @@ function HealthCenterListTable(props) {
                 )}
               />
               <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'warehouseLicenceNumber'}
+                label={i18n(
+                  'entities.healthCenter.fields.warehouseLicenceNumber',
+                )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'isHeadoffice'}
+                label={i18n(
+                  'entities.healthCenter.fields.isHeadoffice',
+                )}
+              />
+              <TableCellCustom
                 label={i18n(
                   'entities.healthCenter.fields.adminName',
                 )}
@@ -200,6 +218,12 @@ function HealthCenterListTable(props) {
                 <TableCell>{row.name}</TableCell>
                 <TableCell>{row.address}</TableCell>
                 <TableCell>{row.phoneNumber}</TableCell>
+                <TableCell>{row.warehouseLicenceNumber}</TableCell>
+                <TableCell>
+                  {row.isHeadoffice
+                    ? i18n('common.yes')
+                    : i18n('common.no')}
+                </TableCell>
                 <TableCell>
                   <UserListItem value={row.adminName} />
                 </TableCell>                  

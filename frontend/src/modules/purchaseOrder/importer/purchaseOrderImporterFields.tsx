@@ -36,14 +36,6 @@ export default [
     ),
   },
   {
-    name: 'submittedTotalCost',
-    label: i18n('entities.purchaseOrder.fields.submittedTotalCost'),
-    schema: schemas.decimal(
-      i18n('entities.purchaseOrder.fields.submittedTotalCost'),
-      {},
-    ),
-  },
-  {
     name: 'entries',
     label: i18n('entities.purchaseOrder.fields.entries'),
     schema: schemas.relationToMany(
@@ -60,16 +52,6 @@ export default [
     ),
   },
   {
-    name: 'notes',
-    label: i18n('entities.purchaseOrder.fields.notes'),
-    schema: schemas.string(
-      i18n('entities.purchaseOrder.fields.notes'),
-      {
-        "max": 255
-      },
-    ),
-  },
-  {
     name: 'purchaseOrderLookup',
     label: i18n('entities.purchaseOrder.fields.purchaseOrderLookup'),
     schema: schemas.string(
@@ -77,6 +59,56 @@ export default [
       {
         "max": 255,
         "min": 5
+      },
+    ),
+  },
+  {
+    name: 'totalGST',
+    label: i18n('entities.purchaseOrder.fields.totalGST'),
+    schema: schemas.decimal(
+      i18n('entities.purchaseOrder.fields.totalGST'),
+      {},
+    ),
+  },
+  {
+    name: 'freightAmount',
+    label: i18n('entities.purchaseOrder.fields.freightAmount'),
+    schema: schemas.decimal(
+      i18n('entities.purchaseOrder.fields.freightAmount'),
+      {},
+    ),
+  },
+  {
+    name: 'discount',
+    label: i18n('entities.purchaseOrder.fields.discount'),
+    schema: schemas.decimal(
+      i18n('entities.purchaseOrder.fields.discount'),
+      {},
+    ),
+  },
+  {
+    name: 'writeOffAmount',
+    label: i18n('entities.purchaseOrder.fields.writeOffAmount'),
+    schema: schemas.decimal(
+      i18n('entities.purchaseOrder.fields.writeOffAmount'),
+      {},
+    ),
+  },
+  {
+    name: 'netAmount',
+    label: i18n('entities.purchaseOrder.fields.netAmount'),
+    schema: schemas.decimal(
+      i18n('entities.purchaseOrder.fields.netAmount'),
+      {},
+    ),
+  },
+  {
+    name: 'notes',
+    label: i18n('entities.purchaseOrder.fields.notes'),
+    schema: schemas.string(
+      i18n('entities.purchaseOrder.fields.notes'),
+      {
+        "max": 255
       },
     ),
   },

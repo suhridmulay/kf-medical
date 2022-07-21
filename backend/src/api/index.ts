@@ -86,6 +86,7 @@ require('./purchaseOrderEntry').default(routes);
 require('./medicineBatch').default(routes);
 require('./purchaseInvoice').default(routes);
 require('./transfer').default(routes);
+require('./prescriptionFill').default(routes);
 
 // Loads the Tenant if the :tenantId param is passed
 routes.param('tenantId', tenantMiddleware);

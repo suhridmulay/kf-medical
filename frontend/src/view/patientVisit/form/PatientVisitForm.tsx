@@ -24,7 +24,7 @@ import HealthCenterAutocompleteFormItem from 'src/view/healthCenter/autocomplete
 import DoctorAutocompleteFormItem from 'src/view/doctor/autocomplete/DoctorAutocompleteFormItem';
 import SymptomsEnumAutocompleteFormItem from 'src/view/symptomsEnum/autocomplete/SymptomsEnumAutocompleteFormItem';
 import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
-import SiteInventoryAutocompleteFormItem from 'src/view/siteInventory/autocomplete/SiteInventoryAutocompleteFormItem';
+import PrescriptionFillAutocompleteFormItem from 'src/view/prescriptionFill/autocomplete/PrescriptionFillAutocompleteFormItem';
 
 const schema = yup.object().shape({
   patient: yupFormSchemas.relationToOne(
@@ -244,20 +244,8 @@ const schema = yup.object().shape({
     i18n('entities.patientVisit.fields.finalNotes'),
     {},
   ),
-  med1BatchDetails: yupFormSchemas.relationToOne(
-    i18n('entities.patientVisit.fields.med1BatchDetails'),
-    {},
-  ),
-  med2BatchDetails: yupFormSchemas.relationToOne(
-    i18n('entities.patientVisit.fields.med2BatchDetails'),
-    {},
-  ),
-  med3BatchDetails: yupFormSchemas.relationToOne(
-    i18n('entities.patientVisit.fields.med3BatchDetails'),
-    {},
-  ),
-  med4BatchDetails: yupFormSchemas.relationToOne(
-    i18n('entities.patientVisit.fields.med4BatchDetails'),
+  prescriptionFills: yupFormSchemas.relationToMany(
+    i18n('entities.patientVisit.fields.prescriptionFills'),
     {},
   ),
 });
@@ -312,10 +300,7 @@ function PatientVisitForm(props) {
       differentialDiagnosis: record.differentialDiagnosis,
       differentialRecommendation: record.differentialRecommendation,
       finalNotes: record.finalNotes,
-      med1BatchDetails: record.med1BatchDetails,
-      med2BatchDetails: record.med2BatchDetails,
-      med3BatchDetails: record.med3BatchDetails,
-      med4BatchDetails: record.med4BatchDetails,
+      prescriptionFills: record.prescriptionFills || [],
     };
   });
 
@@ -697,35 +682,12 @@ function PatientVisitForm(props) {
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SiteInventoryAutocompleteFormItem  
-                name="med1BatchDetails"
-                label={i18n('entities.patientVisit.fields.med1BatchDetails')}
+              <PrescriptionFillAutocompleteFormItem  
+                name="prescriptionFills"
+                label={i18n('entities.patientVisit.fields.prescriptionFills')}
                 required={false}
                 showCreate={!props.modal}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SiteInventoryAutocompleteFormItem  
-                name="med2BatchDetails"
-                label={i18n('entities.patientVisit.fields.med2BatchDetails')}
-                required={false}
-                showCreate={!props.modal}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SiteInventoryAutocompleteFormItem  
-                name="med3BatchDetails"
-                label={i18n('entities.patientVisit.fields.med3BatchDetails')}
-                required={false}
-                showCreate={!props.modal}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SiteInventoryAutocompleteFormItem  
-                name="med4BatchDetails"
-                label={i18n('entities.patientVisit.fields.med4BatchDetails')}
-                required={false}
-                showCreate={!props.modal}
+                mode="multiple"
               />
             </Grid>
           </Grid>
