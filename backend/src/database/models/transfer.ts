@@ -16,24 +16,6 @@ export default function (sequelize) {
 
         }
       },
-      medicineName: {
-        type: DataTypes.STRING(255),
-        validate: {
-          len: [0, 255],
-        }
-      },
-      expiryDate: {
-        type: DataTypes.DATEONLY,
-        get: function() {
-          // @ts-ignore
-          return this.getDataValue('expiryDate')
-            ? moment
-                // @ts-ignore
-                .utc(this.getDataValue('expiryDate'))
-                .format('YYYY-MM-DD')
-            : null;
-        },
-      },
       transferDate: {
         type: DataTypes.DATEONLY,
         get: function() {

@@ -53,6 +53,22 @@ export default [
     ),
   },
   {
+    name: 'stateGST',
+    label: i18n('entities.purchaseOrderEntry.fields.stateGST'),
+    schema: schemas.decimal(
+      i18n('entities.purchaseOrderEntry.fields.stateGST'),
+      {},
+    ),
+  },
+  {
+    name: 'centralGST',
+    label: i18n('entities.purchaseOrderEntry.fields.centralGST'),
+    schema: schemas.decimal(
+      i18n('entities.purchaseOrderEntry.fields.centralGST'),
+      {},
+    ),
+  },
+  {
     name: 'substitutionAllowed',
     label: i18n('entities.purchaseOrderEntry.fields.substitutionAllowed'),
     schema: schemas.boolean(

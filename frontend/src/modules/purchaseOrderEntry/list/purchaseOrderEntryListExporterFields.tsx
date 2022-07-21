@@ -32,6 +32,16 @@ export default [
     render: exporterRenders.decimal(2),
   },
   {
+    name: 'stateGST',
+    label: i18n('entities.purchaseOrderEntry.fields.stateGST'),
+    render: exporterRenders.decimal(),
+  },
+  {
+    name: 'centralGST',
+    label: i18n('entities.purchaseOrderEntry.fields.centralGST'),
+    render: exporterRenders.decimal(),
+  },
+  {
     name: 'substitutionAllowed',
     label: i18n('entities.purchaseOrderEntry.fields.substitutionAllowed'),
     render: exporterRenders.boolean(),

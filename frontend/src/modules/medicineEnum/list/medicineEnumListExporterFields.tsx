@@ -39,6 +39,20 @@ export default [
     render: exporterRenders.decimal(2),
   },
   {
+    name: 'centralGST',
+    label: i18n('entities.medicineEnum.fields.centralGST'),
+    render: exporterRenders.decimal(),
+  },
+  {
+    name: 'stateGST',
+    label: i18n('entities.medicineEnum.fields.stateGST'),
+    render: exporterRenders.decimal(),
+  },
+  {
+    name: 'unit',
+    label: i18n('entities.medicineEnum.fields.unit'),
+  },
+  {
     name: 'createdAt',
     label: i18n('entities.medicineEnum.fields.createdAt'),
     render: exporterRenders.datetime(),

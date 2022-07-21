@@ -4,7 +4,6 @@ import { i18n } from 'src/i18n';
 import TextViewItem from 'src/view/shared/view/TextViewItem';
 import PurchaseInvoiceViewItem from 'src/view/purchaseInvoice/view/PurchaseInvoiceViewItem';
 import MedicineEnumViewItem from 'src/view/medicineEnum/view/MedicineEnumViewItem';
-import VendorViewItem from 'src/view/vendor/view/VendorViewItem';
 
 function MedicineBatchView(props) {
   const renderView = () => {
@@ -47,6 +46,16 @@ function MedicineBatchView(props) {
           value={Number(record.totalPrice).toFixed(2)}
         />}
 
+        {record.stateGST != null && <TextViewItem
+          label={i18n('entities.medicineBatch.fields.stateGST')}
+          value={Number(record.stateGST).toFixed(2)}
+        />}
+
+        {record.centralGST != null && <TextViewItem
+          label={i18n('entities.medicineBatch.fields.centralGST')}
+          value={Number(record.centralGST).toFixed(2)}
+        />}
+
         {record.msrp != null && <TextViewItem
           label={i18n('entities.medicineBatch.fields.msrp')}
           value={Number(record.msrp).toFixed(2)}
@@ -55,16 +64,6 @@ function MedicineBatchView(props) {
         <TextViewItem
           label={i18n('entities.medicineBatch.fields.description')}
           value={record.description}
-        />
-
-        <TextViewItem
-          label={i18n('entities.medicineBatch.fields.purchaseOrderNumber')}
-          value={record.purchaseOrderNumber}
-        />
-
-        <VendorViewItem
-          label={i18n('entities.medicineBatch.fields.vendor')}
-          value={record.vendor}
         />
 
         <TextViewItem

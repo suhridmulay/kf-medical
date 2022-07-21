@@ -18,8 +18,10 @@ export default function (sequelize) {
       },
       batchNumber: {
         type: DataTypes.STRING(100),
+        allowNull: false,
         validate: {
           len: [2, 100],
+          notEmpty: true,
         }
       },
       expiryDate: {
@@ -47,6 +49,18 @@ export default function (sequelize) {
 
         }
       },
+      stateGST: {
+        type: DataTypes.DECIMAL(24, 2),
+        validate: {
+
+        }
+      },
+      centralGST: {
+        type: DataTypes.DECIMAL(24, 2),
+        validate: {
+
+        }
+      },
       msrp: {
         type: DataTypes.DECIMAL(24, 2),
         validate: {
@@ -58,9 +72,6 @@ export default function (sequelize) {
         validate: {
           len: [0, 255],
         }
-      },
-      purchaseOrderNumber: {
-        type: DataTypes.INTEGER,
       },
       medicineBatchLookup: {
         type: DataTypes.STRING(255),
@@ -110,11 +121,6 @@ export default function (sequelize) {
       foreignKey: {
         allowNull: false,
       },
-    });
-
-    models.medicineBatch.belongsTo(models.vendor, {
-      as: 'vendor',
-      constraints: false,
     });
 
 

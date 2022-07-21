@@ -47,6 +47,14 @@ const schema = yup.object().shape({
       "scale": 2
     },
   ),
+  stateGST: yupFormSchemas.decimal(
+    i18n('entities.purchaseOrderEntry.fields.stateGST'),
+    {},
+  ),
+  centralGST: yupFormSchemas.decimal(
+    i18n('entities.purchaseOrderEntry.fields.centralGST'),
+    {},
+  ),
   substitutionAllowed: yupFormSchemas.boolean(
     i18n('entities.purchaseOrderEntry.fields.substitutionAllowed'),
     {},
@@ -63,6 +71,8 @@ function PurchaseOrderEntryForm(props) {
       quantity: record.quantity,
       unitCost: record.unitCost,
       totalCost: record.totalCost,
+      stateGST: record.stateGST,
+      centralGST: record.centralGST,
       substitutionAllowed: record.substitutionAllowed,
     };
   });
@@ -124,6 +134,20 @@ function PurchaseOrderEntryForm(props) {
               <InputFormItem
                 name="totalCost"
                 label={i18n('entities.purchaseOrderEntry.fields.totalCost')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="stateGST"
+                label={i18n('entities.purchaseOrderEntry.fields.stateGST')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="centralGST"
+                label={i18n('entities.purchaseOrderEntry.fields.centralGST')}  
                 required={false}
               />
             </Grid>

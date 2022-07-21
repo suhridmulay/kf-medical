@@ -21,19 +21,34 @@ function PurchaseInvoiceView(props) {
           value={record.invoiceNumber}
         />
 
-        {record.invoiceAmount != null && <TextViewItem
-          label={i18n('entities.purchaseInvoice.fields.invoiceAmount')}
-          value={Number(record.invoiceAmount).toFixed(2)}
+        <TextViewItem
+          label={i18n('entities.purchaseInvoice.fields.referenceNumber')}
+          value={record.referenceNumber}
+        />
+
+        <MedicineBatchViewItem
+          label={i18n('entities.purchaseInvoice.fields.batches')}
+          value={record.batches}
+        />
+
+        {record.grossAmount != null && <TextViewItem
+          label={i18n('entities.purchaseInvoice.fields.grossAmount')}
+          value={Number(record.grossAmount).toFixed(2)}
         />}
 
-        {record.invoiceTax != null && <TextViewItem
-          label={i18n('entities.purchaseInvoice.fields.invoiceTax')}
-          value={Number(record.invoiceTax).toFixed(2)}
+        {record.stateGST != null && <TextViewItem
+          label={i18n('entities.purchaseInvoice.fields.stateGST')}
+          value={Number(record.stateGST).toFixed(2)}
         />}
 
-        {record.invoiceTotal != null && <TextViewItem
-          label={i18n('entities.purchaseInvoice.fields.invoiceTotal')}
-          value={Number(record.invoiceTotal).toFixed(2)}
+        {record.centralGST != null && <TextViewItem
+          label={i18n('entities.purchaseInvoice.fields.centralGST')}
+          value={Number(record.centralGST).toFixed(2)}
+        />}
+
+        {record.grandTotal != null && <TextViewItem
+          label={i18n('entities.purchaseInvoice.fields.grandTotal')}
+          value={Number(record.grandTotal).toFixed(2)}
         />}
 
         <TextViewItem
@@ -51,9 +66,9 @@ function PurchaseInvoiceView(props) {
           value={record.paymentDetails}
         />
 
-        <MedicineBatchViewItem
-          label={i18n('entities.purchaseInvoice.fields.batches')}
-          value={record.batches}
+        <TextViewItem
+          label={i18n('entities.purchaseInvoice.fields.inventoryAddDate')}
+          value={record.inventoryAddDate}
         />        
       </div>
     );

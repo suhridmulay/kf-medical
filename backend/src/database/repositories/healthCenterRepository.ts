@@ -28,7 +28,9 @@ class HealthCenterRepository {
         ...lodash.pick(data, [
           'name',
           'address',
-          'phoneNumber',          
+          'phoneNumber',
+          'warehouseLicenceNumber',
+          'isHeadoffice',          
           'importHash',
         ]),
         adminNameId: data.adminName || null,
@@ -88,7 +90,9 @@ class HealthCenterRepository {
         ...lodash.pick(data, [
           'name',
           'address',
-          'phoneNumber',          
+          'phoneNumber',
+          'warehouseLicenceNumber',
+          'isHeadoffice',          
           'importHash',
         ]),
         adminNameId: data.adminName || null,
@@ -296,6 +300,29 @@ class HealthCenterRepository {
             filter.phoneNumber,
           ),
         );
+      }
+
+      if (filter.warehouseLicenceNumber) {
+        whereAnd.push(
+          SequelizeFilterUtils.ilikeIncludes(
+            'healthCenter',
+            'warehouseLicenceNumber',
+            filter.warehouseLicenceNumber,
+          ),
+        );
+      }
+
+      if (
+        filter.isHeadoffice === true ||
+        filter.isHeadoffice === 'true' ||
+        filter.isHeadoffice === false ||
+        filter.isHeadoffice === 'false'
+      ) {
+        whereAnd.push({
+          isHeadoffice:
+            filter.isHeadoffice === true ||
+            filter.isHeadoffice === 'true',
+        });
       }
 
       if (filter.adminName) {

@@ -34,8 +34,8 @@ export default [
     label: i18n('entities.siteInventory.fields.expiryDate'),
   },
   {
-    name: 'initialcount',
-    label: i18n('entities.siteInventory.fields.initialcount'),
+    name: 'initialCount',
+    label: i18n('entities.siteInventory.fields.initialCount'),
   },
   {
     name: 'currentCount',

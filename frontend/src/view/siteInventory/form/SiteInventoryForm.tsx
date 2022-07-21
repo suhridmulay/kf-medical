@@ -46,8 +46,8 @@ const schema = yup.object().shape({
     i18n('entities.siteInventory.fields.expiryDate'),
     {},
   ),
-  initialcount: yupFormSchemas.integer(
-    i18n('entities.siteInventory.fields.initialcount'),
+  initialCount: yupFormSchemas.integer(
+    i18n('entities.siteInventory.fields.initialCount'),
     {},
   ),
   currentCount: yupFormSchemas.integer(
@@ -67,7 +67,7 @@ function SiteInventoryForm(props) {
       medicine: record.medicine,
       inventoryAddDate: record.inventoryAddDate ? moment(record.inventoryAddDate, 'YYYY-MM-DD') : null,
       expiryDate: record.expiryDate ? moment(record.expiryDate, 'YYYY-MM-DD') : null,
-      initialcount: record.initialcount,
+      initialCount: record.initialCount,
       currentCount: record.currentCount,
     };
   });
@@ -144,8 +144,8 @@ function SiteInventoryForm(props) {
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
               <InputNumberFormItem
-                name="initialcount"
-                label={i18n('entities.siteInventory.fields.initialcount')}  
+                name="initialCount"
+                label={i18n('entities.siteInventory.fields.initialCount')}  
                 required={false}
               />
             </Grid>

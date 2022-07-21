@@ -35,6 +35,16 @@ function VendorView(props) {
         />
 
         <TextViewItem
+          label={i18n('entities.vendor.fields.tin')}
+          value={record.tin}
+        />
+
+        <TextViewItem
+          label={i18n('entities.vendor.fields.dlNumber')}
+          value={record.dlNumber}
+        />
+
+        <TextViewItem
           label={i18n('entities.vendor.fields.gstNumber')}
           value={record.gstNumber}
         />        

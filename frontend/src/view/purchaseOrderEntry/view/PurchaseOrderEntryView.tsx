@@ -37,6 +37,16 @@ function PurchaseOrderEntryView(props) {
         />}
 
         <TextViewItem
+          label={i18n('entities.purchaseOrderEntry.fields.stateGST')}
+          value={record.stateGST}
+        />
+
+        <TextViewItem
+          label={i18n('entities.purchaseOrderEntry.fields.centralGST')}
+          value={record.centralGST}
+        />
+
+        <TextViewItem
           label={i18n('entities.purchaseOrderEntry.fields.substitutionAllowed')}
           value={
             record.substitutionAllowed

@@ -214,6 +214,13 @@ const ptBR = {
         }
       }
     },
+    prescriptionFill: {
+      errors: {
+        unique: {
+
+        }
+      }
+    },
   }
 };
 

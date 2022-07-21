@@ -27,19 +27,31 @@ export default function (sequelize) {
       sumEntriesCost: {
         type: DataTypes.DECIMAL,
       },
-      submittedTotalCost: {
+      purchaseOrderLookup: {
+        type: DataTypes.STRING(255),
+        validate: {
+          len: [5, 255],
+        }
+      },
+      totalGST: {
+        type: DataTypes.DECIMAL,
+      },
+      freightAmount: {
+        type: DataTypes.DECIMAL,
+      },
+      discount: {
+        type: DataTypes.DECIMAL,
+      },
+      writeOffAmount: {
+        type: DataTypes.DECIMAL,
+      },
+      netAmount: {
         type: DataTypes.DECIMAL,
       },
       notes: {
         type: DataTypes.STRING(255),
         validate: {
           len: [0, 255],
-        }
-      },
-      purchaseOrderLookup: {
-        type: DataTypes.STRING(255),
-        validate: {
-          len: [5, 255],
         }
       },
       importHash: {

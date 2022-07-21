@@ -51,7 +51,27 @@ function MedicineEnumView(props) {
         {record.msrp != null && <TextViewItem
           label={i18n('entities.medicineEnum.fields.msrp')}
           value={Number(record.msrp).toFixed(2)}
-        />}        
+        />}
+
+        <TextViewItem
+          label={i18n('entities.medicineEnum.fields.centralGST')}
+          value={record.centralGST}
+        />
+
+        <TextViewItem
+          label={i18n('entities.medicineEnum.fields.stateGST')}
+          value={record.stateGST}
+        />
+
+        <TextViewItem
+          label={i18n('entities.medicineEnum.fields.unit')}
+          value={
+            record.unit &&
+            i18n(
+              `entities.medicineEnum.enumerators.unit.${record.unit}`,
+            )
+          }
+        />        
       </div>
     );
   };

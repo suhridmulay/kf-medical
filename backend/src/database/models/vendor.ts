@@ -47,10 +47,22 @@ export default function (sequelize) {
           notEmpty: true,
         }
       },
-      gstNumber: {
-        type: DataTypes.STRING(255),
+      tin: {
+        type: DataTypes.STRING(15),
         validate: {
-          len: [0, 255],
+          len: [0, 15],
+        }
+      },
+      dlNumber: {
+        type: DataTypes.STRING(100),
+        validate: {
+          len: [0, 100],
+        }
+      },
+      gstNumber: {
+        type: DataTypes.STRING(20),
+        validate: {
+          len: [0, 20],
         }
       },
       importHash: {

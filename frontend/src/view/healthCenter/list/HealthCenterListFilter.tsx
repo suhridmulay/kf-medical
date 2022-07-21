@@ -24,6 +24,7 @@ import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import UserAutocompleteFormItem from 'src/view/user/autocomplete/UserAutocompleteFormItem';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 
 const schema = yup.object().shape({
   name: yupFilterSchemas.string(
@@ -35,6 +36,12 @@ const schema = yup.object().shape({
   phoneNumber: yupFilterSchemas.string(
     i18n('entities.healthCenter.fields.phoneNumber'),
   ),
+  warehouseLicenceNumber: yupFilterSchemas.string(
+    i18n('entities.healthCenter.fields.warehouseLicenceNumber'),
+  ),
+  isHeadoffice: yupFilterSchemas.boolean(
+    i18n('entities.healthCenter.fields.isHeadoffice'),
+  ),
   adminName: yupFilterSchemas.relationToOne(
     i18n('entities.healthCenter.fields.adminName'),
   ),
@@ -44,6 +51,8 @@ const emptyValues = {
   name: null,
   address: null,
   phoneNumber: null,
+  warehouseLicenceNumber: null,
+  isHeadoffice: null,
   adminName: null,
 }
 
@@ -59,6 +68,14 @@ const previewRenders = {
   phoneNumber: {
     label: i18n('entities.healthCenter.fields.phoneNumber'),
     render: filterRenders.generic(),
+  },
+  warehouseLicenceNumber: {
+    label: i18n('entities.healthCenter.fields.warehouseLicenceNumber'),
+    render: filterRenders.generic(),
+  },
+  isHeadoffice: {
+    label: i18n('entities.healthCenter.fields.isHeadoffice'),
+    render: filterRenders.boolean(),
   },
   adminName: {
     label: i18n('entities.healthCenter.fields.adminName'),
@@ -144,6 +161,28 @@ function HealthCenterListFilter(props) {
                   <InputFormItem
                     name="phoneNumber"
                     label={i18n('entities.healthCenter.fields.phoneNumber')}      
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <InputFormItem
+                    name="warehouseLicenceNumber"
+                    label={i18n('entities.healthCenter.fields.warehouseLicenceNumber')}      
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <SelectFormItem
+                    name="isHeadoffice"
+                    label={i18n('entities.healthCenter.fields.isHeadoffice')}
+                    options={[
+                      {
+                        value: true,
+                        label: i18n('common.yes'),
+                      },
+                      {
+                        value: false,
+                        label: i18n('common.no'),
+                      },
+                    ]}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>

@@ -157,27 +157,9 @@ function VendorListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
-                name={'fax'}
-                label={i18n(
-                  'entities.vendor.fields.fax',
-                )}
-              />
-              <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
                 name={'email'}
                 label={i18n(
                   'entities.vendor.fields.email',
-                )}
-              />
-              <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'gstNumber'}
-                label={i18n(
-                  'entities.vendor.fields.gstNumber',
                 )}
               />              
               <TableCellCustom size="md" />
@@ -222,9 +204,7 @@ function VendorListTable(props) {
                 <TableCell>{row.vendorName}</TableCell>
                 <TableCell>{row.address}</TableCell>
                 <TableCell>{row.phone}</TableCell>
-                <TableCell>{row.fax}</TableCell>
-                <TableCell>{row.email}</TableCell>
-                <TableCell>{row.gstNumber}</TableCell>                  
+                <TableCell>{row.email}</TableCell>                  
                   <TableCell>
                     <Box
                       display="flex"

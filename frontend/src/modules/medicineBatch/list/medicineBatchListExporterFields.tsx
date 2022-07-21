@@ -39,6 +39,16 @@ export default [
     render: exporterRenders.decimal(2),
   },
   {
+    name: 'stateGST',
+    label: i18n('entities.medicineBatch.fields.stateGST'),
+    render: exporterRenders.decimal(2),
+  },
+  {
+    name: 'centralGST',
+    label: i18n('entities.medicineBatch.fields.centralGST'),
+    render: exporterRenders.decimal(2),
+  },
+  {
     name: 'msrp',
     label: i18n('entities.medicineBatch.fields.msrp'),
     render: exporterRenders.decimal(2),
@@ -46,15 +56,6 @@ export default [
   {
     name: 'description',
     label: i18n('entities.medicineBatch.fields.description'),
-  },
-  {
-    name: 'purchaseOrderNumber',
-    label: i18n('entities.medicineBatch.fields.purchaseOrderNumber'),
-  },
-  {
-    name: 'vendor',
-    label: i18n('entities.medicineBatch.fields.vendor'),
-    render: exporterRenders.relationToOne(),
   },
   {
     name: 'medicineBatchLookup',

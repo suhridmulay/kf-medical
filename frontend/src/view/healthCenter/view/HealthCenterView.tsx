@@ -25,6 +25,20 @@ function HealthCenterView(props) {
           value={record.phoneNumber}
         />
 
+        <TextViewItem
+          label={i18n('entities.healthCenter.fields.warehouseLicenceNumber')}
+          value={record.warehouseLicenceNumber}
+        />
+
+        <TextViewItem
+          label={i18n('entities.healthCenter.fields.isHeadoffice')}
+          value={
+            record.isHeadoffice
+              ? i18n('common.yes')
+              : i18n('common.no')
+          }
+        />
+
         <UserViewItem
           label={i18n('entities.healthCenter.fields.adminName')}
           value={record.adminName}

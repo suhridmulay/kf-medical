@@ -4,7 +4,6 @@ import { IServiceOptions } from './IServiceOptions';
 import MedicineBatchRepository from '../database/repositories/medicineBatchRepository';
 import PurchaseInvoiceRepository from '../database/repositories/purchaseInvoiceRepository';
 import MedicineEnumRepository from '../database/repositories/medicineEnumRepository';
-import VendorRepository from '../database/repositories/vendorRepository';
 
 export default class MedicineBatchService {
   options: IServiceOptions;
@@ -21,7 +20,6 @@ export default class MedicineBatchService {
     try {
       data.invoice = await PurchaseInvoiceRepository.filterIdInTenant(data.invoice, { ...this.options, transaction });
       data.medicine = await MedicineEnumRepository.filterIdInTenant(data.medicine, { ...this.options, transaction });
-      data.vendor = await VendorRepository.filterIdInTenant(data.vendor, { ...this.options, transaction });
 
       const record = await MedicineBatchRepository.create(data, {
         ...this.options,
@@ -56,7 +54,6 @@ export default class MedicineBatchService {
     try {
       data.invoice = await PurchaseInvoiceRepository.filterIdInTenant(data.invoice, { ...this.options, transaction });
       data.medicine = await MedicineEnumRepository.filterIdInTenant(data.medicine, { ...this.options, transaction });
-      data.vendor = await VendorRepository.filterIdInTenant(data.vendor, { ...this.options, transaction });
 
       const record = await MedicineBatchRepository.update(
         id,

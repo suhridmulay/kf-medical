@@ -36,10 +36,6 @@ const schema = yup.object().shape({
     i18n('entities.purchaseOrder.fields.sumEntriesCost'),
     {},
   ),
-  submittedTotalCost: yupFormSchemas.decimal(
-    i18n('entities.purchaseOrder.fields.submittedTotalCost'),
-    {},
-  ),
   entries: yupFormSchemas.relationToMany(
     i18n('entities.purchaseOrder.fields.entries'),
     {},
@@ -48,17 +44,37 @@ const schema = yup.object().shape({
     i18n('entities.purchaseOrder.fields.invoices'),
     {},
   ),
-  notes: yupFormSchemas.string(
-    i18n('entities.purchaseOrder.fields.notes'),
-    {
-      "max": 255
-    },
-  ),
   purchaseOrderLookup: yupFormSchemas.string(
     i18n('entities.purchaseOrder.fields.purchaseOrderLookup'),
     {
       "max": 255,
       "min": 5
+    },
+  ),
+  totalGST: yupFormSchemas.decimal(
+    i18n('entities.purchaseOrder.fields.totalGST'),
+    {},
+  ),
+  freightAmount: yupFormSchemas.decimal(
+    i18n('entities.purchaseOrder.fields.freightAmount'),
+    {},
+  ),
+  discount: yupFormSchemas.decimal(
+    i18n('entities.purchaseOrder.fields.discount'),
+    {},
+  ),
+  writeOffAmount: yupFormSchemas.decimal(
+    i18n('entities.purchaseOrder.fields.writeOffAmount'),
+    {},
+  ),
+  netAmount: yupFormSchemas.decimal(
+    i18n('entities.purchaseOrder.fields.netAmount'),
+    {},
+  ),
+  notes: yupFormSchemas.string(
+    i18n('entities.purchaseOrder.fields.notes'),
+    {
+      "max": 255
     },
   ),
 });
@@ -72,11 +88,15 @@ function PurchaseOrderForm(props) {
       vendor: record.vendor,
       submittedDate: record.submittedDate ? moment(record.submittedDate, 'YYYY-MM-DD') : null,
       sumEntriesCost: record.sumEntriesCost,
-      submittedTotalCost: record.submittedTotalCost,
       entries: record.entries || [],
       invoices: record.invoices || [],
-      notes: record.notes,
       purchaseOrderLookup: record.purchaseOrderLookup,
+      totalGST: record.totalGST,
+      freightAmount: record.freightAmount,
+      discount: record.discount,
+      writeOffAmount: record.writeOffAmount,
+      netAmount: record.netAmount,
+      notes: record.notes,
     };
   });
 
@@ -136,13 +156,6 @@ function PurchaseOrderForm(props) {
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="submittedTotalCost"
-                label={i18n('entities.purchaseOrder.fields.submittedTotalCost')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
               <PurchaseOrderEntryAutocompleteFormItem  
                 name="entries"
                 label={i18n('entities.purchaseOrder.fields.entries')}
@@ -162,16 +175,51 @@ function PurchaseOrderForm(props) {
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
               <InputFormItem
-                name="notes"
-                label={i18n('entities.purchaseOrder.fields.notes')}  
+                name="purchaseOrderLookup"
+                label={i18n('entities.purchaseOrder.fields.purchaseOrderLookup')}
+              hint={i18n('entities.purchaseOrder.hints.purchaseOrderLookup')}  
                 required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
               <InputFormItem
-                name="purchaseOrderLookup"
-                label={i18n('entities.purchaseOrder.fields.purchaseOrderLookup')}
-              hint={i18n('entities.purchaseOrder.hints.purchaseOrderLookup')}  
+                name="totalGST"
+                label={i18n('entities.purchaseOrder.fields.totalGST')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="freightAmount"
+                label={i18n('entities.purchaseOrder.fields.freightAmount')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="discount"
+                label={i18n('entities.purchaseOrder.fields.discount')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="writeOffAmount"
+                label={i18n('entities.purchaseOrder.fields.writeOffAmount')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="netAmount"
+                label={i18n('entities.purchaseOrder.fields.netAmount')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="notes"
+                label={i18n('entities.purchaseOrder.fields.notes')}  
                 required={false}
               />
             </Grid>

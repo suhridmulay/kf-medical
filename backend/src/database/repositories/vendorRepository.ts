@@ -31,6 +31,8 @@ class VendorRepository {
           'phone',
           'fax',
           'email',
+          'tin',
+          'dlNumber',
           'gstNumber',          
           'importHash',
         ]),
@@ -94,6 +96,8 @@ class VendorRepository {
           'phone',
           'fax',
           'email',
+          'tin',
+          'dlNumber',
           'gstNumber',          
           'importHash',
         ]),
@@ -294,16 +298,6 @@ class VendorRepository {
             'vendor',
             'email',
             filter.email,
-          ),
-        );
-      }
-
-      if (filter.gstNumber) {
-        whereAnd.push(
-          SequelizeFilterUtils.ilikeIncludes(
-            'vendor',
-            'gstNumber',
-            filter.gstNumber,
           ),
         );
       }

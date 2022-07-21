@@ -43,8 +43,8 @@ function SiteInventoryView(props) {
         />
 
         <TextViewItem
-          label={i18n('entities.siteInventory.fields.initialcount')}
-          value={record.initialcount}
+          label={i18n('entities.siteInventory.fields.initialCount')}
+          value={record.initialCount}
         />
 
         <TextViewItem

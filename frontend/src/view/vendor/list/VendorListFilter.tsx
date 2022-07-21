@@ -34,16 +34,12 @@ const schema = yup.object().shape({
   email: yupFilterSchemas.string(
     i18n('entities.vendor.fields.email'),
   ),
-  gstNumber: yupFilterSchemas.string(
-    i18n('entities.vendor.fields.gstNumber'),
-  ),
 });
 
 const emptyValues = {
   vendorName: null,
   phone: null,
   email: null,
-  gstNumber: null,
 }
 
 const previewRenders = {
@@ -57,10 +53,6 @@ const previewRenders = {
   },
   email: {
     label: i18n('entities.vendor.fields.email'),
-    render: filterRenders.generic(),
-  },
-  gstNumber: {
-    label: i18n('entities.vendor.fields.gstNumber'),
     render: filterRenders.generic(),
   },
 }
@@ -143,12 +135,6 @@ function VendorListFilter(props) {
                   <InputFormItem
                     name="email"
                     label={i18n('entities.vendor.fields.email')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputFormItem
-                    name="gstNumber"
-                    label={i18n('entities.vendor.fields.gstNumber')}      
                   />
                 </Grid>
               </Grid>

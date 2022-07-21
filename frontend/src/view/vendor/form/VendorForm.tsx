@@ -50,10 +50,22 @@ const schema = yup.object().shape({
       "max": 255
     },
   ),
+  tin: yupFormSchemas.string(
+    i18n('entities.vendor.fields.tin'),
+    {
+      "max": 15
+    },
+  ),
+  dlNumber: yupFormSchemas.string(
+    i18n('entities.vendor.fields.dlNumber'),
+    {
+      "max": 100
+    },
+  ),
   gstNumber: yupFormSchemas.string(
     i18n('entities.vendor.fields.gstNumber'),
     {
-      "max": 255
+      "max": 20
     },
   ),
 });
@@ -68,6 +80,8 @@ function VendorForm(props) {
       phone: record.phone,
       fax: record.fax,
       email: record.email,
+      tin: record.tin,
+      dlNumber: record.dlNumber,
       gstNumber: record.gstNumber,
     };
   });
@@ -129,6 +143,20 @@ function VendorForm(props) {
                 name="email"
                 label={i18n('entities.vendor.fields.email')}  
                 required={true}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="tin"
+                label={i18n('entities.vendor.fields.tin')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="dlNumber"
+                label={i18n('entities.vendor.fields.dlNumber')}  
+                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

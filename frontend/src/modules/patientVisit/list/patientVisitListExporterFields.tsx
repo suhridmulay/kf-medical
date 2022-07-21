@@ -207,24 +207,9 @@ export default [
     label: i18n('entities.patientVisit.fields.finalNotes'),
   },
   {
-    name: 'med1BatchDetails',
-    label: i18n('entities.patientVisit.fields.med1BatchDetails'),
-    render: exporterRenders.relationToOne(),
-  },
-  {
-    name: 'med2BatchDetails',
-    label: i18n('entities.patientVisit.fields.med2BatchDetails'),
-    render: exporterRenders.relationToOne(),
-  },
-  {
-    name: 'med3BatchDetails',
-    label: i18n('entities.patientVisit.fields.med3BatchDetails'),
-    render: exporterRenders.relationToOne(),
-  },
-  {
-    name: 'med4BatchDetails',
-    label: i18n('entities.patientVisit.fields.med4BatchDetails'),
-    render: exporterRenders.relationToOne(),
+    name: 'prescriptionFills',
+    label: i18n('entities.patientVisit.fields.prescriptionFills'),
+    render: exporterRenders.relationToMany(),
   },
   {
     name: 'createdAt',

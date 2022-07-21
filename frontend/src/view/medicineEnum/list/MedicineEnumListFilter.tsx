@@ -25,6 +25,7 @@ import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputRangeFormItem from 'src/view/shared/form/items/InputRangeFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import medicineEnumEnumerators from 'src/modules/medicineEnum/medicineEnumEnumerators';
 import MedicineCategoryEnumAutocompleteFormItem from 'src/view/medicineCategoryEnum/autocomplete/MedicineCategoryEnumAutocompleteFormItem';
 
 const schema = yup.object().shape({
@@ -49,6 +50,9 @@ const schema = yup.object().shape({
   msrpRange: yupFilterSchemas.decimalRange(
     i18n('entities.medicineEnum.fields.msrpRange'),
   ),
+  unit: yupFilterSchemas.enumerator(
+    i18n('entities.medicineEnum.fields.unit'),
+  ),
 });
 
 const emptyValues = {
@@ -59,6 +63,7 @@ const emptyValues = {
   genericName: null,
   compositionName: null,
   msrpRange: [],
+  unit: null,
 }
 
 const previewRenders = {
@@ -89,6 +94,10 @@ const previewRenders = {
   msrpRange: {
     label: i18n('entities.medicineEnum.fields.msrpRange'),
     render: filterRenders.decimalRange(2),
+  },
+  unit: {
+    label: i18n('entities.medicineEnum.fields.unit'),
+    render: filterRenders.enumerator('entities.medicineEnum.enumerators.unit',),
   },
 }
 
@@ -214,6 +223,20 @@ function MedicineEnumListFilter(props) {
                   <InputRangeFormItem
                     name="msrpRange"
                     label={i18n('entities.medicineEnum.fields.msrpRange')}      
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <SelectFormItem
+                    name="unit"
+                    label={i18n('entities.medicineEnum.fields.unit')}
+                    options={medicineEnumEnumerators.unit.map(
+                      (value) => ({
+                        value,
+                        label: i18n(
+                          `entities.medicineEnum.enumerators.unit.${value}`,
+                        ),
+                      }),
+                    )}
                   />
                 </Grid>
               </Grid>

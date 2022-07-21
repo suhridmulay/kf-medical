@@ -144,57 +144,18 @@ function PurchaseInvoiceListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
-                name={'invoiceAmount'}
+                name={'referenceNumber'}
                 label={i18n(
-                  'entities.purchaseInvoice.fields.invoiceAmount',
-                )}
-                align="right"
-              />
-              <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'invoiceTax'}
-                label={i18n(
-                  'entities.purchaseInvoice.fields.invoiceTax',
-                )}
-                align="right"
-              />
-              <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'invoiceTotal'}
-                label={i18n(
-                  'entities.purchaseInvoice.fields.invoiceTotal',
-                )}
-                align="right"
-              />
-              <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'invoiceDate'}
-                label={i18n(
-                  'entities.purchaseInvoice.fields.invoiceDate',
+                  'entities.purchaseInvoice.fields.referenceNumber',
                 )}
               />
               <TableCellCustom
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
-                name={'invoicePaidDate'}
+                name={'inventoryAddDate'}
                 label={i18n(
-                  'entities.purchaseInvoice.fields.invoicePaidDate',
-                )}
-              />
-              <TableCellCustom
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'paymentDetails'}
-                label={i18n(
-                  'entities.purchaseInvoice.fields.paymentDetails',
+                  'entities.purchaseInvoice.fields.inventoryAddDate',
                 )}
               />              
               <TableCellCustom size="md" />
@@ -240,12 +201,8 @@ function PurchaseInvoiceListTable(props) {
                   <PurchaseOrderListItem value={row.purchaseOrder} />
                 </TableCell>
                 <TableCell>{row.invoiceNumber}</TableCell>
-                <TableCell align="right">{row.invoiceAmount}</TableCell>
-                <TableCell align="right">{row.invoiceTax}</TableCell>
-                <TableCell align="right">{row.invoiceTotal}</TableCell>
-                <TableCell>{row.invoiceDate}</TableCell>
-                <TableCell>{row.invoicePaidDate}</TableCell>
-                <TableCell>{row.paymentDetails}</TableCell>                  
+                <TableCell>{row.referenceNumber}</TableCell>
+                <TableCell>{row.inventoryAddDate}</TableCell>                  
                   <TableCell>
                     <Box
                       display="flex"

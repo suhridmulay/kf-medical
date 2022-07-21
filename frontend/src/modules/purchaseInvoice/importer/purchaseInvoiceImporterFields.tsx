@@ -23,10 +23,26 @@ export default [
     ),
   },
   {
-    name: 'invoiceAmount',
-    label: i18n('entities.purchaseInvoice.fields.invoiceAmount'),
+    name: 'referenceNumber',
+    label: i18n('entities.purchaseInvoice.fields.referenceNumber'),
+    schema: schemas.string(
+      i18n('entities.purchaseInvoice.fields.referenceNumber'),
+      {},
+    ),
+  },
+  {
+    name: 'batches',
+    label: i18n('entities.purchaseInvoice.fields.batches'),
+    schema: schemas.relationToMany(
+      i18n('entities.purchaseInvoice.fields.batches'),
+      {},
+    ),
+  },
+  {
+    name: 'grossAmount',
+    label: i18n('entities.purchaseInvoice.fields.grossAmount'),
     schema: schemas.decimal(
-      i18n('entities.purchaseInvoice.fields.invoiceAmount'),
+      i18n('entities.purchaseInvoice.fields.grossAmount'),
       {
         "required": true,
         "scale": 2,
@@ -35,20 +51,30 @@ export default [
     ),
   },
   {
-    name: 'invoiceTax',
-    label: i18n('entities.purchaseInvoice.fields.invoiceTax'),
+    name: 'stateGST',
+    label: i18n('entities.purchaseInvoice.fields.stateGST'),
     schema: schemas.decimal(
-      i18n('entities.purchaseInvoice.fields.invoiceTax'),
+      i18n('entities.purchaseInvoice.fields.stateGST'),
       {
         "scale": 2
       },
     ),
   },
   {
-    name: 'invoiceTotal',
-    label: i18n('entities.purchaseInvoice.fields.invoiceTotal'),
+    name: 'centralGST',
+    label: i18n('entities.purchaseInvoice.fields.centralGST'),
     schema: schemas.decimal(
-      i18n('entities.purchaseInvoice.fields.invoiceTotal'),
+      i18n('entities.purchaseInvoice.fields.centralGST'),
+      {
+        "scale": 2
+      },
+    ),
+  },
+  {
+    name: 'grandTotal',
+    label: i18n('entities.purchaseInvoice.fields.grandTotal'),
+    schema: schemas.decimal(
+      i18n('entities.purchaseInvoice.fields.grandTotal'),
       {
         "scale": 2
       },
@@ -83,11 +109,12 @@ export default [
     ),
   },
   {
-    name: 'batches',
-    label: i18n('entities.purchaseInvoice.fields.batches'),
-    schema: schemas.relationToMany(
-      i18n('entities.purchaseInvoice.fields.batches'),
+    name: 'inventoryAddDate',
+    label: i18n('entities.purchaseInvoice.fields.inventoryAddDate'),
+    schema: schemas.date(
+      i18n('entities.purchaseInvoice.fields.inventoryAddDate'),
       {},
     ),
+   render: (value) => value && value instanceof Date ? moment(value).format('YYYY-MM-DD') : value,
   },
 ];

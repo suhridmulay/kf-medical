@@ -31,6 +31,24 @@ export default [
     ),
   },
   {
+    name: 'warehouseLicenceNumber',
+    label: i18n('entities.healthCenter.fields.warehouseLicenceNumber'),
+    schema: schemas.string(
+      i18n('entities.healthCenter.fields.warehouseLicenceNumber'),
+      {
+        "max": 255
+      },
+    ),
+  },
+  {
+    name: 'isHeadoffice',
+    label: i18n('entities.healthCenter.fields.isHeadoffice'),
+    schema: schemas.boolean(
+      i18n('entities.healthCenter.fields.isHeadoffice'),
+      {},
+    ),
+  },
+  {
     name: 'adminName',
     label: i18n('entities.healthCenter.fields.adminName'),
     schema: schemas.relationToOne(

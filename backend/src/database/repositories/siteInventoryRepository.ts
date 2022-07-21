@@ -29,7 +29,7 @@ class SiteInventoryRepository {
           'siteBatchIdentifier',
           'inventoryAddDate',
           'expiryDate',
-          'initialcount',
+          'initialCount',
           'currentCount',          
           'importHash',
         ]),
@@ -93,7 +93,7 @@ class SiteInventoryRepository {
           'siteBatchIdentifier',
           'inventoryAddDate',
           'expiryDate',
-          'initialcount',
+          'initialCount',
           'currentCount',          
           'importHash',
         ]),
@@ -350,46 +350,6 @@ class SiteInventoryRepository {
         if (end !== undefined && end !== null && end !== '') {
           whereAnd.push({
             expiryDate: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.initialcountRange) {
-        const [start, end] = filter.initialcountRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            initialcount: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            initialcount: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
-
-      if (filter.currentCountRange) {
-        const [start, end] = filter.currentCountRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          whereAnd.push({
-            currentCount: {
-              [Op.gte]: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          whereAnd.push({
-            currentCount: {
               [Op.lte]: end,
             },
           });

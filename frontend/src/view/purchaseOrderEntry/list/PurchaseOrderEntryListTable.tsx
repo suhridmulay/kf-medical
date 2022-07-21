@@ -171,6 +171,26 @@ function PurchaseOrderEntryListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
+                name={'stateGST'}
+                label={i18n(
+                  'entities.purchaseOrderEntry.fields.stateGST',
+                )}
+                align="right"
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'centralGST'}
+                label={i18n(
+                  'entities.purchaseOrderEntry.fields.centralGST',
+                )}
+                align="right"
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
                 name={'substitutionAllowed'}
                 label={i18n(
                   'entities.purchaseOrderEntry.fields.substitutionAllowed',
@@ -224,6 +244,8 @@ function PurchaseOrderEntryListTable(props) {
                 <TableCell align="right">{row.quantity}</TableCell>
                 <TableCell align="right">{row.unitCost}</TableCell>
                 <TableCell align="right">{row.totalCost}</TableCell>
+                <TableCell align="right">{row.stateGST}</TableCell>
+                <TableCell align="right">{row.centralGST}</TableCell>
                 <TableCell>
                   {row.substitutionAllowed
                     ? i18n('common.yes')

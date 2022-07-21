@@ -26,6 +26,17 @@ export default function (sequelize) {
       phoneNumber: {
         type: DataTypes.TEXT,
       },
+      warehouseLicenceNumber: {
+        type: DataTypes.STRING(255),
+        validate: {
+          len: [0, 255],
+        }
+      },
+      isHeadoffice: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,    

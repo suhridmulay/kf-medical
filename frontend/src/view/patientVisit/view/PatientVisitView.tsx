@@ -7,7 +7,7 @@ import HealthCenterViewItem from 'src/view/healthCenter/view/HealthCenterViewIte
 import DoctorViewItem from 'src/view/doctor/view/DoctorViewItem';
 import SymptomsEnumViewItem from 'src/view/symptomsEnum/view/SymptomsEnumViewItem';
 import MedicineEnumViewItem from 'src/view/medicineEnum/view/MedicineEnumViewItem';
-import SiteInventoryViewItem from 'src/view/siteInventory/view/SiteInventoryViewItem';
+import PrescriptionFillViewItem from 'src/view/prescriptionFill/view/PrescriptionFillViewItem';
 
 function PatientVisitView(props) {
   const renderView = () => {
@@ -274,24 +274,9 @@ function PatientVisitView(props) {
           value={record.finalNotes}
         />
 
-        <SiteInventoryViewItem
-          label={i18n('entities.patientVisit.fields.med1BatchDetails')}
-          value={record.med1BatchDetails}
-        />
-
-        <SiteInventoryViewItem
-          label={i18n('entities.patientVisit.fields.med2BatchDetails')}
-          value={record.med2BatchDetails}
-        />
-
-        <SiteInventoryViewItem
-          label={i18n('entities.patientVisit.fields.med3BatchDetails')}
-          value={record.med3BatchDetails}
-        />
-
-        <SiteInventoryViewItem
-          label={i18n('entities.patientVisit.fields.med4BatchDetails')}
-          value={record.med4BatchDetails}
+        <PrescriptionFillViewItem
+          label={i18n('entities.patientVisit.fields.prescriptionFills')}
+          value={record.prescriptionFills}
         />        
       </div>
     );

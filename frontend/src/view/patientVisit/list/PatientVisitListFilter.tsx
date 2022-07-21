@@ -28,7 +28,6 @@ import DatePickerRangeFormItem from 'src/view/shared/form/items/DatePickerRangeF
 import PatientAutocompleteFormItem from 'src/view/patient/autocomplete/PatientAutocompleteFormItem';
 import HealthCenterAutocompleteFormItem from 'src/view/healthCenter/autocomplete/HealthCenterAutocompleteFormItem';
 import DoctorAutocompleteFormItem from 'src/view/doctor/autocomplete/DoctorAutocompleteFormItem';
-import SiteInventoryAutocompleteFormItem from 'src/view/siteInventory/autocomplete/SiteInventoryAutocompleteFormItem';
 
 const schema = yup.object().shape({
   patient: yupFilterSchemas.relationToOne(
@@ -55,18 +54,6 @@ const schema = yup.object().shape({
   telemedicineDoctor: yupFilterSchemas.relationToOne(
     i18n('entities.patientVisit.fields.telemedicineDoctor'),
   ),
-  med1BatchDetails: yupFilterSchemas.relationToOne(
-    i18n('entities.patientVisit.fields.med1BatchDetails'),
-  ),
-  med2BatchDetails: yupFilterSchemas.relationToOne(
-    i18n('entities.patientVisit.fields.med2BatchDetails'),
-  ),
-  med3BatchDetails: yupFilterSchemas.relationToOne(
-    i18n('entities.patientVisit.fields.med3BatchDetails'),
-  ),
-  med4BatchDetails: yupFilterSchemas.relationToOne(
-    i18n('entities.patientVisit.fields.med4BatchDetails'),
-  ),
 });
 
 const emptyValues = {
@@ -78,10 +65,6 @@ const emptyValues = {
   caseSeverity: null,
   isTelemedReferral: null,
   telemedicineDoctor: null,
-  med1BatchDetails: null,
-  med2BatchDetails: null,
-  med3BatchDetails: null,
-  med4BatchDetails: null,
 }
 
 const previewRenders = {
@@ -115,22 +98,6 @@ const previewRenders = {
   },
   telemedicineDoctor: {
       label: i18n('entities.patientVisit.fields.telemedicineDoctor'),
-      render: filterRenders.relationToOne(),
-    },
-  med1BatchDetails: {
-      label: i18n('entities.patientVisit.fields.med1BatchDetails'),
-      render: filterRenders.relationToOne(),
-    },
-  med2BatchDetails: {
-      label: i18n('entities.patientVisit.fields.med2BatchDetails'),
-      render: filterRenders.relationToOne(),
-    },
-  med3BatchDetails: {
-      label: i18n('entities.patientVisit.fields.med3BatchDetails'),
-      render: filterRenders.relationToOne(),
-    },
-  med4BatchDetails: {
-      label: i18n('entities.patientVisit.fields.med4BatchDetails'),
       render: filterRenders.relationToOne(),
     },
 }
@@ -271,30 +238,6 @@ function PatientVisitListFilter(props) {
                   <DoctorAutocompleteFormItem  
                     name="telemedicineDoctor"
                     label={i18n('entities.patientVisit.fields.telemedicineDoctor')}        
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <SiteInventoryAutocompleteFormItem  
-                    name="med1BatchDetails"
-                    label={i18n('entities.patientVisit.fields.med1BatchDetails')}        
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <SiteInventoryAutocompleteFormItem  
-                    name="med2BatchDetails"
-                    label={i18n('entities.patientVisit.fields.med2BatchDetails')}        
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <SiteInventoryAutocompleteFormItem  
-                    name="med3BatchDetails"
-                    label={i18n('entities.patientVisit.fields.med3BatchDetails')}        
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <SiteInventoryAutocompleteFormItem  
-                    name="med4BatchDetails"
-                    label={i18n('entities.patientVisit.fields.med4BatchDetails')}        
                   />
                 </Grid>
               </Grid>

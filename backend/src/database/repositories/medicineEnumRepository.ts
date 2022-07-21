@@ -31,7 +31,10 @@ class MedicineEnumRepository {
           'isCommon',
           'genericName',
           'compositionName',
-          'msrp',          
+          'msrp',
+          'centralGST',
+          'stateGST',
+          'unit',          
           'importHash',
         ]),
         medicineCategoryId: data.medicineCategory || null,
@@ -94,7 +97,10 @@ class MedicineEnumRepository {
           'isCommon',
           'genericName',
           'compositionName',
-          'msrp',          
+          'msrp',
+          'centralGST',
+          'stateGST',
+          'unit',          
           'importHash',
         ]),
         medicineCategoryId: data.medicineCategory || null,
@@ -356,6 +362,12 @@ class MedicineEnumRepository {
             },
           });
         }
+      }
+
+      if (filter.unit) {
+        whereAnd.push({
+          unit: filter.unit,
+        });
       }
 
       if (filter.createdAtRange) {

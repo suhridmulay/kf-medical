@@ -216,6 +216,13 @@ const en = {
         }
       }
     },
+    prescriptionFill: {
+      errors: {
+        unique: {
+
+        }
+      }
+    },
   }
 };
 

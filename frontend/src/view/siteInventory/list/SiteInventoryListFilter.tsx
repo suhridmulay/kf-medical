@@ -22,7 +22,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import filterRenders from 'src/modules/shared/filter/filterRenders';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
-import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
 import DatePickerRangeFormItem from 'src/view/shared/form/items/DatePickerRangeFormItem';
 import HealthCenterAutocompleteFormItem from 'src/view/healthCenter/autocomplete/HealthCenterAutocompleteFormItem';
 import MedicineBatchAutocompleteFormItem from 'src/view/medicineBatch/autocomplete/MedicineBatchAutocompleteFormItem';
@@ -44,12 +43,6 @@ const schema = yup.object().shape({
   expiryDateRange: yupFilterSchemas.dateRange(
     i18n('entities.siteInventory.fields.expiryDateRange'),
   ),
-  initialcountRange: yupFilterSchemas.integerRange(
-    i18n('entities.siteInventory.fields.initialcountRange'),
-  ),
-  currentCountRange: yupFilterSchemas.integerRange(
-    i18n('entities.siteInventory.fields.currentCountRange'),
-  ),
 });
 
 const emptyValues = {
@@ -58,8 +51,6 @@ const emptyValues = {
   medicine: null,
   inventoryAddDateRange: [],
   expiryDateRange: [],
-  initialcountRange: [],
-  currentCountRange: [],
 }
 
 const previewRenders = {
@@ -82,14 +73,6 @@ const previewRenders = {
   expiryDateRange: {
     label: i18n('entities.siteInventory.fields.expiryDateRange'),
     render: filterRenders.dateRange(),
-  },
-  initialcountRange: {
-    label: i18n('entities.siteInventory.fields.initialcountRange'),
-    render: filterRenders.range(),
-  },
-  currentCountRange: {
-    label: i18n('entities.siteInventory.fields.currentCountRange'),
-    render: filterRenders.range(),
   },
 }
 
@@ -183,18 +166,6 @@ function SiteInventoryListFilter(props) {
                   <DatePickerRangeFormItem
                     name="expiryDateRange"
                     label={i18n('entities.siteInventory.fields.expiryDateRange')}    
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputNumberRangeFormItem
-                    name="initialcountRange"
-                    label={i18n('entities.siteInventory.fields.initialcountRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputNumberRangeFormItem
-                    name="currentCountRange"
-                    label={i18n('entities.siteInventory.fields.currentCountRange')}      
                   />
                 </Grid>
               </Grid>

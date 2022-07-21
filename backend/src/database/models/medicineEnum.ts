@@ -39,6 +39,23 @@ export default function (sequelize) {
 
         }
       },
+      centralGST: {
+        type: DataTypes.DECIMAL,
+      },
+      stateGST: {
+        type: DataTypes.DECIMAL,
+      },
+      unit: {
+        type: DataTypes.TEXT,
+        validate: {
+          isIn: [[
+            "STRIP",
+            "BOTTLE",
+            "DROP",
+            "TUBE"
+          ]],
+        }
+      },
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,    

@@ -73,10 +73,6 @@ class PatientVisitRepository {
         medicine3Id: data.medicine3 || null,
         medicine4Id: data.medicine4 || null,
         telemedicineDoctorId: data.telemedicineDoctor || null,
-        med1BatchDetailsId: data.med1BatchDetails || null,
-        med2BatchDetailsId: data.med2BatchDetails || null,
-        med3BatchDetailsId: data.med3BatchDetails || null,
-        med4BatchDetailsId: data.med4BatchDetails || null,
         tenantId: tenant.id,
         createdById: currentUser.id,
         updatedById: currentUser.id,
@@ -86,7 +82,9 @@ class PatientVisitRepository {
       },
     );
 
-    
+    await record.setPrescriptionFills(data.prescriptionFills || [], {
+      transaction,
+    });    
   
 
   
@@ -178,10 +176,6 @@ class PatientVisitRepository {
         medicine3Id: data.medicine3 || null,
         medicine4Id: data.medicine4 || null,
         telemedicineDoctorId: data.telemedicineDoctor || null,
-        med1BatchDetailsId: data.med1BatchDetails || null,
-        med2BatchDetailsId: data.med2BatchDetails || null,
-        med3BatchDetailsId: data.med3BatchDetails || null,
-        med4BatchDetailsId: data.med4BatchDetails || null,
         updatedById: currentUser.id,
       },
       {
@@ -189,7 +183,9 @@ class PatientVisitRepository {
       },
     );
 
-
+    await record.setPrescriptionFills(data.prescriptionFills || [], {
+      transaction,
+    });
 
 
 
@@ -287,22 +283,6 @@ class PatientVisitRepository {
       {
         model: options.database.doctor,
         as: 'telemedicineDoctor',
-      },
-      {
-        model: options.database.siteInventory,
-        as: 'med1BatchDetails',
-      },
-      {
-        model: options.database.siteInventory,
-        as: 'med2BatchDetails',
-      },
-      {
-        model: options.database.siteInventory,
-        as: 'med3BatchDetails',
-      },
-      {
-        model: options.database.siteInventory,
-        as: 'med4BatchDetails',
       },
     ];
 
@@ -440,22 +420,6 @@ class PatientVisitRepository {
       {
         model: options.database.doctor,
         as: 'telemedicineDoctor',
-      },
-      {
-        model: options.database.siteInventory,
-        as: 'med1BatchDetails',
-      },
-      {
-        model: options.database.siteInventory,
-        as: 'med2BatchDetails',
-      },
-      {
-        model: options.database.siteInventory,
-        as: 'med3BatchDetails',
-      },
-      {
-        model: options.database.siteInventory,
-        as: 'med4BatchDetails',
       },      
     ];
 
@@ -550,38 +514,6 @@ class PatientVisitRepository {
         whereAnd.push({
           ['telemedicineDoctorId']: SequelizeFilterUtils.uuid(
             filter.telemedicineDoctor,
-          ),
-        });
-      }
-
-      if (filter.med1BatchDetails) {
-        whereAnd.push({
-          ['med1BatchDetailsId']: SequelizeFilterUtils.uuid(
-            filter.med1BatchDetails,
-          ),
-        });
-      }
-
-      if (filter.med2BatchDetails) {
-        whereAnd.push({
-          ['med2BatchDetailsId']: SequelizeFilterUtils.uuid(
-            filter.med2BatchDetails,
-          ),
-        });
-      }
-
-      if (filter.med3BatchDetails) {
-        whereAnd.push({
-          ['med3BatchDetailsId']: SequelizeFilterUtils.uuid(
-            filter.med3BatchDetails,
-          ),
-        });
-      }
-
-      if (filter.med4BatchDetails) {
-        whereAnd.push({
-          ['med4BatchDetailsId']: SequelizeFilterUtils.uuid(
-            filter.med4BatchDetails,
           ),
         });
       }
@@ -687,7 +619,7 @@ class PatientVisitRepository {
     if (data) {
       values = {
         ...record.get({ plain: true }),
-
+        prescriptionFillsIds: data.prescriptionFills,
       };
     }
 
@@ -728,7 +660,9 @@ class PatientVisitRepository {
       options,
     );
 
-
+    output.prescriptionFills = await record.getPrescriptionFills({
+      transaction,
+    });
 
     return output;
   }

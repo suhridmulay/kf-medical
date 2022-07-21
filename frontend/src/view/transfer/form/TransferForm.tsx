@@ -11,7 +11,6 @@ import { useForm, FormProvider } from 'react-hook-form';
 import * as yup from 'yup';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
-import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import moment from 'moment';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
@@ -43,16 +42,6 @@ const schema = yup.object().shape({
       "required": true
     },
   ),
-  medicineName: yupFormSchemas.string(
-    i18n('entities.transfer.fields.medicineName'),
-    {
-      "max": 255
-    },
-  ),
-  expiryDate: yupFormSchemas.date(
-    i18n('entities.transfer.fields.expiryDate'),
-    {},
-  ),
   transferDate: yupFormSchemas.date(
     i18n('entities.transfer.fields.transferDate'),
     {},
@@ -68,8 +57,6 @@ function TransferForm(props) {
       toCenter: record.toCenter,
       medicineBatch: record.medicineBatch,
       transferQuantity: record.transferQuantity,
-      medicineName: record.medicineName,
-      expiryDate: record.expiryDate ? moment(record.expiryDate, 'YYYY-MM-DD') : null,
       transferDate: record.transferDate ? moment(record.transferDate, 'YYYY-MM-DD') : null,
     };
   });
@@ -126,22 +113,6 @@ function TransferForm(props) {
                 name="transferQuantity"
                 label={i18n('entities.transfer.fields.transferQuantity')}  
                 required={true}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="medicineName"
-                label={i18n('entities.transfer.fields.medicineName')}
-              hint={i18n('entities.transfer.hints.medicineName')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <DatePickerFormItem
-                name="expiryDate"
-                label={i18n('entities.transfer.fields.expiryDate')}
-              hint={i18n('entities.transfer.hints.expiryDate')}
-                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

@@ -59,12 +59,32 @@ export default [
     ),
   },
   {
+    name: 'tin',
+    label: i18n('entities.vendor.fields.tin'),
+    schema: schemas.string(
+      i18n('entities.vendor.fields.tin'),
+      {
+        "max": 15
+      },
+    ),
+  },
+  {
+    name: 'dlNumber',
+    label: i18n('entities.vendor.fields.dlNumber'),
+    schema: schemas.string(
+      i18n('entities.vendor.fields.dlNumber'),
+      {
+        "max": 100
+      },
+    ),
+  },
+  {
     name: 'gstNumber',
     label: i18n('entities.vendor.fields.gstNumber'),
     schema: schemas.string(
       i18n('entities.vendor.fields.gstNumber'),
       {
-        "max": 255
+        "max": 20
       },
     ),
   },

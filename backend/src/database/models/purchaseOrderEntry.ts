@@ -29,6 +29,12 @@ export default function (sequelize) {
 
         }
       },
+      stateGST: {
+        type: DataTypes.DECIMAL,
+      },
+      centralGST: {
+        type: DataTypes.DECIMAL,
+      },
       substitutionAllowed: {
         type: DataTypes.BOOLEAN,
         allowNull: false,

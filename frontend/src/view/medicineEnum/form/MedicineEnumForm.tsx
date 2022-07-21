@@ -13,6 +13,8 @@ import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import SwitchFormItem from 'src/view/shared/form/items/SwitchFormItem';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import medicineEnumEnumerators from 'src/modules/medicineEnum/medicineEnumEnumerators';
 import MedicineCategoryEnumAutocompleteFormItem from 'src/view/medicineCategoryEnum/autocomplete/MedicineCategoryEnumAutocompleteFormItem';
 
 const schema = yup.object().shape({
@@ -50,6 +52,20 @@ const schema = yup.object().shape({
       "scale": 2
     },
   ),
+  centralGST: yupFormSchemas.decimal(
+    i18n('entities.medicineEnum.fields.centralGST'),
+    {},
+  ),
+  stateGST: yupFormSchemas.decimal(
+    i18n('entities.medicineEnum.fields.stateGST'),
+    {},
+  ),
+  unit: yupFormSchemas.enumerator(
+    i18n('entities.medicineEnum.fields.unit'),
+    {
+      "options": medicineEnumEnumerators.unit
+    },
+  ),
 });
 
 function MedicineEnumForm(props) {
@@ -64,6 +80,9 @@ function MedicineEnumForm(props) {
       genericName: record.genericName,
       compositionName: record.compositionName,
       msrp: record.msrp,
+      centralGST: record.centralGST,
+      stateGST: record.stateGST,
+      unit: record.unit,
     };
   });
 
@@ -138,6 +157,35 @@ function MedicineEnumForm(props) {
               <InputFormItem
                 name="msrp"
                 label={i18n('entities.medicineEnum.fields.msrp')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="centralGST"
+                label={i18n('entities.medicineEnum.fields.centralGST')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="stateGST"
+                label={i18n('entities.medicineEnum.fields.stateGST')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <SelectFormItem
+                name="unit"
+                label={i18n('entities.medicineEnum.fields.unit')}
+                options={medicineEnumEnumerators.unit.map(
+                  (value) => ({
+                    value,
+                    label: i18n(
+                      `entities.medicineEnum.enumerators.unit.${value}`,
+                    ),
+                  }),
+                )}
                 required={false}
               />
             </Grid>

@@ -24,6 +24,7 @@ import purchaseOrderEntry from 'src/modules/purchaseOrderEntry/purchaseOrderEntr
 import medicineBatch from 'src/modules/medicineBatch/medicineBatchReducers';
 import purchaseInvoice from 'src/modules/purchaseInvoice/purchaseInvoiceReducers';
 import transfer from 'src/modules/transfer/transferReducers';
+import prescriptionFill from 'src/modules/prescriptionFill/prescriptionFillReducers';
 import { combineReducers } from 'redux';
 
 export default (history) =>
@@ -54,4 +55,5 @@ export default (history) =>
     medicineBatch,
     purchaseInvoice,
     transfer,
+    prescriptionFill,
   });

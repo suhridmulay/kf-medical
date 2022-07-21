@@ -43,25 +43,6 @@ export default [
     ),
   },
   {
-    name: 'medicineName',
-    label: i18n('entities.transfer.fields.medicineName'),
-    schema: schemas.string(
-      i18n('entities.transfer.fields.medicineName'),
-      {
-        "max": 255
-      },
-    ),
-  },
-  {
-    name: 'expiryDate',
-    label: i18n('entities.transfer.fields.expiryDate'),
-    schema: schemas.date(
-      i18n('entities.transfer.fields.expiryDate'),
-      {},
-    ),
-   render: (value) => value && value instanceof Date ? moment(value).format('YYYY-MM-DD') : value,
-  },
-  {
     name: 'transferDate',
     label: i18n('entities.transfer.fields.transferDate'),
     schema: schemas.date(

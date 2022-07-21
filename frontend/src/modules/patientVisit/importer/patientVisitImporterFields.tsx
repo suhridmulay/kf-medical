@@ -403,34 +403,10 @@ export default [
     ),
   },
   {
-    name: 'med1BatchDetails',
-    label: i18n('entities.patientVisit.fields.med1BatchDetails'),
-    schema: schemas.relationToOne(
-      i18n('entities.patientVisit.fields.med1BatchDetails'),
-      {},
-    ),
-  },
-  {
-    name: 'med2BatchDetails',
-    label: i18n('entities.patientVisit.fields.med2BatchDetails'),
-    schema: schemas.relationToOne(
-      i18n('entities.patientVisit.fields.med2BatchDetails'),
-      {},
-    ),
-  },
-  {
-    name: 'med3BatchDetails',
-    label: i18n('entities.patientVisit.fields.med3BatchDetails'),
-    schema: schemas.relationToOne(
-      i18n('entities.patientVisit.fields.med3BatchDetails'),
-      {},
-    ),
-  },
-  {
-    name: 'med4BatchDetails',
-    label: i18n('entities.patientVisit.fields.med4BatchDetails'),
-    schema: schemas.relationToOne(
-      i18n('entities.patientVisit.fields.med4BatchDetails'),
+    name: 'prescriptionFills',
+    label: i18n('entities.patientVisit.fields.prescriptionFills'),
+    schema: schemas.relationToMany(
+      i18n('entities.patientVisit.fields.prescriptionFills'),
       {},
     ),
   },

@@ -32,11 +32,6 @@ function PurchaseOrderView(props) {
           value={record.sumEntriesCost}
         />
 
-        <TextViewItem
-          label={i18n('entities.purchaseOrder.fields.submittedTotalCost')}
-          value={record.submittedTotalCost}
-        />
-
         <PurchaseOrderEntryViewItem
           label={i18n('entities.purchaseOrder.fields.entries')}
           value={record.entries}
@@ -48,13 +43,38 @@ function PurchaseOrderView(props) {
         />
 
         <TextViewItem
-          label={i18n('entities.purchaseOrder.fields.notes')}
-          value={record.notes}
+          label={i18n('entities.purchaseOrder.fields.purchaseOrderLookup')}
+          value={record.purchaseOrderLookup}
         />
 
         <TextViewItem
-          label={i18n('entities.purchaseOrder.fields.purchaseOrderLookup')}
-          value={record.purchaseOrderLookup}
+          label={i18n('entities.purchaseOrder.fields.totalGST')}
+          value={record.totalGST}
+        />
+
+        <TextViewItem
+          label={i18n('entities.purchaseOrder.fields.freightAmount')}
+          value={record.freightAmount}
+        />
+
+        <TextViewItem
+          label={i18n('entities.purchaseOrder.fields.discount')}
+          value={record.discount}
+        />
+
+        <TextViewItem
+          label={i18n('entities.purchaseOrder.fields.writeOffAmount')}
+          value={record.writeOffAmount}
+        />
+
+        <TextViewItem
+          label={i18n('entities.purchaseOrder.fields.netAmount')}
+          value={record.netAmount}
+        />
+
+        <TextViewItem
+          label={i18n('entities.purchaseOrder.fields.notes')}
+          value={record.notes}
         />        
       </div>
     );

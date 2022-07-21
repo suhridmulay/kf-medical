@@ -218,6 +218,13 @@ const es = {
         }
       }
     },
+    prescriptionFill: {
+      errors: {
+        unique: {
+
+        }
+      }
+    },
   }
 };
 

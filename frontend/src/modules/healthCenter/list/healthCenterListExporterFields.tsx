@@ -19,6 +19,15 @@ export default [
     label: i18n('entities.healthCenter.fields.phoneNumber'),
   },
   {
+    name: 'warehouseLicenceNumber',
+    label: i18n('entities.healthCenter.fields.warehouseLicenceNumber'),
+  },
+  {
+    name: 'isHeadoffice',
+    label: i18n('entities.healthCenter.fields.isHeadoffice'),
+    render: exporterRenders.boolean(),
+  },
+  {
     name: 'adminName',
     label: i18n('entities.healthCenter.fields.adminName'),
     render: exporterRenders.relationToOne(),

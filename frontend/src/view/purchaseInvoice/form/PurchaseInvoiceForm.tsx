@@ -30,22 +30,36 @@ const schema = yup.object().shape({
       "min": 2
     },
   ),
-  invoiceAmount: yupFormSchemas.decimal(
-    i18n('entities.purchaseInvoice.fields.invoiceAmount'),
+  referenceNumber: yupFormSchemas.string(
+    i18n('entities.purchaseInvoice.fields.referenceNumber'),
+    {},
+  ),
+  batches: yupFormSchemas.relationToMany(
+    i18n('entities.purchaseInvoice.fields.batches'),
+    {},
+  ),
+  grossAmount: yupFormSchemas.decimal(
+    i18n('entities.purchaseInvoice.fields.grossAmount'),
     {
       "required": true,
       "scale": 2,
       "min": 0
     },
   ),
-  invoiceTax: yupFormSchemas.decimal(
-    i18n('entities.purchaseInvoice.fields.invoiceTax'),
+  stateGST: yupFormSchemas.decimal(
+    i18n('entities.purchaseInvoice.fields.stateGST'),
     {
       "scale": 2
     },
   ),
-  invoiceTotal: yupFormSchemas.decimal(
-    i18n('entities.purchaseInvoice.fields.invoiceTotal'),
+  centralGST: yupFormSchemas.decimal(
+    i18n('entities.purchaseInvoice.fields.centralGST'),
+    {
+      "scale": 2
+    },
+  ),
+  grandTotal: yupFormSchemas.decimal(
+    i18n('entities.purchaseInvoice.fields.grandTotal'),
     {
       "scale": 2
     },
@@ -64,8 +78,8 @@ const schema = yup.object().shape({
       "max": 255
     },
   ),
-  batches: yupFormSchemas.relationToMany(
-    i18n('entities.purchaseInvoice.fields.batches'),
+  inventoryAddDate: yupFormSchemas.date(
+    i18n('entities.purchaseInvoice.fields.inventoryAddDate'),
     {},
   ),
 });
@@ -77,13 +91,16 @@ function PurchaseInvoiceForm(props) {
     return {
       purchaseOrder: record.purchaseOrder,
       invoiceNumber: record.invoiceNumber,
-      invoiceAmount: record.invoiceAmount,
-      invoiceTax: record.invoiceTax,
-      invoiceTotal: record.invoiceTotal,
+      referenceNumber: record.referenceNumber,
+      batches: record.batches || [],
+      grossAmount: record.grossAmount,
+      stateGST: record.stateGST,
+      centralGST: record.centralGST,
+      grandTotal: record.grandTotal,
       invoiceDate: record.invoiceDate ? moment(record.invoiceDate, 'YYYY-MM-DD') : null,
       invoicePaidDate: record.invoicePaidDate ? moment(record.invoicePaidDate, 'YYYY-MM-DD') : null,
       paymentDetails: record.paymentDetails,
-      batches: record.batches || [],
+      inventoryAddDate: record.inventoryAddDate ? moment(record.inventoryAddDate, 'YYYY-MM-DD') : null,
     };
   });
 
@@ -127,22 +144,45 @@ function PurchaseInvoiceForm(props) {
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
               <InputFormItem
-                name="invoiceAmount"
-                label={i18n('entities.purchaseInvoice.fields.invoiceAmount')}  
+                name="referenceNumber"
+                label={i18n('entities.purchaseInvoice.fields.referenceNumber')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <MedicineBatchAutocompleteFormItem  
+                name="batches"
+                label={i18n('entities.purchaseInvoice.fields.batches')}
+                required={false}
+                showCreate={!props.modal}
+                mode="multiple"
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="grossAmount"
+                label={i18n('entities.purchaseInvoice.fields.grossAmount')}  
                 required={true}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
               <InputFormItem
-                name="invoiceTax"
-                label={i18n('entities.purchaseInvoice.fields.invoiceTax')}  
+                name="stateGST"
+                label={i18n('entities.purchaseInvoice.fields.stateGST')}  
                 required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
               <InputFormItem
-                name="invoiceTotal"
-                label={i18n('entities.purchaseInvoice.fields.invoiceTotal')}  
+                name="centralGST"
+                label={i18n('entities.purchaseInvoice.fields.centralGST')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="grandTotal"
+                label={i18n('entities.purchaseInvoice.fields.grandTotal')}  
                 required={false}
               />
             </Grid>
@@ -168,12 +208,10 @@ function PurchaseInvoiceForm(props) {
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
-              <MedicineBatchAutocompleteFormItem  
-                name="batches"
-                label={i18n('entities.purchaseInvoice.fields.batches')}
+              <DatePickerFormItem
+                name="inventoryAddDate"
+                label={i18n('entities.purchaseInvoice.fields.inventoryAddDate')}
                 required={false}
-                showCreate={!props.modal}
-                mode="multiple"
               />
             </Grid>
           </Grid>
