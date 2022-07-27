@@ -167,21 +167,6 @@ function PurchaseOrderForm(props) {
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
               <InputFormItem
-                name="purchaseOrderLookup"
-                label={i18n('entities.purchaseOrder.fields.purchaseOrderLookup')}
-              hint={i18n('entities.purchaseOrder.hints.purchaseOrderLookup')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="totalGST"
-                label={i18n('entities.purchaseOrder.fields.totalGST')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
                 name="freightAmount"
                 label={i18n('entities.purchaseOrder.fields.freightAmount')}  
                 required={false}
@@ -198,13 +183,6 @@ function PurchaseOrderForm(props) {
               <InputFormItem
                 name="writeOffAmount"
                 label={i18n('entities.purchaseOrder.fields.writeOffAmount')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="netAmount"
-                label={i18n('entities.purchaseOrder.fields.netAmount')}  
                 required={false}
               />
             </Grid>

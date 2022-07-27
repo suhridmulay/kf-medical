@@ -12,6 +12,12 @@ export default class PurchaseOrderEntryService {
     this.options = options;
   }
 
+  fillInTaxes(data, medicine) {
+    data.totalCost = data.quantity * data.unitCost;
+    data.stateGST = (medicine.stateGST/100.0) * data.totalCost;
+    data.centralGST = (medicine.centralGST/100.0) * data.totalCost;
+  }
+
   async create(data) {
     const transaction = await SequelizeRepository.createTransaction(
       this.options.database,
@@ -20,6 +26,9 @@ export default class PurchaseOrderEntryService {
     try {
       data.purchaseOrder = await PurchaseOrderRepository.filterIdInTenant(data.purchaseOrder, { ...this.options, transaction });
       data.medicine = await MedicineEnumRepository.filterIdInTenant(data.medicine, { ...this.options, transaction });
+      let medicine = await MedicineEnumRepository.findById(data.medicine, {...this.options, transaction });
+
+      this.fillInTaxes(data, medicine);
 
       const record = await PurchaseOrderEntryRepository.create(data, {
         ...this.options,
@@ -54,6 +63,8 @@ export default class PurchaseOrderEntryService {
     try {
       data.purchaseOrder = await PurchaseOrderRepository.filterIdInTenant(data.purchaseOrder, { ...this.options, transaction });
       data.medicine = await MedicineEnumRepository.filterIdInTenant(data.medicine, { ...this.options, transaction });
+      let medicine = await MedicineEnumRepository.findById(data.medicine, {...this.options, transaction });
+      this.fillInTaxes(data, medicine);
 
       const record = await PurchaseOrderEntryRepository.update(
         id,

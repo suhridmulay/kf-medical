@@ -731,42 +731,33 @@ class Permissions {
 
       prescriptionFillImport: {
         id: 'prescriptionFillImport',
-        allowedRoles: [roles.admin],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
       },
       prescriptionFillCreate: {
         id: 'prescriptionFillCreate',
-        allowedRoles: [roles.admin],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
-        allowedStorage: [
-
-        ],
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
       },
       prescriptionFillEdit: {
         id: 'prescriptionFillEdit',
-        allowedRoles: [roles.admin],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
-        allowedStorage: [
-
-        ],
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
       },
       prescriptionFillDestroy: {
         id: 'prescriptionFillDestroy',
-        allowedRoles: [roles.admin],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
-        allowedStorage: [
-
-        ],
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
       },
       prescriptionFillRead: {
         id: 'prescriptionFillRead',
-        allowedRoles: [roles.admin, roles.custom],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
       },
       prescriptionFillAutocomplete: {
         id: 'prescriptionFillAutocomplete',
-        allowedRoles: [roles.admin, roles.custom],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
+        allowedPlans: [plans.free],
       },
     };
   }

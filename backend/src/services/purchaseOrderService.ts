@@ -6,8 +6,6 @@ import VendorRepository from '../database/repositories/vendorRepository';
 import PurchaseOrderEntryRepository from '../database/repositories/purchaseOrderEntryRepository';
 import PurchaseInvoiceRepository from '../database/repositories/purchaseInvoiceRepository';
 
-const TAX_RATE = 6; // Move to central location
-
 export default class PurchaseOrderService {
   options: IServiceOptions;
 
@@ -16,11 +14,24 @@ export default class PurchaseOrderService {
     this.options = options;
   }
 
-  async getTotalCost(entries, options, transaction) {
-    let poEntries = await PurchaseOrderEntryRepository.findEntriesByIdList(entries, { ...options, transaction });
-    let totalCost = 0.0;
+  async fillInEntriesCostAndTaxes(data, options, transaction) {
+    let poEntries = await PurchaseOrderEntryRepository.findEntriesByIdList(data.entries, { ...options, transaction });
+    let totalCost = 0.0, stateTaxes = 0.0, centralTaxes = 0.0;
+
     poEntries.rows.every(elem => totalCost += Number(elem.totalCost));
-    return totalCost;
+    poEntries.rows.every(elem => stateTaxes += Number(elem.stateGST));
+    poEntries.rows.every(elem => centralTaxes += Number(elem.centralGST));
+
+    data.sumEntriesCost = totalCost;
+    data.totalGST = centralTaxes + stateTaxes;
+  }
+
+  calculateNetAmount(data) {
+    data.freightAmount |= 0.0;
+    data.discount |= 0.0;
+    data.writeOffAmount |= 0.0;
+
+    data.netAmount = data.sumEntriesCost + data.totalGST + data.freightAmount - data.discount - data.writeOffAmount;
   }
 
   async create(data) {
@@ -36,9 +47,8 @@ export default class PurchaseOrderService {
       let vendor = await VendorRepository.findById(data.vendor, { ...this.options, transaction });
       data.purchaseOrderLookup  = vendor.vendorName + "|" + data.purchaseOrderNumber;
 
-      let totalCost = await this.getTotalCost(data.entries, this.options, transaction);
-      data.sumEntriesCost = totalCost;
-      data.submittedTotalCost = totalCost * (1 + TAX_RATE/100.0);
+      await this.fillInEntriesCostAndTaxes(data, this.options, transaction);
+      this.calculateNetAmount(data);
 
       const record = await PurchaseOrderRepository.create(data, {
         ...this.options,
@@ -75,10 +85,9 @@ export default class PurchaseOrderService {
       data.entries = await PurchaseOrderEntryRepository.filterIdsInTenant(data.entries, { ...this.options, transaction });
       data.invoices = await PurchaseInvoiceRepository.filterIdsInTenant(data.invoices, { ...this.options, transaction });
 
-      let totalCost = await this.getTotalCost(data.entries, this.options, transaction);
-      data.sumEntriesCost = totalCost;
-      data.submittedTotalCost = totalCost * (1 + TAX_RATE/100.0);
-
+      await this.fillInEntriesCostAndTaxes(data, this.options, transaction);
+      this.calculateNetAmount(data);
+      
       const record = await PurchaseOrderRepository.update(
         id,
         data,

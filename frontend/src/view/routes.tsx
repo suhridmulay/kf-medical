@@ -640,6 +640,13 @@ const privateRoutes = [
     permissionRequired: permissions.purchaseOrderRead,
     exact: true,
   },
+  {
+    path: '/purchase-order/:id/print',
+    loader: () =>
+      import('src/view/purchaseOrder/view/PurchaseOrderPrintPage'),
+    permissionRequired: permissions.purchaseOrderRead,
+    exact: true,
+  },
 
   {
     path: '/purchase-order-entry',

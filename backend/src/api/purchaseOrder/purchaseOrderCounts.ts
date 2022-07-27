@@ -9,13 +9,11 @@ export default async (req, res, next) => {
       Permissions.values.purchaseOrderAutocomplete, // FIXME
     );
 
-    const payload = await new PurchaseOrderService(
+    const purchaseOrderCount = await new PurchaseOrderService(
       req,
     ).count();
-    
-    console.log('Coming here 2');
 
-    await ApiResponseHandler.success(req, res, payload);
+    await ApiResponseHandler.success(req, res, {'count': purchaseOrderCount});
   } catch (error) {
     await ApiResponseHandler.error(req, res, error);
   }

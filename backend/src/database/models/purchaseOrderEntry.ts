@@ -95,10 +95,6 @@ export default function (sequelize) {
       as: 'updatedBy',
     });
   };
-
-  purchaseOrderEntry.beforeValidate((purchaseOrderEntry, options) => {
-    purchaseOrderEntry.totalCost  = purchaseOrderEntry.quantity * purchaseOrderEntry.unitCost;
-  });
   
   return purchaseOrderEntry;
 }

@@ -28,9 +28,7 @@ export default class MedicineBatchService {
       data.medicine = await MedicineEnumRepository.filterIdInTenant(data.medicine, { ...this.options, transaction });
 
       let medicine = await MedicineEnumRepository.findById(data.medicine, { ...this.options, transaction });
-      let purchaseInvoice = await PurchaseInvoiceRepository.findById(data.invoice, { ...this.options, transaction });
-      let purchaseOrder = purchaseInvoice.purchaseOrder;
-      data.medicineBatchLookup = medicine.medicineName + " | " + data.expiryDate + " | " + data.batchNumber + " (" + purchaseOrder.purchaseOrderLookup + ")";
+      data.medicineBatchLookup = medicine.medicineName + " | " + data.expiryDate + " | " + data.batchNumber;
 
       const record = await MedicineBatchRepository.create(data, {
         ...this.options,
@@ -49,7 +47,7 @@ export default class MedicineBatchService {
         center: headOffice.id,
         initialCount: data.quantity,
         currentCount: data.quantity,
-        siteBatchIdentifier:  headOffice.name + " | " + medicine.medicineName + " | " + data.expiryDate + " | " + data.batchNumber
+        siteBatchIdentifier:  headOffice.name + " | " + data.medicineBatchLookup
       }
 
       const inventoryRecord = await SiteInventoryRepository.create(inventoryData, {

@@ -25,7 +25,8 @@ const purchaseOrderFormActions = {
         type: purchaseOrderFormActions.INIT_STARTED,
       });
 
-      let count = 0; // await PurchaseOrderService.count();
+      let data = await PurchaseOrderService.count();
+      let count = data['count'];
 
       let record = { purchaseOrderNumber: count + 10000}; // Start at 10000 for the purchaseOrderNumbers
 

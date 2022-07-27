@@ -9,7 +9,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import PrintIcon from '@material-ui/icons/Print';
 import SearchIcon from '@material-ui/icons/Search';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -251,6 +253,27 @@ function PurchaseOrderListTable(props) {
                           <SearchIcon />
                         </IconButton>
                       </Tooltip>
+
+                      <Tooltip title={i18n('common.print')}>
+                        <IconButton
+                          component={Link}
+                          color="primary"
+                          to={`/purchase-order/${row.id}/print`}
+                        >
+                          <PrintIcon />
+                        </IconButton>
+                      </Tooltip>
+
+                      <Tooltip title={i18n('common.print')}>
+                        <IconButton
+                          component={Link}
+                          color="primary"
+                          to={`/purchase-invoice/new`}
+                        >
+                          <AddBoxIcon />
+                        </IconButton>
+                      </Tooltip>
+
                       {hasPermissionToEdit && (
                         <Tooltip
                           title={i18n('common.edit')}
