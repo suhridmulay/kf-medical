@@ -401,14 +401,15 @@ class PurchaseOrderEntryRepository {
       {
         attributes: ['id', 'id'],
         where,
+        include: ['medicine'],
         limit: limit ? Number(limit) : undefined,
         order: [['id', 'ASC']],
       },
     );
 
     return records.map((record) => ({
-      id: record.id,
-      label: record.id,
+      id: record.medicine.medicineName,
+      label: record.medicine.medicineName,
     }));
   }
 

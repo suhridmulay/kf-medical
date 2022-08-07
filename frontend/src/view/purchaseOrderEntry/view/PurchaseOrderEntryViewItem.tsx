@@ -33,7 +33,7 @@ function PurchaseOrderEntryViewItem(props) {
             component={Link}
             to={`/purchase-order-entry/${record.id}`}
           >
-            {record.id}
+            {record.medicineId}
           </MaterialLink>
         </div>
       );

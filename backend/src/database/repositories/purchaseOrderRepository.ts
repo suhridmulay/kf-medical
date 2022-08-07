@@ -5,6 +5,7 @@ import SequelizeFilterUtils from '../../database/utils/sequelizeFilterUtils';
 import Error404 from '../../errors/Error404';
 import Sequelize from 'sequelize';
 import { IRepositoryOptions } from './IRepositoryOptions';
+import MedicineEnumRepository from './medicineEnumRepository';
 
 const Op = Sequelize.Op;
 
@@ -198,7 +199,8 @@ class PurchaseOrderRepository {
         transaction,
       },
     );
-
+    record.tenantId = currentTenant.name;
+    
     if (!record) {
       throw new Error404();
     }
@@ -493,10 +495,14 @@ class PurchaseOrderRepository {
       transaction,
     });
 
+    await Promise.all(output.entries.map(async (entry) => {
+      const medicine = await MedicineEnumRepository.findById(entry.medicineId, options);
+      entry.medicineId = "Qty " + entry.quantity + " of " + medicine.medicineName + "(" + medicine.unit + ")"
+    }));
+
     output.invoices = await record.getInvoices({
       transaction,
     });
-
     return output;
   }
 }
