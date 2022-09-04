@@ -51,8 +51,8 @@ function PurchaseOrderEntryAutocompleteFormItem(props) {
       const value = originalValue.id;
       let label = originalValue.label;
 
-      if (originalValue.id) {
-        label = originalValue.id;
+      if (originalValue.medicine) {
+        label = originalValue.quantity + "@" + originalValue.medicine.medicineName;
       }
 
       return {
