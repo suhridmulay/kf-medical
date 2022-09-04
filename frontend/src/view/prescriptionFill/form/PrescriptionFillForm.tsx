@@ -13,7 +13,7 @@ import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import PatientVisitAutocompleteFormItem from 'src/view/patientVisit/autocomplete/PatientVisitAutocompleteFormItem';
-import MedicineBatchAutocompleteFormItem from 'src/view/medicineBatch/autocomplete/MedicineBatchAutocompleteFormItem';
+import SiteInventoryAutocompleteFormItem from 'src/view/siteInventory/autocomplete/SiteInventoryAutocompleteFormItem';
 
 const schema = yup.object().shape({
   patientVisit: yupFormSchemas.relationToOne(
@@ -22,9 +22,11 @@ const schema = yup.object().shape({
       "required": true
     },
   ),
-  medicineBatch: yupFormSchemas.relationToOne(
-    i18n('entities.prescriptionFill.fields.medicineBatch'),
-    {},
+  siteInventory: yupFormSchemas.relationToOne(
+    i18n('entities.prescriptionFill.fields.siteInventory'),
+    {
+      "required": true
+    },
   ),
   quantity: yupFormSchemas.integer(
     i18n('entities.prescriptionFill.fields.quantity'),
@@ -40,7 +42,7 @@ function PrescriptionFillForm(props) {
 
     return {
       patientVisit: record.patientVisit,
-      medicineBatch: record.medicineBatch,
+      siteInventory: record.siteInventory,
       quantity: record.quantity,
     };
   });
@@ -77,10 +79,11 @@ function PrescriptionFillForm(props) {
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
-              <MedicineBatchAutocompleteFormItem  
-                name="medicineBatch"
-                label={i18n('entities.prescriptionFill.fields.medicineBatch')}
-                required={false}
+              <SiteInventoryAutocompleteFormItem  
+                name="siteInventory"
+                label={i18n('entities.prescriptionFill.fields.siteInventory')}
+              hint={i18n('entities.prescriptionFill.hints.siteInventory')}
+                required={true}
                 showCreate={!props.modal}
               />
             </Grid>

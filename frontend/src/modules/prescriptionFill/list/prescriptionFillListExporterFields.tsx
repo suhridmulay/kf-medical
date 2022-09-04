@@ -12,8 +12,8 @@ export default [
     render: exporterRenders.relationToOne(),
   },
   {
-    name: 'medicineBatch',
-    label: i18n('entities.prescriptionFill.fields.medicineBatch'),
+    name: 'siteInventory',
+    label: i18n('entities.prescriptionFill.fields.siteInventory'),
     render: exporterRenders.relationToOne(),
   },
   {

@@ -13,11 +13,13 @@ export default [
     ),
   },
   {
-    name: 'medicineBatch',
-    label: i18n('entities.prescriptionFill.fields.medicineBatch'),
+    name: 'siteInventory',
+    label: i18n('entities.prescriptionFill.fields.siteInventory'),
     schema: schemas.relationToOne(
-      i18n('entities.prescriptionFill.fields.medicineBatch'),
-      {},
+      i18n('entities.prescriptionFill.fields.siteInventory'),
+      {
+        "required": true
+      },
     ),
   },
   {

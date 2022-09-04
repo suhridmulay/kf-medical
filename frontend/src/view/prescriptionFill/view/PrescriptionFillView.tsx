@@ -3,7 +3,7 @@ import Spinner from 'src/view/shared/Spinner';
 import { i18n } from 'src/i18n';
 import TextViewItem from 'src/view/shared/view/TextViewItem';
 import PatientVisitViewItem from 'src/view/patientVisit/view/PatientVisitViewItem';
-import MedicineBatchViewItem from 'src/view/medicineBatch/view/MedicineBatchViewItem';
+import SiteInventoryViewItem from 'src/view/siteInventory/view/SiteInventoryViewItem';
 
 function PrescriptionFillView(props) {
   const renderView = () => {
@@ -16,9 +16,9 @@ function PrescriptionFillView(props) {
           value={record.patientVisit}
         />
 
-        <MedicineBatchViewItem
-          label={i18n('entities.prescriptionFill.fields.medicineBatch')}
-          value={record.medicineBatch}
+        <SiteInventoryViewItem
+          label={i18n('entities.prescriptionFill.fields.siteInventory')}
+          value={record.siteInventory}
         />
 
         <TextViewItem

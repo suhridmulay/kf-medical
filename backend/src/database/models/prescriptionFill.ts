@@ -49,9 +49,12 @@ export default function (sequelize) {
       },
     });
 
-    models.prescriptionFill.belongsTo(models.medicineBatch, {
-      as: 'medicineBatch',
+    models.prescriptionFill.belongsTo(models.siteInventory, {
+      as: 'siteInventory',
       constraints: false,
+      foreignKey: {
+        allowNull: false,
+      },
     });
 
 

@@ -1283,7 +1283,7 @@ const es = {
         fields: {
           id: 'Id',
           'patientVisit': 'PatientVisit',
-          'medicineBatch': 'Medicine Batch',
+          'siteInventory': 'SiteInventory',
           'quantityRange': 'Quantity',
           'quantity': 'Quantity',
           createdAt: 'Creado el',
@@ -1297,7 +1297,7 @@ const es = {
 
         },
         hints: {
-
+          'siteInventory': 'Local medicine inventory batch at the center',
         },
         new: {
           title: 'Nuevo Prescription Fill',
