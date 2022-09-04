@@ -11667,8 +11667,8 @@
           "patientVisit": {
             "$ref": "#/components/schemas/PatientVisit"
           },
-          "medicineBatch": {
-            "$ref": "#/components/schemas/MedicineBatch"
+          "siteInventory": {
+            "$ref": "#/components/schemas/SiteInventory"
           },
           "quantity": {
             "type": "integer"
@@ -11682,7 +11682,7 @@
             "type": "string",
             "format": "uuid"
           },
-          "medicineBatch": {
+          "siteInventory": {
             "type": "string",
             "format": "uuid"
           },

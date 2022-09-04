@@ -4,6 +4,7 @@ import { IServiceOptions } from './IServiceOptions';
 import PrescriptionFillRepository from '../database/repositories/prescriptionFillRepository';
 import PatientVisitRepository from '../database/repositories/patientVisitRepository';
 import MedicineBatchRepository from '../database/repositories/medicineBatchRepository';
+import SiteInventoryRepository from '../database/repositories/siteInventoryRepository';
 
 export default class PrescriptionFillService {
   options: IServiceOptions;
@@ -19,12 +20,26 @@ export default class PrescriptionFillService {
 
     try {
       data.patientVisit = await PatientVisitRepository.filterIdInTenant(data.patientVisit, { ...this.options, transaction });
-      data.medicineBatch = await MedicineBatchRepository.filterIdInTenant(data.medicineBatch, { ...this.options, transaction });
+      data.siteInventory = await SiteInventoryRepository.filterIdInTenant(data.siteInventory, { ...this.options, transaction });
 
       const record = await PrescriptionFillRepository.create(data, {
         ...this.options,
         transaction,
       });
+
+      // Decrease the inventory count for this particular medicine at the local site
+      let updateRecord = await SiteInventoryRepository.findById(data.siteInventory, this.options);
+      console.log("Coming here 2" + JSON.stringify(updateRecord));
+
+      updateRecord.currentCount -= data.quantity;
+      if (updateRecord.currentCount < 0) {
+        updateRecord.currentCount = 0; // Dont let it go negative
+      }
+      // Updates require the IDs as opposed to the expanded record 
+      updateRecord.medicine = updateRecord.medicineId;
+      updateRecord.batchNumber = updateRecord.batchNumberId;
+      updateRecord.center = updateRecord.centerId;
+      let result2 = await SiteInventoryRepository.update(updateRecord.id, updateRecord, {...this.options, transaction,});
 
       await SequelizeRepository.commitTransaction(
         transaction,
@@ -53,7 +68,7 @@ export default class PrescriptionFillService {
 
     try {
       data.patientVisit = await PatientVisitRepository.filterIdInTenant(data.patientVisit, { ...this.options, transaction });
-      data.medicineBatch = await MedicineBatchRepository.filterIdInTenant(data.medicineBatch, { ...this.options, transaction });
+      data.siteInventory = await SiteInventoryRepository.filterIdInTenant(data.siteInventory, { ...this.options, transaction });
 
       const record = await PrescriptionFillRepository.update(
         id,

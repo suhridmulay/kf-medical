@@ -30,9 +30,9 @@ function PrescriptionFillFormPage(props) {
     : i18n('entities.prescriptionFill.new.title');
 
   useEffect(() => {
-    dispatch(actions.doInit(match.params.id));
+    dispatch(actions.doInit(match.params.id, match.params.patientVisitId));
     setDispatched(true);
-  }, [dispatch, match.params.id]);
+  }, [dispatch, match.params.id, match.params.patientVisitId]);
 
   const doSubmit = (id, data) => {
     if (isEditing) {

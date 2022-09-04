@@ -52,7 +52,7 @@ function PurchaseOrderEntryAutocompleteFormItem(props) {
       let label = originalValue.label;
 
       if (originalValue.medicine) {
-        label = originalValue.quantity + "@" + originalValue.medicine.medicineName;
+        label = originalValue.quantity + "@" + originalValue.medicine.medicineName; 
       }
 
       return {

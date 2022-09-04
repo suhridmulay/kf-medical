@@ -7,6 +7,8 @@ const en = {
     search: 'Search',
     edit: 'Edit',
     print: 'Print',
+    invoice: 'Invoices',
+    prescriptionFills: 'Prescription Fills',
     new: 'New',
     export: 'Export to Excel',
     noDataToExport: 'No data to export',
@@ -614,6 +616,10 @@ const en = {
           fileName: 'siteInventory_import_template',
           hint:
             'Files/Images columns must be the URLs of the files separated by space.',
+        },
+        errors: {
+          noEntryFound: 'User error: No local medicine inventory found',
+          tooManyEntries: 'Program error: too many local entries found',
         },
       },
 
@@ -1286,7 +1292,7 @@ const en = {
         fields: {
           id: 'Id',
           'patientVisit': 'PatientVisit',
-          'medicineBatch': 'Medicine Batch',
+          'siteInventory': 'SiteInventory',
           'quantityRange': 'Quantity',
           'quantity': 'Quantity',
           createdAt: 'Created at',
@@ -1300,7 +1306,7 @@ const en = {
 
         },
         hints: {
-
+          'siteInventory': 'Local medicine inventory batch at the center',
         },
         new: {
           title: 'New Prescription Fill',

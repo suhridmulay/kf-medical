@@ -497,7 +497,8 @@ class PurchaseOrderRepository {
 
     await Promise.all(output.entries.map(async (entry) => {
       const medicine = await MedicineEnumRepository.findById(entry.medicineId, options);
-      entry.medicineId = "Qty " + entry.quantity + " of " + medicine.medicineName + "(" + medicine.unit + ")"
+      entry.medicineId = "Qty " + entry.quantity + " of " + medicine.medicineName + 
+                         ". Generic: (" + medicine.genericName + ")";
     }));
 
     output.invoices = await record.getInvoices({

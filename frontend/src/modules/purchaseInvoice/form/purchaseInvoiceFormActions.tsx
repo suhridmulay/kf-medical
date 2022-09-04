@@ -1,4 +1,5 @@
 import PurchaseInvoiceService from 'src/modules/purchaseInvoice/purchaseInvoiceService';
+import PurchaseOrderService from 'src/modules/purchaseOrder/purchaseOrderService';
 import Errors from 'src/modules/shared/error/errors';
 import Message from 'src/view/shared/message';
 import { getHistory } from 'src/modules/store';
@@ -19,20 +20,25 @@ const purchaseInvoiceFormActions = {
   UPDATE_SUCCESS: `${prefix}_UPDATE_SUCCESS`,
   UPDATE_ERROR: `${prefix}_UPDATE_ERROR`,
 
-  doInit: (id) => async (dispatch) => {
+  doInit: (id, purchaseOrderId) => async (dispatch) => {
     try {
       dispatch({
         type: purchaseInvoiceFormActions.INIT_STARTED,
       });
-
       let record = {};
 
       const isEdit = Boolean(id);
 
+      if (purchaseOrderId) {
+        let purchaseOrder = await PurchaseOrderService.find(purchaseOrderId);
+        record['purchaseOrderId'] = purchaseOrderId;
+        record['purchaseOrder'] = {'purchaseOrderLookup': purchaseOrder.purchaseOrderLookup};
+      }
+
       if (isEdit) {
         record = await PurchaseInvoiceService.find(id);
       }
-
+      
       dispatch({
         type: purchaseInvoiceFormActions.INIT_SUCCESS,
         payload: record,

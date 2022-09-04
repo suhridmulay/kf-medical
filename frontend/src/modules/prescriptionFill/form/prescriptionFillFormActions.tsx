@@ -1,4 +1,7 @@
 import PrescriptionFillService from 'src/modules/prescriptionFill/prescriptionFillService';
+import PatientVisitService from 'src/modules/patientVisit/patientVisitService';
+import SiteInventoryService from 'src/modules/siteInventory/siteInventoryService';
+
 import Errors from 'src/modules/shared/error/errors';
 import Message from 'src/view/shared/message';
 import { getHistory } from 'src/modules/store';
@@ -19,7 +22,7 @@ const prescriptionFillFormActions = {
   UPDATE_SUCCESS: `${prefix}_UPDATE_SUCCESS`,
   UPDATE_ERROR: `${prefix}_UPDATE_ERROR`,
 
-  doInit: (id) => async (dispatch) => {
+  doInit: (id, patientVisitId) => async (dispatch) => {
     try {
       dispatch({
         type: prescriptionFillFormActions.INIT_STARTED,
@@ -31,6 +34,33 @@ const prescriptionFillFormActions = {
 
       if (isEdit) {
         record = await PrescriptionFillService.find(id);
+      }
+
+      if (patientVisitId != null) {
+        const patientVisitDetails = await PatientVisitService.find(patientVisitId);
+        const medicalCenter = patientVisitDetails.medicalCenterId;
+        
+        record['med1'] = patientVisitDetails.medicine1;
+        record['med1Qty'] = patientVisitDetails.med1Qty;
+        
+        record['med2'] = patientVisitDetails.medicine2;
+        record['med2Qty'] = patientVisitDetails.med2Qty;
+        
+        record['med3'] = patientVisitDetails.medicine3;
+        record['med3Qty'] = patientVisitDetails.med3Qty;
+        
+        record['med4'] = patientVisitDetails.medicine4;
+        record['med4Qty'] = patientVisitDetails.med4Qty;
+
+        record['patientVisit'] =  patientVisitDetails;
+        record['med1Inventory'] = await SiteInventoryService.list({center: medicalCenter, medicine: patientVisitDetails.medicine1Id}, 
+                                                                  'expiryDate', null, null);
+        record['med2Inventory'] = await SiteInventoryService.list({center: medicalCenter, medicine: patientVisitDetails.medicine2Id}, 
+                                                                    'expiryDate', null, null);
+        record['med3Inventory'] = await SiteInventoryService.list({center: medicalCenter, medicine: patientVisitDetails.medicine3Id}, 
+                                                                      'expiryDate', null, null);
+        record['med4Inventory'] = await SiteInventoryService.list({center: medicalCenter, medicine: patientVisitDetails.medicine4Id}, 
+                                                                        'expiryDate', null, null);                                                
       }
 
       dispatch({

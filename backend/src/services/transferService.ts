@@ -33,7 +33,11 @@ export default class TransferService {
       let inventoryAtSourceCenter = await SiteInventoryRepository.findAndCountAll({filter: {center: data.fromCenter, batchNumber: data.medicineBatch}}, this.options);
       let inventoryAtDestCenter = await SiteInventoryRepository.findAndCountAll({filter: {center: data.toCenter, batchNumber: data.medicineBatch}}, this.options);
 
-      if (inventoryAtSourceCenter.count > 0) {
+      if (inventoryAtSourceCenter.count == 0) {
+        throw new Error400(this.options.language, 'siteInventory.errors.noEntryFound');
+      } else if (inventoryAtSourceCenter.count > 1) {
+        throw new Error400(this.options.language, 'siteInventory.errors.tooManyEntries');
+      } else {
         let srcInventoryRecord = inventoryAtSourceCenter.rows[0];
         let toCenterDetails = await HealthCenterRepository.findById(data.toCenter, this.options);
         let medicineBatchDetails = await MedicineBatchRepository.findById(data.medicineBatch, this.options);
@@ -66,6 +70,9 @@ export default class TransferService {
         }
         
         srcInventoryRecord.currentCount -= data.transferQuantity;
+        if (srcInventoryRecord.currentCount < 0) { // Probably a programming error
+          srcInventoryRecord.currentCount = 0; 
+        }
 
         // Updates require the IDs as opposed to the expanded record 
         srcInventoryRecord.medicine = srcInventoryRecord.medicineId;

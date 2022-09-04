@@ -264,11 +264,11 @@ function PurchaseOrderListTable(props) {
                         </IconButton>
                       </Tooltip>
 
-                      <Tooltip title={i18n('common.print')}>
+                      <Tooltip title={i18n('common.invoice')}>
                         <IconButton
                           component={Link}
                           color="primary"
-                          to={`/purchase-invoice/new`}
+                          to={`/purchase-invoice/new/${row.id}`}
                         >
                           <AddBoxIcon />
                         </IconButton>

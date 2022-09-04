@@ -25,14 +25,15 @@ function PurchaseInvoiceFormPage(props) {
   const record = useSelector(selectors.selectRecord);
 
   const isEditing = Boolean(match.params.id);
+
   const title = isEditing
     ? i18n('entities.purchaseInvoice.edit.title')
     : i18n('entities.purchaseInvoice.new.title');
 
   useEffect(() => {
-    dispatch(actions.doInit(match.params.id));
+    dispatch(actions.doInit(match.params.id, match.params.purchaseOrderId));
     setDispatched(true);
-  }, [dispatch, match.params.id]);
+  }, [dispatch, match.params.id, match.params.purchaseOrderId]);
 
   const doSubmit = (id, data) => {
     if (isEditing) {

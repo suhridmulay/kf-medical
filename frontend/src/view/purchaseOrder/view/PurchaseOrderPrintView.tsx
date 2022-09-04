@@ -1,7 +1,6 @@
 import React from 'react';
 import Spinner from 'src/view/shared/Spinner';
 import { Document, Page, Text, Svg, Line, View, StyleSheet, PDFViewer } from "@react-pdf/renderer";
-import vendorDestroyReducers from 'src/modules/vendor/destroy/vendorDestroyReducers';
 
 const styles = StyleSheet.create({
   page: {
@@ -248,7 +247,7 @@ const createPurchaseOrderExtras = (field, value) => {
       </View>
 
       <View style={styles.tableColStyle4}>
-        <Text style={styles.tableCellRStyle}>{value}</Text>
+        <Text style={styles.tableCellRStyle}>Rs {value}</Text>
       </View>
 
     </View>

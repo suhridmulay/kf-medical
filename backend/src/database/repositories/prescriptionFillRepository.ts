@@ -30,7 +30,7 @@ class PrescriptionFillRepository {
           'importHash',
         ]),
         patientVisitId: data.patientVisit || null,
-        medicineBatchId: data.medicineBatch || null,
+        siteInventoryId: data.siteInventory || null,
         tenantId: tenant.id,
         createdById: currentUser.id,
         updatedById: currentUser.id,
@@ -89,7 +89,7 @@ class PrescriptionFillRepository {
           'importHash',
         ]),
         patientVisitId: data.patientVisit || null,
-        medicineBatchId: data.medicineBatch || null,
+        siteInventoryId: data.siteInventory || null,
         updatedById: currentUser.id,
       },
       {
@@ -157,8 +157,8 @@ class PrescriptionFillRepository {
         as: 'patientVisit',
       },
       {
-        model: options.database.medicineBatch,
-        as: 'medicineBatch',
+        model: options.database.siteInventory,
+        as: 'siteInventory',
       },
     ];
 
@@ -258,8 +258,8 @@ class PrescriptionFillRepository {
         as: 'patientVisit',
       },
       {
-        model: options.database.medicineBatch,
-        as: 'medicineBatch',
+        model: options.database.siteInventory,
+        as: 'siteInventory',
       },      
     ];
 

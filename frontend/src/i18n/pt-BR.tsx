@@ -1285,7 +1285,7 @@ const ptBR = {
         fields: {
           id: 'Id',
           'patientVisit': 'PatientVisit',
-          'medicineBatch': 'Medicine Batch',
+          'siteInventory': 'SiteInventory',
           'quantityRange': 'Quantity',
           'quantity': 'Quantity',
           createdAt: 'Criado em',
@@ -1299,7 +1299,7 @@ const ptBR = {
 
         },
         hints: {
-
+          'siteInventory': 'Local medicine inventory batch at the center',
         },
         new: {
           title: 'Novo Prescription Fill',

@@ -739,6 +739,13 @@ const privateRoutes = [
     exact: true,
   },
   {
+    path: '/purchase-invoice/new/:purchaseOrderId',
+    loader: () =>
+      import('src/view/purchaseInvoice/form/PurchaseInvoiceFormPage'),
+    permissionRequired: permissions.purchaseInvoiceCreate,
+    exact: true,
+  },
+  {
     path: '/purchase-invoice/importer',
     loader: () =>
       import(
@@ -809,6 +816,13 @@ const privateRoutes = [
   },
   {
     path: '/prescription-fill/new',
+    loader: () =>
+      import('src/view/prescriptionFill/form/PrescriptionFillFormPage'),
+    permissionRequired: permissions.prescriptionFillCreate,
+    exact: true,
+  },
+  {
+    path: '/prescription-fill/new/:patientVisitId',
     loader: () =>
       import('src/view/prescriptionFill/form/PrescriptionFillFormPage'),
     permissionRequired: permissions.prescriptionFillCreate,

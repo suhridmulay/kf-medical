@@ -24,7 +24,7 @@ import Pagination from 'src/view/shared/table/Pagination';
 import Spinner from 'src/view/shared/Spinner';
 import TableCellCustom from 'src/view/shared/table/TableCellCustom';
 import PatientVisitListItem from 'src/view/patientVisit/list/PatientVisitListItem';
-import MedicineBatchListItem from 'src/view/medicineBatch/list/MedicineBatchListItem';
+import SiteInventoryListItem from 'src/view/siteInventory/list/SiteInventoryListItem';
 
 function PrescriptionFillListTable(props) {
   const [
@@ -134,7 +134,7 @@ function PrescriptionFillListTable(props) {
               />
               <TableCellCustom
                 label={i18n(
-                  'entities.prescriptionFill.fields.medicineBatch',
+                  'entities.prescriptionFill.fields.siteInventory',
                 )}
               />
               <TableCellCustom
@@ -190,7 +190,7 @@ function PrescriptionFillListTable(props) {
                   <PatientVisitListItem value={row.patientVisit} />
                 </TableCell>
                 <TableCell>
-                  <MedicineBatchListItem value={row.medicineBatch} />
+                  <SiteInventoryListItem value={row.siteInventory} />
                 </TableCell>
                 <TableCell align="right">{row.quantity}</TableCell>                  
                   <TableCell>

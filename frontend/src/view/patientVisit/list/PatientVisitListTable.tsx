@@ -9,6 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import PrintIcon from '@material-ui/icons/Print';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import SearchIcon from '@material-ui/icons/Search';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -238,6 +240,24 @@ function PatientVisitListTable(props) {
                           to={`/patient-visit/${row.id}`}
                         >
                           <SearchIcon />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title={i18n('common.print')}>
+                        <IconButton
+                          component={Link}
+                          color="primary"
+                          to={`/patient-visit/${row.id}/print`}
+                        >
+                          <PrintIcon />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title={i18n('common.prescriptionFills')}>
+                        <IconButton
+                          component={Link}
+                          color="primary"
+                          to={`/prescription-fill/new/${row.id}`}
+                        >
+                          <AddCircleIcon />
                         </IconButton>
                       </Tooltip>
                       {hasPermissionToEdit && (
