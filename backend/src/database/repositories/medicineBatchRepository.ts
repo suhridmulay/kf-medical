@@ -27,6 +27,7 @@ class MedicineBatchRepository {
       {
         ...lodash.pick(data, [
           'quantity',
+          'qtyInStrips',
           'batchNumber',
           'expiryDate',
           'unitPrice',
@@ -95,6 +96,7 @@ class MedicineBatchRepository {
       {
         ...lodash.pick(data, [
           'quantity',
+          'qtyInStrips',
           'batchNumber',
           'expiryDate',
           'unitPrice',
@@ -305,6 +307,19 @@ class MedicineBatchRepository {
           ['medicineId']: SequelizeFilterUtils.uuid(
             filter.medicine,
           ),
+        });
+      }
+
+      if (
+        filter.qtyInStrips === true ||
+        filter.qtyInStrips === 'true' ||
+        filter.qtyInStrips === false ||
+        filter.qtyInStrips === 'false'
+      ) {
+        whereAnd.push({
+          qtyInStrips:
+            filter.qtyInStrips === true ||
+            filter.qtyInStrips === 'true',
         });
       }
 

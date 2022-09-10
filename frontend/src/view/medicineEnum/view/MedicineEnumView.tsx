@@ -71,6 +71,11 @@ function MedicineEnumView(props) {
               `entities.medicineEnum.enumerators.unit.${record.unit}`,
             )
           }
+        />
+
+        <TextViewItem
+          label={i18n('entities.medicineEnum.fields.tabletsPerStrip')}
+          value={record.tabletsPerStrip}
         />        
       </div>
     );

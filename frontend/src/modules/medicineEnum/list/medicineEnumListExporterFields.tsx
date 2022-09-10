@@ -53,6 +53,10 @@ export default [
     label: i18n('entities.medicineEnum.fields.unit'),
   },
   {
+    name: 'tabletsPerStrip',
+    label: i18n('entities.medicineEnum.fields.tabletsPerStrip'),
+  },
+  {
     name: 'createdAt',
     label: i18n('entities.medicineEnum.fields.createdAt'),
     render: exporterRenders.datetime(),

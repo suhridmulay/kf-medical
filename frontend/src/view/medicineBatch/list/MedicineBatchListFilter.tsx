@@ -23,6 +23,7 @@ import filterRenders from 'src/modules/shared/filter/filterRenders';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import PurchaseInvoiceAutocompleteFormItem from 'src/view/purchaseInvoice/autocomplete/PurchaseInvoiceAutocompleteFormItem';
 import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
 
@@ -33,6 +34,9 @@ const schema = yup.object().shape({
   medicine: yupFilterSchemas.relationToOne(
     i18n('entities.medicineBatch.fields.medicine'),
   ),
+  qtyInStrips: yupFilterSchemas.boolean(
+    i18n('entities.medicineBatch.fields.qtyInStrips'),
+  ),
   medicineBatchLookup: yupFilterSchemas.string(
     i18n('entities.medicineBatch.fields.medicineBatchLookup'),
   ),
@@ -41,6 +45,7 @@ const schema = yup.object().shape({
 const emptyValues = {
   invoice: null,
   medicine: null,
+  qtyInStrips: null,
   medicineBatchLookup: null,
 }
 
@@ -53,6 +58,10 @@ const previewRenders = {
       label: i18n('entities.medicineBatch.fields.medicine'),
       render: filterRenders.relationToOne(),
     },
+  qtyInStrips: {
+    label: i18n('entities.medicineBatch.fields.qtyInStrips'),
+    render: filterRenders.boolean(),
+  },
   medicineBatchLookup: {
     label: i18n('entities.medicineBatch.fields.medicineBatchLookup'),
     render: filterRenders.generic(),
@@ -131,6 +140,22 @@ function MedicineBatchListFilter(props) {
                   <MedicineEnumAutocompleteFormItem  
                     name="medicine"
                     label={i18n('entities.medicineBatch.fields.medicine')}        
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <SelectFormItem
+                    name="qtyInStrips"
+                    label={i18n('entities.medicineBatch.fields.qtyInStrips')}
+                    options={[
+                      {
+                        value: true,
+                        label: i18n('common.yes'),
+                      },
+                      {
+                        value: false,
+                        label: i18n('common.no'),
+                      },
+                    ]}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>

@@ -90,4 +90,12 @@ export default [
       },
     ),
   },
+  {
+    name: 'tabletsPerStrip',
+    label: i18n('entities.medicineEnum.fields.tabletsPerStrip'),
+    schema: schemas.integer(
+      i18n('entities.medicineEnum.fields.tabletsPerStrip'),
+      {},
+    ),
+  },
 ];

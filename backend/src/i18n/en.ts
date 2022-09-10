@@ -223,6 +223,15 @@ const en = {
         }
       }
     },
+    staff: {
+      errors: {
+        unique: {
+          name: 'Name must be unique',
+          user: 'User must be unique',
+          userId: 'User must be unique',
+        }
+      }
+    },
   }
 };
 

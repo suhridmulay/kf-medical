@@ -34,7 +34,8 @@ class MedicineEnumRepository {
           'msrp',
           'centralGST',
           'stateGST',
-          'unit',          
+          'unit',
+          'tabletsPerStrip',          
           'importHash',
         ]),
         medicineCategoryId: data.medicineCategory || null,
@@ -100,7 +101,8 @@ class MedicineEnumRepository {
           'msrp',
           'centralGST',
           'stateGST',
-          'unit',          
+          'unit',
+          'tabletsPerStrip',          
           'importHash',
         ]),
         medicineCategoryId: data.medicineCategory || null,
@@ -368,6 +370,26 @@ class MedicineEnumRepository {
         whereAnd.push({
           unit: filter.unit,
         });
+      }
+
+      if (filter.tabletsPerStripRange) {
+        const [start, end] = filter.tabletsPerStripRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          whereAnd.push({
+            tabletsPerStrip: {
+              [Op.gte]: start,
+            },
+          });
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          whereAnd.push({
+            tabletsPerStrip: {
+              [Op.lte]: end,
+            },
+          });
+        }
       }
 
       if (filter.createdAtRange) {

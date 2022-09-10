@@ -194,6 +194,16 @@ function MedicineEnumListTable(props) {
                 label={i18n(
                   'entities.medicineEnum.fields.unit',
                 )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'tabletsPerStrip'}
+                label={i18n(
+                  'entities.medicineEnum.fields.tabletsPerStrip',
+                )}
+                align="right"
               />              
               <TableCellCustom size="md" />
             </TableRow>
@@ -257,7 +267,8 @@ function MedicineEnumListTable(props) {
                         `entities.medicineEnum.enumerators.unit.${row.unit}`,
                       )
                     : null}
-                </TableCell>                  
+                </TableCell>
+                <TableCell align="right">{row.tabletsPerStrip}</TableCell>                  
                   <TableCell>
                     <Box
                       display="flex"

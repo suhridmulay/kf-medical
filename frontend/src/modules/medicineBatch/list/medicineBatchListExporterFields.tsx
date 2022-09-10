@@ -21,6 +21,11 @@ export default [
     label: i18n('entities.medicineBatch.fields.quantity'),
   },
   {
+    name: 'qtyInStrips',
+    label: i18n('entities.medicineBatch.fields.qtyInStrips'),
+    render: exporterRenders.boolean(),
+  },
+  {
     name: 'batchNumber',
     label: i18n('entities.medicineBatch.fields.batchNumber'),
   },

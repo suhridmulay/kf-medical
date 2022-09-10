@@ -13,6 +13,7 @@ import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
+import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import moment from 'moment';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
 import PurchaseInvoiceAutocompleteFormItem from 'src/view/purchaseInvoice/autocomplete/PurchaseInvoiceAutocompleteFormItem';
@@ -34,6 +35,10 @@ const schema = yup.object().shape({
     {
       "required": true
     },
+  ),
+  qtyInStrips: yupFormSchemas.boolean(
+    i18n('entities.medicineBatch.fields.qtyInStrips'),
+    {},
   ),
   batchNumber: yupFormSchemas.string(
     i18n('entities.medicineBatch.fields.batchNumber'),
@@ -102,6 +107,7 @@ function MedicineBatchForm(props) {
       invoice: record.invoice,
       medicine: record.medicine,
       quantity: record.quantity,
+      qtyInStrips: record.qtyInStrips,
       batchNumber: record.batchNumber,
       expiryDate: record.expiryDate ? moment(record.expiryDate, 'YYYY-MM-DD') : null,
       unitPrice: record.unitPrice,
@@ -158,6 +164,13 @@ function MedicineBatchForm(props) {
                 name="quantity"
                 label={i18n('entities.medicineBatch.fields.quantity')}  
                 required={true}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <CheckboxFormItem
+                name="qtyInStrips"
+                label={i18n('entities.medicineBatch.fields.qtyInStrips')}
+              hint={i18n('entities.medicineBatch.hints.qtyInStrips')}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

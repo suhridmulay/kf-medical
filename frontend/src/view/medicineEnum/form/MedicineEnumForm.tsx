@@ -12,6 +12,7 @@ import * as yup from 'yup';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
+import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import SwitchFormItem from 'src/view/shared/form/items/SwitchFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import medicineEnumEnumerators from 'src/modules/medicineEnum/medicineEnumEnumerators';
@@ -66,6 +67,10 @@ const schema = yup.object().shape({
       "options": medicineEnumEnumerators.unit
     },
   ),
+  tabletsPerStrip: yupFormSchemas.integer(
+    i18n('entities.medicineEnum.fields.tabletsPerStrip'),
+    {},
+  ),
 });
 
 function MedicineEnumForm(props) {
@@ -83,6 +88,7 @@ function MedicineEnumForm(props) {
       centralGST: record.centralGST,
       stateGST: record.stateGST,
       unit: record.unit,
+      tabletsPerStrip: record.tabletsPerStrip,
     };
   });
 
@@ -186,6 +192,13 @@ function MedicineEnumForm(props) {
                     ),
                   }),
                 )}
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputNumberFormItem
+                name="tabletsPerStrip"
+                label={i18n('entities.medicineEnum.fields.tabletsPerStrip')}  
                 required={false}
               />
             </Grid>

@@ -16,6 +16,11 @@ export default function (sequelize) {
 
         }
       },
+      qtyInStrips: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       batchNumber: {
         type: DataTypes.STRING(100),
         allowNull: false,
