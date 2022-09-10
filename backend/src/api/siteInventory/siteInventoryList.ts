@@ -12,7 +12,6 @@ export default async (req, res, next) => {
       Permissions.values.siteInventoryRead,
     );
 
-    console.log("Site Inventory " + JSON.stringify(req));
     const currentUserRoles = permissions.currentUserRolesIds;
     const filter = {"user": req.currentUser.id};
 
@@ -21,7 +20,7 @@ export default async (req, res, next) => {
       if (staff.count > 0) {
         const affiliatedMedicalCenter = staff.rows[0].medicalCenterId;
         if (affiliatedMedicalCenter) {
-          req.query.filter['medicalCenter'] = affiliatedMedicalCenter;
+          req.query.filter['center'] = affiliatedMedicalCenter;
         }
       }
     }
