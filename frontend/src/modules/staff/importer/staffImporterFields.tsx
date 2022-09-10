@@ -8,7 +8,9 @@ export default [
     schema: schemas.string(
       i18n('entities.staff.fields.name'),
       {
-        "required": true
+        "required": true,
+        "max": 100,
+        "min": 5
       },
     ),
   },

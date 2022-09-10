@@ -10,9 +10,10 @@ export default function (sequelize) {
         primaryKey: true,
       },
       name: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(100),
         allowNull: false,
         validate: {
+          len: [5, 100],
           notEmpty: true,
         }
       },

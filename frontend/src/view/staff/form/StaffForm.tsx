@@ -19,7 +19,9 @@ const schema = yup.object().shape({
   name: yupFormSchemas.string(
     i18n('entities.staff.fields.name'),
     {
-      "required": true
+      "required": true,
+      "max": 100,
+      "min": 5
     },
   ),
   mobileNumber: yupFormSchemas.string(
