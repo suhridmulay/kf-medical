@@ -31,6 +31,14 @@ export default [
     ),
   },
   {
+    name: 'qtyInStrips',
+    label: i18n('entities.medicineBatch.fields.qtyInStrips'),
+    schema: schemas.boolean(
+      i18n('entities.medicineBatch.fields.qtyInStrips'),
+      {},
+    ),
+  },
+  {
     name: 'batchNumber',
     label: i18n('entities.medicineBatch.fields.batchNumber'),
     schema: schemas.string(

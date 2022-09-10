@@ -225,6 +225,15 @@ const es = {
         }
       }
     },
+    staff: {
+      errors: {
+        unique: {
+          name: 'Name debe ser único',
+          user: 'User debe ser único',
+          userId: 'User debe ser único',
+        }
+      }
+    },
   }
 };
 

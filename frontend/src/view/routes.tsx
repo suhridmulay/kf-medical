@@ -851,6 +851,44 @@ const privateRoutes = [
     permissionRequired: permissions.prescriptionFillRead,
     exact: true,
   },
+
+  {
+    path: '/staff',
+    loader: () =>
+      import('src/view/staff/list/StaffListPage'),
+    permissionRequired: permissions.staffRead,
+    exact: true,
+  },
+  {
+    path: '/staff/new',
+    loader: () =>
+      import('src/view/staff/form/StaffFormPage'),
+    permissionRequired: permissions.staffCreate,
+    exact: true,
+  },
+  {
+    path: '/staff/importer',
+    loader: () =>
+      import(
+        'src/view/staff/importer/StaffImporterPage'
+      ),
+    permissionRequired: permissions.staffImport,
+    exact: true,
+  },
+  {
+    path: '/staff/:id/edit',
+    loader: () =>
+      import('src/view/staff/form/StaffFormPage'),
+    permissionRequired: permissions.staffEdit,
+    exact: true,
+  },
+  {
+    path: '/staff/:id',
+    loader: () =>
+      import('src/view/staff/view/StaffViewPage'),
+    permissionRequired: permissions.staffRead,
+    exact: true,
+  },
 ].filter(Boolean);
 
 const publicRoutes = [

@@ -180,4 +180,11 @@ export default [
     icon: <ChevronRightIcon />,
     label: i18n('entities.prescriptionFill.menu'),
   },
+
+  {
+    path: '/staff',
+    permissionRequired: permissions.staffRead,
+    icon: <ChevronRightIcon />,
+    label: i18n('entities.staff.menu'),
+  },
 ].filter(Boolean);

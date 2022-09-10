@@ -759,6 +759,45 @@ class Permissions {
         allowedRoles: [roles.admin, roles.manager, roles.pharmacist],
         allowedPlans: [plans.free],
       },
+
+      staffImport: {
+        id: 'staffImport',
+        allowedRoles: [roles.admin, roles.manager],
+      },
+      staffCreate: {
+        id: 'staffCreate',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [plans.free],
+        allowedStorage: [
+
+        ],
+      },
+      staffEdit: {
+        id: 'staffEdit',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [plans.free],
+        allowedStorage: [
+
+        ],
+      },
+      staffDestroy: {
+        id: 'staffDestroy',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [plans.free],
+        allowedStorage: [
+
+        ],
+      },
+      staffRead: {
+        id: 'staffRead',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [plans.free],
+      },
+      staffAutocomplete: {
+        id: 'staffAutocomplete',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [plans.free],
+      },
     };
   }
 

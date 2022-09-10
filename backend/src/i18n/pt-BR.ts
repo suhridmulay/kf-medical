@@ -221,6 +221,15 @@ const ptBR = {
         }
       }
     },
+    staff: {
+      errors: {
+        unique: {
+          name: 'Name deve ser único',
+          user: 'User deve ser único',
+          userId: 'User deve ser único',
+        }
+      }
+    },
   }
 };
 

@@ -24,6 +24,7 @@ import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputRangeFormItem from 'src/view/shared/form/items/InputRangeFormItem';
+import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import medicineEnumEnumerators from 'src/modules/medicineEnum/medicineEnumEnumerators';
 import MedicineCategoryEnumAutocompleteFormItem from 'src/view/medicineCategoryEnum/autocomplete/MedicineCategoryEnumAutocompleteFormItem';
@@ -53,6 +54,9 @@ const schema = yup.object().shape({
   unit: yupFilterSchemas.enumerator(
     i18n('entities.medicineEnum.fields.unit'),
   ),
+  tabletsPerStripRange: yupFilterSchemas.integerRange(
+    i18n('entities.medicineEnum.fields.tabletsPerStripRange'),
+  ),
 });
 
 const emptyValues = {
@@ -64,6 +68,7 @@ const emptyValues = {
   compositionName: null,
   msrpRange: [],
   unit: null,
+  tabletsPerStripRange: [],
 }
 
 const previewRenders = {
@@ -98,6 +103,10 @@ const previewRenders = {
   unit: {
     label: i18n('entities.medicineEnum.fields.unit'),
     render: filterRenders.enumerator('entities.medicineEnum.enumerators.unit',),
+  },
+  tabletsPerStripRange: {
+    label: i18n('entities.medicineEnum.fields.tabletsPerStripRange'),
+    render: filterRenders.range(),
   },
 }
 
@@ -237,6 +246,12 @@ function MedicineEnumListFilter(props) {
                         ),
                       }),
                     )}
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <InputNumberRangeFormItem
+                    name="tabletsPerStripRange"
+                    label={i18n('entities.medicineEnum.fields.tabletsPerStripRange')}      
                   />
                 </Grid>
               </Grid>

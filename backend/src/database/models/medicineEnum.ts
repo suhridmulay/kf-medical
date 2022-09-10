@@ -56,6 +56,9 @@ export default function (sequelize) {
           ]],
         }
       },
+      tabletsPerStrip: {
+        type: DataTypes.INTEGER,
+      },
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,    

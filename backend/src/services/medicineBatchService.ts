@@ -35,6 +35,11 @@ export default class MedicineBatchService {
         transaction,
       });
 
+      let multiplier = 1;
+      if (data.qtyInStrips === true) {
+        multiplier = medicine.tabletsPerStrip;
+      }
+
       let lookupFilter = {'isHeadoffice': true};
       let headOfficeData = await HealthCenterRepository.findAndCountAll({filter: lookupFilter}, { ...this.options, transaction });
       let headOffice = headOfficeData.rows[0];
@@ -45,8 +50,8 @@ export default class MedicineBatchService {
         medicine: medicine.id,
         batchNumber: record.id,
         center: headOffice.id,
-        initialCount: data.quantity,
-        currentCount: data.quantity,
+        initialCount: data.quantity * multiplier,
+        currentCount: data.quantity * multiplier,
         siteBatchIdentifier:  headOffice.name + " | " + data.medicineBatchLookup
       }
 

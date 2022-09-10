@@ -27,6 +27,15 @@ function MedicineBatchView(props) {
         />
 
         <TextViewItem
+          label={i18n('entities.medicineBatch.fields.qtyInStrips')}
+          value={
+            record.qtyInStrips
+              ? i18n('common.yes')
+              : i18n('common.no')
+          }
+        />
+
+        <TextViewItem
           label={i18n('entities.medicineBatch.fields.batchNumber')}
           value={record.batchNumber}
         />
