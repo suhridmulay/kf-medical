@@ -151,6 +151,15 @@ function PurchaseOrderEntryListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
+                name={'unit'}
+                label={i18n(
+                  'entities.purchaseOrderEntry.fields.unit',
+                )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
                 name={'unitCost'}
                 label={i18n(
                   'entities.purchaseOrderEntry.fields.unitCost',
@@ -242,6 +251,13 @@ function PurchaseOrderEntryListTable(props) {
                   <MedicineEnumListItem value={row.medicine} />
                 </TableCell>
                 <TableCell align="right">{row.quantity}</TableCell>
+                <TableCell>
+                  {row.unit
+                    ? i18n(
+                        `entities.purchaseOrderEntry.enumerators.unit.${row.unit}`,
+                      )
+                    : null}
+                </TableCell>
                 <TableCell align="right">{row.unitCost}</TableCell>
                 <TableCell align="right">{row.totalCost}</TableCell>
                 <TableCell align="right">{row.stateGST}</TableCell>

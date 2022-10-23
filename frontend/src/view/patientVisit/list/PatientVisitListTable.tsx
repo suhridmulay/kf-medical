@@ -137,6 +137,15 @@ function PatientVisitListTable(props) {
                 )}
               />
               <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'department'}
+                label={i18n(
+                  'entities.patientVisit.fields.department',
+                )}
+              />
+              <TableCellCustom
                 label={i18n(
                   'entities.patientVisit.fields.doctor',
                 )}
@@ -211,6 +220,13 @@ function PatientVisitListTable(props) {
                   </TableCell>
                 <TableCell>
                   <PatientListItem value={row.patient} />
+                </TableCell>
+                <TableCell>
+                  {row.department
+                    ? i18n(
+                        `entities.patientVisit.enumerators.department.${row.department}`,
+                      )
+                    : null}
                 </TableCell>
                 <TableCell>
                   <DoctorListItem value={row.doctor} />

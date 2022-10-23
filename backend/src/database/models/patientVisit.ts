@@ -9,6 +9,17 @@ export default function (sequelize) {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
+      department: {
+        type: DataTypes.TEXT,
+        validate: {
+          isIn: [[
+            "General",
+            "Eyecare",
+            "Homeo",
+            "Dentist"
+          ]],
+        }
+      },
       visitDate: {
         type: DataTypes.DATEONLY,
         get: function() {

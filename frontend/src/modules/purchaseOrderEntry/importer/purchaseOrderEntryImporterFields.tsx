@@ -1,5 +1,5 @@
 import schemas from 'src/modules/shared/yup/yupImporterSchemas';
-import { i18n } from 'src/i18n';
+import { i18n } from 'src/i18n';import purchaseOrderEntryEnumerators from 'src/modules/purchaseOrderEntry/purchaseOrderEntryEnumerators';
 
 export default [
   {
@@ -28,6 +28,16 @@ export default [
       {
         "required": true,
         "scale": 2
+      },
+    ),
+  },
+  {
+    name: 'unit',
+    label: i18n('entities.purchaseOrderEntry.fields.unit'),
+    schema: schemas.enumerator(
+      i18n('entities.purchaseOrderEntry.fields.unit'),
+      {
+        "options": purchaseOrderEntryEnumerators.unit
       },
     ),
   },

@@ -36,6 +36,9 @@ const schema = yup.object().shape({
   medicalCenter: yupFilterSchemas.relationToOne(
     i18n('entities.patientVisit.fields.medicalCenter'),
   ),
+  department: yupFilterSchemas.enumerator(
+    i18n('entities.patientVisit.fields.department'),
+  ),
   doctor: yupFilterSchemas.relationToOne(
     i18n('entities.patientVisit.fields.doctor'),
   ),
@@ -59,6 +62,7 @@ const schema = yup.object().shape({
 const emptyValues = {
   patient: null,
   medicalCenter: null,
+  department: null,
   doctor: null,
   visitDateRange: [],
   repeatVisit: null,
@@ -76,6 +80,10 @@ const previewRenders = {
       label: i18n('entities.patientVisit.fields.medicalCenter'),
       render: filterRenders.relationToOne(),
     },
+  department: {
+    label: i18n('entities.patientVisit.fields.department'),
+    render: filterRenders.enumerator('entities.patientVisit.enumerators.department',),
+  },
   doctor: {
       label: i18n('entities.patientVisit.fields.doctor'),
       render: filterRenders.relationToOne(),
@@ -174,6 +182,20 @@ function PatientVisitListFilter(props) {
                   <HealthCenterAutocompleteFormItem  
                     name="medicalCenter"
                     label={i18n('entities.patientVisit.fields.medicalCenter')}        
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <SelectFormItem
+                    name="department"
+                    label={i18n('entities.patientVisit.fields.department')}
+                    options={patientVisitEnumerators.department.map(
+                      (value) => ({
+                        value,
+                        label: i18n(
+                          `entities.patientVisit.enumerators.department.${value}`,
+                        ),
+                      }),
+                    )}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>

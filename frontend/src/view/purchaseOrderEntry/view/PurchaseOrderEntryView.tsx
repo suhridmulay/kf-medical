@@ -26,6 +26,16 @@ function PurchaseOrderEntryView(props) {
           value={Number(record.quantity).toFixed(2)}
         />}
 
+        <TextViewItem
+          label={i18n('entities.purchaseOrderEntry.fields.unit')}
+          value={
+            record.unit &&
+            i18n(
+              `entities.purchaseOrderEntry.enumerators.unit.${record.unit}`,
+            )
+          }
+        />
+
         {record.unitCost != null && <TextViewItem
           label={i18n('entities.purchaseOrderEntry.fields.unitCost')}
           value={Number(record.unitCost).toFixed(2)}
