@@ -1,4 +1,10 @@
 const patientVisitEnumerators = {
+  department: [
+    'General',
+    'Eyecare',
+    'Homeo',
+    'Dentist',
+  ],
   caseSeverity: [
     'Green',
     'Orange',

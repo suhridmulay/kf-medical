@@ -25,6 +25,16 @@ function PatientVisitView(props) {
           value={record.medicalCenter}
         />
 
+        <TextViewItem
+          label={i18n('entities.patientVisit.fields.department')}
+          value={
+            record.department &&
+            i18n(
+              `entities.patientVisit.enumerators.department.${record.department}`,
+            )
+          }
+        />
+
         <DoctorViewItem
           label={i18n('entities.patientVisit.fields.doctor')}
           value={record.doctor}

@@ -13,6 +13,8 @@ import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import SwitchFormItem from 'src/view/shared/form/items/SwitchFormItem';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import purchaseOrderEntryEnumerators from 'src/modules/purchaseOrderEntry/purchaseOrderEntryEnumerators';
 import PurchaseOrderAutocompleteFormItem from 'src/view/purchaseOrder/autocomplete/PurchaseOrderAutocompleteFormItem';
 import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
 
@@ -32,6 +34,12 @@ const schema = yup.object().shape({
     {
       "required": true,
       "scale": 2
+    },
+  ),
+  unit: yupFormSchemas.enumerator(
+    i18n('entities.purchaseOrderEntry.fields.unit'),
+    {
+      "options": purchaseOrderEntryEnumerators.unit
     },
   ),
   unitCost: yupFormSchemas.decimal(
@@ -69,6 +77,7 @@ function PurchaseOrderEntryForm(props) {
       purchaseOrder: record.purchaseOrder,
       medicine: record.medicine,
       quantity: record.quantity,
+      unit: record.unit,
       unitCost: record.unitCost,
       totalCost: record.totalCost,
       stateGST: record.stateGST,
@@ -121,6 +130,21 @@ function PurchaseOrderEntryForm(props) {
                 name="quantity"
                 label={i18n('entities.purchaseOrderEntry.fields.quantity')}  
                 required={true}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <SelectFormItem
+                name="unit"
+                label={i18n('entities.purchaseOrderEntry.fields.unit')}
+                options={purchaseOrderEntryEnumerators.unit.map(
+                  (value) => ({
+                    value,
+                    label: i18n(
+                      `entities.purchaseOrderEntry.enumerators.unit.${value}`,
+                    ),
+                  }),
+                )}
+                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

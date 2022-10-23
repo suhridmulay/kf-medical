@@ -1476,6 +1476,14 @@
           },
           {
             "in": "query",
+            "name": "filter[department]",
+            "schema": {
+              "type": "string",
+              "enum": ["General","Eyecare","Homeo","Dentist"]
+            }
+          },
+          {
+            "in": "query",
             "name": "filter[doctor]",
             "schema": {
               "type": "string",
@@ -10921,6 +10929,10 @@
           "medicalCenter": {
             "$ref": "#/components/schemas/HealthCenter"
           },
+          "department": {
+            "type": "string",
+            "enum": ["General","Eyecare","Homeo","Dentist"]
+          },
           "doctor": {
             "$ref": "#/components/schemas/Doctor"
           },
@@ -11072,6 +11084,10 @@
           "medicalCenter": {
             "type": "string",
             "format": "uuid"
+          },
+          "department": {
+            "type": "string",
+            "enum": ["General","Eyecare","Homeo","Dentist"]
           },
           "doctor": {
             "type": "string",
@@ -11836,6 +11852,10 @@
           "quantity": {
             "type": "number"
           },
+          "unit": {
+            "type": "string",
+            "enum": ["Tablets","Strips","Bottle","Tube","Drop"]
+          },
           "unitCost": {
             "type": "number"
           },
@@ -11866,6 +11886,10 @@
           },
           "quantity": {
             "type": "number"
+          },
+          "unit": {
+            "type": "string",
+            "enum": ["Tablets","Strips","Bottle","Tube","Drop"]
           },
           "unitCost": {
             "type": "number"

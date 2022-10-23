@@ -39,6 +39,12 @@ const schema = yup.object().shape({
       "required": true
     },
   ),
+  department: yupFormSchemas.enumerator(
+    i18n('entities.patientVisit.fields.department'),
+    {
+      "options": patientVisitEnumerators.department
+    },
+  ),
   doctor: yupFormSchemas.relationToOne(
     i18n('entities.patientVisit.fields.doctor'),
     {
@@ -257,6 +263,7 @@ function PatientVisitForm(props) {
     return {
       patient: record.patient,
       medicalCenter: record.medicalCenter,
+      department: record.department,
       doctor: record.doctor,
       visitDate: record.visitDate ? moment(record.visitDate, 'YYYY-MM-DD') : null,
       repeatVisit: record.repeatVisit,
@@ -341,6 +348,21 @@ function PatientVisitForm(props) {
                 label={i18n('entities.patientVisit.fields.medicalCenter')}
                 required={true}
                 showCreate={!props.modal}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <SelectFormItem
+                name="department"
+                label={i18n('entities.patientVisit.fields.department')}
+                options={patientVisitEnumerators.department.map(
+                  (value) => ({
+                    value,
+                    label: i18n(
+                      `entities.patientVisit.enumerators.department.${value}`,
+                    ),
+                  }),
+                )}
+                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

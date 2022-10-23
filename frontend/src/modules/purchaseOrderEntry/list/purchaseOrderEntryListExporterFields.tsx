@@ -22,6 +22,10 @@ export default [
     render: exporterRenders.decimal(2),
   },
   {
+    name: 'unit',
+    label: i18n('entities.purchaseOrderEntry.fields.unit'),
+  },
+  {
     name: 'unitCost',
     label: i18n('entities.purchaseOrderEntry.fields.unitCost'),
     render: exporterRenders.decimal(2),

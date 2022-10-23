@@ -193,6 +193,7 @@ const es = {
           id: 'Id',
           'patient': 'Patient',
           'medicalCenter': 'Medical Center',
+          'department': 'Department',
           'doctor': 'Doctor',
           'visitDateRange': 'Visit Date',
           'visitDate': 'Visit Date',
@@ -251,6 +252,12 @@ const es = {
           createdAtRange: 'Creado el',
         },
         enumerators: {
+          'department': {
+            'General': 'General',
+            'Eyecare': 'Eyecare',
+            'Homeo': 'Homeo',
+            'Dentist': 'Dentist',
+          },
           'caseSeverity': {
             'Green': 'Green',
             'Orange': 'Orange',
@@ -1018,6 +1025,7 @@ const es = {
           'medicine': 'Medicine',
           'quantityRange': 'Quantity',
           'quantity': 'Quantity',
+          'unit': 'Unit',
           'unitCostRange': 'Unit Cost',
           'unitCost': 'Unit Cost',
           'totalCostRange': 'Total Cost',
@@ -1032,7 +1040,13 @@ const es = {
           createdAtRange: 'Creado el',
         },
         enumerators: {
-
+          'unit': {
+            'Tablets': 'Tablets',
+            'Strips': 'Strips',
+            'Bottle': 'Bottle',
+            'Tube': 'Tube',
+            'Drop': 'Drop',
+          },
         },
         placeholders: {
 

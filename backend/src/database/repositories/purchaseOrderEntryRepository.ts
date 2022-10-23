@@ -27,6 +27,7 @@ class PurchaseOrderEntryRepository {
       {
         ...lodash.pick(data, [
           'quantity',
+          'unit',
           'unitCost',
           'totalCost',
           'stateGST',
@@ -91,6 +92,7 @@ class PurchaseOrderEntryRepository {
       {
         ...lodash.pick(data, [
           'quantity',
+          'unit',
           'unitCost',
           'totalCost',
           'stateGST',

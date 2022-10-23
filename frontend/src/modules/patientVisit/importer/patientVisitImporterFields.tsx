@@ -24,6 +24,16 @@ export default [
     ),
   },
   {
+    name: 'department',
+    label: i18n('entities.patientVisit.fields.department'),
+    schema: schemas.enumerator(
+      i18n('entities.patientVisit.fields.department'),
+      {
+        "options": patientVisitEnumerators.department
+      },
+    ),
+  },
+  {
     name: 'doctor',
     label: i18n('entities.patientVisit.fields.doctor'),
     schema: schemas.relationToOne(

@@ -26,6 +26,7 @@ class PatientVisitRepository {
     const record = await options.database.patientVisit.create(
       {
         ...lodash.pick(data, [
+          'department',
           'visitDate',
           'repeatVisit',
           'otherSymptoms',
@@ -129,6 +130,7 @@ class PatientVisitRepository {
     record = await record.update(
       {
         ...lodash.pick(data, [
+          'department',
           'visitDate',
           'repeatVisit',
           'otherSymptoms',
@@ -447,6 +449,12 @@ class PatientVisitRepository {
           ['medicalCenterId']: SequelizeFilterUtils.uuid(
             filter.medicalCenter,
           ),
+        });
+      }
+
+      if (filter.department) {
+        whereAnd.push({
+          department: filter.department,
         });
       }
 
