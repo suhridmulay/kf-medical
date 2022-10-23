@@ -41,7 +41,6 @@ export default class TransferService {
         let srcInventoryRecord = inventoryAtSourceCenter.rows[0];
         let toCenterDetails = await HealthCenterRepository.findById(data.toCenter, this.options);
         let medicineBatchDetails = await MedicineBatchRepository.findById(data.medicineBatch, this.options);
-
         if (inventoryAtDestCenter.count == 0) { // create a new entry
           let inventoryData = {
             center: data.toCenter,
@@ -59,7 +58,8 @@ export default class TransferService {
           });
         } else { // Update the record found
           let destInventoryRecord = inventoryAtDestCenter.rows[0];
-          destInventoryRecord.currentCount += data.transferQuanity;
+
+          destInventoryRecord.currentCount += data.transferQuantity;
 
           // Updates require the IDs as opposed to the expanded record 
           destInventoryRecord.medicine = destInventoryRecord.medicineId;

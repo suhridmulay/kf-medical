@@ -291,6 +291,14 @@ class SiteInventoryRepository {
           ['id']: SequelizeFilterUtils.uuid(filter.id),
         });
       }
+ 
+   if (filter.hasRemainingMeds) {
+        whereAnd.push({
+          ['currentCount']: {
+            [Op.gt]: 0,
+          },
+        });
+      }
 
       if (filter.center) {
         whereAnd.push({

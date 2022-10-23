@@ -28,7 +28,7 @@ export default class MedicineBatchService {
       data.medicine = await MedicineEnumRepository.filterIdInTenant(data.medicine, { ...this.options, transaction });
 
       let medicine = await MedicineEnumRepository.findById(data.medicine, { ...this.options, transaction });
-      data.medicineBatchLookup = medicine.medicineName + " | " + data.expiryDate + " | " + data.batchNumber;
+      data.medicineBatchLookup = medicine.medicineName + " | Exp:" + data.expiryDate + " | Batch:" + data.batchNumber;
 
       const record = await MedicineBatchRepository.create(data, {
         ...this.options,

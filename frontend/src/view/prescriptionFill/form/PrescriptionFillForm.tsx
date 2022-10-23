@@ -19,24 +19,61 @@ import * as yup from 'yup';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 
 const schema = yup.object().shape({
   patientVisit: yupFormSchemas.relationToOne(
     i18n('entities.prescriptionFill.fields.patientVisit'),
     {
-      "required": true
+      "required": false
     },
   ),
-  siteInventory: yupFormSchemas.relationToOne(
-    i18n('entities.prescriptionFill.fields.siteInventory'),
-    {
-      "required": true
-    },
-  ),
-  quantity: yupFormSchemas.integer(
+  med1Qty: yupFormSchemas.integer(
     i18n('entities.prescriptionFill.fields.quantity'),
     {
-      "required": true
+      "required": false
+    },
+  ),
+  med2Qty: yupFormSchemas.integer(
+    i18n('entities.prescriptionFill.fields.quantity'),
+    {
+      "required": false
+    },
+  ),
+  med3Qty: yupFormSchemas.integer(
+    i18n('entities.prescriptionFill.fields.quantity'),
+    {
+      "required": false
+    },
+  ),
+  med4Qty: yupFormSchemas.integer(
+    i18n('entities.prescriptionFill.fields.quantity'),
+    {
+      "required": false
+    },
+  ),
+  med1SiteInventory: yupFormSchemas.relationToOne(
+    i18n('entities.prescriptionFill.fields.siteInventory'),
+    {
+      "required": false
+    },
+  ),
+  med2SiteInventory: yupFormSchemas.relationToOne(
+    i18n('entities.prescriptionFill.fields.siteInventory'),
+    {
+      "required": false
+    },
+  ),
+  med3SiteInventory: yupFormSchemas.relationToOne(
+    i18n('entities.prescriptionFill.fields.siteInventory'),
+    {
+      "required": false
+    },
+  ),
+  med4SiteInventory: yupFormSchemas.relationToOne(
+    i18n('entities.prescriptionFill.fields.siteInventory'),
+    {
+      "required": false
     },
   ),
 });
@@ -57,8 +94,11 @@ function PrescriptionFillForm(props) {
     defaultValues: initialValues as any,
   });
 
+  const { saveLoading, modal } = props;
+  const patientVisit = props.record.patientVisit;
+
   const onSubmit = (values) => {
-    console.log("Onsubmit: " + JSON.stringify(values));
+    values.patientVisit = patientVisit.id;
     props.onSubmit(props.record?.id, values);
   };
 
@@ -68,24 +108,25 @@ function PrescriptionFillForm(props) {
     });
   };
 
-  const { saveLoading, modal } = props;
-  const patientVisit = props.record.patientVisit;
-
   function renderTableRow (medQty, medDetails, medInventory, formQtyName, formMedBatch)  {
     if (!medDetails) 
       return;
 
     return (
       <TableRow>
-      <TableCell component="th" scope="row">Qty {medQty} of {medDetails.medicineName}</TableCell>
-      <TableCell align="right">
-        <select {...formMedBatch}>
-          {medInventory.rows.map((x) =>
-            <option value={x.id}>{x.siteBatchIdentifier} | Count: {x.currentCount}</option>
+      <TableCell component="th" scope="row" style={{width:200}}>Qty {medQty} of {medDetails.medicineName}</TableCell>
+      <TableCell align="right" style={{width:600 }}>
+        <SelectFormItem name={formMedBatch} label="Medicine Batch"
+          options={medInventory.rows.map(
+            (value) => ({
+              value,
+              label: value.siteBatchIdentifier + " | Current Count: " + value.currentCount + " | Stocked on: " + value.inventoryAddDate,
+            }),
           )}
-        </select>
+          required={false}
+        />
       </TableCell>
-      <TableCell align="right">
+      <TableCell align="right" style={{width:100}}>
       <InputNumberFormItem
           name={formQtyName}
           label="Qty"
@@ -101,12 +142,12 @@ function PrescriptionFillForm(props) {
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Grid spacing={2} container>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item lg={12} md={12} sm={12} xs={12}>
               <h2>Patient visit for {patientVisit.patient.fullName} on {patientVisit.visitDate}</h2>
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item lg={12} md={12} sm={12} xs={12}>
               <TableContainer component={Paper}>
-                <Table style={{ borderRadius: '5px', border: '1px solid rgb(224, 224, 224)', borderCollapse: 'initial'}}>
+                <Table style={{ borderRadius: '5px', border: '1px solid rgb(224, 224, 224)', borderCollapse: 'initial', paddingBottom: '100px'}}>
                   <TableHead>
                     <TableRow>
                       <TableCell>Prescribed</TableCell>
@@ -115,8 +156,10 @@ function PrescriptionFillForm(props) {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {renderTableRow(props.record.med1Qty, props.record.med1, props.record.med1Inventory, "med1BatchQty", "med1BatchSelected")}
-                    {renderTableRow(props.record.med2Qty, props.record.med2, props.record.med2Inventory, "med2BatchQty", "med2BatchSelected")}
+                    {renderTableRow(props.record.med1Qty, props.record.med1, props.record.med1Inventory, "med1Qty", "med1SiteInventory")}
+                    {renderTableRow(props.record.med2Qty, props.record.med2, props.record.med2Inventory, "med2Qty", "med2SiteInventory")}
+                    {renderTableRow(props.record.med3Qty, props.record.med3, props.record.med3Inventory, "med3Qty", "med3SiteInventory")}
+                    {renderTableRow(props.record.med4Qty, props.record.med4, props.record.med4Inventory, "med4Qty", "med4SiteInventory")}
                   </TableBody>
                 </Table>
               </TableContainer>

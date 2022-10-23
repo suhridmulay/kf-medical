@@ -29,7 +29,6 @@ export default class PrescriptionFillService {
 
       // Decrease the inventory count for this particular medicine at the local site
       let updateRecord = await SiteInventoryRepository.findById(data.siteInventory, this.options);
-      console.log("Coming here 2" + JSON.stringify(updateRecord));
 
       updateRecord.currentCount -= data.quantity;
       if (updateRecord.currentCount < 0) {

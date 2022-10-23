@@ -53,14 +53,25 @@ const prescriptionFillFormActions = {
         record['med4Qty'] = patientVisitDetails.med4Qty;
 
         record['patientVisit'] =  patientVisitDetails;
-        record['med1Inventory'] = await SiteInventoryService.list({center: medicalCenter, medicine: patientVisitDetails.medicine1Id}, 
-                                                                  'expiryDate', null, null);
-        record['med2Inventory'] = await SiteInventoryService.list({center: medicalCenter, medicine: patientVisitDetails.medicine2Id}, 
-                                                                    'expiryDate', null, null);
-        record['med3Inventory'] = await SiteInventoryService.list({center: medicalCenter, medicine: patientVisitDetails.medicine3Id}, 
-                                                                      'expiryDate', null, null);
-        record['med4Inventory'] = await SiteInventoryService.list({center: medicalCenter, medicine: patientVisitDetails.medicine4Id}, 
-                                                                        'expiryDate', null, null);                                                
+        if (record['med1']) {
+          record['med1Inventory'] = await SiteInventoryService.list({center: medicalCenter, medicine: patientVisitDetails.medicine1Id, hasRemainingMeds: 1}, 
+                                                                    'expiryDate', 2, null);
+        }
+
+        if (record['med2']) {
+          record['med2Inventory'] = await SiteInventoryService.list({center: medicalCenter, medicine: patientVisitDetails.medicine2Id, hasRemainingMeds: 1}, 
+                                                                    'expiryDate', 2, null);
+        }
+        
+        if (record['med3']) {
+          record['med3Inventory'] = await SiteInventoryService.list({center: medicalCenter, medicine: patientVisitDetails.medicine3Id, hasRemainingMeds: 1}, 
+                                                                    'expiryDate', 2, null);
+        }
+
+        if (record['med4']) {
+          record['med4Inventory'] = await SiteInventoryService.list({center: medicalCenter, medicine: patientVisitDetails.medicine4Id, hasRemainingMeds: 1}, 
+                                                                    'expiryDate', 2, null);
+        }
       }
 
       dispatch({
@@ -84,7 +95,26 @@ const prescriptionFillFormActions = {
         type: prescriptionFillFormActions.CREATE_STARTED,
       });
 
-      await PrescriptionFillService.create(values);
+      const record1 = {"patientVisit": values.patientVisit, "quantity": values.med1Qty, "siteInventory": values.med1SiteInventory};
+      const record2 = {"patientVisit": values.patientVisit, "quantity": values.med2Qty, "siteInventory": values.med2SiteInventory};
+      const record3 = {"patientVisit": values.patientVisit, "quantity": values.med3Qty, "siteInventory": values.med3SiteInventory};
+      const record4 = {"patientVisit": values.patientVisit, "quantity": values.med4Qty, "siteInventory": values.med4SiteInventory};
+
+      if (record1.quantity > 0) {
+        await PrescriptionFillService.create(record1);
+      }
+
+      if (record2.quantity > 0) {
+        await PrescriptionFillService.create(record2);
+      }
+
+      if (record3.quantity > 0) {
+        await PrescriptionFillService.create(record3);
+      }
+
+      if (record4.quantity > 0) {
+        await PrescriptionFillService.create(record2);
+      }
 
       dispatch({
         type: prescriptionFillFormActions.CREATE_SUCCESS,
