@@ -151,6 +151,15 @@ function MedicineBatchListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
+                name={'unit'}
+                label={i18n(
+                  'entities.medicineBatch.fields.unit',
+                )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
                 name={'qtyInStrips'}
                 label={i18n(
                   'entities.medicineBatch.fields.qtyInStrips',
@@ -279,6 +288,13 @@ function MedicineBatchListTable(props) {
                   <MedicineEnumListItem value={row.medicine} />
                 </TableCell>
                 <TableCell align="right">{row.quantity}</TableCell>
+                <TableCell>
+                  {row.unit
+                    ? i18n(
+                        `entities.medicineBatch.enumerators.unit.${row.unit}`,
+                      )
+                    : null}
+                </TableCell>
                 <TableCell>
                   {row.qtyInStrips
                     ? i18n('common.yes')

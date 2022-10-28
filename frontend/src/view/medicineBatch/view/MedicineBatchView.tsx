@@ -27,6 +27,16 @@ function MedicineBatchView(props) {
         />
 
         <TextViewItem
+          label={i18n('entities.medicineBatch.fields.unit')}
+          value={
+            record.unit &&
+            i18n(
+              `entities.medicineBatch.enumerators.unit.${record.unit}`,
+            )
+          }
+        />
+
+        <TextViewItem
           label={i18n('entities.medicineBatch.fields.qtyInStrips')}
           value={
             record.qtyInStrips

@@ -67,6 +67,12 @@ const schema = yup.object().shape({
     i18n('entities.purchaseOrderEntry.fields.substitutionAllowed'),
     {},
   ),
+  purchaseOrderEntryLookup: yupFormSchemas.string(
+    i18n('entities.purchaseOrderEntry.fields.purchaseOrderEntryLookup'),
+    {
+      "max": 255
+    },
+  ),
 });
 
 function PurchaseOrderEntryForm(props) {
@@ -83,6 +89,7 @@ function PurchaseOrderEntryForm(props) {
       stateGST: record.stateGST,
       centralGST: record.centralGST,
       substitutionAllowed: record.substitutionAllowed,
+      purchaseOrderEntryLookup: record.purchaseOrderEntryLookup,
     };
   });
 
@@ -150,6 +157,14 @@ function PurchaseOrderEntryForm(props) {
               <SwitchFormItem
                 name="substitutionAllowed"
                 label={i18n('entities.purchaseOrderEntry.fields.substitutionAllowed')}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="purchaseOrderEntryLookup"
+                label={i18n('entities.purchaseOrderEntry.fields.purchaseOrderEntryLookup')}
+              hint={i18n('entities.purchaseOrderEntry.hints.purchaseOrderEntryLookup')}  
+                required={false}
               />
             </Grid>
           </Grid>

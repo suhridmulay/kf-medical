@@ -1037,6 +1037,7 @@ const ptBR = {
           'centralGSTRange': 'Central GST',
           'centralGST': 'Central GST',
           'substitutionAllowed': 'Substitution Allowed',
+          'purchaseOrderEntryLookup': 'PurchaseOrder Entry Lookup',
           createdAt: 'Criado em',
           updatedAt: 'Atualizado em',
           createdAtRange: 'Criado em',
@@ -1054,7 +1055,7 @@ const ptBR = {
 
         },
         hints: {
-
+          'purchaseOrderEntryLookup': 'Auto-filled in',
         },
         new: {
           title: 'Novo Purchase Order Entry',
@@ -1100,6 +1101,7 @@ const ptBR = {
           'medicine': 'Medicine',
           'quantityRange': 'Quantity',
           'quantity': 'Quantity',
+          'unit': 'Unit',
           'qtyInStrips': 'Quantity In Strips',
           'batchNumber': 'Batch Number',
           'expiryDateRange': 'Expiry Date',
@@ -1121,10 +1123,16 @@ const ptBR = {
           createdAtRange: 'Criado em',
         },
         enumerators: {
-
+          'unit': {
+            'Tablets': 'Tablets',
+            'Strips': 'Strips',
+            'Bottle': 'Bottle',
+            'Tube': 'Tube',
+            'Drop': 'Drop',
+          },
         },
         placeholders: {
-
+          'unit': 'Tablet',
         },
         hints: {
           'qtyInStrips': 'Qty in strips or tablets. Strips * Tablets/Strip = Qty',

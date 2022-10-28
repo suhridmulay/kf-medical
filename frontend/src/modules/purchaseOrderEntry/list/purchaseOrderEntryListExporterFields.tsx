@@ -51,6 +51,10 @@ export default [
     render: exporterRenders.boolean(),
   },
   {
+    name: 'purchaseOrderEntryLookup',
+    label: i18n('entities.purchaseOrderEntry.fields.purchaseOrderEntryLookup'),
+  },
+  {
     name: 'createdAt',
     label: i18n('entities.purchaseOrderEntry.fields.createdAt'),
     render: exporterRenders.datetime(),

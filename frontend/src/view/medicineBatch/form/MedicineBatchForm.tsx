@@ -14,6 +14,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import medicineBatchEnumerators from 'src/modules/medicineBatch/medicineBatchEnumerators';
 import moment from 'moment';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
 import PurchaseInvoiceAutocompleteFormItem from 'src/view/purchaseInvoice/autocomplete/PurchaseInvoiceAutocompleteFormItem';
@@ -34,6 +36,13 @@ const schema = yup.object().shape({
     i18n('entities.medicineBatch.fields.quantity'),
     {
       "required": true
+    },
+  ),
+  unit: yupFormSchemas.enumerator(
+    i18n('entities.medicineBatch.fields.unit'),
+    {
+      "required": true,
+      "options": medicineBatchEnumerators.unit
     },
   ),
   qtyInStrips: yupFormSchemas.boolean(
@@ -107,6 +116,7 @@ function MedicineBatchForm(props) {
       invoice: record.invoice,
       medicine: record.medicine,
       quantity: record.quantity,
+      unit: record.unit,
       qtyInStrips: record.qtyInStrips,
       batchNumber: record.batchNumber,
       expiryDate: record.expiryDate ? moment(record.expiryDate, 'YYYY-MM-DD') : null,
@@ -163,6 +173,22 @@ function MedicineBatchForm(props) {
               <InputNumberFormItem
                 name="quantity"
                 label={i18n('entities.medicineBatch.fields.quantity')}  
+                required={true}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <SelectFormItem
+                name="unit"
+                label={i18n('entities.medicineBatch.fields.unit')}
+              placeholder={i18n('entities.medicineBatch.placeholders.unit')}
+                options={medicineBatchEnumerators.unit.map(
+                  (value) => ({
+                    value,
+                    label: i18n(
+                      `entities.medicineBatch.enumerators.unit.${value}`,
+                    ),
+                  }),
+                )}
                 required={true}
               />
             </Grid>

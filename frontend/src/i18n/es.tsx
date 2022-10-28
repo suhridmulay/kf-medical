@@ -1035,6 +1035,7 @@ const es = {
           'centralGSTRange': 'Central GST',
           'centralGST': 'Central GST',
           'substitutionAllowed': 'Substitution Allowed',
+          'purchaseOrderEntryLookup': 'PurchaseOrder Entry Lookup',
           createdAt: 'Creado el',
           updatedAt: 'Actualizado el',
           createdAtRange: 'Creado el',
@@ -1052,7 +1053,7 @@ const es = {
 
         },
         hints: {
-
+          'purchaseOrderEntryLookup': 'Auto-filled in',
         },
         new: {
           title: 'Nuevo Purchase Order Entry',
@@ -1098,6 +1099,7 @@ const es = {
           'medicine': 'Medicine',
           'quantityRange': 'Quantity',
           'quantity': 'Quantity',
+          'unit': 'Unit',
           'qtyInStrips': 'Quantity In Strips',
           'batchNumber': 'Batch Number',
           'expiryDateRange': 'Expiry Date',
@@ -1119,10 +1121,16 @@ const es = {
           createdAtRange: 'Creado el',
         },
         enumerators: {
-
+          'unit': {
+            'Tablets': 'Tablets',
+            'Strips': 'Strips',
+            'Bottle': 'Bottle',
+            'Tube': 'Tube',
+            'Drop': 'Drop',
+          },
         },
         placeholders: {
-
+          'unit': 'Tablet',
         },
         hints: {
           'qtyInStrips': 'Qty in strips or tablets. Strips * Tablets/Strip = Qty',

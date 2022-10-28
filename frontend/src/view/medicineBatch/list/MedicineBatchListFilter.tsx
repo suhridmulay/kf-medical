@@ -24,6 +24,7 @@ import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import medicineBatchEnumerators from 'src/modules/medicineBatch/medicineBatchEnumerators';
 import PurchaseInvoiceAutocompleteFormItem from 'src/view/purchaseInvoice/autocomplete/PurchaseInvoiceAutocompleteFormItem';
 import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
 
@@ -33,6 +34,9 @@ const schema = yup.object().shape({
   ),
   medicine: yupFilterSchemas.relationToOne(
     i18n('entities.medicineBatch.fields.medicine'),
+  ),
+  unit: yupFilterSchemas.enumerator(
+    i18n('entities.medicineBatch.fields.unit'),
   ),
   qtyInStrips: yupFilterSchemas.boolean(
     i18n('entities.medicineBatch.fields.qtyInStrips'),
@@ -45,6 +49,7 @@ const schema = yup.object().shape({
 const emptyValues = {
   invoice: null,
   medicine: null,
+  unit: null,
   qtyInStrips: null,
   medicineBatchLookup: null,
 }
@@ -58,6 +63,10 @@ const previewRenders = {
       label: i18n('entities.medicineBatch.fields.medicine'),
       render: filterRenders.relationToOne(),
     },
+  unit: {
+    label: i18n('entities.medicineBatch.fields.unit'),
+    render: filterRenders.enumerator('entities.medicineBatch.enumerators.unit',),
+  },
   qtyInStrips: {
     label: i18n('entities.medicineBatch.fields.qtyInStrips'),
     render: filterRenders.boolean(),
@@ -140,6 +149,20 @@ function MedicineBatchListFilter(props) {
                   <MedicineEnumAutocompleteFormItem  
                     name="medicine"
                     label={i18n('entities.medicineBatch.fields.medicine')}        
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <SelectFormItem
+                    name="unit"
+                    label={i18n('entities.medicineBatch.fields.unit')}
+                    options={medicineBatchEnumerators.unit.map(
+                      (value) => ({
+                        value,
+                        label: i18n(
+                          `entities.medicineBatch.enumerators.unit.${value}`,
+                        ),
+                      }),
+                    )}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
