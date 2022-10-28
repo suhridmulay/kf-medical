@@ -204,6 +204,15 @@ function PurchaseOrderEntryListTable(props) {
                 label={i18n(
                   'entities.purchaseOrderEntry.fields.substitutionAllowed',
                 )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'purchaseOrderEntryLookup'}
+                label={i18n(
+                  'entities.purchaseOrderEntry.fields.purchaseOrderEntryLookup',
+                )}
               />              
               <TableCellCustom size="md" />
             </TableRow>
@@ -266,7 +275,8 @@ function PurchaseOrderEntryListTable(props) {
                   {row.substitutionAllowed
                     ? i18n('common.yes')
                     : i18n('common.no')}
-                </TableCell>                  
+                </TableCell>
+                <TableCell>{row.purchaseOrderEntryLookup}</TableCell>                  
                   <TableCell>
                     <Box
                       display="flex"

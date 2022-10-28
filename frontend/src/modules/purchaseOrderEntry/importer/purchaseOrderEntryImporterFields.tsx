@@ -86,4 +86,14 @@ export default [
       {},
     ),
   },
+  {
+    name: 'purchaseOrderEntryLookup',
+    label: i18n('entities.purchaseOrderEntry.fields.purchaseOrderEntryLookup'),
+    schema: schemas.string(
+      i18n('entities.purchaseOrderEntry.fields.purchaseOrderEntryLookup'),
+      {
+        "max": 255
+      },
+    ),
+  },
 ];

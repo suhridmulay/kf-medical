@@ -7273,6 +7273,14 @@
           },
           {
             "in": "query",
+            "name": "filter[unit]",
+            "schema": {
+              "type": "string",
+              "enum": ["Tablets","Strips","Bottle","Tube","Drop"]
+            }
+          },
+          {
+            "in": "query",
             "name": "filter[qtyInStrips]",
             "schema": {
               "type": "boolean"
@@ -11870,6 +11878,9 @@
           },
           "substitutionAllowed": {
             "type": "boolean"
+          },
+          "purchaseOrderEntryLookup": {
+            "type": "string"
           }    
         }
       },
@@ -11905,6 +11916,9 @@
           },
           "substitutionAllowed": {
             "type": "boolean"
+          },
+          "purchaseOrderEntryLookup": {
+            "type": "string"
           }    
         }
       },
@@ -11924,6 +11938,10 @@
           },
           "quantity": {
             "type": "integer"
+          },
+          "unit": {
+            "type": "string",
+            "enum": ["Tablets","Strips","Bottle","Tube","Drop"]
           },
           "qtyInStrips": {
             "type": "boolean"
@@ -11971,6 +11989,10 @@
           },
           "quantity": {
             "type": "integer"
+          },
+          "unit": {
+            "type": "string",
+            "enum": ["Tablets","Strips","Bottle","Tube","Drop"]
           },
           "qtyInStrips": {
             "type": "boolean"

@@ -27,6 +27,7 @@ class MedicineBatchRepository {
       {
         ...lodash.pick(data, [
           'quantity',
+          'unit',
           'qtyInStrips',
           'batchNumber',
           'expiryDate',
@@ -96,6 +97,7 @@ class MedicineBatchRepository {
       {
         ...lodash.pick(data, [
           'quantity',
+          'unit',
           'qtyInStrips',
           'batchNumber',
           'expiryDate',
@@ -307,6 +309,12 @@ class MedicineBatchRepository {
           ['medicineId']: SequelizeFilterUtils.uuid(
             filter.medicine,
           ),
+        });
+      }
+
+      if (filter.unit) {
+        whereAnd.push({
+          unit: filter.unit,
         });
       }
 

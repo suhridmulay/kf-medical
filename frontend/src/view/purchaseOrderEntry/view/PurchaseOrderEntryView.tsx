@@ -63,6 +63,11 @@ function PurchaseOrderEntryView(props) {
               ? i18n('common.yes')
               : i18n('common.no')
           }
+        />
+
+        <TextViewItem
+          label={i18n('entities.purchaseOrderEntry.fields.purchaseOrderEntryLookup')}
+          value={record.purchaseOrderEntryLookup}
         />        
       </div>
     );

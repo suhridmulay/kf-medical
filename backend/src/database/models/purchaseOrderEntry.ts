@@ -52,6 +52,12 @@ export default function (sequelize) {
         allowNull: false,
         defaultValue: false,
       },
+      purchaseOrderEntryLookup: {
+        type: DataTypes.STRING(255),
+        validate: {
+          len: [0, 255],
+        }
+      },
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,    

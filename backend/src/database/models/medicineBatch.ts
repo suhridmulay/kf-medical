@@ -16,6 +16,20 @@ export default function (sequelize) {
 
         }
       },
+      unit: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+          isIn: [[
+            "Tablets",
+            "Strips",
+            "Bottle",
+            "Tube",
+            "Drop"
+          ]],
+        }
+      },
       qtyInStrips: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
