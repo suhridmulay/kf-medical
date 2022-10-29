@@ -157,15 +157,6 @@ function PurchaseOrderForm(props) {
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
-              <PurchaseInvoiceAutocompleteFormItem  
-                name="invoices"
-                label={i18n('entities.purchaseOrder.fields.invoices')}
-                required={false}
-                showCreate={!props.modal}
-                mode="multiple"
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
               <InputFormItem
                 name="freightAmount"
                 label={i18n('entities.purchaseOrder.fields.freightAmount')}  

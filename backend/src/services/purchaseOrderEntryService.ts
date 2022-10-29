@@ -27,6 +27,7 @@ export default class PurchaseOrderEntryService {
       data.purchaseOrder = await PurchaseOrderRepository.filterIdInTenant(data.purchaseOrder, { ...this.options, transaction });
       data.medicine = await MedicineEnumRepository.filterIdInTenant(data.medicine, { ...this.options, transaction });
       let medicine = await MedicineEnumRepository.findById(data.medicine, {...this.options, transaction });
+      data.purchaseOrderEntryLookup = medicine.medicineName + " | Qty " + data.quantity + " "  + data.unit;
 
       this.fillInTaxes(data, medicine);
 

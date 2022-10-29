@@ -159,14 +159,6 @@ function PurchaseOrderEntryForm(props) {
                 label={i18n('entities.purchaseOrderEntry.fields.substitutionAllowed')}
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="purchaseOrderEntryLookup"
-                label={i18n('entities.purchaseOrderEntry.fields.purchaseOrderEntryLookup')}
-              hint={i18n('entities.purchaseOrderEntry.hints.purchaseOrderEntryLookup')}  
-                required={false}
-              />
-            </Grid>
           </Grid>
           <FormButtons
             style={{

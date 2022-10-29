@@ -10,7 +10,7 @@ export default function (sequelize) {
         primaryKey: true,
       },
       quantity: {
-        type: DataTypes.DECIMAL(24, 2),
+        type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
 

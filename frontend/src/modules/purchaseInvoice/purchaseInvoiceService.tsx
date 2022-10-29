@@ -36,6 +36,7 @@ export default class PurchaseInvoiceService {
   }
 
   static async create(data) {
+    console.log("Inside service with " + JSON.stringify(data));
     const body = {
       data,
     };

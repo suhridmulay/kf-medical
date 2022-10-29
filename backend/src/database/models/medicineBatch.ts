@@ -17,7 +17,7 @@ export default function (sequelize) {
         }
       },
       unit: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(64),
         allowNull: false,
         validate: {
           notEmpty: true,

@@ -32,7 +32,7 @@ const purchaseInvoiceFormActions = {
       if (purchaseOrderId) {
         let purchaseOrder = await PurchaseOrderService.find(purchaseOrderId);
         record['purchaseOrderId'] = purchaseOrderId;
-        record['purchaseOrder'] = {'purchaseOrderLookup': purchaseOrder.purchaseOrderLookup};
+        record['purchaseOrderEntries'] = purchaseOrder.entries;
       }
 
       if (isEdit) {

@@ -16,6 +16,7 @@ function PurchaseInvoiceFormModal(props) {
   const [saveLoading, setSaveLoading] = useState(false);
 
   const doSubmit = async (_, data) => {
+    console.log("Coming here with " + JSON.stringify(data));
     try {
       setSaveLoading(true);
       const { id } = await PurchaseInvoiceService.create(data);
