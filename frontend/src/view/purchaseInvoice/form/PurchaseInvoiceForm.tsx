@@ -9,7 +9,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { i18n } from 'src/i18n';
 import FormWrapper, {
@@ -20,12 +19,10 @@ import * as yup from 'yup';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
 import moment from 'moment';
 import purchaseOrderEntryEnumerators from 'src/modules/purchaseOrderEntry/purchaseOrderEntryEnumerators';
-import PurchaseOrderAutocompleteFormItem from 'src/view/purchaseOrder/autocomplete/PurchaseOrderAutocompleteFormItem';
 import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
 
 const schema = yup.object().shape({
@@ -112,9 +109,8 @@ function PurchaseInvoiceForm(props) {
         totalPrice: elem.totalCost,
         stateGST:   elem.stateGST,
         centralGST: elem.centralGST,
-        medicineId: elem.medicineId, 
+        medicine:   {id: elem.medicineId}, 
         unit:       elem.unit,
-        batchNumber: "Batch-" + index,
       }
     });
     let totalInvoiceCost = poEntries.reduce(function(accumulator, entry) {return accumulator + Number(entry.totalCost);}, 0);
@@ -173,7 +169,8 @@ function PurchaseInvoiceForm(props) {
       <TableHead>
         <TableRow>
           <TableCell>Ordered</TableCell>
-          <TableCell>Medicine Batch</TableCell>
+          <TableCell>Medicine</TableCell>
+          <TableCell>Batch Number</TableCell>
           <TableCell>Qty*</TableCell>
           <TableCell>Units</TableCell>
           <TableCell>Expiry Date*</TableCell>
@@ -187,7 +184,7 @@ function PurchaseInvoiceForm(props) {
         batches.map((val, index) => (
         <TableRow key={"batches-" + index}>
           <TableCell style={{width:300}}>{val.poLabel + " @ Rs" + val.poCost}</TableCell>
-          <TableCell><MedicineEnumAutocompleteFormItem  name={"batches[" + index + "].medicineId"} required={true}/></TableCell>
+          <TableCell><MedicineEnumAutocompleteFormItem  name={"batches[" + index + "].medicine"} required={true}/></TableCell>
           <TableCell style={{width:250}}><InputFormItem name={"batches["+ index + "].batchNumber"} required={true}/></TableCell>
           <TableCell style={{width:125}}><InputFormItem name={"batches[" + index + "].quantity"} required={true}/></TableCell>
           <TableCell style={{width:200}}><SelectFormItem name={"batches[" + index + "].unit"}

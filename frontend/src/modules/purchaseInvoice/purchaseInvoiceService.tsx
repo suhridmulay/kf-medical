@@ -35,13 +35,44 @@ export default class PurchaseInvoiceService {
     return response.data;
   }
 
+  static async createChildBatch(data, tenantId) {
+
+    // Check that the expiryDate is filled in & the BatchNumber is present
+    if (data.expiryDate && data.batchNumber) {
+      if (data.unit === "Strips") {
+         data.qtyInStrips = true;
+      };
+
+      const body = {
+        data,
+      }; 
+
+      const response = await authAxios.post(
+          `/tenant/${tenantId}/medicine-batch`,
+          body,
+      );
+      return response.data.id;
+    } else {
+      return null;
+    }
+  }
+
   static async create(data) {
-    console.log("Inside service with " + JSON.stringify(data));
     const body = {
       data,
     };
-
+ 
     const tenantId = AuthCurrentTenant.get();
+
+    // First create the child batches
+    let newBatches: Array<string> = [];
+    for (const batch of data.batches) {
+      const response = await PurchaseInvoiceService.createChildBatch(batch, tenantId); 
+      if (response != null)
+        newBatches.push(response);
+    }
+
+    data.batches = newBatches;
 
     const response = await authAxios.post(
       `/tenant/${tenantId}/purchase-invoice`,
