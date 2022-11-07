@@ -1,2 +1,6 @@
-Visit https://docs.scaffoldhub.io for docs/instructions.
-Version: 2.7.8
+A full-fledged electronic medical records + drugs warehousing ERP solution
+built for non-profit organizations like Rural Healthcare Foundation (RHCF)
+
+Currently, hosted on GCP at https://kf-medical.web.app
+
+
