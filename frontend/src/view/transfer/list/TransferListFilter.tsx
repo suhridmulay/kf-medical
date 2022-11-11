@@ -23,6 +23,8 @@ import filterRenders from 'src/modules/shared/filter/filterRenders';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
 import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import transferEnumerators from 'src/modules/transfer/transferEnumerators';
 import DatePickerRangeFormItem from 'src/view/shared/form/items/DatePickerRangeFormItem';
 import HealthCenterAutocompleteFormItem from 'src/view/healthCenter/autocomplete/HealthCenterAutocompleteFormItem';
 import MedicineBatchAutocompleteFormItem from 'src/view/medicineBatch/autocomplete/MedicineBatchAutocompleteFormItem';
@@ -40,6 +42,9 @@ const schema = yup.object().shape({
   transferQuantityRange: yupFilterSchemas.integerRange(
     i18n('entities.transfer.fields.transferQuantityRange'),
   ),
+  unit: yupFilterSchemas.enumerator(
+    i18n('entities.transfer.fields.unit'),
+  ),
   transferDateRange: yupFilterSchemas.dateRange(
     i18n('entities.transfer.fields.transferDateRange'),
   ),
@@ -50,6 +55,7 @@ const emptyValues = {
   toCenter: null,
   medicineBatch: null,
   transferQuantityRange: [],
+  unit: null,
   transferDateRange: [],
 }
 
@@ -69,6 +75,10 @@ const previewRenders = {
   transferQuantityRange: {
     label: i18n('entities.transfer.fields.transferQuantityRange'),
     render: filterRenders.range(),
+  },
+  unit: {
+    label: i18n('entities.transfer.fields.unit'),
+    render: filterRenders.enumerator('entities.transfer.enumerators.unit',),
   },
   transferDateRange: {
     label: i18n('entities.transfer.fields.transferDateRange'),
@@ -160,6 +170,20 @@ function TransferListFilter(props) {
                   <InputNumberRangeFormItem
                     name="transferQuantityRange"
                     label={i18n('entities.transfer.fields.transferQuantityRange')}      
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <SelectFormItem
+                    name="unit"
+                    label={i18n('entities.transfer.fields.unit')}
+                    options={transferEnumerators.unit.map(
+                      (value) => ({
+                        value,
+                        label: i18n(
+                          `entities.transfer.enumerators.unit.${value}`,
+                        ),
+                      }),
+                    )}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>

@@ -12,6 +12,10 @@ export default [
     render: exporterRenders.relationToOne(),
   },
   {
+    name: 'registrationNumber',
+    label: i18n('entities.patient.fields.registrationNumber'),
+  },
+  {
     name: 'firstName',
     label: i18n('entities.patient.fields.firstName'),
   },

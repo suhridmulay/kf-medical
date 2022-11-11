@@ -10,6 +10,12 @@ export default function (sequelize) {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
+      registrationNumber: {
+        type: DataTypes.STRING(12),
+        validate: {
+          len: [6, 12],
+        }
+      },
       firstName: {
         type: DataTypes.STRING(50),
         allowNull: false,

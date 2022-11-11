@@ -42,6 +42,18 @@ export default function (sequelize) {
       initialCount: {
         type: DataTypes.INTEGER,
       },
+      unit: {
+        type: DataTypes.TEXT,
+        validate: {
+          isIn: [[
+            "Tablets",
+            "Strips",
+            "Bottle",
+            "Tube",
+            "Drop"
+          ]],
+        }
+      },
       currentCount: {
         type: DataTypes.INTEGER,
       },

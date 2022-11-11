@@ -175,6 +175,15 @@ function SiteInventoryListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
+                name={'unit'}
+                label={i18n(
+                  'entities.siteInventory.fields.unit',
+                )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
                 name={'currentCount'}
                 label={i18n(
                   'entities.siteInventory.fields.currentCount',
@@ -232,6 +241,13 @@ function SiteInventoryListTable(props) {
                 </TableCell>
                 <TableCell>{row.expiryDate}</TableCell>
                 <TableCell align="right">{row.initialCount}</TableCell>
+                <TableCell>
+                  {row.unit
+                    ? i18n(
+                        `entities.siteInventory.enumerators.unit.${row.unit}`,
+                      )
+                    : null}
+                </TableCell>
                 <TableCell align="right">{row.currentCount}</TableCell>                  
                   <TableCell>
                     <Box

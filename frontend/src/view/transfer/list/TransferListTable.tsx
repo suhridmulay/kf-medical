@@ -156,6 +156,15 @@ function TransferListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
+                name={'unit'}
+                label={i18n(
+                  'entities.transfer.fields.unit',
+                )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
                 name={'transferDate'}
                 label={i18n(
                   'entities.transfer.fields.transferDate',
@@ -210,6 +219,13 @@ function TransferListTable(props) {
                   <MedicineBatchListItem value={row.medicineBatch} />
                 </TableCell>
                 <TableCell align="right">{row.transferQuantity}</TableCell>
+                <TableCell>
+                  {row.unit
+                    ? i18n(
+                        `entities.transfer.enumerators.unit.${row.unit}`,
+                      )
+                    : null}
+                </TableCell>
                 <TableCell>{row.transferDate}</TableCell>                  
                   <TableCell>
                     <Box

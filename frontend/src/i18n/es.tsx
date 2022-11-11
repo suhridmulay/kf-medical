@@ -59,6 +59,7 @@ const es = {
         fields: {
           id: 'Id',
           'medicalCenter': 'MedicalCenter',
+          'registrationNumber': 'Registration Number',
           'firstName': 'FirstName',
           'middleName': 'MiddleName',
           'lastName': 'LastName',
@@ -86,7 +87,7 @@ const es = {
           },
         },
         placeholders: {
-
+          'registrationNumber': 'Auto-generated',
         },
         hints: {
           'medicalCenter': 'Medical center for patient',
@@ -594,6 +595,7 @@ const es = {
           'expiryDate': 'Expiry Date',
           'initialCountRange': 'Initial Count',
           'initialCount': 'Initial Count',
+          'unit': 'Unit',
           'currentCountRange': 'CurrentCount',
           'currentCount': 'CurrentCount',
           createdAt: 'Creado el',
@@ -601,7 +603,13 @@ const es = {
           createdAtRange: 'Creado el',
         },
         enumerators: {
-
+          'unit': {
+            'Tablets': 'Tablets',
+            'Strips': 'Strips',
+            'Bottle': 'Bottle',
+            'Tube': 'Tube',
+            'Drop': 'Drop',
+          },
         },
         placeholders: {
 
@@ -1253,6 +1261,7 @@ const es = {
           'medicineBatch': 'MedicineBatch',
           'transferQuantityRange': 'Transfer Quantity',
           'transferQuantity': 'Transfer Quantity',
+          'unit': 'Unit',
           'transferDateRange': 'Transfer Date',
           'transferDate': 'Transfer Date',
           createdAt: 'Creado el',
@@ -1260,7 +1269,13 @@ const es = {
           createdAtRange: 'Creado el',
         },
         enumerators: {
-
+          'unit': {
+            'Tablets': 'Tablets',
+            'Strips': 'Strips',
+            'Bottle': 'Bottle',
+            'Tube': 'Tube',
+            'Drop': 'Drop',
+          },
         },
         placeholders: {
 

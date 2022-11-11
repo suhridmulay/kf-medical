@@ -135,6 +135,15 @@ function PatientListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
+                name={'registrationNumber'}
+                label={i18n(
+                  'entities.patient.fields.registrationNumber',
+                )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
                 name={'fullName'}
                 label={i18n(
                   'entities.patient.fields.fullName',
@@ -219,6 +228,7 @@ function PatientListTable(props) {
                 <TableCell>
                   <HealthCenterListItem value={row.medicalCenter} />
                 </TableCell>
+                <TableCell>{row.registrationNumber}</TableCell>
                 <TableCell>{row.fullName}</TableCell>
                 <TableCell>
                   {row.gender

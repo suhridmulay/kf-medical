@@ -32,6 +32,9 @@ const schema = yup.object().shape({
   medicalCenter: yupFilterSchemas.relationToOne(
     i18n('entities.patient.fields.medicalCenter'),
   ),
+  registrationNumber: yupFilterSchemas.string(
+    i18n('entities.patient.fields.registrationNumber'),
+  ),
   firstName: yupFilterSchemas.string(
     i18n('entities.patient.fields.firstName'),
   ),
@@ -60,6 +63,7 @@ const schema = yup.object().shape({
 
 const emptyValues = {
   medicalCenter: null,
+  registrationNumber: null,
   firstName: null,
   lastName: null,
   fullName: null,
@@ -75,6 +79,10 @@ const previewRenders = {
       label: i18n('entities.patient.fields.medicalCenter'),
       render: filterRenders.relationToOne(),
     },
+  registrationNumber: {
+    label: i18n('entities.patient.fields.registrationNumber'),
+    render: filterRenders.generic(),
+  },
   firstName: {
     label: i18n('entities.patient.fields.firstName'),
     render: filterRenders.generic(),
@@ -175,6 +183,12 @@ function PatientListFilter(props) {
                   <HealthCenterAutocompleteFormItem  
                     name="medicalCenter"
                     label={i18n('entities.patient.fields.medicalCenter')}        
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <InputFormItem
+                    name="registrationNumber"
+                    label={i18n('entities.patient.fields.registrationNumber')}      
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>

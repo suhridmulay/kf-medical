@@ -16,6 +16,18 @@ export default function (sequelize) {
 
         }
       },
+      unit: {
+        type: DataTypes.TEXT,
+        validate: {
+          isIn: [[
+            "Tablets",
+            "Strips",
+            "Bottle",
+            "Tube",
+            "Drop"
+          ]],
+        }
+      },
       transferDate: {
         type: DataTypes.DATEONLY,
         get: function() {

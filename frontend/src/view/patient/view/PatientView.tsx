@@ -20,6 +20,11 @@ function PatientView(props) {
         />
 
         <TextViewItem
+          label={i18n('entities.patient.fields.registrationNumber')}
+          value={record.registrationNumber}
+        />
+
+        <TextViewItem
           label={i18n('entities.patient.fields.firstName')}
           value={record.firstName}
         />

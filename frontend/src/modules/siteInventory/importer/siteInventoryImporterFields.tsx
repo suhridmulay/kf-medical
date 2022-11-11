@@ -1,5 +1,6 @@
 import schemas from 'src/modules/shared/yup/yupImporterSchemas';
-import { i18n } from 'src/i18n';import moment from 'moment';
+import { i18n } from 'src/i18n';import siteInventoryEnumerators from 'src/modules/siteInventory/siteInventoryEnumerators';
+import moment from 'moment';
 
 export default [
   {
@@ -60,6 +61,16 @@ export default [
     schema: schemas.integer(
       i18n('entities.siteInventory.fields.initialCount'),
       {},
+    ),
+  },
+  {
+    name: 'unit',
+    label: i18n('entities.siteInventory.fields.unit'),
+    schema: schemas.enumerator(
+      i18n('entities.siteInventory.fields.unit'),
+      {
+        "options": siteInventoryEnumerators.unit
+      },
     ),
   },
   {

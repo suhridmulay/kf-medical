@@ -12,6 +12,17 @@ export default [
     ),
   },
   {
+    name: 'registrationNumber',
+    label: i18n('entities.patient.fields.registrationNumber'),
+    schema: schemas.string(
+      i18n('entities.patient.fields.registrationNumber'),
+      {
+        "max": 12,
+        "min": 6
+      },
+    ),
+  },
+  {
     name: 'firstName',
     label: i18n('entities.patient.fields.firstName'),
     schema: schemas.string(

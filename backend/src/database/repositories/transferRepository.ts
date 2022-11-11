@@ -27,6 +27,7 @@ class TransferRepository {
       {
         ...lodash.pick(data, [
           'transferQuantity',
+          'unit',
           'transferDate',          
           'importHash',
         ]),
@@ -88,6 +89,7 @@ class TransferRepository {
       {
         ...lodash.pick(data, [
           'transferQuantity',
+          'unit',
           'transferDate',          
           'importHash',
         ]),
@@ -328,6 +330,12 @@ class TransferRepository {
             },
           });
         }
+      }
+
+      if (filter.unit) {
+        whereAnd.push({
+          unit: filter.unit,
+        });
       }
 
       if (filter.transferDateRange) {

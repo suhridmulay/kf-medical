@@ -13,6 +13,8 @@ import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import siteInventoryEnumerators from 'src/modules/siteInventory/siteInventoryEnumerators';
 import moment from 'moment';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
 import HealthCenterAutocompleteFormItem from 'src/view/healthCenter/autocomplete/HealthCenterAutocompleteFormItem';
@@ -50,6 +52,12 @@ const schema = yup.object().shape({
     i18n('entities.siteInventory.fields.initialCount'),
     {},
   ),
+  unit: yupFormSchemas.enumerator(
+    i18n('entities.siteInventory.fields.unit'),
+    {
+      "options": siteInventoryEnumerators.unit
+    },
+  ),
   currentCount: yupFormSchemas.integer(
     i18n('entities.siteInventory.fields.currentCount'),
     {},
@@ -68,6 +76,7 @@ function SiteInventoryForm(props) {
       inventoryAddDate: record.inventoryAddDate ? moment(record.inventoryAddDate, 'YYYY-MM-DD') : null,
       expiryDate: record.expiryDate ? moment(record.expiryDate, 'YYYY-MM-DD') : null,
       initialCount: record.initialCount,
+      unit: record.unit,
       currentCount: record.currentCount,
     };
   });
@@ -146,6 +155,21 @@ function SiteInventoryForm(props) {
               <InputNumberFormItem
                 name="initialCount"
                 label={i18n('entities.siteInventory.fields.initialCount')}  
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <SelectFormItem
+                name="unit"
+                label={i18n('entities.siteInventory.fields.unit')}
+                options={siteInventoryEnumerators.unit.map(
+                  (value) => ({
+                    value,
+                    label: i18n(
+                      `entities.siteInventory.enumerators.unit.${value}`,
+                    ),
+                  }),
+                )}
                 required={false}
               />
             </Grid>
