@@ -25,7 +25,10 @@ const patientFormActions = {
         type: patientFormActions.INIT_STARTED,
       });
 
-      let record = {};
+      let data = await PatientService.count();
+      let count = data['count'];
+
+      let record = { registrationNumber: (count + 10000000).toString()};
 
       const isEdit = Boolean(id);
 

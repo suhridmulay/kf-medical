@@ -118,6 +118,10 @@ export default class PatientService {
     return PatientRepository.findById(id, this.options);
   }
 
+  async count() {
+    return PatientRepository.count({}, this.options);
+  }
+
   async findAllAutocomplete(search, limit) {
     return PatientRepository.findAllAutocomplete(
       search,

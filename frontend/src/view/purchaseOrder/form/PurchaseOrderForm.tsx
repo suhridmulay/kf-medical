@@ -17,7 +17,6 @@ import moment from 'moment';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
 import VendorAutocompleteFormItem from 'src/view/vendor/autocomplete/VendorAutocompleteFormItem';
 import PurchaseOrderEntryAutocompleteFormItem from 'src/view/purchaseOrderEntry/autocomplete/PurchaseOrderEntryAutocompleteFormItem';
-import PurchaseInvoiceAutocompleteFormItem from 'src/view/purchaseInvoice/autocomplete/PurchaseInvoiceAutocompleteFormItem';
 
 const schema = yup.object().shape({
   purchaseOrderNumber: yupFormSchemas.integer(

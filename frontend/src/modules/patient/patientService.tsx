@@ -2,6 +2,16 @@ import authAxios from 'src/modules/shared/axios/authAxios';
 import AuthCurrentTenant from 'src/modules/auth/authCurrentTenant';
 
 export default class PatientService {
+  static async count() {
+    const tenantId = AuthCurrentTenant.get();
+
+    const response = await authAxios.get(
+      `/tenant/${tenantId}/patient/total-counts`,
+    );
+
+    return response.data;
+  }
+
   static async update(id, data) {
     const body = {
       id,

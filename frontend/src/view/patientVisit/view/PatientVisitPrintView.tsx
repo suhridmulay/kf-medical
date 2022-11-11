@@ -76,8 +76,8 @@ function PatientVisitPrintView(props) {
               <View style={styles.section1}>
                 <Text style={styles.textTitle}>{record.doctor.name} </Text>
                 <Text>Center: {record.medicalCenter.name} Date: {record.visitDate}</Text>
-                <Text>Digital prescription for patient {record.patient.fullName} 
-                      ({record.patient.gender}, {record.patient.age} yrs)</Text>
+                <Text>Prescription for {record.patient.fullName} 
+                      (#{record.patient.registrationNumber}, {record.patient.gender}, {record.patient.age} yrs)</Text>
                 <Svg height="2" width="500"><Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(0,0,0)" /></Svg>
               </View>
               <View style={styles.section2}>

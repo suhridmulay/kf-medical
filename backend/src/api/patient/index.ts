@@ -1,4 +1,9 @@
 export default (app) => {
+  app.get(
+    `/tenant/:tenantId/patient/total-counts`,
+    require('./patientCounts').default,
+  );
+
   app.post(
     `/tenant/:tenantId/patient`,
     require('./patientCreate').default,

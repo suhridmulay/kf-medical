@@ -105,8 +105,8 @@ function PurchaseInvoiceForm(props) {
         poUnit:     elem.unit,
         poCost:     elem.totalCost,
         quantity:   elem.quantity,
-        unitPrice:  elem.unitCost,
-        totalPrice: elem.totalCost,
+        unitPrice:   elem.unitCost,
+        totalPrice:  elem.totalCost,
         stateGST:   elem.stateGST,
         centralGST: elem.centralGST,
         medicine:   {id: elem.medicineId}, 
@@ -165,18 +165,21 @@ function PurchaseInvoiceForm(props) {
 
   function renderBatchTable(batches) {
     return (
-      <Table style={{ borderRadius: '2px', border: '1px solid rgb(224, 224, 224)', borderCollapse: 'initial', paddingBottom: '75px'}}>
+
+      <Table style={{ border: '1px solid rgb(224, 224, 224)', borderCollapse: 'initial', padding:0, paddingBottom: '75px'}}>
       <TableHead>
         <TableRow>
           <TableCell>Ordered</TableCell>
           <TableCell>Medicine</TableCell>
-          <TableCell>Batch Number</TableCell>
-          <TableCell>Qty*</TableCell>
+          <TableCell style={{color:'green'}}>Batch Number*</TableCell>
+          <TableCell style={{color:'green'}}>Qty*</TableCell>
           <TableCell>Units</TableCell>
           <TableCell>Expiry Date*</TableCell>
+          <TableCell>Unit Cost</TableCell>
           <TableCell>Total Cost</TableCell>
           <TableCell>S-GST</TableCell>
           <TableCell>C-GST</TableCell>
+          <TableCell>MSRP</TableCell>
         </TableRow>
       </TableHead>
       <TableBody> 
@@ -197,9 +200,11 @@ function PurchaseInvoiceForm(props) {
           /> 
           </TableCell>
           <TableCell style={{width:150}}><DatePickerFormItem name={"batches[" + index + "].expiryDate"} required={true}/></TableCell>
+          <TableCell style={{width:100}}><InputFormItem name={"batches[" + index + "].unitPrice"}/></TableCell>
           <TableCell style={{width:150}}><InputFormItem name={"batches[" + index + "].totalPrice"} required={true}/></TableCell>
           <TableCell style={{width:100}}><InputFormItem name={"batches[" + index + "].stateGST"} required={true}/></TableCell>
           <TableCell style={{width:100}}><InputFormItem name={"batches[" + index + "].centralGST"} required={true}/></TableCell>
+          <TableCell style={{width:100}}><InputFormItem name={"batches[" + index + "].msrp"}/></TableCell>
         </TableRow> 
       ),)
      } 
