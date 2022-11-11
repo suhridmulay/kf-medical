@@ -522,6 +522,13 @@
           },
           {
             "in": "query",
+            "name": "filter[registrationNumber]",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
             "name": "filter[firstName]",
             "schema": {
               "type": "string"
@@ -10751,6 +10758,9 @@
           "medicalCenter": {
             "$ref": "#/components/schemas/HealthCenter"
           },
+          "registrationNumber": {
+            "type": "string"
+          },
           "firstName": {
             "type": "string"
           },
@@ -10812,6 +10822,9 @@
           "medicalCenter": {
             "type": "string",
             "format": "uuid"
+          },
+          "registrationNumber": {
+            "type": "string"
           },
           "firstName": {
             "type": "string"

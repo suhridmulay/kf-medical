@@ -26,6 +26,7 @@ class PatientRepository {
     const record = await options.database.patient.create(
       {
         ...lodash.pick(data, [
+          'registrationNumber',
           'firstName',
           'middleName',
           'lastName',
@@ -107,6 +108,7 @@ class PatientRepository {
     record = await record.update(
       {
         ...lodash.pick(data, [
+          'registrationNumber',
           'firstName',
           'middleName',
           'lastName',
@@ -324,6 +326,16 @@ class PatientRepository {
             filter.medicalCenter,
           ),
         });
+      }
+
+      if (filter.registrationNumber) {
+        whereAnd.push(
+          SequelizeFilterUtils.ilikeIncludes(
+            'patient',
+            'registrationNumber',
+            filter.registrationNumber,
+          ),
+        );
       }
 
       if (filter.firstName) {

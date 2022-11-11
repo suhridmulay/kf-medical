@@ -29,6 +29,13 @@ const schema = yup.object().shape({
     i18n('entities.patient.fields.medicalCenter'),
     {},
   ),
+  registrationNumber: yupFormSchemas.string(
+    i18n('entities.patient.fields.registrationNumber'),
+    {
+      "max": 12,
+      "min": 6
+    },
+  ),
   firstName: yupFormSchemas.string(
     i18n('entities.patient.fields.firstName'),
     {
@@ -109,6 +116,7 @@ function PatientForm(props) {
 
     return {
       medicalCenter: record.medicalCenter,
+      registrationNumber: record.registrationNumber,
       firstName: record.firstName,
       middleName: record.middleName,
       lastName: record.lastName,
@@ -156,6 +164,14 @@ function PatientForm(props) {
               hint={i18n('entities.patient.hints.medicalCenter')}
                 required={false}
                 showCreate={!props.modal}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <InputFormItem
+                name="registrationNumber"
+                label={i18n('entities.patient.fields.registrationNumber')}
+              placeholder={i18n('entities.patient.placeholders.registrationNumber')}  
+                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

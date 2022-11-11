@@ -59,6 +59,7 @@ const es = {
         fields: {
           id: 'Id',
           'medicalCenter': 'MedicalCenter',
+          'registrationNumber': 'Registration Number',
           'firstName': 'FirstName',
           'middleName': 'MiddleName',
           'lastName': 'LastName',
@@ -86,7 +87,7 @@ const es = {
           },
         },
         placeholders: {
-
+          'registrationNumber': 'Auto-generated',
         },
         hints: {
           'medicalCenter': 'Medical center for patient',
