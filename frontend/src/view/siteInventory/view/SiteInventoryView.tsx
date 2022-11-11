@@ -48,6 +48,16 @@ function SiteInventoryView(props) {
         />
 
         <TextViewItem
+          label={i18n('entities.siteInventory.fields.unit')}
+          value={
+            record.unit &&
+            i18n(
+              `entities.siteInventory.enumerators.unit.${record.unit}`,
+            )
+          }
+        />
+
+        <TextViewItem
           label={i18n('entities.siteInventory.fields.currentCount')}
           value={record.currentCount}
         />        

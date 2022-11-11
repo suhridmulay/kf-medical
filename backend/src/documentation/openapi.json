@@ -8203,6 +8203,14 @@
           },
           {
             "in": "query",
+            "name": "filter[unit]",
+            "schema": {
+              "type": "string",
+              "enum": ["Tablets","Strips","Bottle","Tube","Drop"]
+            }
+          },
+          {
+            "in": "query",
             "name": "filter[transferDateRange][]",
             "schema": {
               "type": "array",
@@ -11510,6 +11518,10 @@
           "initialCount": {
             "type": "integer"
           },
+          "unit": {
+            "type": "string",
+            "enum": ["Tablets","Strips","Bottle","Tube","Drop"]
+          },
           "currentCount": {
             "type": "integer"
           }    
@@ -11543,6 +11555,10 @@
           },
           "initialCount": {
             "type": "integer"
+          },
+          "unit": {
+            "type": "string",
+            "enum": ["Tablets","Strips","Bottle","Tube","Drop"]
           },
           "currentCount": {
             "type": "integer"
@@ -12161,6 +12177,10 @@
           "transferQuantity": {
             "type": "integer"
           },
+          "unit": {
+            "type": "string",
+            "enum": ["Tablets","Strips","Bottle","Tube","Drop"]
+          },
           "transferDate": {
             "type": "string",
             "format": "date"
@@ -12184,6 +12204,10 @@
           },
           "transferQuantity": {
             "type": "integer"
+          },
+          "unit": {
+            "type": "string",
+            "enum": ["Tablets","Strips","Bottle","Tube","Drop"]
           },
           "transferDate": {
             "type": "string",

@@ -597,6 +597,7 @@ const en = {
           'expiryDate': 'Expiry Date',
           'initialCountRange': 'Initial Count',
           'initialCount': 'Initial Count',
+          'unit': 'Unit',
           'currentCountRange': 'CurrentCount',
           'currentCount': 'CurrentCount',
           createdAt: 'Created at',
@@ -604,7 +605,13 @@ const en = {
           createdAtRange: 'Created at',
         },
         enumerators: {
-
+          'unit': {
+            'Tablets': 'Tablets',
+            'Strips': 'Strips',
+            'Bottle': 'Bottle',
+            'Tube': 'Tube',
+            'Drop': 'Drop',
+          },
         },
         placeholders: {
 
@@ -1256,6 +1263,7 @@ const en = {
           'medicineBatch': 'MedicineBatch',
           'transferQuantityRange': 'Transfer Quantity',
           'transferQuantity': 'Transfer Quantity',
+          'unit': 'Unit',
           'transferDateRange': 'Transfer Date',
           'transferDate': 'Transfer Date',
           createdAt: 'Created at',
@@ -1263,7 +1271,13 @@ const en = {
           createdAtRange: 'Created at',
         },
         enumerators: {
-
+          'unit': {
+            'Tablets': 'Tablets',
+            'Strips': 'Strips',
+            'Bottle': 'Bottle',
+            'Tube': 'Tube',
+            'Drop': 'Drop',
+          },
         },
         placeholders: {
 

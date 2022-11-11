@@ -12,6 +12,8 @@ import * as yup from 'yup';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import transferEnumerators from 'src/modules/transfer/transferEnumerators';
 import moment from 'moment';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
 import HealthCenterAutocompleteFormItem from 'src/view/healthCenter/autocomplete/HealthCenterAutocompleteFormItem';
@@ -42,6 +44,12 @@ const schema = yup.object().shape({
       "required": true
     },
   ),
+  unit: yupFormSchemas.enumerator(
+    i18n('entities.transfer.fields.unit'),
+    {
+      "options": transferEnumerators.unit
+    },
+  ),
   transferDate: yupFormSchemas.date(
     i18n('entities.transfer.fields.transferDate'),
     {},
@@ -57,6 +65,7 @@ function TransferForm(props) {
       toCenter: record.toCenter,
       medicineBatch: record.medicineBatch,
       transferQuantity: record.transferQuantity,
+      unit: record.unit,
       transferDate: record.transferDate ? moment(record.transferDate, 'YYYY-MM-DD') : null,
     };
   });
@@ -113,6 +122,21 @@ function TransferForm(props) {
                 name="transferQuantity"
                 label={i18n('entities.transfer.fields.transferQuantity')}  
                 required={true}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <SelectFormItem
+                name="unit"
+                label={i18n('entities.transfer.fields.unit')}
+                options={transferEnumerators.unit.map(
+                  (value) => ({
+                    value,
+                    label: i18n(
+                      `entities.transfer.enumerators.unit.${value}`,
+                    ),
+                  }),
+                )}
+                required={false}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

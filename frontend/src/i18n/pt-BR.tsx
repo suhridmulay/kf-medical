@@ -597,6 +597,7 @@ const ptBR = {
           'expiryDate': 'Expiry Date',
           'initialCountRange': 'Initial Count',
           'initialCount': 'Initial Count',
+          'unit': 'Unit',
           'currentCountRange': 'CurrentCount',
           'currentCount': 'CurrentCount',
           createdAt: 'Criado em',
@@ -604,7 +605,13 @@ const ptBR = {
           createdAtRange: 'Criado em',
         },
         enumerators: {
-
+          'unit': {
+            'Tablets': 'Tablets',
+            'Strips': 'Strips',
+            'Bottle': 'Bottle',
+            'Tube': 'Tube',
+            'Drop': 'Drop',
+          },
         },
         placeholders: {
 
@@ -1256,6 +1263,7 @@ const ptBR = {
           'medicineBatch': 'MedicineBatch',
           'transferQuantityRange': 'Transfer Quantity',
           'transferQuantity': 'Transfer Quantity',
+          'unit': 'Unit',
           'transferDateRange': 'Transfer Date',
           'transferDate': 'Transfer Date',
           createdAt: 'Criado em',
@@ -1263,7 +1271,13 @@ const ptBR = {
           createdAtRange: 'Criado em',
         },
         enumerators: {
-
+          'unit': {
+            'Tablets': 'Tablets',
+            'Strips': 'Strips',
+            'Bottle': 'Bottle',
+            'Tube': 'Tube',
+            'Drop': 'Drop',
+          },
         },
         placeholders: {
 

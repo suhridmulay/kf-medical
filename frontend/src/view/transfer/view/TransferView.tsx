@@ -32,6 +32,16 @@ function TransferView(props) {
         />
 
         <TextViewItem
+          label={i18n('entities.transfer.fields.unit')}
+          value={
+            record.unit &&
+            i18n(
+              `entities.transfer.enumerators.unit.${record.unit}`,
+            )
+          }
+        />
+
+        <TextViewItem
           label={i18n('entities.transfer.fields.transferDate')}
           value={record.transferDate}
         />        

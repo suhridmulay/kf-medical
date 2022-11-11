@@ -38,6 +38,10 @@ export default [
     label: i18n('entities.siteInventory.fields.initialCount'),
   },
   {
+    name: 'unit',
+    label: i18n('entities.siteInventory.fields.unit'),
+  },
+  {
     name: 'currentCount',
     label: i18n('entities.siteInventory.fields.currentCount'),
   },

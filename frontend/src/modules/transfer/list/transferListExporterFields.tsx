@@ -26,6 +26,10 @@ export default [
     label: i18n('entities.transfer.fields.transferQuantity'),
   },
   {
+    name: 'unit',
+    label: i18n('entities.transfer.fields.unit'),
+  },
+  {
     name: 'transferDate',
     label: i18n('entities.transfer.fields.transferDate'),
   },

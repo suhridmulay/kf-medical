@@ -1,5 +1,6 @@
 import schemas from 'src/modules/shared/yup/yupImporterSchemas';
-import { i18n } from 'src/i18n';import moment from 'moment';
+import { i18n } from 'src/i18n';import transferEnumerators from 'src/modules/transfer/transferEnumerators';
+import moment from 'moment';
 
 export default [
   {
@@ -39,6 +40,16 @@ export default [
       i18n('entities.transfer.fields.transferQuantity'),
       {
         "required": true
+      },
+    ),
+  },
+  {
+    name: 'unit',
+    label: i18n('entities.transfer.fields.unit'),
+    schema: schemas.enumerator(
+      i18n('entities.transfer.fields.unit'),
+      {
+        "options": transferEnumerators.unit
       },
     ),
   },
