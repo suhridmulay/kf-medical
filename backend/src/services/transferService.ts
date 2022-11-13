@@ -33,6 +33,7 @@ export default class TransferService {
       let inventoryAtSourceCenter = await SiteInventoryRepository.findAndCountAll({filter: {center: data.fromCenter, batchNumber: data.medicineBatch}}, this.options);
       let inventoryAtDestCenter = await SiteInventoryRepository.findAndCountAll({filter: {center: data.toCenter, batchNumber: data.medicineBatch}}, this.options);
 
+
       if (inventoryAtSourceCenter.count == 0) {
         throw new Error400(this.options.language, 'siteInventory.errors.noEntryFound');
       } else if (inventoryAtSourceCenter.count > 1) {
@@ -41,6 +42,14 @@ export default class TransferService {
         let srcInventoryRecord = inventoryAtSourceCenter.rows[0];
         let toCenterDetails = await HealthCenterRepository.findById(data.toCenter, this.options);
         let medicineBatchDetails = await MedicineBatchRepository.findById(data.medicineBatch, this.options);
+
+        // If unit was specified in strips, fix up with the multipliers
+        let multiplier = 1;
+        if (data.unit == "Strips") {
+          multiplier = medicineBatchDetails.medicine.tabletsPerStrip;
+          data.unit  = "Tablets";
+        }
+
         if (inventoryAtDestCenter.count == 0) { // create a new entry
           let inventoryData = {
             center: data.toCenter,
@@ -48,8 +57,9 @@ export default class TransferService {
             batchNumber: srcInventoryRecord.batchNumberId,
             expiryDate: srcInventoryRecord.expiryDate,
             inventoryAddDate: data.transferDate,
-            initialCount: data.transferQuantity,
-            currentCount: data.transferQuantity,
+            initialCount: data.transferQuantity * multiplier,
+            currentCount: data.transferQuantity * multiplier,
+            unit: data.unit,
             siteBatchIdentifier: toCenterDetails.name + " | " + medicineBatchDetails.medicineBatchLookup,
           };
           const inventoryRecord = await SiteInventoryRepository.create(inventoryData, {
@@ -59,7 +69,7 @@ export default class TransferService {
         } else { // Update the record found
           let destInventoryRecord = inventoryAtDestCenter.rows[0];
 
-          destInventoryRecord.currentCount += data.transferQuantity;
+          destInventoryRecord.currentCount += data.transferQuantity * multiplier;
 
           // Updates require the IDs as opposed to the expanded record 
           destInventoryRecord.medicine = destInventoryRecord.medicineId;
@@ -69,7 +79,7 @@ export default class TransferService {
           let result2 = await SiteInventoryRepository.update(destInventoryRecord.id, destInventoryRecord, {...this.options, transaction,});
         }
         
-        srcInventoryRecord.currentCount -= data.transferQuantity;
+        srcInventoryRecord.currentCount -= data.transferQuantity * multiplier;
         if (srcInventoryRecord.currentCount < 0) { // Probably a programming error
           srcInventoryRecord.currentCount = 0; 
         }

@@ -38,8 +38,9 @@ export default class MedicineBatchService {
       });
 
       let multiplier = 1;
-      if (data.qtyInStrips === true) {
+      if ((data.qtyInStrips === true) || (data.unit == "Strips")) {
         multiplier = medicine.tabletsPerStrip;
+        data.unit  = "Tablets";
       }
 
       let lookupFilter = {'isHeadoffice': true};
@@ -52,6 +53,7 @@ export default class MedicineBatchService {
         medicine: medicine.id,
         batchNumber: record.id,
         center: headOffice.id,
+        unit: data.unit,
         initialCount: data.quantity * multiplier,
         currentCount: data.quantity * multiplier,
         siteBatchIdentifier:  headOffice.name + " | " + data.medicineBatchLookup

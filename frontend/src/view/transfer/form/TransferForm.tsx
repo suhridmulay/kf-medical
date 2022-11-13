@@ -47,7 +47,8 @@ const schema = yup.object().shape({
   unit: yupFormSchemas.enumerator(
     i18n('entities.transfer.fields.unit'),
     {
-      "options": transferEnumerators.unit
+      "options": transferEnumerators.unit,
+      "required": true
     },
   ),
   transferDate: yupFormSchemas.date(
@@ -136,7 +137,7 @@ function TransferForm(props) {
                     ),
                   }),
                 )}
-                required={false}
+                required={true}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

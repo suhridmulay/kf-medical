@@ -173,8 +173,8 @@ function PurchaseInvoiceForm(props) {
           <TableCell>Medicine</TableCell>
           <TableCell style={{color:'green'}}>Batch Number*</TableCell>
           <TableCell style={{color:'green'}}>Qty*</TableCell>
-          <TableCell>Units</TableCell>
-          <TableCell>Expiry Date*</TableCell>
+          <TableCell style={{color:'green'}}>Units*</TableCell>
+          <TableCell style={{color:'green'}}>Expiry Date*</TableCell>
           <TableCell>Unit Cost</TableCell>
           <TableCell>Total Cost</TableCell>
           <TableCell>S-GST</TableCell>
