@@ -120,6 +120,16 @@ export default [
    render: (value) => value && value instanceof Date ? moment(value).format('YYYY-MM-DD') : value,
   },
   {
+    name: 'referral',
+    label: i18n('entities.patient.fields.referral'),
+    schema: schemas.enumerator(
+      i18n('entities.patient.fields.referral'),
+      {
+        "options": patientEnumerators.referral
+      },
+    ),
+  },
+  {
     name: 'picture',
     label: i18n('entities.patient.fields.picture'),
     schema: schemas.images(

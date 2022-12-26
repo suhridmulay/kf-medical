@@ -889,6 +889,44 @@ const privateRoutes = [
     permissionRequired: permissions.staffRead,
     exact: true,
   },
+
+  {
+    path: '/visit-tickets',
+    loader: () =>
+      import('src/view/visitTickets/list/VisitTicketsListPage'),
+    permissionRequired: permissions.visitTicketsRead,
+    exact: true,
+  },
+  {
+    path: '/visit-tickets/new',
+    loader: () =>
+      import('src/view/visitTickets/form/VisitTicketsFormPage'),
+    permissionRequired: permissions.visitTicketsCreate,
+    exact: true,
+  },
+  {
+    path: '/visit-tickets/importer',
+    loader: () =>
+      import(
+        'src/view/visitTickets/importer/VisitTicketsImporterPage'
+      ),
+    permissionRequired: permissions.visitTicketsImport,
+    exact: true,
+  },
+  {
+    path: '/visit-tickets/:id/edit',
+    loader: () =>
+      import('src/view/visitTickets/form/VisitTicketsFormPage'),
+    permissionRequired: permissions.visitTicketsEdit,
+    exact: true,
+  },
+  {
+    path: '/visit-tickets/:id',
+    loader: () =>
+      import('src/view/visitTickets/view/VisitTicketsViewPage'),
+    permissionRequired: permissions.visitTicketsRead,
+    exact: true,
+  },
 ].filter(Boolean);
 
 const publicRoutes = [

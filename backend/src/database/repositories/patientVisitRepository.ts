@@ -83,6 +83,9 @@ class PatientVisitRepository {
       },
     );
 
+    await record.setTickets(data.tickets || [], {
+      transaction,
+    });
     await record.setPrescriptionFills(data.prescriptionFills || [], {
       transaction,
     });    
@@ -185,6 +188,9 @@ class PatientVisitRepository {
       },
     );
 
+    await record.setTickets(data.tickets || [], {
+      transaction,
+    });
     await record.setPrescriptionFills(data.prescriptionFills || [], {
       transaction,
     });
@@ -627,6 +633,7 @@ class PatientVisitRepository {
     if (data) {
       values = {
         ...record.get({ plain: true }),
+        ticketsIds: data.tickets,
         prescriptionFillsIds: data.prescriptionFills,
       };
     }
@@ -667,6 +674,10 @@ class PatientVisitRepository {
     const transaction = SequelizeRepository.getTransaction(
       options,
     );
+
+    output.tickets = await record.getTickets({
+      transaction,
+    });
 
     output.prescriptionFills = await record.getPrescriptionFills({
       transaction,

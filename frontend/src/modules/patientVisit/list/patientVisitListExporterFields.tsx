@@ -21,6 +21,11 @@ export default [
     label: i18n('entities.patientVisit.fields.department'),
   },
   {
+    name: 'tickets',
+    label: i18n('entities.patientVisit.fields.tickets'),
+    render: exporterRenders.relationToMany(),
+  },
+  {
     name: 'doctor',
     label: i18n('entities.patientVisit.fields.doctor'),
     render: exporterRenders.relationToOne(),

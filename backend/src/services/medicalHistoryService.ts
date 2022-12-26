@@ -22,6 +22,7 @@ export default class MedicalHistoryService {
       data.chronicDisease1 = await ChronicDiseaseEnumRepository.filterIdInTenant(data.chronicDisease1, { ...this.options, transaction });
       data.chronicDisease2 = await ChronicDiseaseEnumRepository.filterIdInTenant(data.chronicDisease2, { ...this.options, transaction });
       data.chronicDisease3 = await ChronicDiseaseEnumRepository.filterIdInTenant(data.chronicDisease3, { ...this.options, transaction });
+      data.chronicDisease4 = await ChronicDiseaseEnumRepository.filterIdInTenant(data.chronicDisease4, { ...this.options, transaction });
 
       const record = await MedicalHistoryRepository.create(data, {
         ...this.options,
@@ -58,6 +59,7 @@ export default class MedicalHistoryService {
       data.chronicDisease1 = await ChronicDiseaseEnumRepository.filterIdInTenant(data.chronicDisease1, { ...this.options, transaction });
       data.chronicDisease2 = await ChronicDiseaseEnumRepository.filterIdInTenant(data.chronicDisease2, { ...this.options, transaction });
       data.chronicDisease3 = await ChronicDiseaseEnumRepository.filterIdInTenant(data.chronicDisease3, { ...this.options, transaction });
+      data.chronicDisease4 = await ChronicDiseaseEnumRepository.filterIdInTenant(data.chronicDisease4, { ...this.options, transaction });
 
       const record = await MedicalHistoryRepository.update(
         id,

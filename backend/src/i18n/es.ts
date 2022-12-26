@@ -234,6 +234,13 @@ const es = {
         }
       }
     },
+    visitTickets: {
+      errors: {
+        unique: {
+
+        }
+      }
+    },
   }
 };
 

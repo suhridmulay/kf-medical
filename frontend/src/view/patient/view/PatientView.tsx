@@ -79,6 +79,16 @@ function PatientView(props) {
           value={record.dateOfBirth}
         />
 
+        <TextViewItem
+          label={i18n('entities.patient.fields.referral')}
+          value={
+            record.referral &&
+            i18n(
+              `entities.patient.enumerators.referral.${record.referral}`,
+            )
+          }
+        />
+
         <ImagesViewItem
           label={i18n('entities.patient.fields.picture')}
           value={record.picture}

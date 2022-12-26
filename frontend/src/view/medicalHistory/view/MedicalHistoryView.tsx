@@ -60,6 +60,11 @@ function MedicalHistoryView(props) {
           value={record.chronicDisease3}
         />
 
+        <ChronicDiseaseEnumViewItem
+          label={i18n('entities.medicalHistory.fields.chronicDisease4')}
+          value={record.chronicDisease4}
+        />
+
         <TextViewItem
           label={i18n('entities.medicalHistory.fields.familyHistory')}
           value={record.familyHistory}

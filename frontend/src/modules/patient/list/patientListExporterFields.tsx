@@ -56,6 +56,10 @@ export default [
     label: i18n('entities.patient.fields.dateOfBirth'),
   },
   {
+    name: 'referral',
+    label: i18n('entities.patient.fields.referral'),
+  },
+  {
     name: 'picture',
     label: i18n('entities.patient.fields.picture'),
     render: exporterRenders.filesOrImages(),

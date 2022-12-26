@@ -36,7 +36,8 @@ class PatientRepository {
           'localityName',
           'mobileNumber',
           'aadharNumber',
-          'dateOfBirth',          
+          'dateOfBirth',
+          'referral',          
           'importHash',
         ]),
         medicalCenterId: data.medicalCenter || null,
@@ -118,7 +119,8 @@ class PatientRepository {
           'localityName',
           'mobileNumber',
           'aadharNumber',
-          'dateOfBirth',          
+          'dateOfBirth',
+          'referral',          
           'importHash',
         ]),
         medicalCenterId: data.medicalCenter || null,
@@ -422,6 +424,12 @@ class PatientRepository {
             },
           });
         }
+      }
+
+      if (filter.referral) {
+        whereAnd.push({
+          referral: filter.referral,
+        });
       }
 
       if (filter.createdAtRange) {

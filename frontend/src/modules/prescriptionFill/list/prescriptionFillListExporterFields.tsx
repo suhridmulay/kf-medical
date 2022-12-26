@@ -12,13 +12,18 @@ export default [
     render: exporterRenders.relationToOne(),
   },
   {
-    name: 'siteInventory',
-    label: i18n('entities.prescriptionFill.fields.siteInventory'),
+    name: 'medicine',
+    label: i18n('entities.prescriptionFill.fields.medicine'),
     render: exporterRenders.relationToOne(),
   },
   {
     name: 'quantity',
     label: i18n('entities.prescriptionFill.fields.quantity'),
+  },
+  {
+    name: 'siteInventory',
+    label: i18n('entities.prescriptionFill.fields.siteInventory'),
+    render: exporterRenders.relationToOne(),
   },
   {
     name: 'createdAt',

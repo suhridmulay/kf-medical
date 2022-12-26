@@ -20,6 +20,9 @@ import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import PatientVisitAutocompleteFormItem from 'src/view/patientVisit/autocomplete/PatientVisitAutocompleteFormItem';
+import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
+import SiteInventoryAutocompleteFormItem from 'src/view/siteInventory/autocomplete/SiteInventoryAutocompleteFormItem';
 
 const schema = yup.object().shape({
   patientVisit: yupFormSchemas.relationToOne(
@@ -28,53 +31,15 @@ const schema = yup.object().shape({
       "required": false
     },
   ),
-  med1Qty: yupFormSchemas.integer(
-    i18n('entities.prescriptionFill.fields.quantity'),
+  medicine: yupFormSchemas.relationToOne(
+    i18n('entities.prescriptionFill.fields.medicine'),
     {
       "required": false
     },
   ),
-  med2Qty: yupFormSchemas.integer(
-    i18n('entities.prescriptionFill.fields.quantity'),
-    {
-      "required": false
-    },
-  ),
-  med3Qty: yupFormSchemas.integer(
-    i18n('entities.prescriptionFill.fields.quantity'),
-    {
-      "required": false
-    },
-  ),
-  med4Qty: yupFormSchemas.integer(
-    i18n('entities.prescriptionFill.fields.quantity'),
-    {
-      "required": false
-    },
-  ),
-  med1SiteInventory: yupFormSchemas.relationToOne(
+  siteInventory: yupFormSchemas.relationToOne(
     i18n('entities.prescriptionFill.fields.siteInventory'),
-    {
-      "required": false
-    },
-  ),
-  med2SiteInventory: yupFormSchemas.relationToOne(
-    i18n('entities.prescriptionFill.fields.siteInventory'),
-    {
-      "required": false
-    },
-  ),
-  med3SiteInventory: yupFormSchemas.relationToOne(
-    i18n('entities.prescriptionFill.fields.siteInventory'),
-    {
-      "required": false
-    },
-  ),
-  med4SiteInventory: yupFormSchemas.relationToOne(
-    i18n('entities.prescriptionFill.fields.siteInventory'),
-    {
-      "required": false
-    },
+    {},
   ),
 });
 
@@ -83,8 +48,9 @@ function PrescriptionFillForm(props) {
     const record = props.record || {};
     return {
       patientVisit: record.patientVisit,
-      siteInventory: record.siteInventory,
+      medicine: record.medicine,
       quantity: record.quantity,
+      siteInventory: record.siteInventory,
     };
   });
 
@@ -145,6 +111,22 @@ function PrescriptionFillForm(props) {
             <Grid item lg={12} md={12} sm={12} xs={12}>
               <h2>Patient visit for {patientVisit.patient.fullName} on {patientVisit.visitDate}</h2>
             </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <PatientVisitAutocompleteFormItem  
+                name="patientVisit"
+                label={i18n('entities.prescriptionFill.fields.patientVisit')}
+                required={true}
+                showCreate={!props.modal}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <MedicineEnumAutocompleteFormItem  
+                name="medicine"
+                label={i18n('entities.prescriptionFill.fields.medicine')}
+                required={true}
+                showCreate={!props.modal}
+              />
+            </Grid>
             <Grid item lg={12} md={12} sm={12} xs={12}>
               <TableContainer component={Paper}>
                 <Table style={{ borderRadius: '5px', border: '1px solid rgb(224, 224, 224)', borderCollapse: 'initial', paddingBottom: '100px'}}>
@@ -163,6 +145,15 @@ function PrescriptionFillForm(props) {
                   </TableBody>
                 </Table>
               </TableContainer>
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <SiteInventoryAutocompleteFormItem  
+                name="siteInventory"
+                label={i18n('entities.prescriptionFill.fields.siteInventory')}
+              hint={i18n('entities.prescriptionFill.hints.siteInventory')}
+                required={false}
+                showCreate={!props.modal}
+              />
             </Grid>
           </Grid>
           <FormButtons

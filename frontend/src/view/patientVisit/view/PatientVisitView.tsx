@@ -4,6 +4,7 @@ import { i18n } from 'src/i18n';
 import TextViewItem from 'src/view/shared/view/TextViewItem';
 import PatientViewItem from 'src/view/patient/view/PatientViewItem';
 import HealthCenterViewItem from 'src/view/healthCenter/view/HealthCenterViewItem';
+import VisitTicketsViewItem from 'src/view/visitTickets/view/VisitTicketsViewItem';
 import DoctorViewItem from 'src/view/doctor/view/DoctorViewItem';
 import SymptomsEnumViewItem from 'src/view/symptomsEnum/view/SymptomsEnumViewItem';
 import MedicineEnumViewItem from 'src/view/medicineEnum/view/MedicineEnumViewItem';
@@ -33,6 +34,11 @@ function PatientVisitView(props) {
               `entities.patientVisit.enumerators.department.${record.department}`,
             )
           }
+        />
+
+        <VisitTicketsViewItem
+          label={i18n('entities.patientVisit.fields.tickets')}
+          value={record.tickets}
         />
 
         <DoctorViewItem

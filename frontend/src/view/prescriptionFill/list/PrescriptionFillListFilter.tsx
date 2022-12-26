@@ -23,20 +23,29 @@ import filterRenders from 'src/modules/shared/filter/filterRenders';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
 import PatientVisitAutocompleteFormItem from 'src/view/patientVisit/autocomplete/PatientVisitAutocompleteFormItem';
+import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
 
 const schema = yup.object().shape({
   patientVisit: yupFilterSchemas.relationToOne(
     i18n('entities.prescriptionFill.fields.patientVisit'),
   ),
+  medicine: yupFilterSchemas.relationToOne(
+    i18n('entities.prescriptionFill.fields.medicine'),
+  ),
 });
 
 const emptyValues = {
   patientVisit: null,
+  medicine: null,
 }
 
 const previewRenders = {
   patientVisit: {
       label: i18n('entities.prescriptionFill.fields.patientVisit'),
+      render: filterRenders.relationToOne(),
+    },
+  medicine: {
+      label: i18n('entities.prescriptionFill.fields.medicine'),
       render: filterRenders.relationToOne(),
     },
 }
@@ -107,6 +116,12 @@ function PrescriptionFillListFilter(props) {
                   <PatientVisitAutocompleteFormItem  
                     name="patientVisit"
                     label={i18n('entities.prescriptionFill.fields.patientVisit')}        
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <MedicineEnumAutocompleteFormItem  
+                    name="medicine"
+                    label={i18n('entities.prescriptionFill.fields.medicine')}        
                   />
                 </Grid>
               </Grid>

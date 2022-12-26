@@ -30,6 +30,7 @@ class PrescriptionFillRepository {
           'importHash',
         ]),
         patientVisitId: data.patientVisit || null,
+        medicineId: data.medicine || null,
         siteInventoryId: data.siteInventory || null,
         tenantId: tenant.id,
         createdById: currentUser.id,
@@ -89,6 +90,7 @@ class PrescriptionFillRepository {
           'importHash',
         ]),
         patientVisitId: data.patientVisit || null,
+        medicineId: data.medicine || null,
         siteInventoryId: data.siteInventory || null,
         updatedById: currentUser.id,
       },
@@ -155,6 +157,10 @@ class PrescriptionFillRepository {
       {
         model: options.database.patientVisit,
         as: 'patientVisit',
+      },
+      {
+        model: options.database.medicineEnum,
+        as: 'medicine',
       },
       {
         model: options.database.siteInventory,
@@ -258,6 +264,10 @@ class PrescriptionFillRepository {
         as: 'patientVisit',
       },
       {
+        model: options.database.medicineEnum,
+        as: 'medicine',
+      },
+      {
         model: options.database.siteInventory,
         as: 'siteInventory',
       },      
@@ -278,6 +288,14 @@ class PrescriptionFillRepository {
         whereAnd.push({
           ['patientVisitId']: SequelizeFilterUtils.uuid(
             filter.patientVisit,
+          ),
+        });
+      }
+
+      if (filter.medicine) {
+        whereAnd.push({
+          ['medicineId']: SequelizeFilterUtils.uuid(
+            filter.medicine,
           ),
         });
       }

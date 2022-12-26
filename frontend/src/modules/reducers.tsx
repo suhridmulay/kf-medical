@@ -26,6 +26,7 @@ import purchaseInvoice from 'src/modules/purchaseInvoice/purchaseInvoiceReducers
 import transfer from 'src/modules/transfer/transferReducers';
 import prescriptionFill from 'src/modules/prescriptionFill/prescriptionFillReducers';
 import staff from 'src/modules/staff/staffReducers';
+import visitTickets from 'src/modules/visitTickets/visitTicketsReducers';
 import { combineReducers } from 'redux';
 
 export default (history) =>
@@ -58,4 +59,5 @@ export default (history) =>
     transfer,
     prescriptionFill,
     staff,
+    visitTickets,
   });

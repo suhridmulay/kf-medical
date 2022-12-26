@@ -246,6 +246,12 @@ export default function (sequelize) {
       },
     });
 
+    models.patientVisit.hasMany(models.visitTickets, {
+      as: 'tickets',
+      constraints: false,
+      foreignKey: 'patientVisitId',
+    });
+
     models.patientVisit.belongsTo(models.doctor, {
       as: 'doctor',
       constraints: false,

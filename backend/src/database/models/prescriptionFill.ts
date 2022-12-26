@@ -49,12 +49,17 @@ export default function (sequelize) {
       },
     });
 
-    models.prescriptionFill.belongsTo(models.siteInventory, {
-      as: 'siteInventory',
+    models.prescriptionFill.belongsTo(models.medicineEnum, {
+      as: 'medicine',
       constraints: false,
       foreignKey: {
         allowNull: false,
       },
+    });
+
+    models.prescriptionFill.belongsTo(models.siteInventory, {
+      as: 'siteInventory',
+      constraints: false,
     });
 
 

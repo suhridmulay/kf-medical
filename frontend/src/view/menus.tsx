@@ -187,4 +187,11 @@ export default [
     icon: <ChevronRightIcon />,
     label: i18n('entities.staff.menu'),
   },
+
+  {
+    path: '/visit-tickets',
+    permissionRequired: permissions.visitTicketsRead,
+    icon: <ChevronRightIcon />,
+    label: i18n('entities.visitTickets.menu'),
+  },
 ].filter(Boolean);

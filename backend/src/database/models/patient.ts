@@ -80,6 +80,18 @@ export default function (sequelize) {
             : null;
         },
       },
+      referral: {
+        type: DataTypes.TEXT,
+        validate: {
+          isIn: [[
+            "Outreach",
+            "Friend",
+            "Telecalling",
+            "Self",
+            "Other"
+          ]],
+        }
+      },
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,    

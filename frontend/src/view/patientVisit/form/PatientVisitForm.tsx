@@ -21,6 +21,7 @@ import moment from 'moment';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
 import PatientAutocompleteFormItem from 'src/view/patient/autocomplete/PatientAutocompleteFormItem';
 import HealthCenterAutocompleteFormItem from 'src/view/healthCenter/autocomplete/HealthCenterAutocompleteFormItem';
+import VisitTicketsAutocompleteFormItem from 'src/view/visitTickets/autocomplete/VisitTicketsAutocompleteFormItem';
 import DoctorAutocompleteFormItem from 'src/view/doctor/autocomplete/DoctorAutocompleteFormItem';
 import SymptomsEnumAutocompleteFormItem from 'src/view/symptomsEnum/autocomplete/SymptomsEnumAutocompleteFormItem';
 import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
@@ -44,6 +45,10 @@ const schema = yup.object().shape({
     {
       "options": patientVisitEnumerators.department
     },
+  ),
+  tickets: yupFormSchemas.relationToMany(
+    i18n('entities.patientVisit.fields.tickets'),
+    {},
   ),
   doctor: yupFormSchemas.relationToOne(
     i18n('entities.patientVisit.fields.doctor'),
@@ -264,6 +269,7 @@ function PatientVisitForm(props) {
       patient: record.patient,
       medicalCenter: record.medicalCenter,
       department: record.department,
+      tickets: record.tickets || [],
       doctor: record.doctor,
       visitDate: record.visitDate ? moment(record.visitDate, 'YYYY-MM-DD') : null,
       repeatVisit: record.repeatVisit,
@@ -363,6 +369,15 @@ function PatientVisitForm(props) {
                   }),
                 )}
                 required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <VisitTicketsAutocompleteFormItem  
+                name="tickets"
+                label={i18n('entities.patientVisit.fields.tickets')}
+                required={false}
+                showCreate={!props.modal}
+                mode="multiple"
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
