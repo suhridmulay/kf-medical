@@ -24,6 +24,7 @@ import Pagination from 'src/view/shared/table/Pagination';
 import Spinner from 'src/view/shared/Spinner';
 import TableCellCustom from 'src/view/shared/table/TableCellCustom';
 import PatientVisitListItem from 'src/view/patientVisit/list/PatientVisitListItem';
+import MedicineEnumListItem from 'src/view/medicineEnum/list/MedicineEnumListItem';
 import SiteInventoryListItem from 'src/view/siteInventory/list/SiteInventoryListItem';
 
 function PrescriptionFillListTable(props) {
@@ -134,7 +135,7 @@ function PrescriptionFillListTable(props) {
               />
               <TableCellCustom
                 label={i18n(
-                  'entities.prescriptionFill.fields.siteInventory',
+                  'entities.prescriptionFill.fields.medicine',
                 )}
               />
               <TableCellCustom
@@ -146,6 +147,11 @@ function PrescriptionFillListTable(props) {
                   'entities.prescriptionFill.fields.quantity',
                 )}
                 align="right"
+              />
+              <TableCellCustom
+                label={i18n(
+                  'entities.prescriptionFill.fields.siteInventory',
+                )}
               />              
               <TableCellCustom size="md" />
             </TableRow>
@@ -190,9 +196,12 @@ function PrescriptionFillListTable(props) {
                   <PatientVisitListItem value={row.patientVisit} />
                 </TableCell>
                 <TableCell>
-                  <SiteInventoryListItem value={row.siteInventory} />
+                  <MedicineEnumListItem value={row.medicine} />
                 </TableCell>
-                <TableCell align="right">{row.quantity}</TableCell>                  
+                <TableCell align="right">{row.quantity}</TableCell>
+                <TableCell>
+                  <SiteInventoryListItem value={row.siteInventory} />
+                </TableCell>                  
                   <TableCell>
                     <Box
                       display="flex"

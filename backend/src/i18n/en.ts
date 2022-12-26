@@ -232,6 +232,13 @@ const en = {
         }
       }
     },
+    visitTickets: {
+      errors: {
+        unique: {
+
+        }
+      }
+    },
   }
 };
 

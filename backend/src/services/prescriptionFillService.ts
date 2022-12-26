@@ -3,6 +3,7 @@ import SequelizeRepository from '../database/repositories/sequelizeRepository';
 import { IServiceOptions } from './IServiceOptions';
 import PrescriptionFillRepository from '../database/repositories/prescriptionFillRepository';
 import PatientVisitRepository from '../database/repositories/patientVisitRepository';
+import MedicineEnumRepository from '../database/repositories/medicineEnumRepository';
 import SiteInventoryRepository from '../database/repositories/siteInventoryRepository';
 
 export default class PrescriptionFillService {
@@ -19,6 +20,7 @@ export default class PrescriptionFillService {
 
     try {
       data.patientVisit = await PatientVisitRepository.filterIdInTenant(data.patientVisit, { ...this.options, transaction });
+      data.medicine = await MedicineEnumRepository.filterIdInTenant(data.medicine, { ...this.options, transaction });
       data.siteInventory = await SiteInventoryRepository.filterIdInTenant(data.siteInventory, { ...this.options, transaction });
 
       const record = await PrescriptionFillRepository.create(data, {
@@ -53,6 +55,7 @@ export default class PrescriptionFillService {
 
     try {
       data.patientVisit = await PatientVisitRepository.filterIdInTenant(data.patientVisit, { ...this.options, transaction });
+      data.medicine = await MedicineEnumRepository.filterIdInTenant(data.medicine, { ...this.options, transaction });
       data.siteInventory = await SiteInventoryRepository.filterIdInTenant(data.siteInventory, { ...this.options, transaction });
 
       const record = await PrescriptionFillRepository.update(

@@ -14,6 +14,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import RadioFormItem from 'src/view/shared/form/items/RadioFormItem';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import patientEnumerators from 'src/modules/patient/patientEnumerators';
 import moment from 'moment';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
@@ -92,6 +93,12 @@ const schema = yup.object().shape({
     i18n('entities.patient.fields.dateOfBirth'),
     {},
   ),
+  referral: yupFormSchemas.enumerator(
+    i18n('entities.patient.fields.referral'),
+    {
+      "options": patientEnumerators.referral
+    },
+  ),
   picture: yupFormSchemas.images(
     i18n('entities.patient.fields.picture'),
     {},
@@ -127,6 +134,7 @@ function PatientForm(props) {
       mobileNumber: record.mobileNumber,
       aadharNumber: record.aadharNumber,
       dateOfBirth: record.dateOfBirth ? moment(record.dateOfBirth, 'YYYY-MM-DD') : null,
+      referral: record.referral,
       picture: record.picture || [],
       medicalHistory: record.medicalHistory,
       medicalVisits: record.medicalVisits || [],
@@ -250,6 +258,21 @@ function PatientForm(props) {
               <DatePickerFormItem
                 name="dateOfBirth"
                 label={i18n('entities.patient.fields.dateOfBirth')}
+                required={false}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <SelectFormItem
+                name="referral"
+                label={i18n('entities.patient.fields.referral')}
+                options={patientEnumerators.referral.map(
+                  (value) => ({
+                    value,
+                    label: i18n(
+                      `entities.patient.enumerators.referral.${value}`,
+                    ),
+                  }),
+                )}
                 required={false}
               />
             </Grid>

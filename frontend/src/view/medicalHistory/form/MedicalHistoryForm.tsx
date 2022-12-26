@@ -52,6 +52,10 @@ const schema = yup.object().shape({
     i18n('entities.medicalHistory.fields.chronicDisease3'),
     {},
   ),
+  chronicDisease4: yupFormSchemas.relationToOne(
+    i18n('entities.medicalHistory.fields.chronicDisease4'),
+    {},
+  ),
   familyHistory: yupFormSchemas.string(
     i18n('entities.medicalHistory.fields.familyHistory'),
     {},
@@ -70,6 +74,7 @@ function MedicalHistoryForm(props) {
       chronicDisease1: record.chronicDisease1,
       chronicDisease2: record.chronicDisease2,
       chronicDisease3: record.chronicDisease3,
+      chronicDisease4: record.chronicDisease4,
       familyHistory: record.familyHistory,
     };
   });
@@ -161,6 +166,14 @@ function MedicalHistoryForm(props) {
               <ChronicDiseaseEnumAutocompleteFormItem  
                 name="chronicDisease3"
                 label={i18n('entities.medicalHistory.fields.chronicDisease3')}
+                required={false}
+                showCreate={!props.modal}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <ChronicDiseaseEnumAutocompleteFormItem  
+                name="chronicDisease4"
+                label={i18n('entities.medicalHistory.fields.chronicDisease4')}
                 required={false}
                 showCreate={!props.modal}
               />

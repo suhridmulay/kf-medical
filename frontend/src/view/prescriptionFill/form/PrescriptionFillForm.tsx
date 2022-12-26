@@ -13,6 +13,7 @@ import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import PatientVisitAutocompleteFormItem from 'src/view/patientVisit/autocomplete/PatientVisitAutocompleteFormItem';
+import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
 import SiteInventoryAutocompleteFormItem from 'src/view/siteInventory/autocomplete/SiteInventoryAutocompleteFormItem';
 
 const schema = yup.object().shape({
@@ -22,8 +23,8 @@ const schema = yup.object().shape({
       "required": true
     },
   ),
-  siteInventory: yupFormSchemas.relationToOne(
-    i18n('entities.prescriptionFill.fields.siteInventory'),
+  medicine: yupFormSchemas.relationToOne(
+    i18n('entities.prescriptionFill.fields.medicine'),
     {
       "required": true
     },
@@ -34,6 +35,10 @@ const schema = yup.object().shape({
       "required": true
     },
   ),
+  siteInventory: yupFormSchemas.relationToOne(
+    i18n('entities.prescriptionFill.fields.siteInventory'),
+    {},
+  ),
 });
 
 function PrescriptionFillForm(props) {
@@ -42,8 +47,9 @@ function PrescriptionFillForm(props) {
 
     return {
       patientVisit: record.patientVisit,
-      siteInventory: record.siteInventory,
+      medicine: record.medicine,
       quantity: record.quantity,
+      siteInventory: record.siteInventory,
     };
   });
 
@@ -79,10 +85,9 @@ function PrescriptionFillForm(props) {
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SiteInventoryAutocompleteFormItem  
-                name="siteInventory"
-                label={i18n('entities.prescriptionFill.fields.siteInventory')}
-              hint={i18n('entities.prescriptionFill.hints.siteInventory')}
+              <MedicineEnumAutocompleteFormItem  
+                name="medicine"
+                label={i18n('entities.prescriptionFill.fields.medicine')}
                 required={true}
                 showCreate={!props.modal}
               />
@@ -92,6 +97,15 @@ function PrescriptionFillForm(props) {
                 name="quantity"
                 label={i18n('entities.prescriptionFill.fields.quantity')}  
                 required={true}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <SiteInventoryAutocompleteFormItem  
+                name="siteInventory"
+                label={i18n('entities.prescriptionFill.fields.siteInventory')}
+              hint={i18n('entities.prescriptionFill.hints.siteInventory')}
+                required={false}
+                showCreate={!props.modal}
               />
             </Grid>
           </Grid>

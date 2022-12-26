@@ -40,6 +40,11 @@ export default [
     render: exporterRenders.relationToOne(),
   },
   {
+    name: 'chronicDisease4',
+    label: i18n('entities.medicalHistory.fields.chronicDisease4'),
+    render: exporterRenders.relationToOne(),
+  },
+  {
     name: 'familyHistory',
     label: i18n('entities.medicalHistory.fields.familyHistory'),
   },

@@ -34,6 +34,14 @@ export default [
     ),
   },
   {
+    name: 'tickets',
+    label: i18n('entities.patientVisit.fields.tickets'),
+    schema: schemas.relationToMany(
+      i18n('entities.patientVisit.fields.tickets'),
+      {},
+    ),
+  },
+  {
     name: 'doctor',
     label: i18n('entities.patientVisit.fields.doctor'),
     schema: schemas.relationToOne(

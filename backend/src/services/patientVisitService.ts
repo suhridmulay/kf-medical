@@ -4,6 +4,7 @@ import { IServiceOptions } from './IServiceOptions';
 import PatientVisitRepository from '../database/repositories/patientVisitRepository';
 import PatientRepository from '../database/repositories/patientRepository';
 import HealthCenterRepository from '../database/repositories/healthCenterRepository';
+import VisitTicketsRepository from '../database/repositories/visitTicketsRepository';
 import DoctorRepository from '../database/repositories/doctorRepository';
 import SymptomsEnumRepository from '../database/repositories/symptomsEnumRepository';
 import MedicineEnumRepository from '../database/repositories/medicineEnumRepository';
@@ -24,6 +25,7 @@ export default class PatientVisitService {
     try {
       data.patient = await PatientRepository.filterIdInTenant(data.patient, { ...this.options, transaction });
       data.medicalCenter = await HealthCenterRepository.filterIdInTenant(data.medicalCenter, { ...this.options, transaction });
+      data.tickets = await VisitTicketsRepository.filterIdsInTenant(data.tickets, { ...this.options, transaction });
       data.doctor = await DoctorRepository.filterIdInTenant(data.doctor, { ...this.options, transaction });
       data.symptom1 = await SymptomsEnumRepository.filterIdInTenant(data.symptom1, { ...this.options, transaction });
       data.symptom2 = await SymptomsEnumRepository.filterIdInTenant(data.symptom2, { ...this.options, transaction });
@@ -68,6 +70,7 @@ export default class PatientVisitService {
     try {
       data.patient = await PatientRepository.filterIdInTenant(data.patient, { ...this.options, transaction });
       data.medicalCenter = await HealthCenterRepository.filterIdInTenant(data.medicalCenter, { ...this.options, transaction });
+      data.tickets = await VisitTicketsRepository.filterIdsInTenant(data.tickets, { ...this.options, transaction });
       data.doctor = await DoctorRepository.filterIdInTenant(data.doctor, { ...this.options, transaction });
       data.symptom1 = await SymptomsEnumRepository.filterIdInTenant(data.symptom1, { ...this.options, transaction });
       data.symptom2 = await SymptomsEnumRepository.filterIdInTenant(data.symptom2, { ...this.options, transaction });

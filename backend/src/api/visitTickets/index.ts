@@ -1,0 +1,30 @@
+export default (app) => {
+  app.post(
+    `/tenant/:tenantId/visit-tickets`,
+    require('./visitTicketsCreate').default,
+  );
+  app.put(
+    `/tenant/:tenantId/visit-tickets/:id`,
+    require('./visitTicketsUpdate').default,
+  );
+  app.post(
+    `/tenant/:tenantId/visit-tickets/import`,
+    require('./visitTicketsImport').default,
+  );
+  app.delete(
+    `/tenant/:tenantId/visit-tickets`,
+    require('./visitTicketsDestroy').default,
+  );
+  app.get(
+    `/tenant/:tenantId/visit-tickets/autocomplete`,
+    require('./visitTicketsAutocomplete').default,
+  );
+  app.get(
+    `/tenant/:tenantId/visit-tickets`,
+    require('./visitTicketsList').default,
+  );
+  app.get(
+    `/tenant/:tenantId/visit-tickets/:id`,
+    require('./visitTicketsFind').default,
+  );
+};

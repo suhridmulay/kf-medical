@@ -63,6 +63,14 @@ export default [
     ),
   },
   {
+    name: 'chronicDisease4',
+    label: i18n('entities.medicalHistory.fields.chronicDisease4'),
+    schema: schemas.relationToOne(
+      i18n('entities.medicalHistory.fields.chronicDisease4'),
+      {},
+    ),
+  },
+  {
     name: 'familyHistory',
     label: i18n('entities.medicalHistory.fields.familyHistory'),
     schema: schemas.string(

@@ -74,6 +74,7 @@ const en = {
           'aadharNumber': 'Aadhar Card Number',
           'dateOfBirthRange': 'Date Of Birth',
           'dateOfBirth': 'Date Of Birth',
+          'referral': 'Referral',
           'picture': 'Picture',
           'medicalHistory': 'MedicalHistory',
           'medicalVisits': 'Medical Visits',
@@ -86,6 +87,13 @@ const en = {
           'gender': {
             'Male': 'Male',
             'Female': 'Female',
+          },
+          'referral': {
+            'Outreach': 'Outreach',
+            'Friend': 'Friend',
+            'Telecalling': 'Telecalling',
+            'Self': 'Self',
+            'Other': 'Other',
           },
         },
         placeholders: {
@@ -197,6 +205,7 @@ const en = {
           'patient': 'Patient',
           'medicalCenter': 'Medical Center',
           'department': 'Department',
+          'tickets': 'Tickets',
           'doctor': 'Doctor',
           'visitDateRange': 'Visit Date',
           'visitDate': 'Visit Date',
@@ -720,6 +729,7 @@ const en = {
           'chronicDisease1': 'ChronicDisease1',
           'chronicDisease2': 'ChronicDisease2',
           'chronicDisease3': 'ChronicDisease3',
+          'chronicDisease4': 'ChronicDisease4',
           'familyHistory': 'Family History',
           createdAt: 'Created at',
           updatedAt: 'Updated at',
@@ -1326,9 +1336,10 @@ const en = {
         fields: {
           id: 'Id',
           'patientVisit': 'PatientVisit',
-          'siteInventory': 'SiteInventory',
+          'medicine': 'Medicine',
           'quantityRange': 'Quantity',
           'quantity': 'Quantity',
+          'siteInventory': 'SiteInventory',
           createdAt: 'Created at',
           updatedAt: 'Updated at',
           createdAtRange: 'Created at',
@@ -1408,6 +1419,68 @@ const en = {
         importer: {
           title: 'Import Staff',
           fileName: 'staff_import_template',
+          hint:
+            'Files/Images columns must be the URLs of the files separated by space.',
+        },
+      },
+
+    visitTickets: {
+        name: 'visitTickets',
+        label: 'VisitTickets',
+        menu: 'VisitTickets',
+        exporterFileName: 'visitTickets_export',
+        list: {
+          menu: 'VisitTickets',
+          title: 'VisitTickets',
+        },
+        create: {
+          success: 'Visit Tickets successfully saved',
+        },
+        update: {
+          success: 'Visit Tickets successfully saved',
+        },
+        destroy: {
+          success: 'Visit Tickets successfully deleted',
+        },
+        destroyAll: {
+          success: 'Visit Tickets(s) successfully deleted',
+        },
+        edit: {
+          title: 'Edit Visit Tickets',
+        },
+        fields: {
+          id: 'Id',
+          'patientVisit': 'PatientVisit',
+          'department': 'Department',
+          'ticketCountRange': 'TicketCount',
+          'ticketCount': 'TicketCount',
+          createdAt: 'Created at',
+          updatedAt: 'Updated at',
+          createdAtRange: 'Created at',
+        },
+        enumerators: {
+          'department': {
+            'General': 'General',
+            'Homeopathy': 'Homeopathy',
+            'Dental': 'Dental',
+            'Eye': 'Eye',
+          },
+        },
+        placeholders: {
+
+        },
+        hints: {
+
+        },
+        new: {
+          title: 'New Visit Tickets',
+        },
+        view: {
+          title: 'View Visit Tickets',
+        },
+        importer: {
+          title: 'Import VisitTickets',
+          fileName: 'visitTickets_import_template',
           hint:
             'Files/Images columns must be the URLs of the files separated by space.',
         },

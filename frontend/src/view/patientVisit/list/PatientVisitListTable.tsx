@@ -24,6 +24,7 @@ import Pagination from 'src/view/shared/table/Pagination';
 import Spinner from 'src/view/shared/Spinner';
 import TableCellCustom from 'src/view/shared/table/TableCellCustom';
 import PatientListItem from 'src/view/patient/list/PatientListItem';
+import VisitTicketsListItem from 'src/view/visitTickets/list/VisitTicketsListItem';
 import DoctorListItem from 'src/view/doctor/list/DoctorListItem';
 import SymptomsEnumListItem from 'src/view/symptomsEnum/list/SymptomsEnumListItem';
 import MedicineEnumListItem from 'src/view/medicineEnum/list/MedicineEnumListItem';
@@ -145,6 +146,11 @@ function PatientVisitListTable(props) {
               />
               <TableCellCustom
                 label={i18n(
+                  'entities.patientVisit.fields.tickets',
+                )}
+              />
+              <TableCellCustom
+                label={i18n(
                   'entities.patientVisit.fields.doctor',
                 )}
               />
@@ -225,6 +231,9 @@ function PatientVisitListTable(props) {
                         `entities.patientVisit.enumerators.department.${row.department}`,
                       )
                     : null}
+                </TableCell>
+                <TableCell>
+                  <VisitTicketsListItem value={row.tickets} />
                 </TableCell>
                 <TableCell>
                   <DoctorListItem value={row.doctor} />

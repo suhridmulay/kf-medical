@@ -185,6 +185,15 @@ function PatientListTable(props) {
                 label={i18n(
                   'entities.patient.fields.mobileNumber',
                 )}
+              />
+              <TableCellCustom
+                onSort={doChangeSort}
+                hasRows={hasRows}
+                sorter={sorter}
+                name={'referral'}
+                label={i18n(
+                  'entities.patient.fields.referral',
+                )}
               />              
               <TableCellCustom size="md" />
             </TableRow>
@@ -239,7 +248,14 @@ function PatientListTable(props) {
                 </TableCell>
                 <TableCell align="right">{row.age}</TableCell>
                 <TableCell>{row.localityName}</TableCell>
-                <TableCell>{row.mobileNumber}</TableCell>                  
+                <TableCell>{row.mobileNumber}</TableCell>
+                <TableCell>
+                  {row.referral
+                    ? i18n(
+                        `entities.patient.enumerators.referral.${row.referral}`,
+                      )
+                    : null}
+                </TableCell>                  
                   <TableCell>
                     <Box
                       display="flex"

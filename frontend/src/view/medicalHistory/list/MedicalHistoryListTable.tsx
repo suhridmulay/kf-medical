@@ -173,6 +173,11 @@ function MedicalHistoryListTable(props) {
                 label={i18n(
                   'entities.medicalHistory.fields.chronicDisease3',
                 )}
+              />
+              <TableCellCustom
+                label={i18n(
+                  'entities.medicalHistory.fields.chronicDisease4',
+                )}
               />              
               <TableCellCustom size="md" />
             </TableRow>
@@ -243,6 +248,9 @@ function MedicalHistoryListTable(props) {
                 </TableCell>
                 <TableCell>
                   <ChronicDiseaseEnumListItem value={row.chronicDisease3} />
+                </TableCell>
+                <TableCell>
+                  <ChronicDiseaseEnumListItem value={row.chronicDisease4} />
                 </TableCell>                  
                   <TableCell>
                     <Box

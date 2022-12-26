@@ -230,6 +230,13 @@ const ptBR = {
         }
       }
     },
+    visitTickets: {
+      errors: {
+        unique: {
+
+        }
+      }
+    },
   }
 };
 

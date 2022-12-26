@@ -3,6 +3,13 @@ const patientEnumerators = {
     'Male',
     'Female',
   ],
+  referral: [
+    'Outreach',
+    'Friend',
+    'Telecalling',
+    'Self',
+    'Other',
+  ],
 };
 
 export default patientEnumerators;

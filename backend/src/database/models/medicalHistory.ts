@@ -85,6 +85,11 @@ export default function (sequelize) {
       constraints: false,
     });
 
+    models.medicalHistory.belongsTo(models.chronicDiseaseEnum, {
+      as: 'chronicDisease4',
+      constraints: false,
+    });
+
 
     
     models.medicalHistory.belongsTo(models.tenant, {

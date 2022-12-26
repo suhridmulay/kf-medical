@@ -59,6 +59,9 @@ const schema = yup.object().shape({
   dateOfBirthRange: yupFilterSchemas.dateRange(
     i18n('entities.patient.fields.dateOfBirthRange'),
   ),
+  referral: yupFilterSchemas.enumerator(
+    i18n('entities.patient.fields.referral'),
+  ),
 });
 
 const emptyValues = {
@@ -72,6 +75,7 @@ const emptyValues = {
   mobileNumber: null,
   aadharNumber: null,
   dateOfBirthRange: [],
+  referral: null,
 }
 
 const previewRenders = {
@@ -114,6 +118,10 @@ const previewRenders = {
   dateOfBirthRange: {
     label: i18n('entities.patient.fields.dateOfBirthRange'),
     render: filterRenders.dateRange(),
+  },
+  referral: {
+    label: i18n('entities.patient.fields.referral'),
+    render: filterRenders.enumerator('entities.patient.enumerators.referral',),
   },
 }
 
@@ -245,6 +253,20 @@ function PatientListFilter(props) {
                   <DatePickerRangeFormItem
                     name="dateOfBirthRange"
                     label={i18n('entities.patient.fields.dateOfBirthRange')}    
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <SelectFormItem
+                    name="referral"
+                    label={i18n('entities.patient.fields.referral')}
+                    options={patientEnumerators.referral.map(
+                      (value) => ({
+                        value,
+                        label: i18n(
+                          `entities.patient.enumerators.referral.${value}`,
+                        ),
+                      }),
+                    )}
                   />
                 </Grid>
               </Grid>

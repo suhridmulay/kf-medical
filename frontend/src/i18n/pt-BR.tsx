@@ -74,6 +74,7 @@ const ptBR = {
           'aadharNumber': 'Aadhar Card Number',
           'dateOfBirthRange': 'Date Of Birth',
           'dateOfBirth': 'Date Of Birth',
+          'referral': 'Referral',
           'picture': 'Picture',
           'medicalHistory': 'MedicalHistory',
           'medicalVisits': 'Medical Visits',
@@ -86,6 +87,13 @@ const ptBR = {
           'gender': {
             'Male': 'Male',
             'Female': 'Female',
+          },
+          'referral': {
+            'Outreach': 'Outreach',
+            'Friend': 'Friend',
+            'Telecalling': 'Telecalling',
+            'Self': 'Self',
+            'Other': 'Other',
           },
         },
         placeholders: {
@@ -197,6 +205,7 @@ const ptBR = {
           'patient': 'Patient',
           'medicalCenter': 'Medical Center',
           'department': 'Department',
+          'tickets': 'Tickets',
           'doctor': 'Doctor',
           'visitDateRange': 'Visit Date',
           'visitDate': 'Visit Date',
@@ -720,6 +729,7 @@ const ptBR = {
           'chronicDisease1': 'ChronicDisease1',
           'chronicDisease2': 'ChronicDisease2',
           'chronicDisease3': 'ChronicDisease3',
+          'chronicDisease4': 'ChronicDisease4',
           'familyHistory': 'Family History',
           createdAt: 'Criado em',
           updatedAt: 'Atualizado em',
@@ -1326,9 +1336,10 @@ const ptBR = {
         fields: {
           id: 'Id',
           'patientVisit': 'PatientVisit',
-          'siteInventory': 'SiteInventory',
+          'medicine': 'Medicine',
           'quantityRange': 'Quantity',
           'quantity': 'Quantity',
+          'siteInventory': 'SiteInventory',
           createdAt: 'Criado em',
           updatedAt: 'Atualizado em',
           createdAtRange: 'Criado em',
@@ -1408,6 +1419,68 @@ const ptBR = {
         importer: {
           title: 'Importar Staff',
           fileName: 'staff_template_importacao',
+          hint:
+            'Arquivos/Imagens devem ser as URLs dos arquivos, separados por espaço. Relacionamentos devem ser os IDs separados por espaço.',
+        },
+      },
+
+    visitTickets: {
+        name: 'Visit Tickets',
+        label: 'VisitTickets',
+        menu: 'VisitTickets',
+        exporterFileName: 'Visit Tickets_exportados',
+        list: {
+          menu: 'VisitTickets',
+          title: 'VisitTickets',
+        },
+        create: {
+          success: 'Visit Tickets salvo com sucesso',
+        },
+        update: {
+          success: 'Visit Tickets salvo com sucesso',
+        },
+        destroy: {
+          success: 'Visit Tickets deletado com sucesso',
+        },
+        destroyAll: {
+          success: 'Visit Tickets(s) deletado com sucesso',
+        },
+        edit: {
+          title: 'Editar Visit Tickets',
+        },
+        fields: {
+          id: 'Id',
+          'patientVisit': 'PatientVisit',
+          'department': 'Department',
+          'ticketCountRange': 'TicketCount',
+          'ticketCount': 'TicketCount',
+          createdAt: 'Criado em',
+          updatedAt: 'Atualizado em',
+          createdAtRange: 'Criado em',
+        },
+        enumerators: {
+          'department': {
+            'General': 'General',
+            'Homeopathy': 'Homeopathy',
+            'Dental': 'Dental',
+            'Eye': 'Eye',
+          },
+        },
+        placeholders: {
+
+        },
+        hints: {
+
+        },
+        new: {
+          title: 'Novo Visit Tickets',
+        },
+        view: {
+          title: 'Visualizar Visit Tickets',
+        },
+        importer: {
+          title: 'Importar VisitTickets',
+          fileName: 'visitTickets_template_importacao',
           hint:
             'Arquivos/Imagens devem ser as URLs dos arquivos, separados por espaço. Relacionamentos devem ser os IDs separados por espaço.',
         },

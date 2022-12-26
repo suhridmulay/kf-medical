@@ -36,6 +36,7 @@ class MedicalHistoryRepository {
         chronicDisease1Id: data.chronicDisease1 || null,
         chronicDisease2Id: data.chronicDisease2 || null,
         chronicDisease3Id: data.chronicDisease3 || null,
+        chronicDisease4Id: data.chronicDisease4 || null,
         tenantId: tenant.id,
         createdById: currentUser.id,
         updatedById: currentUser.id,
@@ -100,6 +101,7 @@ class MedicalHistoryRepository {
         chronicDisease1Id: data.chronicDisease1 || null,
         chronicDisease2Id: data.chronicDisease2 || null,
         chronicDisease3Id: data.chronicDisease3 || null,
+        chronicDisease4Id: data.chronicDisease4 || null,
         updatedById: currentUser.id,
       },
       {
@@ -177,6 +179,10 @@ class MedicalHistoryRepository {
       {
         model: options.database.chronicDiseaseEnum,
         as: 'chronicDisease3',
+      },
+      {
+        model: options.database.chronicDiseaseEnum,
+        as: 'chronicDisease4',
       },
     ];
 
@@ -286,6 +292,10 @@ class MedicalHistoryRepository {
       {
         model: options.database.chronicDiseaseEnum,
         as: 'chronicDisease3',
+      },
+      {
+        model: options.database.chronicDiseaseEnum,
+        as: 'chronicDisease4',
       },      
     ];
 

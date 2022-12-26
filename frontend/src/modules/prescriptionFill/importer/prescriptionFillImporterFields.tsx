@@ -13,10 +13,10 @@ export default [
     ),
   },
   {
-    name: 'siteInventory',
-    label: i18n('entities.prescriptionFill.fields.siteInventory'),
+    name: 'medicine',
+    label: i18n('entities.prescriptionFill.fields.medicine'),
     schema: schemas.relationToOne(
-      i18n('entities.prescriptionFill.fields.siteInventory'),
+      i18n('entities.prescriptionFill.fields.medicine'),
       {
         "required": true
       },
@@ -30,6 +30,14 @@ export default [
       {
         "required": true
       },
+    ),
+  },
+  {
+    name: 'siteInventory',
+    label: i18n('entities.prescriptionFill.fields.siteInventory'),
+    schema: schemas.relationToOne(
+      i18n('entities.prescriptionFill.fields.siteInventory'),
+      {},
     ),
   },
 ];
