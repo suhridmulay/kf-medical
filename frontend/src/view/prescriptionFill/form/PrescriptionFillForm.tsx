@@ -154,13 +154,14 @@ function PrescriptionFillForm(props) {
   const processRowUpdate = useCallback(
     (newRow: GridRowModel<IMedicineRecord>) => {
       const record = newRow;
+      const index = newRow.id;
       if (validateRow(record)) {
         setFormRows((oldFormRows) => { 
-          const allExceptLast = oldFormRows.slice(0, -1)
-          return [...allExceptLast, record]
+          const rows = [...oldFormRows];
+          rows[index] = {...record};
+          return rows;
         })
       }
-      console.log({record})
       return record;
     },
     [formRows],
