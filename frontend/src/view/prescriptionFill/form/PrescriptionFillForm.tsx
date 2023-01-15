@@ -155,20 +155,25 @@ function PrescriptionFillForm(props) {
     (newRow: GridRowModel<IMedicineRecord>) => {
       const record = newRow;
       const index = newRow.id;
-      if (validateRow(record)) {
-        setFormRows((oldFormRows) => { 
-          const rows = [...oldFormRows];
-          rows[index] = {...record};
-          return rows;
-        })
-      }
+      setFormRows((oldFormRows) => {
+        const rows = [...oldFormRows];
+        rows[index] = { ...record };
+        return rows;
+      });
       return record;
     },
     [formRows],
   );
 
   return (
-    <div style={{ height: 700, width: '100%' }}>
+    <div
+      style={{
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <Box>
         <Button
           variant="contained"
