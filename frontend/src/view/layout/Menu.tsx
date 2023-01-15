@@ -18,7 +18,8 @@ import {
 
 const drawerWidth = 200;
 
-const useStyles = makeStyles((theme) => ({
+// TODO: figure out the actual type and put it in here
+const useStyles = makeStyles((theme: any) => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
