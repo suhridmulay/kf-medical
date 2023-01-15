@@ -801,42 +801,42 @@ class Permissions {
 
       visitTicketsImport: {
         id: 'visitTicketsImport',
-        allowedRoles: [roles.admin],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
+        allowedPlans: [plans.free],
       },
       visitTicketsCreate: {
         id: 'visitTicketsCreate',
-        allowedRoles: [roles.admin],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
+        allowedPlans: [plans.free],
         allowedStorage: [
 
         ],
       },
       visitTicketsEdit: {
         id: 'visitTicketsEdit',
-        allowedRoles: [roles.admin],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
+        allowedPlans: [plans.free],
         allowedStorage: [
 
         ],
       },
       visitTicketsDestroy: {
         id: 'visitTicketsDestroy',
-        allowedRoles: [roles.admin],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
+        allowedPlans: [plans.free],
         allowedStorage: [
 
         ],
       },
       visitTicketsRead: {
         id: 'visitTicketsRead',
-        allowedRoles: [roles.admin, roles.custom],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
+        allowedPlans: [plans.free],
       },
       visitTicketsAutocomplete: {
         id: 'visitTicketsAutocomplete',
-        allowedRoles: [roles.admin, roles.custom],
-        allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedRoles: [roles.admin, roles.doctor, roles.nurse, roles.data_entry, roles.manager],
+        allowedPlans: [plans.free],
       },
     };
   }

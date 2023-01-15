@@ -1,6 +1,7 @@
 import PrescriptionFillService from 'src/modules/prescriptionFill/prescriptionFillService';
 import PatientVisitService from 'src/modules/patientVisit/patientVisitService';
 import SiteInventoryService from 'src/modules/siteInventory/siteInventoryService';
+import MedicineEnumService from 'src/modules/medicineEnum/medicineEnumService';
 
 import Errors from 'src/modules/shared/error/errors';
 import Message from 'src/view/shared/message';
@@ -39,39 +40,10 @@ const prescriptionFillFormActions = {
       if (patientVisitId != null) {
         const patientVisitDetails = await PatientVisitService.find(patientVisitId);
         const medicalCenter = patientVisitDetails.medicalCenterId;
-        
-        record['med1'] = patientVisitDetails.medicine1;
-        record['med1Qty'] = patientVisitDetails.med1Qty;
-        
-        record['med2'] = patientVisitDetails.medicine2;
-        record['med2Qty'] = patientVisitDetails.med2Qty;
-        
-        record['med3'] = patientVisitDetails.medicine3;
-        record['med3Qty'] = patientVisitDetails.med3Qty;
-        
-        record['med4'] = patientVisitDetails.medicine4;
-        record['med4Qty'] = patientVisitDetails.med4Qty;
 
-        record['patientVisit'] =  patientVisitDetails;
-        if (record['med1']) {
-          record['med1Inventory'] = await SiteInventoryService.list({center: medicalCenter, medicine: patientVisitDetails.medicine1Id, hasRemainingMeds: 1}, 
-                                                                    'expiryDate', 2, null);
-        }
-
-        if (record['med2']) {
-          record['med2Inventory'] = await SiteInventoryService.list({center: medicalCenter, medicine: patientVisitDetails.medicine2Id, hasRemainingMeds: 1}, 
-                                                                    'expiryDate', 2, null);
-        }
-        
-        if (record['med3']) {
-          record['med3Inventory'] = await SiteInventoryService.list({center: medicalCenter, medicine: patientVisitDetails.medicine3Id, hasRemainingMeds: 1}, 
-                                                                    'expiryDate', 2, null);
-        }
-
-        if (record['med4']) {
-          record['med4Inventory'] = await SiteInventoryService.list({center: medicalCenter, medicine: patientVisitDetails.medicine4Id, hasRemainingMeds: 1}, 
-                                                                    'expiryDate', 2, null);
-        }
+        record['patientVisit']      = patientVisitDetails;
+        record['medicineInventory'] = await SiteInventoryService.list({center: medicalCenter, hasRemainingMeds: 1}, 'expiryDate', null, null);
+        record['medicines']         = await MedicineEnumService.list({}, 'medicineName', null, null);
       }
 
       dispatch({
