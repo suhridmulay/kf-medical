@@ -67,6 +67,13 @@ const prescriptionFillFormActions = {
         type: prescriptionFillFormActions.CREATE_STARTED,
       });
 
+      const records = values.map(value => ({
+        ...value,
+        siteInventory: value.medicineInventory,
+      }))
+
+      await Promise.all(records.map(async (record) => await PrescriptionFillService.create(record)))
+
       const record1 = {"patientVisit": values.patientVisit, "quantity": values.med1Qty, "siteInventory": values.med1SiteInventory};
       const record2 = {"patientVisit": values.patientVisit, "quantity": values.med2Qty, "siteInventory": values.med2SiteInventory};
       const record3 = {"patientVisit": values.patientVisit, "quantity": values.med3Qty, "siteInventory": values.med3SiteInventory};

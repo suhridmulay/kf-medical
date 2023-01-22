@@ -39,6 +39,7 @@ function PrescriptionFillFormPage(props) {
       dispatch(actions.doUpdate(id, data));
     } else {
       dispatch(actions.doCreate(data));
+      console.log(data)
     }
   };
 

@@ -16,7 +16,9 @@ import * as yup from 'yup';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formatRFC3339 } from 'date-fns';
-import { Box } from '@mui/material';
+import { Box, Paper } from '@mui/material';
+import { Grid, Typography } from '@material-ui/core';
+import { Medicine } from 'src/types';
 
 const schema = yup.object().shape({
   patientVisit: yupFormSchemas.relationToOne(
@@ -44,6 +46,19 @@ interface IMedicineRecord {
   inventory: string;
 }
 
+function total(records: IMedicineRecord[]) {
+  let total = new Map<string, { quantity: number }>();
+  for (let record of records) {
+    const oldTotal = total.get(record.medicine) || {
+      quantity: 0,
+    };
+    total.set(record.medicine, {
+      quantity: oldTotal.quantity + record.qty,
+    });
+  }
+  return total;
+}
+
 function validateRow(row: Partial<IMedicineRecord>) {
   return (
     row.medicine &&
@@ -55,7 +70,41 @@ function validateRow(row: Partial<IMedicineRecord>) {
   );
 }
 
+function BillFooter({
+  totals,
+}: {
+  totals: Map<string, { quantity: number }>;
+}) {
+  const keys = Array.from(totals.keys());
+  return (
+    <Box sx={{ p: 2 }}>
+      <Grid container spacing={2}>
+        {keys.map((key) =>
+          key && key.length > 0 ? (
+            <Grid item xs={3}>
+              <Paper sx={{ p: 2 }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <Typography>{key}</Typography>
+                  <Typography>
+                    {totals.get(key)?.quantity || 0}
+                  </Typography>
+                </Box>
+              </Paper>
+            </Grid>
+          ) : null,
+        )}
+      </Grid>
+    </Box>
+  );
+}
+
 function PrescriptionFillForm(props) {
+  console.log(props);
   const [initialValues] = useState(() => {
     const record = props.record || {};
     return {
@@ -126,6 +175,18 @@ function PrescriptionFillForm(props) {
 
   const { saveLoading, modal } = props;
   const patientVisit = props.record.patientVisit;
+  const medicines = props.record.medicines.rows;
+  const medicineInventories = props.record.medicineInventory.rows;
+
+  const handleSubmit = () => {
+    const records = formRows.map(row => ({
+      patientVisit: patientVisit.id,
+      medicineInventory: medicineInventories.find(inventory => inventory.center.name === row.inventory.split('|')[0]?.trim()).id,
+      medicine: medicines.find(med => med.medicineName === row.medicine)?.id,
+      quantity: row.qty
+    }))
+    props.onSubmit(props.record.id, records);
+  }
 
   const BLANK_ROW = (id: number) => ({
     id: id,
@@ -133,19 +194,6 @@ function PrescriptionFillForm(props) {
     qty: 0,
     inventory: '',
   });
-
-  // let rowObjects: any = [];
-  // for (var id = 1; id <= 1; id++) {
-  //   let newRow = {
-  //     id: id,
-  //     medicine: '',
-  //     qty: 0,
-  //     inventory: '',
-  //   };
-  //   rowObjects.push(newRow);
-  // }
-
-  // const rows: GridRowsProp = rowObjects;
 
   const [formRows, setFormRows] = useState<
     IMedicineRecord[]
@@ -172,6 +220,7 @@ function PrescriptionFillForm(props) {
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
+        gap: '2ch'
       }}
     >
       <Box>
@@ -186,14 +235,22 @@ function PrescriptionFillForm(props) {
         >
           Add Row
         </Button>
-        <Button>Submit</Button>
+        <Button onClick={handleSubmit}>Submit</Button>
       </Box>
       <DataGrid
         experimentalFeatures={{ newEditingApi: true }}
         rows={formRows}
         columns={columns}
         processRowUpdate={processRowUpdate}
+        components={{
+          Footer: () => (
+            <BillFooter totals={total(formRows)} />
+          ),
+        }}
       />
+      <Box>
+        <Button>Submit Prescription</Button>
+      </Box>
     </div>
   );
 }
