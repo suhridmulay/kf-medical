@@ -10,7 +10,8 @@ const ContentWrapper = styled('div')({
   display: 'flex',
   height: '100%',
   flexDirection: 'column',
-  maxHeight: 'calc(100vh - 12em)'
+  maxHeight: 'calc(100vh - 12em)',
+  overflow: 'hidden auto'
 });
 
 export default ContentWrapper;
