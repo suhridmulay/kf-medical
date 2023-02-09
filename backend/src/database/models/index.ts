@@ -20,6 +20,9 @@ function models() {
     {
       host: getConfig().DATABASE_HOST,
       dialect: getConfig().DATABASE_DIALECT,
+      dialectOptions: {
+        socketPath: '/var/run/mysqld/mysqld.sock'
+      },
       logging:
         getConfig().DATABASE_LOGGING === 'true'
           ? (log) =>
@@ -31,6 +34,7 @@ function models() {
               )
           : false,
     },
+
   );
 
   fs.readdirSync(__dirname)

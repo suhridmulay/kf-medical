@@ -1,7 +1,12 @@
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridRowsProp,
+  GridColDef,
+  GridRowModel,
+} from '@mui/x-data-grid';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { i18n } from 'src/i18n';
 import FormWrapper, {
   FormButtons,
@@ -10,18 +15,22 @@ import { useForm, FormProvider } from 'react-hook-form';
 import * as yup from 'yup';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { formatRFC3339 } from 'date-fns';
+import { Box, Paper } from '@mui/material';
+import { Grid, Typography } from '@material-ui/core';
+import { Medicine } from 'src/types';
 
 const schema = yup.object().shape({
   patientVisit: yupFormSchemas.relationToOne(
     i18n('entities.prescriptionFill.fields.patientVisit'),
     {
-      "required": false
+      required: false,
     },
   ),
   medicine: yupFormSchemas.relationToOne(
     i18n('entities.prescriptionFill.fields.medicine'),
     {
-      "required": false
+      required: false,
     },
   ),
   siteInventory: yupFormSchemas.relationToOne(
@@ -30,7 +39,72 @@ const schema = yup.object().shape({
   ),
 });
 
+interface IMedicineRecord {
+  id: number;
+  medicine: string;
+  qty: number;
+  inventory: string;
+}
+
+function total(records: IMedicineRecord[]) {
+  let total = new Map<string, { quantity: number }>();
+  for (let record of records) {
+    const oldTotal = total.get(record.medicine) || {
+      quantity: 0,
+    };
+    total.set(record.medicine, {
+      quantity: oldTotal.quantity + record.qty,
+    });
+  }
+  return total;
+}
+
+function validateRow(row: Partial<IMedicineRecord>) {
+  return (
+    row.medicine &&
+    row.medicine.length > 0 &&
+    row.qty &&
+    row.qty > 0 &&
+    row.inventory &&
+    row.inventory.length > 0
+  );
+}
+
+function BillFooter({
+  totals,
+}: {
+  totals: Map<string, { quantity: number }>;
+}) {
+  const keys = Array.from(totals.keys());
+  return (
+    <Box sx={{ p: 2 }}>
+      <Grid container spacing={2}>
+        {keys.map((key) =>
+          key && key.length > 0 ? (
+            <Grid item xs={3}>
+              <Paper sx={{ p: 2 }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <Typography>{key}</Typography>
+                  <Typography>
+                    {totals.get(key)?.quantity || 0}
+                  </Typography>
+                </Box>
+              </Paper>
+            </Grid>
+          ) : null,
+        )}
+      </Grid>
+    </Box>
+  );
+}
+
 function PrescriptionFillForm(props) {
+  console.log(props);
   const [initialValues] = useState(() => {
     const record = props.record || {};
     return {
@@ -41,15 +115,19 @@ function PrescriptionFillForm(props) {
     };
   });
 
-  const medicineList = props.record.medicines.rows.map((x) => x.medicineName);
+  const medicineList = props.record.medicines.rows.map(
+    (x) => x.medicineName,
+  );
   medicineList.push(''); // Empty string for initial empty
-  const medicineInventory = props.record.medicineInventory.rows;
-  
-  // key is medicineName; value is a list of matching inventory items
-  const medicineInventoryMap = new Map<string, string[]>(); 
+  const medicineInventory =
+    props.record.medicineInventory.rows;
 
-  for (var i=0; i<medicineInventory.length; i++) {
-    let medicineName = medicineInventory[i].medicine.medicineName;
+  // key is medicineName; value is a list of matching inventory items
+  const medicineInventoryMap = new Map<string, string[]>();
+
+  for (var i = 0; i < medicineInventory.length; i++) {
+    let medicineName =
+      medicineInventory[i].medicine.medicineName;
     let newValue = medicineInventory[i].siteBatchIdentifier;
     if (medicineInventoryMap[medicineName]) {
       let entry = medicineInventoryMap[medicineName];
@@ -60,13 +138,33 @@ function PrescriptionFillForm(props) {
   }
 
   const columns: GridColDef[] = [
-    { field: 'medicine', headerName: 'Medicine', 
-      type: 'singleSelect', width: 250, editable: true, 
-      valueOptions: ({ row }) => { return medicineList }},
-    { field: 'qty', headerName: 'Quantity', type: 'number', width: 100, editable: true},
-    { field: 'inventory', headerName: 'Batch', 
-      type: 'singleSelect', width: 650, editable: true, 
-      valueOptions: ({ row }) => { return medicineInventoryMap[row.medicine] || [] }},
+    {
+      field: 'medicine',
+      headerName: 'Medicine',
+      type: 'singleSelect',
+      width: 250,
+      editable: true,
+      valueOptions: ({ row }) => {
+        return medicineList;
+      },
+    },
+    {
+      field: 'qty',
+      headerName: 'Quantity',
+      type: 'number',
+      width: 100,
+      editable: true,
+    },
+    {
+      field: 'inventory',
+      headerName: 'Batch',
+      type: 'singleSelect',
+      width: 650,
+      editable: true,
+      valueOptions: ({ row }) => {
+        return medicineInventoryMap[row.medicine] || [];
+      },
+    },
   ];
 
   const form = useForm({
@@ -77,19 +175,82 @@ function PrescriptionFillForm(props) {
 
   const { saveLoading, modal } = props;
   const patientVisit = props.record.patientVisit;
+  const medicines = props.record.medicines.rows;
+  const medicineInventories = props.record.medicineInventory.rows;
 
+  const handleSubmit = () => {
+    const records = formRows.map(row => ({
+      patientVisit: patientVisit.id,
+      medicineInventory: medicineInventories.find(inventory => inventory.center.name === row.inventory.split('|')[0]?.trim()).id,
+      medicine: medicines.find(med => med.medicineName === row.medicine)?.id,
+      quantity: row.qty
+    }))
+    props.onSubmit(props.record.id, records);
+  }
 
-  let rowObjects:any = [];
-  for (var id=1; id<=15; id++) {
-    let newRow = { id: id, medicine: '', qty: 0, inventory: '' };    
-    rowObjects.push(newRow);
-  };
+  const BLANK_ROW = (id: number) => ({
+    id: id,
+    medicine: '',
+    qty: 0,
+    inventory: '',
+  });
 
-  const rows: GridRowsProp = rowObjects;
+  const [formRows, setFormRows] = useState<
+    IMedicineRecord[]
+  >([]);
+
+  const processRowUpdate = useCallback(
+    (newRow: GridRowModel<IMedicineRecord>) => {
+      const record = newRow;
+      const index = newRow.id;
+      setFormRows((oldFormRows) => {
+        const rows = [...oldFormRows];
+        rows[index] = { ...record };
+        return rows;
+      });
+      return record;
+    },
+    [formRows],
+  );
 
   return (
-   <div style={{ height: 700, width: '100%' }}>
-      <DataGrid experimentalFeatures={{ newEditingApi: true }} rows={rows} columns={columns} />
+    <div
+      style={{
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '2ch'
+      }}
+    >
+      <Box>
+        <Button
+          variant="contained"
+          onClick={() =>
+            setFormRows((oldFormRows) => [
+              ...oldFormRows,
+              BLANK_ROW(oldFormRows.length),
+            ])
+          }
+        >
+          Add Row
+        </Button>
+        <Button onClick={handleSubmit}>Submit</Button>
+      </Box>
+      <DataGrid
+        experimentalFeatures={{ newEditingApi: true }}
+        rows={formRows}
+        columns={columns}
+        processRowUpdate={processRowUpdate}
+        components={{
+          Footer: () => (
+            <BillFooter totals={total(formRows)} />
+          ),
+        }}
+      />
+      <Box>
+        <Button>Submit Prescription</Button>
+      </Box>
     </div>
   );
 }

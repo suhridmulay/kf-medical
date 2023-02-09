@@ -1,4 +1,9 @@
-import { Button, Grid } from '@material-ui/core';
+import {
+  AccordionDetails,
+  Button,
+  Grid,
+  Typography,
+} from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
 import UndoIcon from '@material-ui/icons/Undo';
@@ -26,24 +31,27 @@ import DoctorAutocompleteFormItem from 'src/view/doctor/autocomplete/DoctorAutoc
 import SymptomsEnumAutocompleteFormItem from 'src/view/symptomsEnum/autocomplete/SymptomsEnumAutocompleteFormItem';
 import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
 import PrescriptionFillAutocompleteFormItem from 'src/view/prescriptionFill/autocomplete/PrescriptionFillAutocompleteFormItem';
+import { Accordion, AccordionSummary, Box } from '@mui/material';
+import { Add } from '@material-ui/icons';
+import { styled } from '@mui/system';
 
 const schema = yup.object().shape({
   patient: yupFormSchemas.relationToOne(
     i18n('entities.patientVisit.fields.patient'),
     {
-      "required": true
+      required: true,
     },
   ),
   medicalCenter: yupFormSchemas.relationToOne(
     i18n('entities.patientVisit.fields.medicalCenter'),
     {
-      "required": true
+      required: true,
     },
   ),
   department: yupFormSchemas.enumerator(
     i18n('entities.patientVisit.fields.department'),
     {
-      "options": patientVisitEnumerators.department
+      options: patientVisitEnumerators.department,
     },
   ),
   tickets: yupFormSchemas.relationToMany(
@@ -53,13 +61,13 @@ const schema = yup.object().shape({
   doctor: yupFormSchemas.relationToOne(
     i18n('entities.patientVisit.fields.doctor'),
     {
-      "required": true
+      required: true,
     },
   ),
   visitDate: yupFormSchemas.date(
     i18n('entities.patientVisit.fields.visitDate'),
     {
-      "required": true
+      required: true,
     },
   ),
   repeatVisit: yupFormSchemas.boolean(
@@ -69,7 +77,7 @@ const schema = yup.object().shape({
   symptom1: yupFormSchemas.relationToOne(
     i18n('entities.patientVisit.fields.symptom1'),
     {
-      "required": true
+      required: true,
     },
   ),
   symptom2: yupFormSchemas.relationToOne(
@@ -87,55 +95,57 @@ const schema = yup.object().shape({
   height: yupFormSchemas.string(
     i18n('entities.patientVisit.fields.height'),
     {
-      "max": 6
+      max: 6,
     },
   ),
   weight: yupFormSchemas.string(
     i18n('entities.patientVisit.fields.weight'),
     {
-      "max": 6
+      max: 6,
     },
   ),
   temperature: yupFormSchemas.string(
     i18n('entities.patientVisit.fields.temperature'),
     {
-      "max": 5,
-      "min": 2
+      max: 5,
+      min: 2,
     },
   ),
   bloodPressure: yupFormSchemas.string(
     i18n('entities.patientVisit.fields.bloodPressure'),
     {
-      "max": 8
+      max: 8,
     },
   ),
   pulseRate: yupFormSchemas.string(
     i18n('entities.patientVisit.fields.pulseRate'),
     {
-      "min": 2,
-      "max": 3
+      min: 2,
+      max: 3,
     },
   ),
   oxygenLevel: yupFormSchemas.string(
     i18n('entities.patientVisit.fields.oxygenLevel'),
     {
-      "max": 3
+      max: 3,
     },
   ),
   vitalStatisticsOther: yupFormSchemas.string(
-    i18n('entities.patientVisit.fields.vitalStatisticsOther'),
+    i18n(
+      'entities.patientVisit.fields.vitalStatisticsOther',
+    ),
     {},
   ),
   diagnosis: yupFormSchemas.string(
     i18n('entities.patientVisit.fields.diagnosis'),
     {
-      "required": true
+      required: true,
     },
   ),
   caseSeverity: yupFormSchemas.enumerator(
     i18n('entities.patientVisit.fields.caseSeverity'),
     {
-      "options": patientVisitEnumerators.caseSeverity
+      options: patientVisitEnumerators.caseSeverity,
     },
   ),
   medicine1: yupFormSchemas.relationToOne(
@@ -187,7 +197,9 @@ const schema = yup.object().shape({
     {},
   ),
   medicineInstructions: yupFormSchemas.string(
-    i18n('entities.patientVisit.fields.medicineInstructions'),
+    i18n(
+      'entities.patientVisit.fields.medicineInstructions',
+    ),
     {},
   ),
   requestedLabs: yupFormSchemas.string(
@@ -195,7 +207,9 @@ const schema = yup.object().shape({
     {},
   ),
   dietaryInstructions: yupFormSchemas.string(
-    i18n('entities.patientVisit.fields.dietaryInstructions'),
+    i18n(
+      'entities.patientVisit.fields.dietaryInstructions',
+    ),
     {},
   ),
   isTelemedReferral: yupFormSchemas.boolean(
@@ -205,20 +219,20 @@ const schema = yup.object().shape({
   medicineCopay: yupFormSchemas.decimal(
     i18n('entities.patientVisit.fields.medicineCopay'),
     {
-      "scale": 2
+      scale: 2,
     },
   ),
   doctorCopay: yupFormSchemas.decimal(
     i18n('entities.patientVisit.fields.doctorCopay'),
     {
-      "scale": 2,
-      "min": 0
+      scale: 2,
+      min: 0,
     },
   ),
   telemedCopay: yupFormSchemas.decimal(
     i18n('entities.patientVisit.fields.telemedCopay'),
     {
-      "scale": 2
+      scale: 2,
     },
   ),
   referralHospital: yupFormSchemas.string(
@@ -226,13 +240,15 @@ const schema = yup.object().shape({
     {},
   ),
   referredSpecialistDoctor: yupFormSchemas.string(
-    i18n('entities.patientVisit.fields.referredSpecialistDoctor'),
+    i18n(
+      'entities.patientVisit.fields.referredSpecialistDoctor',
+    ),
     {},
   ),
   returnIn: yupFormSchemas.enumerator(
     i18n('entities.patientVisit.fields.returnIn'),
     {
-      "options": patientVisitEnumerators.returnIn
+      options: patientVisitEnumerators.returnIn,
     },
   ),
   telemedicineDoctor: yupFormSchemas.relationToOne(
@@ -240,15 +256,21 @@ const schema = yup.object().shape({
     {},
   ),
   telemedicineConsultDate: yupFormSchemas.date(
-    i18n('entities.patientVisit.fields.telemedicineConsultDate'),
+    i18n(
+      'entities.patientVisit.fields.telemedicineConsultDate',
+    ),
     {},
   ),
   differentialDiagnosis: yupFormSchemas.string(
-    i18n('entities.patientVisit.fields.differentialDiagnosis'),
+    i18n(
+      'entities.patientVisit.fields.differentialDiagnosis',
+    ),
     {},
   ),
   differentialRecommendation: yupFormSchemas.string(
-    i18n('entities.patientVisit.fields.differentialRecommendation'),
+    i18n(
+      'entities.patientVisit.fields.differentialRecommendation',
+    ),
     {},
   ),
   finalNotes: yupFormSchemas.string(
@@ -261,6 +283,11 @@ const schema = yup.object().shape({
   ),
 });
 
+const FormSectionHeading = styled(Typography)({
+  fontWeight: 'bold',
+  fontSize: '1rem',
+});
+
 function PatientVisitForm(props) {
   const [initialValues] = useState(() => {
     const record = props.record || {};
@@ -271,7 +298,9 @@ function PatientVisitForm(props) {
       department: record.department,
       tickets: record.tickets || [],
       doctor: record.doctor,
-      visitDate: record.visitDate ? moment(record.visitDate, 'YYYY-MM-DD') : null,
+      visitDate: record.visitDate
+        ? moment(record.visitDate, 'YYYY-MM-DD')
+        : null,
       repeatVisit: record.repeatVisit,
       symptom1: record.symptom1,
       symptom2: record.symptom2,
@@ -306,16 +335,42 @@ function PatientVisitForm(props) {
       doctorCopay: record.doctorCopay,
       telemedCopay: record.telemedCopay,
       referralHospital: record.referralHospital,
-      referredSpecialistDoctor: record.referredSpecialistDoctor,
+      referredSpecialistDoctor:
+        record.referredSpecialistDoctor,
       returnIn: record.returnIn,
       telemedicineDoctor: record.telemedicineDoctor,
-      telemedicineConsultDate: record.telemedicineConsultDate ? moment(record.telemedicineConsultDate, 'YYYY-MM-DD') : null,
+      telemedicineConsultDate:
+        record.telemedicineConsultDate
+          ? moment(
+            record.telemedicineConsultDate,
+            'YYYY-MM-DD',
+          )
+          : null,
       differentialDiagnosis: record.differentialDiagnosis,
-      differentialRecommendation: record.differentialRecommendation,
+      differentialRecommendation:
+        record.differentialRecommendation,
       finalNotes: record.finalNotes,
       prescriptionFills: record.prescriptionFills || [],
     };
   });
+
+  // This state variable tracks which accordion is expanded
+  // It can have the values
+  // - visitData
+  // - preliminaryDiagnosis
+  // - doctorsOpinion
+  // - prescription
+  // - telemedicine
+  // We will label this as a FormSection type
+  type FormSection =
+    | 'visitData'
+    | 'preliminaryDiagnosis'
+    | 'doctorOpinion'
+    | 'prescription'
+    | 'telemedicine';
+  const [expanded, setExpanded] = useState<
+    FormSection | false
+  >(false);
 
   const form = useForm({
     resolver: yupResolver(schema),
@@ -335,393 +390,640 @@ function PatientVisitForm(props) {
 
   const { saveLoading, modal } = props;
 
+  const handleFormSectionChange =
+    (section: FormSection) =>
+      (e: React.SyntheticEvent, expanded: boolean) => {
+        setExpanded(expanded ? section : false);
+      };
+
   return (
     <FormWrapper>
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <Grid spacing={2} container>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <PatientAutocompleteFormItem  
-                name="patient"
-                label={i18n('entities.patientVisit.fields.patient')}
-                required={true}
-                showCreate={!props.modal}
-              />
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+            <Accordion
+              sx={{ width: '100%' }}
+              expanded={expanded === 'visitData'}
+              onChange={handleFormSectionChange(
+                'visitData',
+              )}
+            >
+              <AccordionSummary expandIcon={<Add />}>
+                <FormSectionHeading>
+                  Patient Details
+                </FormSectionHeading>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <PatientAutocompleteFormItem
+                      name="patient"
+                      label={i18n(
+                        'entities.patientVisit.fields.patient',
+                      )}
+                      required={true}
+                      showCreate={!props.modal}
+                    />
+                  </Grid>
+                  <Grid item lg={6} md={6} sm={12} xs={12}>
+                    <HealthCenterAutocompleteFormItem
+                      name="medicalCenter"
+                      label={i18n(
+                        'entities.patientVisit.fields.medicalCenter',
+                      )}
+                      required={true}
+                      showCreate={!props.modal}
+                    />
+                  </Grid>
+                  <Grid item lg={6} md={6} sm={12} xs={12}>
+                    <SelectFormItem
+                      name="department"
+                      label={i18n(
+                        'entities.patientVisit.fields.department',
+                      )}
+                      options={patientVisitEnumerators.department.map(
+                        (value) => ({
+                          value,
+                          label: i18n(
+                            `entities.patientVisit.enumerators.department.${value}`,
+                          ),
+                        }),
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    lg={12}
+                    md={12}
+                    sm={12}
+                    xs={12}
+                  >
+                    <VisitTicketsAutocompleteFormItem
+                      name="tickets"
+                      label={i18n(
+                        'entities.patientVisit.fields.tickets',
+                      )}
+                      required={false}
+                      showCreate={!props.modal}
+                      mode="multiple"
+                    />
+                  </Grid>
+                  <Grid item lg={8} md={8} sm={12} xs={12}>
+                    <DoctorAutocompleteFormItem
+                      name="doctor"
+                      label={i18n(
+                        'entities.patientVisit.fields.doctor',
+                      )}
+                      required={true}
+                      showCreate={!props.modal}
+                    />
+                  </Grid>
+                  <Grid item lg={4} md={4} sm={12} xs={12}>
+                    <DatePickerFormItem
+                      name="visitDate"
+                      label={i18n(
+                        'entities.patientVisit.fields.visitDate',
+                      )}
+                      required={true}
+                    />
+                  </Grid>
+                  <Grid item lg={8} md={8} sm={12} xs={12}>
+                    <SwitchFormItem
+                      name="repeatVisit"
+                      label={i18n(
+                        'entities.patientVisit.fields.repeatVisit',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.repeatVisit',
+                      )}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={4} lg={4}>
+                        <Box sx={{width: '100%', display: 'flex', flexDirection: 'row-reverse'}}>
+                          <Button variant='contained' onClick={() => setExpanded('preliminaryDiagnosis')}>Next</Button>
+                        </Box>
+                  </Grid>
+                </Grid>
+              </AccordionDetails>
+            </Accordion>
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <HealthCenterAutocompleteFormItem  
-                name="medicalCenter"
-                label={i18n('entities.patientVisit.fields.medicalCenter')}
-                required={true}
-                showCreate={!props.modal}
-              />
+            <Grid item xs={12}>
+            <Accordion
+              onChange={handleFormSectionChange(
+                'preliminaryDiagnosis',
+              )}
+              expanded={expanded === 'preliminaryDiagnosis'}
+              sx={{ width: '100%' }}
+            >
+              <AccordionSummary expandIcon={<Add />}>
+                <FormSectionHeading>
+                  Symptoms and Primary Diagnosis
+                </FormSectionHeading>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Grid container spacing={2}>
+                  <Grid item lg={4} md={4} sm={12} xs={12}>
+                    <InputFormItem
+                      name="height"
+                      label={i18n(
+                        'entities.patientVisit.fields.height',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.height',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={4} md={4} sm={12} xs={12}>
+                    <InputFormItem
+                      name="weight"
+                      label={i18n(
+                        'entities.patientVisit.fields.weight',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.weight',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={4} md={4} sm={12} xs={12}>
+                    <InputFormItem
+                      name="temperature"
+                      label={i18n(
+                        'entities.patientVisit.fields.temperature',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.temperature',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={4} md={4} sm={12} xs={12}>
+                    <InputFormItem
+                      name="bloodPressure"
+                      label={i18n(
+                        'entities.patientVisit.fields.bloodPressure',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.bloodPressure',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={4} md={4} sm={12} xs={12}>
+                    <InputFormItem
+                      name="pulseRate"
+                      label={i18n(
+                        'entities.patientVisit.fields.pulseRate',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.pulseRate',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={4} md={4} sm={12} xs={12}>
+                    <InputFormItem
+                      name="oxygenLevel"
+                      label={i18n(
+                        'entities.patientVisit.fields.oxygenLevel',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.oxygenLevel',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    lg={12}
+                    md={12}
+                    sm={12}
+                    xs={12}
+                  >
+                    <InputFormItem
+                      name="vitalStatisticsOther"
+                      label={i18n(
+                        'entities.patientVisit.fields.vitalStatisticsOther',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={6} md={6} sm={12} xs={12}>
+                    <SymptomsEnumAutocompleteFormItem
+                      name="symptom1"
+                      label={i18n(
+                        'entities.patientVisit.fields.symptom1',
+                      )}
+                      required={true}
+                      showCreate={!props.modal}
+                    />
+                  </Grid>
+                  <Grid item lg={6} md={6} sm={12} xs={12}>
+                    <SymptomsEnumAutocompleteFormItem
+                      name="symptom2"
+                      label={i18n(
+                        'entities.patientVisit.fields.symptom2',
+                      )}
+                      required={false}
+                      showCreate={!props.modal}
+                    />
+                  </Grid>
+                  <Grid item lg={6} md={6} sm={12} xs={12}>
+                    <SymptomsEnumAutocompleteFormItem
+                      name="symptom3"
+                      label={i18n(
+                        'entities.patientVisit.fields.symptom3',
+                      )}
+                      required={false}
+                      showCreate={!props.modal}
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    lg={12}
+                    md={12}
+                    sm={12}
+                    xs={12}
+                  >
+                    <InputFormItem
+                      name="otherSymptoms"
+                      label={i18n(
+                        'entities.patientVisit.fields.otherSymptoms',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={4} lg={4}>
+                        <Box sx={{width: '100%', display: 'flex', flexDirection: 'row-reverse'}}>
+                          <Button variant='contained' onClick={() => setExpanded('doctorOpinion')}>Next</Button>
+                        </Box>
+                  </Grid>
+                </Grid>
+              </AccordionDetails>
+            </Accordion>
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SelectFormItem
-                name="department"
-                label={i18n('entities.patientVisit.fields.department')}
-                options={patientVisitEnumerators.department.map(
-                  (value) => ({
-                    value,
-                    label: i18n(
-                      `entities.patientVisit.enumerators.department.${value}`,
-                    ),
-                  }),
-                )}
-                required={false}
-              />
+            <Grid item xs={12}>
+            <Accordion
+              expanded={expanded === 'doctorOpinion'}
+              onChange={handleFormSectionChange(
+                'doctorOpinion',
+              )}
+              sx={{ width: '100%' }}
+            >
+              <AccordionSummary expandIcon={<Add />}>
+                <FormSectionHeading>
+                  Doctor's Remarks
+                </FormSectionHeading>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Grid container spacing={2}>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <InputFormItem
+                      name="diagnosis"
+                      label={i18n(
+                        'entities.patientVisit.fields.diagnosis',
+                      )}
+                      required={true}
+                    />
+                  </Grid>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <SelectFormItem
+                      name="caseSeverity"
+                      label={i18n(
+                        'entities.patientVisit.fields.caseSeverity',
+                      )}
+                      placeholder={i18n(
+                        'entities.patientVisit.placeholders.caseSeverity',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.caseSeverity',
+                      )}
+                      options={patientVisitEnumerators.caseSeverity.map(
+                        (value) => ({
+                          value,
+                          label: i18n(
+                            `entities.patientVisit.enumerators.caseSeverity.${value}`,
+                          ),
+                        }),
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <MedicineEnumAutocompleteFormItem
+                      name="medicine1"
+                      label={i18n(
+                        'entities.patientVisit.fields.medicine1',
+                      )}
+                      required={false}
+                      showCreate={!props.modal}
+                    />
+                  </Grid>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <InputNumberFormItem
+                      name="med1Qty"
+                      label={i18n(
+                        'entities.patientVisit.fields.med1Qty',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <SwitchFormItem
+                      name="med1Supplied"
+                      label={i18n(
+                        'entities.patientVisit.fields.med1Supplied',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.med1Supplied',
+                      )}
+                    />
+                  </Grid>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <MedicineEnumAutocompleteFormItem
+                      name="medicine2"
+                      label={i18n(
+                        'entities.patientVisit.fields.medicine2',
+                      )}
+                      required={false}
+                      showCreate={!props.modal}
+                    />
+                  </Grid>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <InputNumberFormItem
+                      name="med2Qty"
+                      label={i18n(
+                        'entities.patientVisit.fields.med2Qty',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <SwitchFormItem
+                      name="med2Supplied"
+                      label={i18n(
+                        'entities.patientVisit.fields.med2Supplied',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.med2Supplied',
+                      )}
+                    />
+                  </Grid>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <MedicineEnumAutocompleteFormItem
+                      name="medicine3"
+                      label={i18n(
+                        'entities.patientVisit.fields.medicine3',
+                      )}
+                      required={false}
+                      showCreate={!props.modal}
+                    />
+                  </Grid>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <InputNumberFormItem
+                      name="med3Qty"
+                      label={i18n(
+                        'entities.patientVisit.fields.med3Qty',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <SwitchFormItem
+                      name="med3Supplied"
+                      label={i18n(
+                        'entities.patientVisit.fields.med3Supplied',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.med3Supplied',
+                      )}
+                    />
+                  </Grid>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <MedicineEnumAutocompleteFormItem
+                      name="medicine4"
+                      label={i18n(
+                        'entities.patientVisit.fields.medicine4',
+                      )}
+                      required={false}
+                      showCreate={!props.modal}
+                    />
+                  </Grid>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <InputNumberFormItem
+                      name="med4Qty"
+                      label={i18n(
+                        'entities.patientVisit.fields.med4Qty',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <SwitchFormItem
+                      name="med4Supplied"
+                      label={i18n(
+                        'entities.patientVisit.fields.med4Supplied',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.med4Supplied',
+                      )}
+                    />
+                  </Grid>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <TextAreaFormItem
+                      name="medicineInstructions"
+                      label={i18n(
+                        'entities.patientVisit.fields.medicineInstructions',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <InputFormItem
+                      name="requestedLabs"
+                      label={i18n(
+                        'entities.patientVisit.fields.requestedLabs',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={7} md={8} sm={12} xs={12}>
+                    <TextAreaFormItem
+                      name="dietaryInstructions"
+                      label={i18n(
+                        'entities.patientVisit.fields.dietaryInstructions',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item xs='auto'>
+                        <Box sx={{width: '100%', display: 'flex', flexDirection: 'row-reverse'}}>
+                          <Button variant='contained' onClick={() => setExpanded('telemedicine')}>Next</Button>
+                        </Box>
+                  </Grid>
+                </Grid>
+              </AccordionDetails>
+            </Accordion>
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <VisitTicketsAutocompleteFormItem  
-                name="tickets"
-                label={i18n('entities.patientVisit.fields.tickets')}
-                required={false}
-                showCreate={!props.modal}
-                mode="multiple"
-              />
+            <Grid item xs={12}>
+            <Accordion
+              sx={{ width: '100%' }}
+              onChange={handleFormSectionChange(
+                'telemedicine',
+              )}
+              expanded={expanded === 'telemedicine'}
+            >
+              <AccordionSummary expandIcon={<Add />}>
+                <FormSectionHeading>
+                  Telemedicine
+                </FormSectionHeading>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Grid container spacing={2}>
+                  <Grid item lg={12} md={12} sm={12} xs={12}>
+                    <SwitchFormItem
+                      name="isTelemedReferral"
+                      label={i18n(
+                        'entities.patientVisit.fields.isTelemedReferral',
+                      )}
+                    />
+                  </Grid>
+                  <Grid item lg={4} md={4} sm={12} xs={12}>
+                    <InputFormItem
+                      name="medicineCopay"
+                      label={i18n(
+                        'entities.patientVisit.fields.medicineCopay',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={4} md={4} sm={12} xs={12}>
+                    <InputFormItem
+                      name="doctorCopay"
+                      label={i18n(
+                        'entities.patientVisit.fields.doctorCopay',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={4} md={4} sm={12} xs={12}>
+                    <InputFormItem
+                      name="telemedCopay"
+                      label={i18n(
+                        'entities.patientVisit.fields.telemedCopay',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={6} md={6} sm={12} xs={12}>
+                    <InputFormItem
+                      name="referralHospital"
+                      label={i18n(
+                        'entities.patientVisit.fields.referralHospital',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={6} md={6} sm={12} xs={12}>
+                    <InputFormItem
+                      name="referredSpecialistDoctor"
+                      label={i18n(
+                        'entities.patientVisit.fields.referredSpecialistDoctor',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.referredSpecialistDoctor',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={12} md={12} sm={12} xs={12}>
+                    <SelectFormItem
+                      name="returnIn"
+                      label={i18n(
+                        'entities.patientVisit.fields.returnIn',
+                      )}
+                      options={patientVisitEnumerators.returnIn.map(
+                        (value) => ({
+                          value,
+                          label: i18n(
+                            `entities.patientVisit.enumerators.returnIn.${value}`,
+                          ),
+                        }),
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={6} md={6} sm={12} xs={12}>
+                    <DoctorAutocompleteFormItem
+                      name="telemedicineDoctor"
+                      label={i18n(
+                        'entities.patientVisit.fields.telemedicineDoctor',
+                      )}
+                      required={false}
+                      showCreate={!props.modal}
+                    />
+                  </Grid>
+                  <Grid item lg={6} md={6} sm={12} xs={12}>
+                    <DatePickerFormItem
+                      name="telemedicineConsultDate"
+                      label={i18n(
+                        'entities.patientVisit.fields.telemedicineConsultDate',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.telemedicineConsultDate',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={6} md={6} sm={12} xs={12}>
+                    <TextAreaFormItem
+                      name="differentialDiagnosis"
+                      label={i18n(
+                        'entities.patientVisit.fields.differentialDiagnosis',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.differentialDiagnosis',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={6} md={6} sm={12} xs={12}>
+                    <TextAreaFormItem
+                      name="differentialRecommendation"
+                      label={i18n(
+                        'entities.patientVisit.fields.differentialRecommendation',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.differentialRecommendation',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                  <Grid item lg={12} md={12} sm={12} xs={12}>
+                    <InputFormItem
+                      name="finalNotes"
+                      label={i18n(
+                        'entities.patientVisit.fields.finalNotes',
+                      )}
+                      hint={i18n(
+                        'entities.patientVisit.hints.finalNotes',
+                      )}
+                      required={false}
+                    />
+                  </Grid>
+                </Grid>
+              </AccordionDetails>
+            </Accordion>
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <DoctorAutocompleteFormItem  
-                name="doctor"
-                label={i18n('entities.patientVisit.fields.doctor')}
-                required={true}
-                showCreate={!props.modal}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <DatePickerFormItem
-                name="visitDate"
-                label={i18n('entities.patientVisit.fields.visitDate')}
-                required={true}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SwitchFormItem
-                name="repeatVisit"
-                label={i18n('entities.patientVisit.fields.repeatVisit')}
-              hint={i18n('entities.patientVisit.hints.repeatVisit')}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SymptomsEnumAutocompleteFormItem  
-                name="symptom1"
-                label={i18n('entities.patientVisit.fields.symptom1')}
-                required={true}
-                showCreate={!props.modal}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SymptomsEnumAutocompleteFormItem  
-                name="symptom2"
-                label={i18n('entities.patientVisit.fields.symptom2')}
-                required={false}
-                showCreate={!props.modal}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SymptomsEnumAutocompleteFormItem  
-                name="symptom3"
-                label={i18n('entities.patientVisit.fields.symptom3')}
-                required={false}
-                showCreate={!props.modal}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="otherSymptoms"
-                label={i18n('entities.patientVisit.fields.otherSymptoms')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="height"
-                label={i18n('entities.patientVisit.fields.height')}
-              hint={i18n('entities.patientVisit.hints.height')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="weight"
-                label={i18n('entities.patientVisit.fields.weight')}
-              hint={i18n('entities.patientVisit.hints.weight')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="temperature"
-                label={i18n('entities.patientVisit.fields.temperature')}
-              hint={i18n('entities.patientVisit.hints.temperature')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="bloodPressure"
-                label={i18n('entities.patientVisit.fields.bloodPressure')}
-              hint={i18n('entities.patientVisit.hints.bloodPressure')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="pulseRate"
-                label={i18n('entities.patientVisit.fields.pulseRate')}
-              hint={i18n('entities.patientVisit.hints.pulseRate')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="oxygenLevel"
-                label={i18n('entities.patientVisit.fields.oxygenLevel')}
-              hint={i18n('entities.patientVisit.hints.oxygenLevel')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="vitalStatisticsOther"
-                label={i18n('entities.patientVisit.fields.vitalStatisticsOther')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="diagnosis"
-                label={i18n('entities.patientVisit.fields.diagnosis')}  
-                required={true}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SelectFormItem
-                name="caseSeverity"
-                label={i18n('entities.patientVisit.fields.caseSeverity')}
-              placeholder={i18n('entities.patientVisit.placeholders.caseSeverity')}
-              hint={i18n('entities.patientVisit.hints.caseSeverity')}
-                options={patientVisitEnumerators.caseSeverity.map(
-                  (value) => ({
-                    value,
-                    label: i18n(
-                      `entities.patientVisit.enumerators.caseSeverity.${value}`,
-                    ),
-                  }),
-                )}
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <MedicineEnumAutocompleteFormItem  
-                name="medicine1"
-                label={i18n('entities.patientVisit.fields.medicine1')}
-                required={false}
-                showCreate={!props.modal}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputNumberFormItem
-                name="med1Qty"
-                label={i18n('entities.patientVisit.fields.med1Qty')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SwitchFormItem
-                name="med1Supplied"
-                label={i18n('entities.patientVisit.fields.med1Supplied')}
-              hint={i18n('entities.patientVisit.hints.med1Supplied')}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <MedicineEnumAutocompleteFormItem  
-                name="medicine2"
-                label={i18n('entities.patientVisit.fields.medicine2')}
-                required={false}
-                showCreate={!props.modal}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputNumberFormItem
-                name="med2Qty"
-                label={i18n('entities.patientVisit.fields.med2Qty')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SwitchFormItem
-                name="med2Supplied"
-                label={i18n('entities.patientVisit.fields.med2Supplied')}
-              hint={i18n('entities.patientVisit.hints.med2Supplied')}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <MedicineEnumAutocompleteFormItem  
-                name="medicine3"
-                label={i18n('entities.patientVisit.fields.medicine3')}
-                required={false}
-                showCreate={!props.modal}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputNumberFormItem
-                name="med3Qty"
-                label={i18n('entities.patientVisit.fields.med3Qty')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SwitchFormItem
-                name="med3Supplied"
-                label={i18n('entities.patientVisit.fields.med3Supplied')}
-              hint={i18n('entities.patientVisit.hints.med3Supplied')}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <MedicineEnumAutocompleteFormItem  
-                name="medicine4"
-                label={i18n('entities.patientVisit.fields.medicine4')}
-                required={false}
-                showCreate={!props.modal}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputNumberFormItem
-                name="med4Qty"
-                label={i18n('entities.patientVisit.fields.med4Qty')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SwitchFormItem
-                name="med4Supplied"
-                label={i18n('entities.patientVisit.fields.med4Supplied')}
-              hint={i18n('entities.patientVisit.hints.med4Supplied')}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <TextAreaFormItem
-                name="medicineInstructions"
-                label={i18n('entities.patientVisit.fields.medicineInstructions')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="requestedLabs"
-                label={i18n('entities.patientVisit.fields.requestedLabs')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <TextAreaFormItem
-                name="dietaryInstructions"
-                label={i18n('entities.patientVisit.fields.dietaryInstructions')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SwitchFormItem
-                name="isTelemedReferral"
-                label={i18n('entities.patientVisit.fields.isTelemedReferral')}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="medicineCopay"
-                label={i18n('entities.patientVisit.fields.medicineCopay')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="doctorCopay"
-                label={i18n('entities.patientVisit.fields.doctorCopay')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="telemedCopay"
-                label={i18n('entities.patientVisit.fields.telemedCopay')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="referralHospital"
-                label={i18n('entities.patientVisit.fields.referralHospital')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="referredSpecialistDoctor"
-                label={i18n('entities.patientVisit.fields.referredSpecialistDoctor')}
-              hint={i18n('entities.patientVisit.hints.referredSpecialistDoctor')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SelectFormItem
-                name="returnIn"
-                label={i18n('entities.patientVisit.fields.returnIn')}
-                options={patientVisitEnumerators.returnIn.map(
-                  (value) => ({
-                    value,
-                    label: i18n(
-                      `entities.patientVisit.enumerators.returnIn.${value}`,
-                    ),
-                  }),
-                )}
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <DoctorAutocompleteFormItem  
-                name="telemedicineDoctor"
-                label={i18n('entities.patientVisit.fields.telemedicineDoctor')}
-                required={false}
-                showCreate={!props.modal}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <DatePickerFormItem
-                name="telemedicineConsultDate"
-                label={i18n('entities.patientVisit.fields.telemedicineConsultDate')}
-              hint={i18n('entities.patientVisit.hints.telemedicineConsultDate')}
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <TextAreaFormItem
-                name="differentialDiagnosis"
-                label={i18n('entities.patientVisit.fields.differentialDiagnosis')}
-              hint={i18n('entities.patientVisit.hints.differentialDiagnosis')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <TextAreaFormItem
-                name="differentialRecommendation"
-                label={i18n('entities.patientVisit.fields.differentialRecommendation')}
-              hint={i18n('entities.patientVisit.hints.differentialRecommendation')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="finalNotes"
-                label={i18n('entities.patientVisit.fields.finalNotes')}
-              hint={i18n('entities.patientVisit.hints.finalNotes')}  
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <PrescriptionFillAutocompleteFormItem  
+            <Grid item lg={12} md={12} sm={12} xs={12}>
+              <PrescriptionFillAutocompleteFormItem
                 name="prescriptionFills"
-                label={i18n('entities.patientVisit.fields.prescriptionFills')}
+                label={i18n(
+                  'entities.patientVisit.fields.prescriptionFills',
+                )}
                 required={false}
                 showCreate={!props.modal}
                 mode="multiple"
