@@ -1,8 +1,18 @@
-import { Button, Grid } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Grid,
+} from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
 import UndoIcon from '@material-ui/icons/Undo';
-import React, { useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { i18n } from 'src/i18n';
 import FormWrapper, {
   FormButtons,
@@ -17,42 +27,54 @@ import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import purchaseOrderEntryEnumerators from 'src/modules/purchaseOrderEntry/purchaseOrderEntryEnumerators';
 import PurchaseOrderAutocompleteFormItem from 'src/view/purchaseOrder/autocomplete/PurchaseOrderAutocompleteFormItem';
 import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
+import MedicineEnumService from 'src/modules/medicineEnum/medicineEnumService';
+import {
+  DataGrid,
+  GridColDef,
+  renderEditSingleSelectCell,
+} from '@mui/x-data-grid';
+import { MenuItem, Select, Stack } from '@mui/material';
+import { Add } from '@material-ui/icons';
+import { Medicine, PromiseTracker } from 'src/types';
+import MaterialReactTable from 'material-react-table';
 
 const schema = yup.object().shape({
   purchaseOrder: yupFormSchemas.relationToOne(
-    i18n('entities.purchaseOrderEntry.fields.purchaseOrder'),
+    i18n(
+      'entities.purchaseOrderEntry.fields.purchaseOrder',
+    ),
     {},
   ),
   medicine: yupFormSchemas.relationToOne(
     i18n('entities.purchaseOrderEntry.fields.medicine'),
     {
-      "required": true
+      required: true,
     },
   ),
   quantity: yupFormSchemas.decimal(
     i18n('entities.purchaseOrderEntry.fields.quantity'),
     {
-      "required": true,
-      "scale": 2
+      required: true,
+      scale: 2,
     },
   ),
   unit: yupFormSchemas.enumerator(
     i18n('entities.purchaseOrderEntry.fields.unit'),
     {
-      "options": purchaseOrderEntryEnumerators.unit
+      options: purchaseOrderEntryEnumerators.unit,
     },
   ),
   unitCost: yupFormSchemas.decimal(
     i18n('entities.purchaseOrderEntry.fields.unitCost'),
     {
-      "required": true,
-      "scale": 2
+      required: true,
+      scale: 2,
     },
   ),
   totalCost: yupFormSchemas.decimal(
     i18n('entities.purchaseOrderEntry.fields.totalCost'),
     {
-      "scale": 2
+      scale: 2,
     },
   ),
   stateGST: yupFormSchemas.decimal(
@@ -64,16 +86,46 @@ const schema = yup.object().shape({
     {},
   ),
   substitutionAllowed: yupFormSchemas.boolean(
-    i18n('entities.purchaseOrderEntry.fields.substitutionAllowed'),
+    i18n(
+      'entities.purchaseOrderEntry.fields.substitutionAllowed',
+    ),
     {},
   ),
   purchaseOrderEntryLookup: yupFormSchemas.string(
-    i18n('entities.purchaseOrderEntry.fields.purchaseOrderEntryLookup'),
+    i18n(
+      'entities.purchaseOrderEntry.fields.purchaseOrderEntryLookup',
+    ),
     {
-      "max": 255
+      max: 255,
     },
   ),
 });
+
+interface PurchaseOrder {
+  id: number;
+  purchaseOrder: string;
+  medicine: string;
+  quantity: number;
+  unit: string;
+  unitCost: number;
+  totalCost: number;
+  stateGST: number;
+  centralGST: number;
+  substitutionAllowed: boolean;
+  purchaseOrderEntryLookup: string;
+}
+
+const useMedicines = () => {
+  const [meds, setMeds] = useState<PromiseTracker<any>>({
+    state: 'pending',
+  });
+  useEffect(() => {
+    MedicineEnumService.listAutocomplete(null, null).then(
+      (res) => setMeds({ state: 'resolved', payload: res }),
+    );
+  }, []);
+  return meds;
+};
 
 function PurchaseOrderEntryForm(props) {
   const [initialValues] = useState(() => {
@@ -89,9 +141,15 @@ function PurchaseOrderEntryForm(props) {
       stateGST: record.stateGST,
       centralGST: record.centralGST,
       substitutionAllowed: record.substitutionAllowed,
-      purchaseOrderEntryLookup: record.purchaseOrderEntryLookup,
+      purchaseOrderEntryLookup:
+        record.purchaseOrderEntryLookup,
     };
   });
+
+  const [orders, setOrders] = useState<
+    Partial<PurchaseOrder>[]
+  >([]);
+  const medicines = useMedicines();
 
   const form = useForm({
     resolver: yupResolver(schema),
@@ -109,8 +167,68 @@ function PurchaseOrderEntryForm(props) {
     });
   };
 
+  const handleOrderAdd = () => {
+    setOrders([...orders, { id: orders.length }]);
+  };
+
+  const handleOrderUpdate = (newOrderEntry) => {
+    const record = newOrderEntry;
+    const idx = newOrderEntry.id;
+    console.log({record})
+    setOrders(
+      orders.map((ord, i) => (i === idx ? record : ord)),
+    );
+    return record;
+  };
+
   const { saveLoading, modal } = props;
 
+  const processRowUpdate = useCallback(handleOrderUpdate, [
+    orders,
+  ]);
+
+  const coldefs = useMemo(() => [
+    {
+      id: 'id',
+      header: 'Serial Number',
+      accessorFn: (row) => row.id, 
+    },
+    {
+      id: 'medicine',
+      header: 'Medicine',
+      accessorFn: (row) => row.medicineName,
+    },
+  ], []);
+
+  // return (
+  //   <Stack sx={{ width: '100%', height: '100%' }} gap="1em">
+  //     {medicines.state === 'resolved' ? (
+  //       <>
+  //         <Stack direction="row">
+  //           <Button
+  //             variant="contained"
+  //             startIcon={<Add />}
+  //             onClick={handleOrderAdd}
+  //           >
+  //             Add
+  //           </Button>
+  //         </Stack>
+  //         <Stack style={{ height: '100%' }}>
+  //           <MaterialReactTable
+  //             editingMode='row' 
+  //             enableEditing
+  //             columns={[]}
+  //             data={[]}
+  //           />
+  //         </Stack>
+  //       </>
+  //     ) : (
+  //       <CircularProgress />
+  //     )}
+  //   </Stack>
+  // );
+
+  
   return (
     <FormWrapper>
       <FormProvider {...form}>

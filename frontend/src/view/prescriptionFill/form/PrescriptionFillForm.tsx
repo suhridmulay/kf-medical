@@ -97,7 +97,6 @@ function BillFooter({
 }
 
 function PrescriptionFillForm(props) {
-  console.log(props);
   const [initialValues] = useState(() => {
     const record = props.record || {};
     return {
