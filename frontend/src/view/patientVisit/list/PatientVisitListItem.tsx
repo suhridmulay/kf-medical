@@ -7,10 +7,11 @@ import { useSelector } from 'react-redux';
 import selectors from 'src/modules/patientVisit/patientVisitSelectors';
 import PatientService from 'src/modules/patient/patientService';
 import { PromiseTracker } from 'src/types';
+import { Typography } from '@material-ui/core';
 
 function PatientRecord(props) {
   const {record} = props;
-  const [patientData, setPatientData] = React.useState<PromiseTracker>({state: 'pending'});
+  const [patientData, setPatientData] = React.useState<PromiseTracker<any>>({state: 'pending'});
 
   useEffect(() => {
     setPatientData({state: 'pending'});
@@ -20,7 +21,7 @@ function PatientRecord(props) {
   }, [])
 
   return(
-    <pre>{JSON.stringify(patientData, null, '\t')}</pre>
+    <Typography>{patientData.state === 'resolved' ?  patientData.payload.fullName : record.patiendId}</Typography>
   )
 }
 
