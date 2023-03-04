@@ -38,6 +38,11 @@ function PurchaseOrderEntryFormModal(props) {
       onClose={doClose}
       maxWidth="md"
       fullWidth={true}
+      PaperProps={{
+        style: {
+          height: '100%'
+        }
+      }}
     >
       <DialogTitle
         disableTypography
@@ -55,7 +60,7 @@ function PurchaseOrderEntryFormModal(props) {
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <DialogContent>
+      <DialogContent style={{display: 'flex', flexDirection: 'column'}}>
         <PurchaseOrderEntryForm
           saveLoading={saveLoading}
           onSubmit={doSubmit}

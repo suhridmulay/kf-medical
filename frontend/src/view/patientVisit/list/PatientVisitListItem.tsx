@@ -1,10 +1,29 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import MaterialLink from '@material-ui/core/Link';
 
 import { useSelector } from 'react-redux';
 import selectors from 'src/modules/patientVisit/patientVisitSelectors';
+import PatientService from 'src/modules/patient/patientService';
+import { PromiseTracker } from 'src/types';
+import { Typography } from '@material-ui/core';
+
+function PatientRecord(props) {
+  const {record} = props;
+  const [patientData, setPatientData] = React.useState<PromiseTracker<any>>({state: 'pending'});
+
+  useEffect(() => {
+    setPatientData({state: 'pending'});
+    PatientService.find(record.patientId).then(data => {
+      setPatientData({state: 'resolved', payload: data});
+    })
+  }, [])
+
+  return(
+    <Typography>{patientData.state === 'resolved' ?  patientData.payload.fullName : record.patiendId}</Typography>
+  )
+}
 
 function PatientVisitListItem(props) {
   const hasPermissionToRead = useSelector(
@@ -28,14 +47,7 @@ function PatientVisitListItem(props) {
   const displayableRecord = (record) => {
     if (hasPermissionToRead) {
       return (
-        <div key={record.id}>
-          <MaterialLink
-            component={Link}
-            to={`/patient-visit/${record.id}`}
-          >
-            {record.id}
-          </MaterialLink>
-        </div>
+        <PatientRecord record={record}/>
       );
     }
 

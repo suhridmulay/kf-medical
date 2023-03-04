@@ -4,11 +4,12 @@ const ToolbarWrapper = styled('div')({
   display: 'flex',
   alignItems: 'center',
   marginBottom: '16px',
-  flexWrap: 'wrap',
+  gap: '2ch',
 
   '& > *': {
     marginBottom: '8px',
     marginRight: '8px',
+    whiteSpace: 'nowrap',
   },
 });
 

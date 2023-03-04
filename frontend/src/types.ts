@@ -17,3 +17,16 @@ export type Medicine = {
     medicineCategoryId: string;
     medicineName: string;
 }
+
+type PromisePending = {
+    state: 'pending'
+}
+type PromiseResolved<T> = {
+    state: 'resolved',
+    payload: T
+}
+type PromiseRejected<E> = {
+    state: 'rejected',
+    reason: E
+}
+export type PromiseTracker<T = unknown, E = unknown> = PromisePending | PromiseResolved<T> | PromiseRejected<E>;

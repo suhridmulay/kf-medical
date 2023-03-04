@@ -1,4 +1,4 @@
-import { Button, Tooltip } from '@material-ui/core';
+import { Button, TextField, Tooltip } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -7,6 +7,7 @@ import HistoryIcon from '@material-ui/icons/History';
 import { i18n } from 'src/i18n';
 import auditLogSelectors from 'src/modules/auditLog/auditLogSelectors';
 import prescriptionFillSelectors from 'src/modules/prescriptionFill/prescriptionFillSelectors';
+import patientVisitSelectors from 'src/modules/patientVisit/list/patientVisitListSelectors';
 import destroyActions from 'src/modules/prescriptionFill/destroy/prescriptionFillDestroyActions';
 import destroySelectors from 'src/modules/prescriptionFill/destroy/prescriptionFillDestroySelectors';
 import actions from 'src/modules/prescriptionFill/list/prescriptionFillListActions';
@@ -16,6 +17,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
 import ToolbarWrapper from 'src/view/shared/styles/ToolbarWrapper';
+import { Autocomplete, Box } from '@mui/material';
 
 function PrescriptionFillToolbar(props) {
   const [
@@ -48,6 +50,12 @@ function PrescriptionFillToolbar(props) {
   const hasPermissionToImport = useSelector(
     prescriptionFillSelectors.selectPermissionToImport,
   );
+
+  const patientVisitsLoading = useSelector(patientVisitSelectors.selectLoading);
+  const patientVisitHasRows = useSelector(patientVisitSelectors.selectHasRows);
+  const rows = useSelector(patientVisitSelectors.selectRows);
+
+  const [selectedPatientVisit, setSelectedPatientVisit] = useState<any>(null);
 
   const doOpenDestroyAllConfirmModal = () => {
     setDestroyAllConfirmVisible(true);
@@ -83,13 +91,13 @@ function PrescriptionFillToolbar(props) {
     );
 
     if (!disabledWithTooltip) {
-      return button;
+      return <div>{button}</div>;
     }
 
     return (
       <>
         <Tooltip title={i18n('common.noDataToExport')}>
-          <span>{button}</span>
+          <div>{button}</div>
         </Tooltip>
       </>
     );
@@ -119,7 +127,7 @@ function PrescriptionFillToolbar(props) {
     if (disabled) {
       return (
         <Tooltip title={i18n('common.mustSelectARow')}>
-          <span>{button}</span>
+          <div>{button}</div>
         </Tooltip>
       );
     }
@@ -129,20 +137,34 @@ function PrescriptionFillToolbar(props) {
 
   return (
     <ToolbarWrapper>
-      {hasPermissionToCreate && (
+      {hasPermissionToCreate && !patientVisitsLoading && patientVisitHasRows && (
+        <Box sx={{display: 'flex', width: '100%', alignItems: 'center', gap: '1ch'}}>
+        <Autocomplete 
+          options={rows}
+          value={selectedPatientVisit}
+          onChange={(e, v) => setSelectedPatientVisit(v)}
+          fullWidth
+          getOptionLabel={(row: any) => `${row.patient.fullName} - ${row.visitDate}`}
+          renderInput={(params) => <TextField label='patient visit' {...params}/>}
+        />
+        <div>
         <Button
           variant="contained"
           color="primary"
           component={Link}
-          to="/prescription-fill/new"
+          to={`/prescription-fill/new/${selectedPatientVisit?.id}`}
           startIcon={<AddIcon />}
           size="small"
+          disabled={!selectedPatientVisit}
         >
           {i18n('common.new')}
         </Button>
+        </div>
+        </Box>
       )}
 
       {hasPermissionToImport && (
+        <div>
         <Button
           variant="contained"
           color="primary"
@@ -153,11 +175,13 @@ function PrescriptionFillToolbar(props) {
         >
           {i18n('common.import')}
         </Button>
+        </div>
       )}
 
       {renderDestroyButton()}
 
       {hasPermissionToAuditLogs && (
+        <div>
         <Button
           component={Link}
           to="/audit-logs?entityNames=prescriptionFill"
@@ -166,6 +190,7 @@ function PrescriptionFillToolbar(props) {
         >
           {i18n('auditLog.menu')}
         </Button>
+        </div>
       )}
 
       {renderExportButton()}

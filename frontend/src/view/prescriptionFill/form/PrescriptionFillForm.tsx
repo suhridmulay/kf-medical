@@ -1,24 +1,17 @@
 import {
   DataGrid,
-  GridRowsProp,
   GridColDef,
   GridRowModel,
 } from '@mui/x-data-grid';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { i18n } from 'src/i18n';
-import FormWrapper, {
-  FormButtons,
-} from 'src/view/shared/styles/FormWrapper';
-import { useForm, FormProvider } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { formatRFC3339 } from 'date-fns';
 import { Box, Paper } from '@mui/material';
 import { Grid, Typography } from '@material-ui/core';
-import { Medicine } from 'src/types';
 
 const schema = yup.object().shape({
   patientVisit: yupFormSchemas.relationToOne(
@@ -104,7 +97,6 @@ function BillFooter({
 }
 
 function PrescriptionFillForm(props) {
-  console.log(props);
   const [initialValues] = useState(() => {
     const record = props.record || {};
     return {
