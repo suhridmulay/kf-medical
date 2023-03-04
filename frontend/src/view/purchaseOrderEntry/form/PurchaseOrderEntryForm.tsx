@@ -36,7 +36,7 @@ import {
 import { MenuItem, Select, Stack } from '@mui/material';
 import { Add } from '@material-ui/icons';
 import { Medicine, PromiseTracker } from 'src/types';
-import MaterialReactTable from 'material-react-table';
+import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 
 const schema = yup.object().shape({
   purchaseOrder: yupFormSchemas.relationToOne(
@@ -158,7 +158,19 @@ function PurchaseOrderEntryForm(props) {
   });
 
   const onSubmit = (values) => {
-    props.onSubmit(props.record?.id, values);
+    /**
+     * {
+     *   "substitutionAllowed": false,
+     *   "unitCost": 1,
+     *   "unit": "Tablets",
+     *   "quantity": 100,
+     *   "medicine": "66106524-908b-44e0-bae9-5c14f62bcd6e"
+     * }
+     */
+    console.log(values);
+    for (let value of values) {
+      props.onSubmit(props.record?.id, value);
+    }
   };
 
   const onReset = () => {
@@ -171,158 +183,206 @@ function PurchaseOrderEntryForm(props) {
     setOrders([...orders, { id: orders.length }]);
   };
 
-  const handleOrderUpdate = (newOrderEntry) => {
-    const record = newOrderEntry;
-    const idx = newOrderEntry.id;
-    console.log({record})
-    setOrders(
-      orders.map((ord, i) => (i === idx ? record : ord)),
-    );
-    return record;
+  const handleRowUpdate = ({ row, values }) => {
+    orders[row.id] = { ...orders[row.id], ...values };
+    setOrders([...orders]);
   };
 
   const { saveLoading, modal } = props;
 
-  const processRowUpdate = useCallback(handleOrderUpdate, [
-    orders,
-  ]);
+  const coldefs: MRT_ColumnDef[] = useMemo(
+    () => [
+      {
+        id: 'id',
+        header: 'Serial Number',
+        accessorKey: 'id',
+        enableEditing: false,
+      },
+      {
+        id: 'medicine',
+        header: 'Medicine',
+        accessorKey: 'medicine',
+        Cell: ({row, cell}) => {
+          return (medicines.state === 'resolved' ? medicines.payload : []).find(med => med.id === cell.getValue())?.label;
+        },
+        editVariant: 'select' as const,
+        editSelectOptions:
+          medicines.state === 'resolved'
+            ? medicines.payload.map((m) => ({value: m.id, text: m.label}))
+            : [],
+      },
+      {
+        id: 'unit',
+        header: 'Unit',
+        accessorKey: 'unit',
+        editVariant: 'select' as const,
+        editSelectOptions: ['Tablets', 'Strips', 'Bottles']
+      },
+      {
+        id: 'unitCost',
+        header: 'Unit Cost',
+        accessorKey: 'unitCost',
+      },
+      {
+        id: 'quantity',
+        header: 'Quantity',
+        accessorKey: 'quantity',
+      },
+      {
+        id: 'substitute',
+        header: 'Substitution Allowed',
+        accessorKey: 'substitutionAllowed',
+        editVariant: 'select',
+        editSelectOptions: [{value: true, text: 'yes'}, {value: false, text: 'no'}]
+      },
+    ],
+    [medicines],
+  );
 
-  const coldefs = useMemo(() => [
-    {
-      id: 'id',
-      header: 'Serial Number',
-      accessorFn: (row) => row.id, 
-    },
-    {
-      id: 'medicine',
-      header: 'Medicine',
-      accessorFn: (row) => row.medicineName,
-    },
-  ], []);
-
-  // return (
-  //   <Stack sx={{ width: '100%', height: '100%' }} gap="1em">
-  //     {medicines.state === 'resolved' ? (
-  //       <>
-  //         <Stack direction="row">
-  //           <Button
-  //             variant="contained"
-  //             startIcon={<Add />}
-  //             onClick={handleOrderAdd}
-  //           >
-  //             Add
-  //           </Button>
-  //         </Stack>
-  //         <Stack style={{ height: '100%' }}>
-  //           <MaterialReactTable
-  //             editingMode='row' 
-  //             enableEditing
-  //             columns={[]}
-  //             data={[]}
-  //           />
-  //         </Stack>
-  //       </>
-  //     ) : (
-  //       <CircularProgress />
-  //     )}
-  //   </Stack>
-  // );
-
-  
   return (
-    <FormWrapper>
-      <FormProvider {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <Grid spacing={2} container>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <MedicineEnumAutocompleteFormItem  
-                name="medicine"
-                label={i18n('entities.purchaseOrderEntry.fields.medicine')}
-                required={true}
-                showCreate={!props.modal}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="quantity"
-                label={i18n('entities.purchaseOrderEntry.fields.quantity')}  
-                required={true}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SelectFormItem
-                name="unit"
-                label={i18n('entities.purchaseOrderEntry.fields.unit')}
-                options={purchaseOrderEntryEnumerators.unit.map(
-                  (value) => ({
-                    value,
-                    label: i18n(
-                      `entities.purchaseOrderEntry.enumerators.unit.${value}`,
-                    ),
-                  }),
-                )}
-                required={false}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <InputFormItem
-                name="unitCost"
-                label={i18n('entities.purchaseOrderEntry.fields.unitCost')}  
-                required={true}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <SwitchFormItem
-                name="substitutionAllowed"
-                label={i18n('entities.purchaseOrderEntry.fields.substitutionAllowed')}
-              />
-            </Grid>
-          </Grid>
-          <FormButtons
-            style={{
-              flexDirection: modal
-                ? 'row-reverse'
-                : undefined,
-            }}
-          >
+    <Stack sx={{ width: '100%', height: '100%' }} gap="1em">
+      {medicines.state === 'resolved' ? (
+        <>
+          <Stack direction="row">
             <Button
               variant="contained"
-              color="primary"
-              disabled={saveLoading}
-              type="button"
-              onClick={form.handleSubmit(onSubmit)}
-              startIcon={<SaveIcon />}
-              size="small"
+              startIcon={<Add />}
+              onClick={handleOrderAdd}
             >
-              {i18n('common.save')}
+              Add
             </Button>
-
             <Button
-              disabled={saveLoading}
-              onClick={onReset}
-              type="button"
-              startIcon={<UndoIcon />}
-              size="small"
+              variant="contained"
+              startIcon={<Add />}
+              onClick={() => onSubmit(orders)}
             >
-              {i18n('common.reset')}
+              Submit
             </Button>
-
-            {props.onCancel ? (
-              <Button
-                disabled={saveLoading}
-                onClick={() => props.onCancel()}
-                type="button"
-                startIcon={<CloseIcon />}
-                size="small"
-              >
-                {i18n('common.cancel')}
-              </Button>
-            ) : null}
-          </FormButtons>
-        </form>
-      </FormProvider>
-    </FormWrapper>
+          </Stack>
+          <Stack style={{ height: '100%' }}>
+            <MaterialReactTable
+              columns={coldefs}
+              data={orders}
+              enableRowActions
+              enableEditing
+              editingMode="row"
+              muiTableBodyCellEditTextFieldProps={{
+                variant: 'outlined',
+              }}
+              onEditingRowSave={handleRowUpdate}
+            />
+          </Stack>
+        </>
+      ) : (
+        <CircularProgress />
+      )}
+    </Stack>
   );
+
+  // return (
+  //   <FormWrapper>
+  //     <FormProvider {...form}>
+  //       <form onSubmit={form.handleSubmit(onSubmit)}>
+  //         <Grid spacing={2} container>
+  //           <Grid item lg={7} md={8} sm={12} xs={12}>
+  //             <MedicineEnumAutocompleteFormItem
+  //               name="medicine"
+  //               label={i18n(
+  //                 'entities.purchaseOrderEntry.fields.medicine',
+  //               )}
+  //               required={true}
+  //               showCreate={!props.modal}
+  //             />
+  //           </Grid>
+  //           <Grid item lg={7} md={8} sm={12} xs={12}>
+  //             <InputFormItem
+  //               name="quantity"
+  //               label={i18n(
+  //                 'entities.purchaseOrderEntry.fields.quantity',
+  //               )}
+  //               required={true}
+  //             />
+  //           </Grid>
+  //           <Grid item lg={7} md={8} sm={12} xs={12}>
+  //             <SelectFormItem
+  //               name="unit"
+  //               label={i18n(
+  //                 'entities.purchaseOrderEntry.fields.unit',
+  //               )}
+  //               options={purchaseOrderEntryEnumerators.unit.map(
+  //                 (value) => ({
+  //                   value,
+  //                   label: i18n(
+  //                     `entities.purchaseOrderEntry.enumerators.unit.${value}`,
+  //                   ),
+  //                 }),
+  //               )}
+  //               required={false}
+  //             />
+  //           </Grid>
+  //           <Grid item lg={7} md={8} sm={12} xs={12}>
+  //             <InputFormItem
+  //               name="unitCost"
+  //               label={i18n(
+  //                 'entities.purchaseOrderEntry.fields.unitCost',
+  //               )}
+  //               required={true}
+  //             />
+  //           </Grid>
+  //           <Grid item lg={7} md={8} sm={12} xs={12}>
+  //             <SwitchFormItem
+  //               name="substitutionAllowed"
+  //               label={i18n(
+  //                 'entities.purchaseOrderEntry.fields.substitutionAllowed',
+  //               )}
+  //             />
+  //           </Grid>
+  //         </Grid>
+  //         <FormButtons
+  //           style={{
+  //             flexDirection: modal
+  //               ? 'row-reverse'
+  //               : undefined,
+  //           }}
+  //         >
+  //           <Button
+  //             variant="contained"
+  //             color="primary"
+  //             disabled={saveLoading}
+  //             type="button"
+  //             onClick={form.handleSubmit(onSubmit)}
+  //             startIcon={<SaveIcon />}
+  //             size="small"
+  //           >
+  //             {i18n('common.save')}
+  //           </Button>
+
+  //           <Button
+  //             disabled={saveLoading}
+  //             onClick={onReset}
+  //             type="button"
+  //             startIcon={<UndoIcon />}
+  //             size="small"
+  //           >
+  //             {i18n('common.reset')}
+  //           </Button>
+
+  //           {props.onCancel ? (
+  //             <Button
+  //               disabled={saveLoading}
+  //               onClick={() => props.onCancel()}
+  //               type="button"
+  //               startIcon={<CloseIcon />}
+  //               size="small"
+  //             >
+  //               {i18n('common.cancel')}
+  //             </Button>
+  //           ) : null}
+  //         </FormButtons>
+  //       </form>
+  //     </FormProvider>
+  //   </FormWrapper>
+  // );
 }
 
 export default PurchaseOrderEntryForm;
