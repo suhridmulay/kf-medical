@@ -10,8 +10,13 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Paper } from '@mui/material';
-import { Grid, Typography } from '@material-ui/core';
+import {
+  Autocomplete,
+  Box,
+  Input,
+  Paper,
+} from '@mui/material';
+import { Grid, TextField, Typography } from '@mui/material';
 
 const schema = yup.object().shape({
   patientVisit: yupFormSchemas.relationToOne(
@@ -129,56 +134,27 @@ function PrescriptionFillForm(props) {
     }
   }
 
-  const columns: GridColDef[] = [
-    {
-      field: 'medicine',
-      headerName: 'Medicine',
-      type: 'singleSelect',
-      width: 250,
-      editable: true,
-      valueOptions: ({ row }) => {
-        return medicineList;
-      },
-    },
-    {
-      field: 'qty',
-      headerName: 'Quantity',
-      type: 'number',
-      width: 100,
-      editable: true,
-    },
-    {
-      field: 'inventory',
-      headerName: 'Batch',
-      type: 'singleSelect',
-      width: 650,
-      editable: true,
-      valueOptions: ({ row }) => {
-        return medicineInventoryMap[row.medicine] || [];
-      },
-    },
-  ];
-
-  const form = useForm({
-    resolver: yupResolver(schema),
-    mode: 'all',
-    defaultValues: initialValues as any,
-  });
-
   const { saveLoading, modal } = props;
   const patientVisit = props.record.patientVisit;
   const medicines = props.record.medicines.rows;
-  const medicineInventories = props.record.medicineInventory.rows;
+  const medicineInventories =
+    props.record.medicineInventory.rows;
 
   const handleSubmit = () => {
-    const records = formRows.map(row => ({
+    const records = formRows.map((row) => ({
       patientVisit: patientVisit.id,
-      medicineInventory: medicineInventories.find(inventory => inventory.center.name === row.inventory.split('|')[0]?.trim()).id,
-      medicine: medicines.find(med => med.medicineName === row.medicine)?.id,
-      quantity: row.qty
-    }))
+      medicineInventory: medicineInventories.find(
+        (inventory) =>
+          inventory.center.name ===
+          row.inventory.split('|')[0]?.trim(),
+      ).id,
+      medicine: medicines.find(
+        (med) => med.medicineName === row.medicine,
+      )?.id,
+      quantity: row.qty,
+    }));
     props.onSubmit(props.record.id, records);
-  }
+  };
 
   const BLANK_ROW = (id: number) => ({
     id: id,
@@ -191,19 +167,23 @@ function PrescriptionFillForm(props) {
     IMedicineRecord[]
   >([]);
 
-  const processRowUpdate = useCallback(
-    (newRow: GridRowModel<IMedicineRecord>) => {
-      const record = newRow;
-      const index = newRow.id;
-      setFormRows((oldFormRows) => {
-        const rows = [...oldFormRows];
-        rows[index] = { ...record };
-        return rows;
-      });
-      return record;
-    },
-    [formRows],
-  );
+  const handleFormRowUpdate = (
+    index: number,
+    update: Partial<IMedicineRecord>,
+  ) => {
+    setFormRows((rows) =>
+      rows.map((row, i) => {
+        if (i === index) {
+          return { ...row, ...update };
+        }
+        return row;
+      }),
+    );
+  };
+
+  const isFormDataValid = () => {
+    return formRows.every(row => row.medicine && row.qty && row.inventory);
+  }
 
   return (
     <div
@@ -212,7 +192,7 @@ function PrescriptionFillForm(props) {
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
-        gap: '2ch'
+        gap: '2ch',
       }}
     >
       <Box>
@@ -227,22 +207,70 @@ function PrescriptionFillForm(props) {
         >
           Add Row
         </Button>
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Button onClick={handleSubmit} disabled={!isFormDataValid()}>Submit</Button>
       </Box>
-      <DataGrid
-        experimentalFeatures={{ newEditingApi: true }}
-        rows={formRows}
-        columns={columns}
-        processRowUpdate={processRowUpdate}
-        components={{
-          Footer: () => (
-            <BillFooter totals={total(formRows)} />
-          ),
-        }}
-      />
-      <Box>
-        <Button>Submit Prescription</Button>
-      </Box>
+      {/* TODO: Refactor this into its own component */}
+      {formRows.map((row, i) => {
+        return (
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 20ch 2fr',
+              gap: '1em',
+            }}
+          >
+            <Autocomplete
+              size="small"
+              options={medicines.map(
+                (med) => med.medicineName,
+              )}
+              value={formRows[i].medicine}
+              onChange={(e, v) =>
+                v
+                  ? handleFormRowUpdate(i, { medicine: v })
+                  : handleFormRowUpdate(i, {
+                      medicine: undefined,
+                    })
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Medicine Name"
+                />
+              )}
+            />
+            <TextField
+              size="small"
+              label="Quantity"
+              variant="outlined"
+              InputProps={{ type: 'number' }}
+              value={formRows[i].qty}
+              onChange={(e) => {
+                const qty = parseInt(e.currentTarget.value);
+                if (qty >= 0) {
+                  handleFormRowUpdate(i, { qty });
+                }
+              }}
+            />
+            <Autocomplete
+              size="small"
+              options={medicineInventories}
+              value={formRows[i].inventory}
+              onChange={(e, v) =>
+                v
+                  ? handleFormRowUpdate(i, { inventory: v })
+                  : null
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Medicine Inventory"
+                />
+              )}
+            />
+          </Box>
+        );
+      })}
     </div>
   );
 }

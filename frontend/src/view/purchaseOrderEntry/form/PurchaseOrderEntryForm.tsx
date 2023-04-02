@@ -1,9 +1,15 @@
 import {
+  Autocomplete,
   Box,
   Button,
+  Checkbox,
   CircularProgress,
+  FormControlLabel,
   Grid,
-} from '@material-ui/core';
+  IconButton,
+  TextField,
+  Typography,
+} from '@mui/material';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
 import UndoIcon from '@material-ui/icons/Undo';
@@ -36,7 +42,7 @@ import {
 import { MenuItem, Select, Stack } from '@mui/material';
 import { Add } from '@material-ui/icons';
 import { Medicine, PromiseTracker } from 'src/types';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import { Delete } from '@mui/icons-material';
 
 const schema = yup.object().shape({
   purchaseOrder: yupFormSchemas.relationToOne(
@@ -151,99 +157,46 @@ function PurchaseOrderEntryForm(props) {
   >([]);
   const medicines = useMedicines();
 
-  const form = useForm({
-    resolver: yupResolver(schema),
-    mode: 'all',
-    defaultValues: initialValues as any,
-  });
-
   const onSubmit = (values) => {
-    /**
-     * {
-     *   "substitutionAllowed": false,
-     *   "unitCost": 1,
-     *   "unit": "Tablets",
-     *   "quantity": 100,
-     *   "medicine": "66106524-908b-44e0-bae9-5c14f62bcd6e"
-     * }
-     */
     console.log(values);
     for (let value of values) {
+      value = {...value, medicine: value.medicine.id}
       props.onSubmit(props.record?.id, value);
     }
-  };
-
-  const onReset = () => {
-    Object.keys(initialValues).forEach((key) => {
-      form.setValue(key, initialValues[key]);
-    });
   };
 
   const handleOrderAdd = () => {
     setOrders([...orders, { id: orders.length }]);
   };
 
-  const handleRowUpdate = ({ row, values }) => {
-    orders[row.id] = { ...orders[row.id], ...values };
-    setOrders([...orders]);
+  const handleOrdersUpdate = (
+    idx: number,
+    update: Partial<PurchaseOrder>,
+  ) => {
+    setOrders((oldOrders) =>
+      oldOrders.map((order, i) => {
+        if (i === idx) {
+          return { ...order, ...update };
+        }
+        return order;
+      }),
+    );
   };
+
+  const handleOrderDelete = (idx) => {
+    setOrders((oldOrders) => oldOrders.filter((_, i) => i !== idx))
+  }
 
   const { saveLoading, modal } = props;
 
-  const coldefs: MRT_ColumnDef[] = useMemo(
-    () => [
-      {
-        id: 'id',
-        header: 'Serial Number',
-        accessorKey: 'id',
-        enableEditing: false,
-      },
-      {
-        id: 'medicine',
-        header: 'Medicine',
-        accessorKey: 'medicine',
-        Cell: ({row, cell}) => {
-          return (medicines.state === 'resolved' ? medicines.payload : []).find(med => med.id === cell.getValue())?.label;
-        },
-        editVariant: 'select' as const,
-        editSelectOptions:
-          medicines.state === 'resolved'
-            ? medicines.payload.map((m) => ({value: m.id, text: m.label}))
-            : [],
-      },
-      {
-        id: 'unit',
-        header: 'Unit',
-        accessorKey: 'unit',
-        editVariant: 'select' as const,
-        editSelectOptions: ['Tablets', 'Strips', 'Bottles']
-      },
-      {
-        id: 'unitCost',
-        header: 'Unit Cost',
-        accessorKey: 'unitCost',
-      },
-      {
-        id: 'quantity',
-        header: 'Quantity',
-        accessorKey: 'quantity',
-      },
-      {
-        id: 'substitute',
-        header: 'Substitution Allowed',
-        accessorKey: 'substitutionAllowed',
-        editVariant: 'select',
-        editSelectOptions: [{value: true, text: 'yes'}, {value: false, text: 'no'}]
-      },
-    ],
-    [medicines],
-  );
-
   return (
-    <Stack sx={{ width: '100%', height: '100%' }} gap="1em">
+    <Stack
+      sx={{ width: '100%', height: '100%' }}
+      spacing={2}
+    >
       {medicines.state === 'resolved' ? (
         <>
-          <Stack direction="row">
+          <Stack direction="row" spacing={2}>
             <Button
               variant="contained"
               startIcon={<Add />}
@@ -253,24 +206,133 @@ function PurchaseOrderEntryForm(props) {
             </Button>
             <Button
               variant="contained"
-              startIcon={<Add />}
               onClick={() => onSubmit(orders)}
             >
               Submit
             </Button>
           </Stack>
-          <Stack style={{ height: '100%' }}>
-            <MaterialReactTable
-              columns={coldefs}
-              data={orders}
-              enableRowActions
-              enableEditing
-              editingMode="row"
-              muiTableBodyCellEditTextFieldProps={{
-                variant: 'outlined',
-              }}
-              onEditingRowSave={handleRowUpdate}
-            />
+          <Stack style={{ height: '100%' }} spacing={4} p={2}>
+            {orders.map((order, i) => {
+              // Fields are
+              // medicine - autocomplete using
+              // unit - select between 'tablet'/'strip' and 'bottle'
+              // unit cost - integer
+              // qty - integer
+              // substitution allowed - checbkox
+              return (
+                <Box sx={{backgroundColor: '#f1f1f1', width: '100%', p: 2, borderRadius: '0.5em'}}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6} md={4}>
+                      <Autocomplete
+                      fullWidth
+                        size="small"
+                        options={medicines.payload}
+                        value={order.medicine ?? null}
+                        onChange={(e, v) =>
+                          v
+                            ? handleOrdersUpdate(i, {
+                                medicine: v,
+                              })
+                            : handleOrdersUpdate(i, {
+                                medicine: undefined,
+                              })
+                        }
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label="medicine"
+                          />
+                        )}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                      <Select
+                        fullWidth
+                        size="small"
+                        value={order.unit}
+                        onChange={(e) =>
+                          handleOrdersUpdate(i, {
+                            unit: e.target.value,
+                          })
+                        }
+                      >
+                        <MenuItem value="Tube">
+                          tube
+                        </MenuItem>
+                        <MenuItem value="Strip">Strip</MenuItem>
+                        <MenuItem value="Bottle">
+                          bottle
+                        </MenuItem>
+                        <MenuItem value="Drop">
+                          drop
+                        </MenuItem>
+                      </Select>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                      <TextField
+                      fullWidth
+                        variant="outlined"
+                        size="small"
+                        label="Unit Cost"
+                        InputProps={{
+                          type: 'number',
+                          startAdornment: (
+                            <Typography sx={{ pr: 1 }}>
+                              Rs:{' '}
+                            </Typography>
+                          ),
+                          endAdornment: (
+                            <Typography sx={{ px: 1 }}>
+                              {' '}
+                              /unit{' '}
+                            </Typography>
+                          ),
+                        }}
+                        value={order.unitCost}
+                        onChange={(e) =>
+                          handleOrdersUpdate(i, {
+                            unitCost: parseInt(e.target.value),
+                          })
+                        }
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                      <TextField
+                      fullWidth
+                        variant="outlined"
+                        size="small"
+                        label="Quantity"
+                        InputProps={{ type: 'number' }}
+                        value={order.quantity}
+                        onChange={(e) =>
+                          handleOrdersUpdate(i, {
+                            quantity: parseInt(e.target.value),
+                          })
+                        }
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                      <FormControlLabel
+                  
+                        control={<Checkbox />}
+                        value={order.substitutionAllowed}
+                        onChange={(e, checked) =>
+                          handleOrdersUpdate(i, {
+                            substitutionAllowed: checked,
+                          })
+                        }
+                        label="Substitution allowed"
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                      <IconButton onClick={() => handleOrderDelete(i)}>
+                        <Delete />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </Box>
+              );
+            })}
           </Stack>
         </>
       ) : (
