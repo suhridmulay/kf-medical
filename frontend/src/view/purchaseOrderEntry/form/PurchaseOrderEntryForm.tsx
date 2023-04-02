@@ -152,9 +152,17 @@ function PurchaseOrderEntryForm(props) {
     };
   });
 
+  console.log(initialValues);
+
   const [orders, setOrders] = useState<
     Partial<PurchaseOrder>[]
-  >([]);
+  >([Object.values(initialValues).filter(x => !!x).length > 0 ? {
+    medicine: initialValues.medicine.medicineName,
+    quantity: initialValues.quantity,
+    unit: initialValues.unit,
+    unitCost: initialValues.unitCost,
+    substitutionAllowed: initialValues.substitutionAllowed,
+  } : {}]);
   const medicines = useMedicines();
 
   const onSubmit = (values) => {
