@@ -122,7 +122,7 @@ function PurchaseOrderForm(props) {
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Grid spacing={2} container>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item xs={12}>
               <InputNumberFormItem
                 name="purchaseOrderNumber"
                 label={i18n('entities.purchaseOrder.fields.purchaseOrderNumber')}
@@ -131,7 +131,7 @@ function PurchaseOrderForm(props) {
               autoFocus
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item md={6} sm={12} xs={12}>
               <VendorAutocompleteFormItem  
                 name="vendor"
                 label={i18n('entities.purchaseOrder.fields.vendor')}
@@ -139,7 +139,7 @@ function PurchaseOrderForm(props) {
                 showCreate={!props.modal}
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item lg={6} md={6} sm={12} xs={12}>
               <DatePickerFormItem
                 name="submittedDate"
                 label={i18n('entities.purchaseOrder.fields.submittedDate')}
@@ -155,28 +155,28 @@ function PurchaseOrderForm(props) {
                 mode="multiple"
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item lg={6} md={6} sm={12} xs={12}>
               <InputFormItem
                 name="freightAmount"
                 label={i18n('entities.purchaseOrder.fields.freightAmount')}  
                 required={false}
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item xs={6}>
               <InputFormItem
                 name="discount"
                 label={i18n('entities.purchaseOrder.fields.discount')}  
                 required={false}
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item xs={6}>
               <InputFormItem
                 name="writeOffAmount"
                 label={i18n('entities.purchaseOrder.fields.writeOffAmount')}  
                 required={false}
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item xs={12}>
               <InputFormItem
                 name="notes"
                 label={i18n('entities.purchaseOrder.fields.notes')}  
