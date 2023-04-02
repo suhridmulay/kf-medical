@@ -156,19 +156,25 @@ function PurchaseOrderEntryForm(props) {
 
   const [orders, setOrders] = useState<
     Partial<PurchaseOrder>[]
-  >([Object.values(initialValues).filter(x => !!x).length > 0 ? {
-    medicine: initialValues.medicine.medicineName,
-    quantity: initialValues.quantity,
-    unit: initialValues.unit,
-    unitCost: initialValues.unitCost,
-    substitutionAllowed: initialValues.substitutionAllowed,
-  } : {}]);
+  >([
+    Object.values(initialValues).filter((x) => !!x).length >
+    0
+      ? {
+          medicine: initialValues.medicine.medicineName,
+          quantity: initialValues.quantity,
+          unit: initialValues.unit,
+          unitCost: initialValues.unitCost,
+          substitutionAllowed:
+            initialValues.substitutionAllowed,
+        }
+      : {},
+  ]);
   const medicines = useMedicines();
 
   const onSubmit = (values) => {
     console.log(values);
     for (let value of values) {
-      value = {...value, medicine: value.medicine.id}
+      value = { ...value, medicine: value.medicine.id };
       props.onSubmit(props.record?.id, value);
     }
   };
@@ -192,8 +198,10 @@ function PurchaseOrderEntryForm(props) {
   };
 
   const handleOrderDelete = (idx) => {
-    setOrders((oldOrders) => oldOrders.filter((_, i) => i !== idx))
-  }
+    setOrders((oldOrders) =>
+      oldOrders.filter((_, i) => i !== idx),
+    );
+  };
 
   const { saveLoading, modal } = props;
 
@@ -219,7 +227,11 @@ function PurchaseOrderEntryForm(props) {
               Submit
             </Button>
           </Stack>
-          <Stack style={{ height: '100%' }} spacing={4} p={2}>
+          <Stack
+            style={{ height: '100%' }}
+            spacing={4}
+            p={2}
+          >
             {orders.map((order, i) => {
               // Fields are
               // medicine - autocomplete using
@@ -228,11 +240,18 @@ function PurchaseOrderEntryForm(props) {
               // qty - integer
               // substitution allowed - checbkox
               return (
-                <Box sx={{backgroundColor: '#f1f1f1', width: '100%', p: 2, borderRadius: '0.5em'}}>
+                <Box
+                  sx={{
+                    backgroundColor: '#f1f1f1',
+                    width: '100%',
+                    p: 2,
+                    borderRadius: '0.5em',
+                  }}
+                >
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6} md={4}>
                       <Autocomplete
-                      fullWidth
+                        fullWidth
                         size="small"
                         options={medicines.payload}
                         value={order.medicine ?? null}
@@ -264,21 +283,22 @@ function PurchaseOrderEntryForm(props) {
                           })
                         }
                       >
-                        <MenuItem value="Tube">
-                          tube
-                        </MenuItem>
-                        <MenuItem value="Strip">Strip</MenuItem>
-                        <MenuItem value="Bottle">
-                          bottle
-                        </MenuItem>
-                        <MenuItem value="Drop">
-                          drop
-                        </MenuItem>
+                        {[
+                          'Tablets',
+                          'Strips',
+                          'Bottle',
+                          'Tube',
+                          'Drop',
+                        ].map((opt) => (
+                          <MenuItem value={opt}>
+                            {opt}
+                          </MenuItem>
+                        ))}
                       </Select>
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
                       <TextField
-                      fullWidth
+                        fullWidth
                         variant="outlined"
                         size="small"
                         label="Unit Cost"
@@ -299,14 +319,16 @@ function PurchaseOrderEntryForm(props) {
                         value={order.unitCost}
                         onChange={(e) =>
                           handleOrdersUpdate(i, {
-                            unitCost: parseInt(e.target.value),
+                            unitCost: parseInt(
+                              e.target.value,
+                            ),
                           })
                         }
                       />
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
                       <TextField
-                      fullWidth
+                        fullWidth
                         variant="outlined"
                         size="small"
                         label="Quantity"
@@ -314,14 +336,15 @@ function PurchaseOrderEntryForm(props) {
                         value={order.quantity}
                         onChange={(e) =>
                           handleOrdersUpdate(i, {
-                            quantity: parseInt(e.target.value),
+                            quantity: parseInt(
+                              e.target.value,
+                            ),
                           })
                         }
                       />
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
                       <FormControlLabel
-                  
                         control={<Checkbox />}
                         value={order.substitutionAllowed}
                         onChange={(e, checked) =>
@@ -333,7 +356,9 @@ function PurchaseOrderEntryForm(props) {
                       />
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
-                      <IconButton onClick={() => handleOrderDelete(i)}>
+                      <IconButton
+                        onClick={() => handleOrderDelete(i)}
+                      >
                         <Delete />
                       </IconButton>
                     </Grid>
