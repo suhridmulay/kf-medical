@@ -165,15 +165,17 @@ function PurchaseInvoiceToolbar(props) {
               <TextField {...params} />
             )}
             getOptionLabel={(option) => option.purchaseOrderLookup}
+            onChange={(e, v) => v ? setSelectedPurchaseOrder(v) : setSelectedPurchaseOrder(null)}
           />
           <Box>
             <Button
               variant="contained"
               color="primary"
               component={Link}
-              to={`/purchase-invoice/new/${selectedPurchaseOrder.id}`}
+              to={`/purchase-invoice/new/${selectedPurchaseOrder?.id ?? ''}`}
               startIcon={<AddIcon />}
               size="small"
+              disabled={!selectedPurchaseOrder}
             >
               {i18n('common.new')}
             </Button>

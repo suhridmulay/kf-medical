@@ -166,10 +166,9 @@ function PurchaseInvoiceForm(props) {
   function renderBatchTable(batches) {
     return (
 
-      <Table>
+      <Table style={{ marginBottom: '5em' }}>
       <TableHead>
         <TableRow>
-          <TableCell>Ordered</TableCell>
           <TableCell>Medicine</TableCell>
           <TableCell style={{color:'green'}}>Batch Number*</TableCell>
           <TableCell style={{color:'green'}}>Qty*</TableCell>
@@ -186,7 +185,6 @@ function PurchaseInvoiceForm(props) {
       {
         batches.map((val, index) => (
         <TableRow key={"batches-" + index}>
-          <TableCell style={{width:300}}>{val.poLabel + " @ Rs" + val.poCost}</TableCell>
           <TableCell><MedicineEnumAutocompleteFormItem style={{width: '100%'}} name={"batches[" + index + "].medicine"} required={true}/></TableCell>
           <TableCell style={{width:250}}><InputFormItem name={"batches["+ index + "].batchNumber"} required={true}/></TableCell>
           <TableCell style={{width:125}}><InputFormItem name={"batches[" + index + "].quantity"} required={true}/></TableCell>

@@ -217,6 +217,7 @@ function AutocompleteInMemoryFormItem(props) {
           InputLabelProps: {
             shrink: true,
           },
+          style: {whitespace: 'nowrap'}
         }}
         components={materialUiComponents}
         isMulti={mode === 'multiple' ? true : false}
