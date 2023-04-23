@@ -96,8 +96,8 @@ const schema = yup.object().shape({
 function PurchaseInvoiceForm(props) {
   const [initialValues] = useState(() => {
     const record = props.record || {};
-    const poEntries = props.record.purchaseOrderEntries;
-    const purchaseOrderId = props.record.purchaseOrderId;
+    const poEntries = props.record.purchaseOrderEntries || [];
+    const purchaseOrderId = props.record.purchaseOrderId || 0;
 
     let precreatedBatches = poEntries.map(function(elem, index) {
       return {
@@ -166,7 +166,7 @@ function PurchaseInvoiceForm(props) {
   function renderBatchTable(batches) {
     return (
 
-      <Table style={{ border: '1px solid rgb(224, 224, 224)', borderCollapse: 'initial', padding:0, paddingBottom: '75px'}}>
+      <Table>
       <TableHead>
         <TableRow>
           <TableCell>Ordered</TableCell>
@@ -187,7 +187,7 @@ function PurchaseInvoiceForm(props) {
         batches.map((val, index) => (
         <TableRow key={"batches-" + index}>
           <TableCell style={{width:300}}>{val.poLabel + " @ Rs" + val.poCost}</TableCell>
-          <TableCell><MedicineEnumAutocompleteFormItem  name={"batches[" + index + "].medicine"} required={true}/></TableCell>
+          <TableCell><MedicineEnumAutocompleteFormItem style={{width: '100%'}} name={"batches[" + index + "].medicine"} required={true}/></TableCell>
           <TableCell style={{width:250}}><InputFormItem name={"batches["+ index + "].batchNumber"} required={true}/></TableCell>
           <TableCell style={{width:125}}><InputFormItem name={"batches[" + index + "].quantity"} required={true}/></TableCell>
           <TableCell style={{width:200}}><SelectFormItem name={"batches[" + index + "].unit"}
@@ -199,12 +199,12 @@ function PurchaseInvoiceForm(props) {
             required={true}
           /> 
           </TableCell>
-          <TableCell style={{width:150}}><DatePickerFormItem name={"batches[" + index + "].expiryDate"} required={true}/></TableCell>
-          <TableCell style={{width:100}}><InputFormItem name={"batches[" + index + "].unitPrice"}/></TableCell>
-          <TableCell style={{width:150}}><InputFormItem name={"batches[" + index + "].totalPrice"} required={true}/></TableCell>
-          <TableCell style={{width:100}}><InputFormItem name={"batches[" + index + "].stateGST"} required={true}/></TableCell>
-          <TableCell style={{width:100}}><InputFormItem name={"batches[" + index + "].centralGST"} required={true}/></TableCell>
-          <TableCell style={{width:100}}><InputFormItem name={"batches[" + index + "].msrp"}/></TableCell>
+          <TableCell><DatePickerFormItem name={"batches[" + index + "].expiryDate"} required={true}/></TableCell>
+          <TableCell><InputFormItem name={"batches[" + index + "].unitPrice"}/></TableCell>
+          <TableCell><InputFormItem name={"batches[" + index + "].totalPrice"} required={true}/></TableCell>
+          <TableCell><InputFormItem name={"batches[" + index + "].stateGST"} required={true}/></TableCell>
+          <TableCell><InputFormItem name={"batches[" + index + "].centralGST"} required={true}/></TableCell>
+          <TableCell><InputFormItem name={"batches[" + index + "].msrp"}/></TableCell>
         </TableRow> 
       ),)
      } 
@@ -221,14 +221,14 @@ function PurchaseInvoiceForm(props) {
             <Grid item lg={7} md={8} sm={12} xs={12}>
               <input type="hidden" name="purchaseOrder" {...form.register("purchaseOrder")}/>
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item lg={6} md={6} sm={12} xs={12}>
               <InputFormItem
                 name="invoiceNumber"
                 label={i18n('entities.purchaseInvoice.fields.invoiceNumber')}  
                 required={true}
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item lg={6} md={6} sm={12} xs={12}>
               <InputFormItem
                 name="referenceNumber"
                 label={i18n('entities.purchaseInvoice.fields.referenceNumber')}  
@@ -236,60 +236,60 @@ function PurchaseInvoiceForm(props) {
               />
             </Grid>
             <Grid item lg={12} md={12} sm={12} xs={12}>
-              <TableContainer component={Paper}>
+              <TableContainer component={Paper} elevation={0}>
                   { renderBatchTable(initialValues.batches) }
               </TableContainer>
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item lg={3} md={3} sm={12} xs={12}>
               <InputFormItem
                 name="grossAmount"
                 label={i18n('entities.purchaseInvoice.fields.grossAmount')}  
                 required={true}
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item lg={3} md={3} sm={12} xs={12}>
               <InputFormItem
                 name="stateGST"
                 label={i18n('entities.purchaseInvoice.fields.stateGST')}  
                 required={false}
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item lg={3} md={3} sm={12} xs={12}>
               <InputFormItem
                 name="centralGST"
                 label={i18n('entities.purchaseInvoice.fields.centralGST')}  
                 required={false}
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item lg={3} md={3} sm={12} xs={12}>
               <InputFormItem
                 name="grandTotal"
                 label={i18n('entities.purchaseInvoice.fields.grandTotal')}  
                 required={false}
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item lg={6} md={6} sm={12} xs={12}>
               <DatePickerFormItem
                 name="invoiceDate"
                 label={i18n('entities.purchaseInvoice.fields.invoiceDate')}
                 required={false}
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item lg={6} md={6} sm={12} xs={12}>
               <DatePickerFormItem
                 name="invoicePaidDate"
                 label={i18n('entities.purchaseInvoice.fields.invoicePaidDate')}
                 required={false}
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item lg={12} md={12} sm={12} xs={12}>
               <InputFormItem
                 name="paymentDetails"
                 label={i18n('entities.purchaseInvoice.fields.paymentDetails')}  
                 required={false}
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item lg={12} md={12} sm={12} xs={12}>
               <DatePickerFormItem
                 name="inventoryAddDate"
                 label={i18n('entities.purchaseInvoice.fields.inventoryAddDate')}

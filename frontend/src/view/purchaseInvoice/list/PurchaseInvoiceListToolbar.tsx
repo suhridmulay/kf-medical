@@ -11,17 +11,35 @@ import destroyActions from 'src/modules/purchaseInvoice/destroy/purchaseInvoiceD
 import destroySelectors from 'src/modules/purchaseInvoice/destroy/purchaseInvoiceDestroySelectors';
 import actions from 'src/modules/purchaseInvoice/list/purchaseInvoiceListActions';
 import selectors from 'src/modules/purchaseInvoice/list/purchaseInvoiceListSelectors';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
 import ToolbarWrapper from 'src/view/shared/styles/ToolbarWrapper';
+import PurchaseOrderService from 'src/modules/purchaseOrder/purchaseOrderService';
+import {
+  Autocomplete,
+  Box,
+  TextField,
+} from '@mui/material';
 
 function PurchaseInvoiceToolbar(props) {
   const [
     destroyAllConfirmVisible,
     setDestroyAllConfirmVisible,
   ] = useState(false);
+
+  const [purchaseOrders, setPurchaseOrders] = useState([]);
+  const [selectedPurchaseOrder, setSelectedPurchaseOrder] =
+    useState(null);
+
+  // Fetch a list of all purchase orders on mount
+  useEffect(() => {
+    PurchaseOrderService.list().then((res) => {
+      setPurchaseOrders(res.rows);
+      setSelectedPurchaseOrder(res.rows[0]);
+    });
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -130,45 +148,69 @@ function PurchaseInvoiceToolbar(props) {
   return (
     <ToolbarWrapper>
       {hasPermissionToCreate && (
-        <Button
-          variant="contained"
-          color="primary"
-          component={Link}
-          to="/purchase-invoice/new"
-          startIcon={<AddIcon />}
-          size="small"
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '2ch',
+            width: '100%',
+            alignItems: 'center'
+          }}
         >
-          {i18n('common.new')}
-        </Button>
+          <Autocomplete
+            size="small"
+            fullWidth
+            value={selectedPurchaseOrder}
+            options={purchaseOrders}
+            renderInput={(params) => (
+              <TextField {...params} />
+            )}
+            getOptionLabel={(option) => option.purchaseOrderLookup}
+          />
+          <Box>
+            <Button
+              variant="contained"
+              color="primary"
+              component={Link}
+              to={`/purchase-invoice/new/${selectedPurchaseOrder.id}`}
+              startIcon={<AddIcon />}
+              size="small"
+            >
+              {i18n('common.new')}
+            </Button>
+          </Box>
+        </Box>
       )}
+      <Box
+        sx={{ display: 'flex', width: '100%', gap: '2ch' }}
+      >
+        {hasPermissionToImport && (
+          <Button
+            variant="contained"
+            color="primary"
+            component={Link}
+            to="/purchase-invoice/importer"
+            startIcon={<CloudUploadIcon />}
+            size="small"
+          >
+            {i18n('common.import')}
+          </Button>
+        )}
 
-      {hasPermissionToImport && (
-        <Button
-          variant="contained"
-          color="primary"
-          component={Link}
-          to="/purchase-invoice/importer"
-          startIcon={<CloudUploadIcon />}
-          size="small"
-        >
-          {i18n('common.import')}
-        </Button>
-      )}
+        {renderDestroyButton()}
 
-      {renderDestroyButton()}
+        {hasPermissionToAuditLogs && (
+          <Button
+            component={Link}
+            to="/audit-logs?entityNames=purchaseInvoice"
+            startIcon={<HistoryIcon />}
+            size="small"
+          >
+            {i18n('auditLog.menu')}
+          </Button>
+        )}
 
-      {hasPermissionToAuditLogs && (
-        <Button
-          component={Link}
-          to="/audit-logs?entityNames=purchaseInvoice"
-          startIcon={<HistoryIcon />}
-          size="small"
-        >
-          {i18n('auditLog.menu')}
-        </Button>
-      )}
-
-      {renderExportButton()}
+        {renderExportButton()}
+      </Box>
 
       {destroyAllConfirmVisible && (
         <ConfirmModal

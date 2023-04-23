@@ -65,6 +65,7 @@ export function InputFormItem(props) {
         name,
       }}
       disabled={disabled}
+      style={{textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}
     />
   );
 }
