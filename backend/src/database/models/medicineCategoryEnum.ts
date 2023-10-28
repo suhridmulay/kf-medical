@@ -1,6 +1,12 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes, Sequelize } from 'sequelize';
 
-export default function (sequelize) {
+interface MedicineCategoryEnum {
+  id: string;
+  categoryName: string;
+  importHash: string;
+}
+
+export default function (sequelize: Sequelize) {
   const medicineCategoryEnum = sequelize.define(
     'medicineCategoryEnum',
     {

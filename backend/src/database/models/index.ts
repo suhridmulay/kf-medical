@@ -4,16 +4,21 @@
  */
 import fs from 'fs';
 import path from 'path';
-import Sequelize, { DataTypes } from 'sequelize';
+import { Sequelize, DataTypes } from 'sequelize';
 import { getConfig } from '../../config';
 const highlight = require('cli-highlight').highlight;
 
 const basename = path.basename(module.filename);
 
-function models() {
-  const database = {} as any;
+interface Database {
+  sequelize: Sequelize;
+  Sequelize: any;
+}
 
-  let sequelize = new (<any>Sequelize)(
+function models() {
+  const database = {} as Database;
+
+  let sequelize = new Sequelize(
     getConfig().DATABASE_DATABASE,
     getConfig().DATABASE_USERNAME,
     getConfig().DATABASE_PASSWORD,
@@ -57,8 +62,8 @@ function models() {
     }
   });
 
-  database.sequelize = sequelize;
-  database.Sequelize = Sequelize;
+  database['sequelize'] = sequelize;
+  database['Sequelize'] = Sequelize;
 
   return database;
 }
