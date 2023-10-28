@@ -214,10 +214,15 @@ function AutocompleteInMemoryFormItem(props) {
           error: Boolean(errorMessage),
           helperText: errorMessage || hintOrLoading,
           size: 'small',
+          style: {
+            whiteSpace: 'nowrap',
+            '& > div': {
+              flexWrap: 'none',
+            }
+          },
           InputLabelProps: {
             shrink: true,
           },
-          style: {whitespace: 'nowrap'}
         }}
         components={materialUiComponents}
         isMulti={mode === 'multiple' ? true : false}

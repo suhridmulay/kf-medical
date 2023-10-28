@@ -22,6 +22,7 @@ import {
   Box,
   TextField,
 } from '@mui/material';
+import { PurchaseOrder } from 'src/types';
 
 function PurchaseInvoiceToolbar(props) {
   const [
@@ -29,13 +30,13 @@ function PurchaseInvoiceToolbar(props) {
     setDestroyAllConfirmVisible,
   ] = useState(false);
 
-  const [purchaseOrders, setPurchaseOrders] = useState([]);
+  const [purchaseOrders, setPurchaseOrders] = useState<PurchaseOrder[]>([]);
   const [selectedPurchaseOrder, setSelectedPurchaseOrder] =
     useState(null);
 
   // Fetch a list of all purchase orders on mount
   useEffect(() => {
-    PurchaseOrderService.list().then((res) => {
+    PurchaseOrderService.list(null, null, 100, 0).then((res) => {
       setPurchaseOrders(res.rows);
       setSelectedPurchaseOrder(res.rows[0]);
     });

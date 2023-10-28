@@ -9,7 +9,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { i18n } from 'src/i18n';
 import FormWrapper, {
   FormButtons,
@@ -24,6 +24,16 @@ import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
 import moment from 'moment';
 import purchaseOrderEntryEnumerators from 'src/modules/purchaseOrderEntry/purchaseOrderEntryEnumerators';
 import MedicineEnumAutocompleteFormItem from 'src/view/medicineEnum/autocomplete/MedicineEnumAutocompleteFormItem';
+import MaterialReactTable, {
+  MRT_ColumnDef,
+} from 'material-react-table';
+import { PurchaseOrderEntry } from 'src/types';
+import {
+  DatePickerFormCellRenderer,
+  InputFormCellRenderer,
+  MedicineCellRenderer,
+  SelectCellRenderer,
+} from './cells';
 
 const schema = yup.object().shape({
   purchaseOrder: yupFormSchemas.string(
@@ -33,9 +43,9 @@ const schema = yup.object().shape({
   invoiceNumber: yupFormSchemas.string(
     i18n('entities.purchaseInvoice.fields.invoiceNumber'),
     {
-      "required": true,
-      "max": 255,
-      "min": 2
+      required: true,
+      max: 255,
+      min: 2,
     },
   ),
   referenceNumber: yupFormSchemas.string(
@@ -50,27 +60,27 @@ const schema = yup.object().shape({
   grossAmount: yupFormSchemas.decimal(
     i18n('entities.purchaseInvoice.fields.grossAmount'),
     {
-      "required": true,
-      "scale": 2,
-      "min": 0
+      required: true,
+      scale: 2,
+      min: 0,
     },
   ),
   stateGST: yupFormSchemas.decimal(
     i18n('entities.purchaseInvoice.fields.stateGST'),
     {
-      "scale": 2
+      scale: 2,
     },
   ),
   centralGST: yupFormSchemas.decimal(
     i18n('entities.purchaseInvoice.fields.centralGST'),
     {
-      "scale": 2
+      scale: 2,
     },
   ),
   grandTotal: yupFormSchemas.decimal(
     i18n('entities.purchaseInvoice.fields.grandTotal'),
     {
-      "scale": 2
+      scale: 2,
     },
   ),
   invoiceDate: yupFormSchemas.date(
@@ -84,39 +94,85 @@ const schema = yup.object().shape({
   paymentDetails: yupFormSchemas.string(
     i18n('entities.purchaseInvoice.fields.paymentDetails'),
     {
-      "max": 255
+      max: 255,
     },
   ),
   inventoryAddDate: yupFormSchemas.date(
-    i18n('entities.purchaseInvoice.fields.inventoryAddDate'),
+    i18n(
+      'entities.purchaseInvoice.fields.inventoryAddDate',
+    ),
     {},
   ),
 });
 
+interface PurchaseInvoiceFormRecord {
+  purchaseOrderEntries: PurchaseOrderEntry[];
+  purchaseOrderId: string;
+
+  invoiceNumber: string;
+  referenceNumber: string;
+  batches: unknown;
+  grossAmount: string;
+  stateGST: string;
+  centralGST: string;
+  grandTotal: string;
+  invoiceDate: string;
+  invoicePaidDate: string;
+  paymentDetails: unknown;
+  inventoryAddDate: string;
+}
+
 function PurchaseInvoiceForm(props) {
   const [initialValues] = useState(() => {
-    const record = props.record || {};
-    const poEntries = props.record.purchaseOrderEntries || [];
-    const purchaseOrderId = props.record.purchaseOrderId || 0;
+    const record: Partial<PurchaseInvoiceFormRecord> =
+      props.record || {};
+    const poEntries =
+      props.record.purchaseOrderEntries || [];
+    const purchaseOrderId =
+      props.record.purchaseOrderId || 0;
 
-    let precreatedBatches = poEntries.map(function(elem, index) {
+    let precreatedBatches = poEntries.map(function (
+      elem,
+      index,
+    ) {
       return {
-        poLabel:    elem.purchaseOrderEntryLookup,
-        poUnit:     elem.unit,
-        poCost:     elem.totalCost,
-        quantity:   elem.quantity,
-        unitPrice:   elem.unitCost,
-        totalPrice:  elem.totalCost,
-        stateGST:   elem.stateGST,
+        poLabel: elem.purchaseOrderEntryLookup,
+        poUnit: elem.unit,
+        poCost: elem.totalCost,
+        quantity: elem.quantity,
+        unitPrice: elem.unitCost,
+        totalPrice: elem.totalCost,
+        stateGST: elem.stateGST,
         centralGST: elem.centralGST,
-        medicine:   {id: elem.medicineId}, 
-        unit:       elem.unit,
-      }
+        medicine: { id: elem.medicineId },
+        unit: elem.unit,
+      };
     });
-    let totalInvoiceCost = poEntries.reduce(function(accumulator, entry) {return accumulator + Number(entry.totalCost);}, 0);
-    let totalInvoiceStateGST = poEntries.reduce(function(accumulator, entry) {return accumulator + Number(entry.stateGST);}, 0);
-    let totalInvoiceCentralGST = poEntries.reduce(function(accumulator, entry) {return accumulator + Number(entry.centralGST);}, 0);
-    let grandTotal = totalInvoiceCost + totalInvoiceStateGST + totalInvoiceCentralGST;
+    let totalInvoiceCost = poEntries.reduce(function (
+      accumulator,
+      entry,
+    ) {
+      return accumulator + Number(entry.totalCost);
+    },
+    0);
+    let totalInvoiceStateGST = poEntries.reduce(function (
+      accumulator,
+      entry,
+    ) {
+      return accumulator + Number(entry.stateGST);
+    },
+    0);
+    let totalInvoiceCentralGST = poEntries.reduce(function (
+      accumulator,
+      entry,
+    ) {
+      return accumulator + Number(entry.centralGST);
+    },
+    0);
+    let grandTotal =
+      totalInvoiceCost +
+      totalInvoiceStateGST +
+      totalInvoiceCentralGST;
 
     return {
       purchaseOrder: purchaseOrderId,
@@ -125,12 +181,19 @@ function PurchaseInvoiceForm(props) {
       batches: record.batches || precreatedBatches,
       grossAmount: record.grossAmount || totalInvoiceCost,
       stateGST: record.stateGST || totalInvoiceStateGST,
-      centralGST: record.centralGST || totalInvoiceCentralGST,
+      centralGST:
+        record.centralGST || totalInvoiceCentralGST,
       grandTotal: record.grandTotal || grandTotal,
-      invoiceDate: record.invoiceDate ? moment(record.invoiceDate, 'YYYY-MM-DD') : null,
-      invoicePaidDate: record.invoicePaidDate ? moment(record.invoicePaidDate, 'YYYY-MM-DD') : null,
+      invoiceDate: record.invoiceDate
+        ? moment(record.invoiceDate, 'YYYY-MM-DD')
+        : null,
+      invoicePaidDate: record.invoicePaidDate
+        ? moment(record.invoicePaidDate, 'YYYY-MM-DD')
+        : null,
       paymentDetails: record.paymentDetails,
-      inventoryAddDate: record.inventoryAddDate ? moment(record.inventoryAddDate, 'YYYY-MM-DD') : null,
+      inventoryAddDate: record.inventoryAddDate
+        ? moment(record.inventoryAddDate, 'YYYY-MM-DD')
+        : null,
     };
   });
 
@@ -140,18 +203,36 @@ function PurchaseInvoiceForm(props) {
     defaultValues: initialValues as any,
   });
 
-
   const onSubmit = (values) => {
-    let totalInvoiceCost = values.batches.reduce(function(accumulator, entry) {return accumulator + Number(entry.totalPrice);}, 0);
-    let totalInvoiceStateGST = values.batches.reduce(function(accumulator, entry) {return accumulator + Number(entry.stateGST);}, 0);
-    let totalInvoiceCentralGST = values.batches.reduce(function(accumulator, entry) {return accumulator + Number(entry.centralGST);}, 0);
+    let totalInvoiceCost = values.batches.reduce(function (
+      accumulator,
+      entry,
+    ) {
+      return accumulator + Number(entry.totalPrice);
+    },
+    0);
+    let totalInvoiceStateGST = values.batches.reduce(
+      function (accumulator, entry) {
+        return accumulator + Number(entry.stateGST);
+      },
+      0,
+    );
+    let totalInvoiceCentralGST = values.batches.reduce(
+      function (accumulator, entry) {
+        return accumulator + Number(entry.centralGST);
+      },
+      0,
+    );
 
     values.grossAmount = totalInvoiceCost;
-    values.centralGST  = totalInvoiceCentralGST;
-    values.stateGST    = totalInvoiceStateGST;
+    values.centralGST = totalInvoiceCentralGST;
+    values.stateGST = totalInvoiceStateGST;
 
-    values.grandTotal  = totalInvoiceCost + totalInvoiceStateGST + totalInvoiceCentralGST;
-     
+    values.grandTotal =
+      totalInvoiceCost +
+      totalInvoiceStateGST +
+      totalInvoiceCentralGST;
+
     props.onSubmit(props.record?.id, values);
   };
 
@@ -160,54 +241,91 @@ function PurchaseInvoiceForm(props) {
       form.setValue(key, initialValues[key]);
     });
   };
-  
+
   const { saveLoading, modal } = props;
 
-  function renderBatchTable(batches) {
-    return (
-
-      <Table style={{ marginBottom: '5em' }}>
-      <TableHead>
-        <TableRow>
-          <TableCell>Medicine</TableCell>
-          <TableCell style={{color:'green'}}>Batch Number*</TableCell>
-          <TableCell style={{color:'green'}}>Qty*</TableCell>
-          <TableCell style={{color:'green'}}>Units*</TableCell>
-          <TableCell style={{color:'green'}}>Expiry Date*</TableCell>
-          <TableCell>Unit Cost</TableCell>
-          <TableCell>Total Cost</TableCell>
-          <TableCell>S-GST</TableCell>
-          <TableCell>C-GST</TableCell>
-          <TableCell>MSRP</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody> 
+  const tableCols = useMemo<MRT_ColumnDef[]>(
+    () => [
       {
-        batches.map((val, index) => (
-        <TableRow key={"batches-" + index}>
-          <TableCell><MedicineEnumAutocompleteFormItem style={{width: '100%'}} name={"batches[" + index + "].medicine"} required={true}/></TableCell>
-          <TableCell style={{width:250}}><InputFormItem name={"batches["+ index + "].batchNumber"} required={true}/></TableCell>
-          <TableCell style={{width:125}}><InputFormItem name={"batches[" + index + "].quantity"} required={true}/></TableCell>
-          <TableCell style={{width:200}}><SelectFormItem name={"batches[" + index + "].unit"}
-             options= {
-               purchaseOrderEntryEnumerators.unit.map((value) => ({
-                 value, label: i18n(`entities.purchaseOrderEntry.enumerators.unit.${value}`,),
-               }),
-            )}
-            required={true}
-          /> 
-          </TableCell>
-          <TableCell><DatePickerFormItem name={"batches[" + index + "].expiryDate"} required={true}/></TableCell>
-          <TableCell><InputFormItem name={"batches[" + index + "].unitPrice"}/></TableCell>
-          <TableCell><InputFormItem name={"batches[" + index + "].totalPrice"} required={true}/></TableCell>
-          <TableCell><InputFormItem name={"batches[" + index + "].stateGST"} required={true}/></TableCell>
-          <TableCell><InputFormItem name={"batches[" + index + "].centralGST"} required={true}/></TableCell>
-          <TableCell><InputFormItem name={"batches[" + index + "].msrp"}/></TableCell>
-        </TableRow> 
-      ),)
-     } 
-     </TableBody>
-    </Table>
+        id: 'medicine',
+        header: 'Medicine',
+        Cell: MedicineCellRenderer,
+      },
+      {
+        id: 'batchNumber',
+        header: 'Batch Number',
+        Cell: InputFormCellRenderer('batchNumber', true),
+      },
+      {
+        id: 'expiryDate',
+        header: 'Expiry Date',
+        Cell: DatePickerFormCellRenderer(
+          'expiryDate',
+          true,
+        ),
+      },
+      {
+        id: 'qty',
+        header: 'Quantity',
+        Cell: InputFormCellRenderer('quantity', true),
+      },
+      {
+        id: 'unitPrice',
+        header: 'Unit Price',
+        Cell: InputFormCellRenderer('unitPrice', true),
+      },
+      {
+        id: 'unit',
+        header: 'Unit',
+        Cell: SelectCellRenderer(
+          'unit',
+          true,
+          purchaseOrderEntryEnumerators.unit.map(
+            (value) => ({
+              value,
+              label: i18n(
+                `entities.purchaseOrderEntry.enumerators.unit.${value}`,
+              ),
+            }),
+          ),
+        ),
+      },
+      {
+        id: 'totalPrice',
+        header: 'Total Price',
+        Cell: InputFormCellRenderer('totalPrice', true),
+      },
+      {
+        id: 'stateGST',
+        header: 'State GST',
+        Cell: InputFormCellRenderer('stateGST', true),
+      },
+      {
+        id: 'centralGST',
+        header: 'Central GST',
+        Cell: InputFormCellRenderer('centralGST', true),
+      },
+      {
+        id: 'msrp',
+        header: 'MSRP',
+        Cell: InputFormCellRenderer('msrp', true),
+      },
+    ],
+    [],
+  );
+
+  function renderBatchTable(batches) {
+    console.log({ batches });
+
+    return (
+      <MaterialReactTable
+        columns={tableCols}
+        data={batches}
+        muiTablePaperProps={{sx: {height: '100%'}}} 
+        muiTableContainerProps={{sx: {minHeight: '33vh'}}}
+        muiTableBodyRowProps={{sx: {overflow: 'visible', '.MuiTableCell-root': {overflow: 'visible'}}}}
+        muiTableBodyCellProps={{sx: {overflow: 'visible'}}}
+      />
     );
   }
 
@@ -217,80 +335,107 @@ function PurchaseInvoiceForm(props) {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Grid spacing={2} container>
             <Grid item lg={7} md={8} sm={12} xs={12}>
-              <input type="hidden" name="purchaseOrder" {...form.register("purchaseOrder")}/>
+              <input
+                type="hidden"
+                name="purchaseOrder"
+                {...form.register('purchaseOrder')}
+              />
             </Grid>
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <InputFormItem
                 name="invoiceNumber"
-                label={i18n('entities.purchaseInvoice.fields.invoiceNumber')}  
+                label={i18n(
+                  'entities.purchaseInvoice.fields.invoiceNumber',
+                )}
                 required={true}
               />
             </Grid>
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <InputFormItem
                 name="referenceNumber"
-                label={i18n('entities.purchaseInvoice.fields.referenceNumber')}  
+                label={i18n(
+                  'entities.purchaseInvoice.fields.referenceNumber',
+                )}
                 required={false}
               />
             </Grid>
             <Grid item lg={12} md={12} sm={12} xs={12}>
-              <TableContainer component={Paper} elevation={0}>
-                  { renderBatchTable(initialValues.batches) }
+              <TableContainer
+                component={Paper}
+                elevation={0}
+              >
+                {renderBatchTable(initialValues.batches)}
               </TableContainer>
             </Grid>
             <Grid item lg={3} md={3} sm={12} xs={12}>
               <InputFormItem
                 name="grossAmount"
-                label={i18n('entities.purchaseInvoice.fields.grossAmount')}  
+                label={i18n(
+                  'entities.purchaseInvoice.fields.grossAmount',
+                )}
                 required={true}
               />
             </Grid>
             <Grid item lg={3} md={3} sm={12} xs={12}>
               <InputFormItem
                 name="stateGST"
-                label={i18n('entities.purchaseInvoice.fields.stateGST')}  
+                label={i18n(
+                  'entities.purchaseInvoice.fields.stateGST',
+                )}
                 required={false}
               />
             </Grid>
             <Grid item lg={3} md={3} sm={12} xs={12}>
               <InputFormItem
                 name="centralGST"
-                label={i18n('entities.purchaseInvoice.fields.centralGST')}  
+                label={i18n(
+                  'entities.purchaseInvoice.fields.centralGST',
+                )}
                 required={false}
               />
             </Grid>
             <Grid item lg={3} md={3} sm={12} xs={12}>
               <InputFormItem
                 name="grandTotal"
-                label={i18n('entities.purchaseInvoice.fields.grandTotal')}  
+                label={i18n(
+                  'entities.purchaseInvoice.fields.grandTotal',
+                )}
                 required={false}
               />
             </Grid>
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <DatePickerFormItem
                 name="invoiceDate"
-                label={i18n('entities.purchaseInvoice.fields.invoiceDate')}
+                label={i18n(
+                  'entities.purchaseInvoice.fields.invoiceDate',
+                )}
                 required={false}
               />
             </Grid>
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <DatePickerFormItem
                 name="invoicePaidDate"
-                label={i18n('entities.purchaseInvoice.fields.invoicePaidDate')}
+                label={i18n(
+                  'entities.purchaseInvoice.fields.invoicePaidDate',
+                )}
                 required={false}
               />
             </Grid>
             <Grid item lg={12} md={12} sm={12} xs={12}>
               <InputFormItem
                 name="paymentDetails"
-                label={i18n('entities.purchaseInvoice.fields.paymentDetails')}  
+                label={i18n(
+                  'entities.purchaseInvoice.fields.paymentDetails',
+                )}
                 required={false}
               />
             </Grid>
             <Grid item lg={12} md={12} sm={12} xs={12}>
               <DatePickerFormItem
                 name="inventoryAddDate"
-                label={i18n('entities.purchaseInvoice.fields.inventoryAddDate')}
+                label={i18n(
+                  'entities.purchaseInvoice.fields.inventoryAddDate',
+                )}
                 required={false}
               />
             </Grid>
